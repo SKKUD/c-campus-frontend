@@ -124,7 +124,6 @@ const MessageList = () => {
                   messageData.beans && messageData.beans.map((bean: IBean) => {
                     return (
                       <Message key={bean.id} id={bean.id} nickName={bean.nickName} />
-                      // <div>{bean.nickName}</div>
                     )
                   })  
                 }

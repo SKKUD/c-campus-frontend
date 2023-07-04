@@ -1,11 +1,16 @@
-import { MessageFrame ,MessageHolder } from "./Message.styles";
+import { MessageFrame ,MessageHolder, MessageContent } from "./Message.styles";
 
-const Message = (nickName: string) => {
+interface IMessage {
+  id: string,
+  nickName: string,
+}
+
+const Message = ({id, nickName}: IMessage) => {
 
   return (
-    <MessageFrame>
+    <MessageFrame id={id}>
       <MessageHolder />
-      <p>{nickName}</p>
+      <MessageContent>{nickName}</MessageContent>
     </MessageFrame>
   );  
 };

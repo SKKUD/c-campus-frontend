@@ -8,7 +8,13 @@ export const MessageFrame = styled.div`
 `
 export const MessageHolder = styled.div`
   background-color: white;
-  border-radius: 20px;
-  width: 25px;
-  height: 25px;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
 `
+
+export const MessageContent = styled.p`
+  width: 40px;
+  height: 12px;
+  font-size: 8px;
+`;

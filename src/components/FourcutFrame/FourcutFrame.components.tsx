@@ -4,29 +4,30 @@ import { Fourcut, PictureHolder, Picture } from "./FourcutFrame.styles";
 // import react
 import { useState } from "react";
 
-const FourcutFrame = () => {
-  // 인생네컷 이미지 소스 저장하는 state
-  const [firstPicture, setFirstPicture] = useState("");
-  const [secondPicture, setSecondPicture] = useState("");
-  const [thirdPicture, setThirdPicture] = useState("");
-  const [fourthPicture, setFourthPicture] = useState("");
+interface IFourcutFrame {
+  firstPicture: string,
+  secondPicture: string,
+  thirdPicture: string,
+  fourthPicture: string,
+}
+const FourcutFrame = ({firstPicture, secondPicture, thirdPicture, fourthPicture}: IFourcutFrame) => {
 
   return (
-    <Fourcut width="280px" height="770px">
-      <PictureHolder width="236px" height="143px">
-        <Picture src="https://i.pravatar.cc/500" width="236px" height="143px"/>
+    <Fourcut width="100px" height="300px">
+      <PictureHolder width="89px" height="50px">
+        <Picture src={firstPicture} width="89px" height="50px"/>
       </PictureHolder>
       
-      <PictureHolder width="236px" height="143px">
-        <Picture src="https://i.pravatar.cc/500" width="236px" height="143px"/>
+      <PictureHolder width="89px" height="50px">
+        <Picture src={secondPicture} width="89px" height="50px"/>
       </PictureHolder>
 
-      <PictureHolder width="236px" height="143px">
-        <Picture src="https://i.pravatar.cc/500" width="236px" height="143px"/>
+      <PictureHolder width="89px" height="50px">
+        <Picture src={thirdPicture} width="89px" height="50px"/>
       </PictureHolder>
 
-      <PictureHolder width="236px" height="143px">
-        <Picture src="https://i.pravatar.cc/500" width="236px" height="143px"/>
+      <PictureHolder width="89px" height="50px">
+        <Picture src={fourthPicture} width="89px" height="50px"/>
       </PictureHolder>
     </Fourcut>
   );

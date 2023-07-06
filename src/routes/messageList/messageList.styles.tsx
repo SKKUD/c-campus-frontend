@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const MessageListContainer = styled.div`
-  width: 320px;
+  width: 375px;
   height: 100vh;
-  background-color: #B9B9B9;
+  background-color: #F7F7F7;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -18,6 +18,8 @@ export const MessageListDate = styled.div`
   display: flex;
   justify-content: flex-start;
   padding-left: 20px;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
 export const MessageListContent = styled.div`

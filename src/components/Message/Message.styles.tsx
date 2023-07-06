@@ -4,20 +4,20 @@ export const MessageFrame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 7px;
-  padding-right: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
 `
 export const MessageHolder = styled.div`
   background-color: white;
   border-radius: 5px;
-  width: 40px;
-  height: 40px;
+  width: 64px;
+  height: 64px;
 `
 
 export const MessageContent = styled.p`
-  width: 40px;
-  height: 12px;
-  font-size: 8px;
+  width: 64px;
+  height: 13px;
+  font-size: 9px;
   margin-top: 5px;
   margin-bottom: 10px;
 `;

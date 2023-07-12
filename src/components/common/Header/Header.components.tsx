@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, useMediaQuery } from "@mui/material";
 import { WebHeaderContainer } from "./Header.styles";
-import MobileHeaderImg from "../../assets/images/mobileheader.png";
+import MobileHeaderImg from "../../../assets/images/mobileheader.png";
 
 const Header = () => {
   const match744 = useMediaQuery("(min-width:744px)");

@@ -1,0 +1,24 @@
+.QuixBoxAnswer {
+  background-color: #EDEDED;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 10px;
+  width: 296px;
+  height: 48px;
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+
+.QuizBoxCheckButton {
+  width: 201px;
+  height: 52px;
+  font-size: 30px;
+  font-weight: 500;
+  background-color: #8DC63F;
+  border: none;
+  color: white;
+  border-radius: 28px;
+  margin: auto;
+  margin-bottom: 20px;
+}

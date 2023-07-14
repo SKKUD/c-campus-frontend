@@ -1,6 +1,11 @@
 import React from "react";
-import { AppBar, useMediaQuery } from "@mui/material";
-import { WebHeaderContainer } from "./Header.styles";
+import { AppBar, Grid, useMediaQuery } from "@mui/material";
+import {
+  MobileHeaderContainer,
+  MobileHeaderGrid,
+  MobileHeaderIMG,
+  WebHeaderContainer,
+} from "./Header.styles";
 import MobileHeaderImg from "../../../assets/images/mobileheader.png";
 
 const Header = () => {
@@ -15,7 +20,18 @@ const Header = () => {
 export default Header;
 
 const MobileHeader = () => {
-  return <img src={MobileHeaderImg} alt="header" />;
+  return (
+    <>
+      <MobileHeaderIMG src={MobileHeaderImg} alt="header" />
+      <MobileHeaderContainer>
+        <MobileHeaderGrid container spacing={2}>
+          <MobileHeaderGrid item xs={2.5} />
+          <MobileHeaderGrid item xs={7} />
+          <MobileHeaderGrid item xs={2.5} />
+        </MobileHeaderGrid>
+      </MobileHeaderContainer>
+    </>
+  );
 };
 
 const WebHeader = () => {

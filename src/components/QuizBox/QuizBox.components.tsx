@@ -12,6 +12,7 @@ import {
   QuizBoxCheckButtonContainer,
   QuizBoxCheckButton,
 } from "./QuizBox.styles";
+
 import CloseIcon from "@mui/icons-material/Close";
 
 // QuizBox interface

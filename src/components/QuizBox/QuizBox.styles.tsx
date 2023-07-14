@@ -8,7 +8,7 @@ export const QuizBoxContainer = styled.div`
   background-color: #FFFFFF;
   border-radius: 20px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 100px;
 `;
 
 export const QuizBoxQuitButtonContainer = styled.div`
@@ -42,7 +42,8 @@ export const QuizBoxInformation = styled.div<{ color: string}>`
   display: flex;
   justify-content: center;
   color: ${props => props.color};
-  font-size: 20px;
+  font-size: 12px;
+  margin-bottom: 10px;
 `
 export const QuizBoxCheckButtonContainer = styled.div`
   display: flex;

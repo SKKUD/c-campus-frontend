@@ -6,8 +6,16 @@ export const SwiperContainer = styled.div`
 `;
 
 export const SwiperSlideCard = styled.div`
-  width: 200px;
-  height: 800px;
-  margin: 0 auto;
-  background-color: #666666;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SwiperImage1 = styled.img`
+  width: 80%;
+`;
+export const SwiperImage2 = styled.img`
+  width: 90%;
 `;

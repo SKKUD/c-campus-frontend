@@ -1,24 +1,71 @@
-import styled from "styled-components";
-import { Grid } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
+import styled from "@emotion/styled";
 
-export const MobileHeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   width: 100%;
-  height: calc(100vw / 6.25);
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 999;
+  height: 56px;
+  padding: 0 15px;
+  background-color: #164300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    height: 72px;
+    justify-content: flex-start;
+  }
 `;
 
-export const MobileHeaderGrid = styled(Grid)`
-  height: calc(100vw / 6.25);
+export const HeaderIMG = styled.img`
+  width: 140px;
+  height: 66px;
+  margin-top: 30px;
+  @media (min-width: 1024px) {
+    width: 190px;
+    height: 91px;
+    margin-top: 40px;
+  }
 `;
 
-export const MobileHeaderIMG = styled.img`
-  width: 100%;
+export const StyledIconButton = styled(IconButton)`
+  width: 48px;
+  height: 48px;
 `;
 
-export const WebHeaderContainer = styled.div`
+export const BackIcon = styled.img`
+  width: 24px;
+  height: 28px;
+`;
+
+export const MenuIcon = styled.img`
+  width: 30px;
+  height: 30px;
+`;
+
+export const InfoIcon = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+export const WebHeaderButton = styled(Button)`
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+`;
+
+export const WebButtonWrap = styled.div`
   width: 100%;
-  height: 60px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const SwipeButtonGroup = styled.div`
+  width: 220px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
 `;

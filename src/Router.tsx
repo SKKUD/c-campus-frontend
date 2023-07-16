@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/common/Header/Header.components";
 import Home from "./pages/Home/home.components";
 import Main from "./pages/Main/Main.components";
 import MessageFeed from "./pages/MessageFeed/MessageFeed.components";
@@ -14,6 +15,7 @@ import NotFound from "./pages/NotFound/NotFound.components";
 const Router = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} /> {/*서비스 소개*/}
         <Route path="/main" element={<Main />} /> {/*콩머신 화면*/}

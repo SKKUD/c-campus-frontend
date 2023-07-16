@@ -16,6 +16,20 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HeaderInfoModal from "./HeaderInfoModal/HeaderInfoModal.components";
 
 const MobileHeader: FC = () => {
+  // 인포모달 구현
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
+  // 뒤로가기버튼 구현
+  const location = useLocation();
+  const pathname = location.pathname;
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -24,17 +38,6 @@ const MobileHeader: FC = () => {
     setAnchorEl(null);
   };
   const PopoverOpen = Boolean(anchorEl);
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleModalOpen = () => setModalOpen(true);
-  const handleModalClose = () => setModalOpen(false);
-
-  const location = useLocation();
-  const pathname = location.pathname;
-  const navigate = useNavigate();
-  const handleGoBack = () => {
-    navigate(-1);
-  };
 
   return (
     <HeaderContainer>

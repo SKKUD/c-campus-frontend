@@ -18,6 +18,7 @@ export const conTheme = createTheme({
       '"omyu_pretty"',
       '"Cafe24Ssurround"',
       '"Cafe24SsurroundAir"',
+      '"GmarketSansMedium"',
       "-apple-system",
       "BlinkMacSystemFont",
       "system-ui",
@@ -35,6 +36,13 @@ export const conTheme = createTheme({
       styleOverrides: {
         body: {
           fontFamily: "Cafe24SsurroundAir",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: "Cafe24Ssurround",
         },
       },
     },

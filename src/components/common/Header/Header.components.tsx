@@ -1,23 +1,15 @@
-import React from "react";
 import { AppBar, useMediaQuery } from "@mui/material";
-import { WebHeaderContainer } from "./Header.styles";
-import MobileHeaderImg from "../../../assets/images/mobileheader.png";
+import MobileHeader from "./MobileHeader.components";
+import WebHeader from "./WebHeader.components";
 
 const Header = () => {
-  const match744 = useMediaQuery("(min-width:744px)");
+  const match1024 = useMediaQuery("(min-width:1024px)");
+
   return (
     <>
-      <AppBar>{match744 ? <WebHeader /> : <MobileHeader />}</AppBar>
+      <AppBar>{match1024 ? <WebHeader /> : <MobileHeader />}</AppBar>
     </>
   );
 };
 
 export default Header;
-
-const MobileHeader = () => {
-  return <img src={MobileHeaderImg} alt="header" />;
-};
-
-const WebHeader = () => {
-  return <WebHeaderContainer></WebHeaderContainer>;
-};

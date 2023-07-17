@@ -2,14 +2,18 @@ import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 
 export const QuizBoxContainer = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 341px;
+  width: 340px;
   background-color: #ffffff;
   border-radius: 20px;
   margin: auto;
-  margin-top: 100px;
+  margin-left: -170px;
+  margin-top: -50px;
 `;
 
 export const QuizBoxQuitButtonContainer = styled.div`
@@ -24,7 +28,7 @@ export const QuizBoxQuitButton = styled.button`
   width: 25px;
   height: 25px;
   border: none;
-  margin: 15px 20px 0px 20px;
+  margin: 10px 10px 0px 10px;
 `;
 
 export const QuizBoxQuizContent = styled.div`

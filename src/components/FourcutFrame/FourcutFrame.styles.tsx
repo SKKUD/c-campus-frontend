@@ -17,7 +17,7 @@ export const PictureHolder = styled.div<{ height: string, width: string }>`
   margin: auto;
   margin-top: 15px;
   margin-bottom: 0px;
-
+  
 `
 
 // 인생네컷 사진

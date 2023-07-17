@@ -9,7 +9,6 @@ import {
   QuizBoxTextArea,
   QuizBoxInformation,
   QuizBoxQuizContent,
-  QuizBoxCheckButtonContainer,
   QuizBoxCheckButton,
 } from "./QuizBox.styles";
 
@@ -19,6 +18,7 @@ import CloseIcon from "@mui/icons-material/Close";
 interface IQuizBox {
   Quiz: string;
   Answer: string;
+  handleClose: () => void;
 }
 
 // information 색깔 코드
@@ -27,7 +27,7 @@ const GREEN_COLOR = "#8DC63F";
 const GREY_COLOR = "#808080";
 
 // Quiz와 Answer을 props로 받음
-const QuizBox = ({ Quiz, Answer }: IQuizBox) => {
+const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
   const [color, SetColor] = useState<string>(""); // information color 색깔 변수
   const [wrongCount, SetWrongCount] = useState<number>(3); // 틀린 횟수 저장하는 변수
   const [isHint, SetIsHint] = useState<boolean>(false); // 힌트가 나오기 시작하는지 저장하는 변수
@@ -112,7 +112,7 @@ const QuizBox = ({ Quiz, Answer }: IQuizBox) => {
   return (
     <QuizBoxContainer>
       <QuizBoxQuitButtonContainer>
-        <QuizBoxQuitButton>
+        <QuizBoxQuitButton onClick={handleClose}>
           <CloseIcon />
         </QuizBoxQuitButton>
       </QuizBoxQuitButtonContainer>

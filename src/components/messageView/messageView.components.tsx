@@ -20,6 +20,7 @@ import QuizBox from "../QuizBox/QuizBox.components";
 // import mui for modal
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import CloseIcon from "@mui/icons-material/Close";
 
 // interface of MessageView (prototype)
 interface IMessageView {
@@ -38,8 +39,13 @@ interface IMessageView {
 const MessageView = () => {
   // mui-modal variable
   const [open, setOpen] = useState<boolean>(false);
+
   // mui-modal function
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+    console.log(open);
+  }
+
   const handleClose = () => {
     setOpen(false);
     console.log(open);
@@ -79,6 +85,7 @@ const MessageView = () => {
               onClose={handleClose}
             >
               <Box>
+                <button onClick={handleClose}/>  
                 <QuizBox Quiz="우리가 처음 만난 곳은?" Answer="수선관" handleClose={handleClose}/>
               </Box>
             </Modal>

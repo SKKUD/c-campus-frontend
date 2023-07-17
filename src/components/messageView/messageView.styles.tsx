@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const MessageViewContainer = styled.div`
-  width: 375px;
+  width: 90vw;
+  min-width: 300px;
+  max-width: 375px;
   height: 100vh;
   margin: auto;
   display: flex;
@@ -40,18 +42,22 @@ export const MessageViewContentMainContainer = styled.div`
   margin-bottom: 5px;
   padding: 20px 10px 20px 10px;
   display: flex;
-  flex-wrap: wrap;
+
   flex-direction: row;
   background-color: white;
   border-radius: 30px;
 `;
 
+export const MessageViewFourcutFrameContainer = styled.div`
+  
+`;
+
 export const MessageViewContentMainText = styled.p`
-  width: 230px;
+  /* width: 230px; */
   text-align: left;
   margin-top: 0px;
   margin-left: 5px;
-  font-size: 15px;
+  font-size: 12px;
 `;
 
 export const MessageViewContentSender = styled.p`

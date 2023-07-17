@@ -1,5 +1,12 @@
+import { MainContainer, MainBackground } from "./Main.styles";
+import ManchineSwiper from "../../components/Main/MachineSwiper/ManchineSwiper.components";
 const Main = () => {
-  return <div>Main</div>;
+  return (
+    <MainContainer>
+      <ManchineSwiper />
+      <MainBackground />
+    </MainContainer>
+  );
 };
 
 export default Main;

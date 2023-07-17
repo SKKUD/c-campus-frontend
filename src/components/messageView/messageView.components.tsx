@@ -1,9 +1,13 @@
+import { useState } from "react";
+
+// import styled-components
 import { 
   MessageViewContainer,
   MessageViewTitle,
   MessageViewContent,
   MessageViewContentReceiver,
   MessageViewContentMainContainer,
+  MessageViewFourcutFrameContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
 } from "./messageView.styles";
@@ -11,7 +15,14 @@ import {
 // import components
 import FourcutFrame from "../../components/FourcutFrame/FourcutFrame.components";
 import SharingButton from "../../components/SharingButton/SharingButton.componets";
+import QuizBox from "../QuizBox/QuizBox.components";
 
+// import mui for modal
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import CloseIcon from "@mui/icons-material/Close";
+
+// interface of MessageView (prototype)
 interface IMessageView {
   public: boolean,
   title: string,
@@ -24,7 +35,22 @@ interface IMessageView {
   pictureUrl3: string,
   pictureUrl4: string,
 }
+
 const MessageView = () => {
+  // mui-modal variable
+  const [open, setOpen] = useState<boolean>(false);
+
+  // mui-modal function
+  const handleOpen = () => {
+    setOpen(true);
+    console.log(open);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+    console.log(open);
+  }
+
   const MessageData: IMessageView = {
     public: true,
     title: "우리가 먹었던 최고의 학식 메뉴",
@@ -48,9 +74,22 @@ const MessageView = () => {
       <MessageViewContent>
         <MessageViewContentReceiver>To. {MessageData.receiver}</MessageViewContentReceiver>
         <MessageViewContentMainContainer>
-          {
-            MessageData.isPicture ? (<FourcutFrame firstPicture={MessageData.pictureUrl1} secondPicture={MessageData.pictureUrl2} thirdPicture={MessageData.pictureUrl3} fourthPicture={MessageData.pictureUrl4}/>) : (<></>)
-          }
+          <MessageViewFourcutFrameContainer onClick={handleOpen}>
+            {
+              MessageData.isPicture ? (<FourcutFrame firstPicture={MessageData.pictureUrl1} secondPicture={MessageData.pictureUrl2} thirdPicture={MessageData.pictureUrl3} fourthPicture={MessageData.pictureUrl4}/>) : (<></>)
+            }
+            {/* modal */}
+            <Modal
+              keepMounted
+              open={open}
+              onClose={handleClose}
+            >
+              <Box>
+                <button onClick={handleClose}/>  
+                <QuizBox Quiz="우리가 처음 만난 곳은?" Answer="수선관" handleClose={handleClose}/>
+              </Box>
+            </Modal>
+          </MessageViewFourcutFrameContainer>
           <MessageViewContentMainText>{MessageData.mainText}</MessageViewContentMainText>
         </MessageViewContentMainContainer>
         

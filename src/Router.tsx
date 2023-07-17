@@ -5,7 +5,7 @@ import Home from "./pages/Home/home.components";
 import Main from "./pages/Main/Main.components";
 import MessageFeed from "./pages/MessageFeed/MessageFeed.components";
 import MessageBox from "./pages/MessageBox/MessageBox.components";
-import MessageView from "./components/messageView/messageView.components";
+import MessageView from "./pages/MessageView/MessageView.components";
 import PostMessage from "./pages/PostMessage/PostMessage.components";
 import PhotoBox from "./pages/PhotoBox/PhotoBox.components";
 import PhotoView from "./pages/PhotoView/PhotoView.components";

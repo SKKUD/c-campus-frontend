@@ -9,7 +9,6 @@ import {
   QuizBoxTextArea,
   QuizBoxInformation,
   QuizBoxQuizContent,
-  QuizBoxCheckButtonContainer,
   QuizBoxCheckButton,
 } from "./QuizBox.styles";
 

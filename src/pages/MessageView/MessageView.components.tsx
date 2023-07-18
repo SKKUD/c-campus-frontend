@@ -14,7 +14,7 @@ import {
 
 // import components
 import FourcutFrame from "../../components/FourcutFrame/FourcutFrame.components";
-import SharingButton from "../../components/SharingButton/SharingButton.componets";
+import Button from "../../components/common/Button/Button.components";
 import QuizBox from "../../components/QuizBox/QuizBox.components";
 
 // import mui for modal
@@ -92,7 +92,7 @@ const MessageView = () => {
         <MessageViewContentSender>From. {MessageData.sender}</MessageViewContentSender>
       </MessageViewContent>
       
-      <SharingButton />
+      <Button content="공유하기"/>
     </MessageViewContainer>
   );
 };

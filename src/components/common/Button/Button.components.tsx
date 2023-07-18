@@ -5,6 +5,7 @@ import {
 
 interface IButton {
   content: string,
+  onClick?: (e: Event) => void;
 }
 
 // receive content and make it to green button

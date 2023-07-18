@@ -10,7 +10,7 @@ import {
 
 // import components
 import FourcutFrame from "../../components/FourcutFrame/FourcutFrame.components";
-import SharingButton from "../../components/SharingButton/SharingButton.componets";
+import Button from "../common/Button/Button.components";
 
 interface IMessageView {
   public: boolean,
@@ -57,7 +57,7 @@ const MessageView = () => {
         <MessageViewContentSender>From. {MessageData.sender}</MessageViewContentSender>
       </MessageViewContent>
       
-      <SharingButton />
+      <Button content="공유하기"/>
     </MessageViewContainer>
   );
 };

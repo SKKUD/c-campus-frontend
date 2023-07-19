@@ -67,3 +67,8 @@ export const MessageViewContentSender = styled.p`
   font-size: 20px;
   font-weight: 500;
 `;
+
+export const GreenBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`

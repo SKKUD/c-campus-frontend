@@ -16,6 +16,7 @@ import {
 import FourcutFrame from "../../components/FourcutFrame/FourcutFrame.components";
 import Button from "../../components/common/Button/Button.components";
 import QuizBox from "../../components/QuizBox/QuizBox.components";
+import PublicToggle from "../../components/PublicToggle/PublicToggle.components";
 
 // import mui for modal
 import Box from '@mui/material/Box';
@@ -65,6 +66,7 @@ const MessageView = () => {
 
   return (
     <MessageViewContainer>
+      <PublicToggle />
       {/* Public Toggle */}
       <MessageViewTitle>
         {MessageData.title}

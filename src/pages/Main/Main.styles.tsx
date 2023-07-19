@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
 
 export const MainBackground = styled.div`
   width: 100%;
-  height: 300px;
+  height: 210px;
   background-color: #4b5745;
   position: absolute;
   bottom: 0;

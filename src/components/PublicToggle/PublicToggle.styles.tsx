@@ -28,17 +28,17 @@ export const ToggleContainer = styled.div`
   > .toggle-circle {
     position: absolute;
     align-items: center;
-    top: 1px;
-    left: 27px;
-    width: 22px;
-    height: 22px;
+    top: 3.5px;
+    left: 29px;
+    width: 17px;
+    height: 17px;
     border-radius: 50%;
     background-color: #C8C8C8;
     transition : 0.5s;
   } 
 
   > .toggle--checked-circle {
-    left: 1px;
+    left: 4px;
     transition : 0.5s;
     background-color: #8DC63F;
   }
@@ -52,9 +52,12 @@ export const ToggleDescriptionContainer = styled.div`
 
 export const ToggleDescription = styled.div<{ color: string}>`
   //설명 부분의 CSS를 구현
+  font-family: GmarketSansMedium;
   color: ${props => props.color};
   text-align: center;
   margin: 20px;
   margin-right: 5px;
-  width: 50px;
+  width: 85px;
+  display: flex;
+  justify-content: right;
 `;

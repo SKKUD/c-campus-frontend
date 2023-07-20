@@ -12,15 +12,28 @@ export const MessageViewContainer = styled.div`
 `;
 
 export const MessageViewTitle = styled.div`
-  font-size: 20px;
+  width: 343px;
+  height: 56px;
+  flex-shrink: 0;
+  font-size: 18px;
   font-weight: 300;
-  background-color: #FFFFFF;
-  border-radius: 10px;
-  height: 40px;
+  border-radius: 7px;
+  border: 0.5px solid var(--main-2, #164300);
+  background: rgba(255, 255, 255, 0.70);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 10px 5px 10px;
+  border: 0.5px;
+  margin: 7px;
+  
+  color: var(--font-black, #303030);
+  text-align: center;
+  /* font-family: Yeongdeok Sea; */
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.4px;
 `;
 
 export const MessageViewContent = styled.div`

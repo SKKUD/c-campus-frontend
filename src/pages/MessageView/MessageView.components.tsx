@@ -10,12 +10,14 @@ import {
   MessageViewFourcutFrameContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
+  GreenBtnContainer
 } from "./MessageView.styles";
 
 // import components
 import FourcutFrame from "../../components/FourcutFrame/FourcutFrame.components";
-import Button from "../../components/common/Buttons/Button.components";
+import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import QuizBox from "../../components/QuizBox/QuizBox.components";
+import PublicToggle from "../../components/PublicToggle/PublicToggle.components";
 
 // import mui for modal
 import Box from "@mui/material/Box";
@@ -66,6 +68,7 @@ const MessageView = () => {
 
   return (
     <MessageViewContainer>
+      <PublicToggle />
       {/* Public Toggle */}
       <MessageViewTitle>{MessageData.title}</MessageViewTitle>
 
@@ -104,8 +107,10 @@ const MessageView = () => {
           From. {MessageData.sender}
         </MessageViewContentSender>
       </MessageViewContent>
-
-      <Button content="공유하기" />
+      
+      <GreenBtnContainer>
+        <GreenBtn content="공유하기" />
+      </GreenBtnContainer>
     </MessageViewContainer>
   );
 };

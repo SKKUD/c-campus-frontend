@@ -15,7 +15,7 @@ export const conTheme = createTheme({
   },
   typography: {
     fontFamily: [
-      '"omyu_pretty"',
+      '"YeongdeokSea"',
       '"Cafe24Ssurround"',
       '"Cafe24SsurroundAir"',
       '"GmarketSansMedium"',

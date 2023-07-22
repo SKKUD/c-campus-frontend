@@ -2,23 +2,26 @@ import { ButtonGroupContainer } from "./ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import WhiteBtn from "../../common/Buttons/WhiteBtn.components";
 import { FC } from "react";
+import { useNavigate } from "react-router";
 
 interface ButtonGroupProps {
   slide: number;
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({ slide }) => {
+  const navigate = useNavigate();
   const pickNotes = () => {
-    console.log("쪽지 뽑음");
+    // 쪽지 뽑는 gif 재생 후
+    navigate("/message");
   };
   const takePhotos = () => {
-    console.log("콩캠네컷 찍기");
+    navigate("/photo/post");
   };
   const movetoNoteBox = () => {
-    console.log("쪽지 보관함");
+    navigate("/message");
   };
   const movetoPhotoBox = () => {
-    console.log("네컷 보관함");
+    navigate("/photo");
   };
 
   return (

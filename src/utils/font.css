@@ -28,3 +28,8 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'YeongdeokSea';
+  src: url('../assets/font/Yeongdeok Sea.ttf') format('truetype');
+}

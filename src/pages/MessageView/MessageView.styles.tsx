@@ -1,20 +1,16 @@
 import styled from "styled-components";
 
 export const MessageViewContainer = styled.div`
-  width: 90vw;
-  min-width: 270px;
   max-width: 375px;
-  margin-top: 60px;
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
+  margin: 60px auto;
   align-items: center;
-  background-color: #D6EABA;
+  background-color: #d6eaba;
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
   width: 90vw;
-  min-width: 270px;
   max-width: 375px;
   display: flex;
   justify-content: right;
@@ -23,7 +19,6 @@ export const MessageViewPublicToggleContainer = styled.div`
 
 export const MessageViewTitle = styled.div`
   width: 90vw;
-  min-width: 270px;
   max-width: 343px;
   height: 56px;
   /* flex-shrink: 0; */
@@ -42,6 +37,7 @@ export const MessageViewTitle = styled.div`
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.4px;
+  word-break: keep-all;
 `;
 
 export const MessageViewContent = styled.div``;
@@ -80,7 +76,6 @@ export const MessageViewContentReceiver = styled.div`
 
 export const MessageViewContentMainContainer = styled.div`
   width: 90vw;
-  min-width: 270px;
   max-width: 343px;
   margin-left: 10px;
   margin-right: 10px;

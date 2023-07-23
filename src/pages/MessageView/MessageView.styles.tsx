@@ -2,23 +2,20 @@ import styled from "styled-components";
 
 export const MessageViewContainer = styled.div`
   width: 90vw;
-  min-width: 300px;
+  min-width: 270px;
   max-width: 375px;
   height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  margin-top: 60px;
   align-items: center;
   background-color: #D6EABA;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%,0%);
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
   width: 90vw;
-  min-width: 300px;
+  min-width: 270px;
   max-width: 375px;
   display: flex;
   justify-content: right;
@@ -27,7 +24,7 @@ export const MessageViewPublicToggleContainer = styled.div`
 
 export const MessageViewTitle = styled.div`
   width: 90vw;
-  min-width: 300px;
+  min-width: 270px;
   max-width: 343px;
   height: 56px;
   flex-shrink: 0;
@@ -87,7 +84,7 @@ export const MessageViewContentReceiver = styled.div`
 
 export const MessageViewContentMainContainer = styled.div`
   width: 90vw;
-  min-width: 300px;
+  min-width: 270px;
   max-width: 343px;
   margin-left: 10px;
   margin-right: 10px;

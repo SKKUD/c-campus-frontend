@@ -64,6 +64,8 @@ export const QuizBoxInformation = styled.div<{ color: string }>`
 `;
 export const QuizBoxCheckButtonContainer = styled.div`
   display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 `;
 
 export const QuizBoxCheckButton = styled(Button)`

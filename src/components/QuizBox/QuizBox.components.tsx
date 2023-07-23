@@ -9,10 +9,12 @@ import {
   QuizBoxTextArea,
   QuizBoxInformation,
   QuizBoxQuizContent,
-  QuizBoxCheckButton,
+  QuizBoxCheckButtonContainer,
 } from "./QuizBox.styles";
 
+// import components
 import CloseIcon from "@mui/icons-material/Close";
+import GreenBtn from "../common/Buttons/GreenBtn.components";
 
 // QuizBox interface
 interface IQuizBox {
@@ -131,10 +133,12 @@ const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
       ) : (
         ""
       )}
-
-      <QuizBoxCheckButton variant="contained" onClick={onClickHandler}>
+      <QuizBoxCheckButtonContainer>
+        <GreenBtn content="확인" onClick={onClickHandler}/>
+      </QuizBoxCheckButtonContainer>
+      {/* <QuizBoxCheckButton variant="contained" onClick={onClickHandler}>
         확인
-      </QuizBoxCheckButton>
+      </QuizBoxCheckButton> */}
     </QuizBoxContainer>
   );
 };

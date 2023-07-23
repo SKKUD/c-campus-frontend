@@ -3,6 +3,7 @@ import { useState } from "react";
 // import styled-components
 import {
   MessageViewContainer,
+  MessageViewPublicToggleContainer,
   MessageViewTitle,
   MessageViewContent,
   MessageViewContentReceiver,
@@ -68,13 +69,15 @@ const MessageView = () => {
   return (
     <MessageViewContainer>
       {/* Public Toggle */}
-      <PublicToggle />
+      <MessageViewPublicToggleContainer>
+        <PublicToggle />
+      </MessageViewPublicToggleContainer>
 
       {/* Title */}
-      <MessageViewTitle>{MessageData.title}</MessageViewTitle>
+      <MessageViewTitle className="MessageViewCenter">{MessageData.title}</MessageViewTitle>
 
       {/* Content */}
-      <MessageViewContent>
+      <MessageViewContent >
         {/* Receiver */}
         <MessageViewContentReceiver>
           <p className="MessageViewReceiverTo">To. </p>
@@ -82,7 +85,7 @@ const MessageView = () => {
         </MessageViewContentReceiver>
 
         {/* Main Content */}
-        <MessageViewContentMainContainer>
+        <MessageViewContentMainContainer className="MessageViewCenter">
           <MessageViewFourcutFrameContainer onClick={handleOpen}>
             {MessageData.isPicture ? (
               <FourcutFrame
@@ -117,7 +120,7 @@ const MessageView = () => {
       </MessageViewContent>
       
       {/* Sharing Button */}
-      <GreenBtnContainer>
+      <GreenBtnContainer className="MessageViewCenter">
         <GreenBtn content="공유하기"/>
       </GreenBtnContainer>
     </MessageViewContainer>

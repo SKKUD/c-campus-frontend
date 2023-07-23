@@ -9,29 +9,35 @@ export const MessageViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: #D6EABA;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,0%);
+`;
 
-  /* @media (max-width: 1024px) {
-    margin-top: 30px;
-    margin: auto;
-  } */
+export const MessageViewPublicToggleContainer = styled.div`
+  width: 90vw;
+  min-width: 300px;
+  max-width: 375px;
+  display: flex;
+  justify-content: right;
+  margin-right: 10px;
 `;
 
 export const MessageViewTitle = styled.div`
-  width: 343px;
+  width: 90vw;
+  min-width: 300px;
+  max-width: 343px;
   height: 56px;
   flex-shrink: 0;
-  font-size: 18px;
-  font-weight: 300;
   border-radius: 7px;
   border: 0.5px solid var(--main-2, #164300);
   background: rgba(255, 255, 255, 0.70);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.5px;
-  margin: 7px;
-  
+  border: 0.5px 0.5px 0.5px 0.5px;
   color: var(--font-black, #303030);
   text-align: center;
   /* font-family: Yeongdeok Sea; */
@@ -80,6 +86,9 @@ export const MessageViewContentReceiver = styled.div`
 
 
 export const MessageViewContentMainContainer = styled.div`
+  width: 90vw;
+  min-width: 300px;
+  max-width: 343px;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 5px;

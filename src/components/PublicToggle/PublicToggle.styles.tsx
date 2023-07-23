@@ -4,7 +4,7 @@ export const PublicToggleContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: right;
-  margin-top: 70px;
+  margin-top: 20px;
   margin-right: 10px;
 `;
 

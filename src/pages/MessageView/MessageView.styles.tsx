@@ -1,24 +1,17 @@
 import styled from "styled-components";
 
 export const MessageViewContainer = styled.div`
-  width: 90vw;
-  min-width: 300px;
   max-width: 375px;
-  height: 100vh;
-  margin: auto;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #D6EABA;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%,0%);
+  background-color: #d6eaba;
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
   width: 90vw;
-  min-width: 300px;
+  /* min-width: 300px; */
   max-width: 375px;
   display: flex;
   justify-content: right;
@@ -27,13 +20,13 @@ export const MessageViewPublicToggleContainer = styled.div`
 
 export const MessageViewTitle = styled.div`
   width: 90vw;
-  min-width: 300px;
-  max-width: 343px;
+  /* min-width: 300px;
+  max-width: 343px; */
   height: 56px;
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
   border-radius: 7px;
   border: 0.5px solid var(--main-2, #164300);
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,9 +41,7 @@ export const MessageViewTitle = styled.div`
   letter-spacing: -0.4px;
 `;
 
-export const MessageViewContent = styled.div`
-  
-`;
+export const MessageViewContent = styled.div``;
 
 export const MessageViewContentReceiver = styled.div`
   margin: 0px;
@@ -84,10 +75,9 @@ export const MessageViewContentReceiver = styled.div`
   }
 `;
 
-
 export const MessageViewContentMainContainer = styled.div`
   width: 90vw;
-  min-width: 300px;
+  /* min-width: 300px; */
   max-width: 343px;
   margin-left: 10px;
   margin-right: 10px;
@@ -99,12 +89,10 @@ export const MessageViewContentMainContainer = styled.div`
   flex-direction: row;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.7);
 `;
 
-export const MessageViewFourcutFrameContainer = styled.div`
-  
-`;
+export const MessageViewFourcutFrameContainer = styled.div``;
 
 export const MessageViewContentMainText = styled.p`
   text-align: left;

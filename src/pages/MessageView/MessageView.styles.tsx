@@ -7,6 +7,7 @@ export const MessageViewContainer = styled.div`
   margin: 60px auto;
   align-items: center;
   background-color: #d6eaba;
+  font-family: YeongdeokSea;
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
@@ -31,7 +32,6 @@ export const MessageViewTitle = styled.div`
   border: 0.5px 0.5px 0.5px 0.5px;
   color: var(--font-black, #303030);
   text-align: center;
-  /* font-family: Yeongdeok Sea; */
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

@@ -30,11 +30,11 @@ export const MessageImage = styled.img`
 export const MessageContent = styled.p`
   width: 15vw;
   max-width: 64px;
-  height: 13px;
+  height: 20px;
   color: var(--font-black, #303030);
   text-align: left;
   font-family: YeongdeokSea;
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
   font-weight: 400;
   line-height: 130%;

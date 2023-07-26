@@ -9,19 +9,25 @@ import {
 import CloseIcon from "../../assets/images/congball.svg";
 import OpenIcon from "../../assets/images/congball_open_color.svg";
 
+import { useNavigate } from "react-router";
+
 interface IMessage {
   id: string,
   isOpen: boolean,
   nickName: string,
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Message = ({id, isOpen, nickName, onClick}: IMessage) => {
+const Message = ({id, isOpen, nickName}: IMessage) => {
+  const navigate = useNavigate();
+
+  const RedirectToID = () => {
+    navigate(`/message/${id}`);
+  }
+
   return (
     <MessageFrame id={id}>
-      <MessageHolder>
+      <MessageHolder onClick={RedirectToID}>
         {isOpen ? (<MessageImage src={OpenIcon}></MessageImage>) : (<MessageImage src={CloseIcon}></MessageImage>)}
-        
       </MessageHolder>
 
       <MessageContent>{nickName}</MessageContent>

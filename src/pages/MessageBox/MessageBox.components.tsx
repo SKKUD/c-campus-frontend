@@ -148,7 +148,7 @@ const MessageList = () => {
       ],
     },
     {
-      date: "5월 19일",
+      date: "5월 18일",
       beans: [
         {
           id: "20",
@@ -178,7 +178,7 @@ const MessageList = () => {
       ],
     },
     {
-      date: "5월 19일",
+      date: "5월 17일",
       beans: [
         {
           id: "25",
@@ -218,11 +218,6 @@ const MessageList = () => {
     navigate(`/message/feed`);
   }
 
-  const RedirectToIDUrl = (id: string) => {
-    console.log(id);
-    navigate(`/message/${id}`);
-  }
-
   return (
     <MessageListContainer>
       <MessageListHeader>
@@ -244,7 +239,6 @@ const MessageList = () => {
                         id={bean.id}
                         isOpen={bean.isOpen}
                         nickName={bean.nickName}
-                        onClick={() => RedirectToIDUrl(bean.id)}
                       />
                     );
                   })}

@@ -13,6 +13,7 @@ export const MessageHolder = styled.div`
   height: 64px;
   border-radius: 10px;
   background: #FFF;
+
   /* default */
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
   display: flex;
@@ -23,7 +24,6 @@ export const MessageHolder = styled.div`
 export const MessageImage = styled.img`
   width: 52px;
   height: 52px;
-  flex-shrink: 0;
 `
 
 export const MessageContent = styled.p`

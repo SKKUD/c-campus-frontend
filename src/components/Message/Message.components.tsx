@@ -13,9 +13,10 @@ interface IMessage {
   id: string,
   isOpen: boolean,
   nickName: string,
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Message = ({id, isOpen, nickName}: IMessage) => {
+const Message = ({id, isOpen, nickName, onClick}: IMessage) => {
   return (
     <MessageFrame id={id}>
       <MessageHolder>

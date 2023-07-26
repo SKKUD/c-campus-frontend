@@ -11,6 +11,7 @@ import {
   MessageListHoder,
   MessageListDate,
   MessageListContent,
+  MessageListDataContainer,
 } from "./MessageBox.styles"
 
 // Message type
@@ -146,6 +147,66 @@ const MessageList = () => {
         },
       ],
     },
+    {
+      date: "5월 19일",
+      beans: [
+        {
+          id: "20",
+          nickName: "닉네임입니당",
+          isOpen: true,
+        },
+        {
+          id: "21",
+          nickName: "닉네임입니당",
+          isOpen: true,
+        },
+        {
+          id: "22",
+          nickName: "닉네임입니당",
+          isOpen: false,
+        },
+        {
+          id: "23",
+          nickName: "닉네임입니당",
+          isOpen: true,
+        },
+        {
+          id: "24",
+          nickName: "닉네임입니당",
+          isOpen: false,
+        },
+      ],
+    },
+    {
+      date: "5월 19일",
+      beans: [
+        {
+          id: "25",
+          nickName: "닉네임입니당",
+          isOpen: true,
+        },
+        {
+          id: "26",
+          nickName: "닉네임입니당",
+          isOpen: true,
+        },
+        {
+          id: "27",
+          nickName: "닉네임입니당",
+          isOpen: false,
+        },
+        {
+          id: "28",
+          nickName: "닉네임입니당",
+          isOpen: true,
+        },
+        {
+          id: "29",
+          nickName: "닉네임입니당",
+          isOpen: false,
+        },
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -155,6 +216,11 @@ const MessageList = () => {
   // navigate to message feed
   const RedirectToFeedUrl = () => {
     navigate(`/message/feed`);
+  }
+
+  const RedirectToIDUrl = (id: string) => {
+    console.log(id);
+    navigate(`/message/${id}`);
   }
 
   return (
@@ -178,6 +244,7 @@ const MessageList = () => {
                         id={bean.id}
                         isOpen={bean.isOpen}
                         nickName={bean.nickName}
+                        onClick={() => RedirectToIDUrl(bean.id)}
                       />
                     );
                   })}

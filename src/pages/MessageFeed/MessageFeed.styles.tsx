@@ -34,8 +34,6 @@ export const OpenMessageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  /* max-width: 340px; */
-  height: 100vh;
   margin: auto;
 `;
 

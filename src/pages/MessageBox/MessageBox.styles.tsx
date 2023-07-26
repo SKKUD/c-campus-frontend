@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const MessageListHeader = styled.div`
-  width: 90vw;
+  width: 100vw;
   min-width: 250px;
   max-width: 340px;
   display: flex;
@@ -27,7 +27,7 @@ export const MessageListHeaderMessageCount = styled.div`
 
 export const MessageListContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: #F7F7F7;
   margin: auto;
   display: flex;
@@ -47,7 +47,7 @@ export const MessageListHoder = styled.div`
 `;
 
 export const MessageListDate = styled.div`
-  width: 90vw;
+  width: 100vw;
   min-width: 250px;
   max-width: 340px;
   display: flex;
@@ -63,10 +63,20 @@ export const MessageListDate = styled.div`
 `;
 
 export const MessageListContent = styled.div`
+  width: 100vw;
+  min-width: 250px;
+  max-width: 340px;
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+  padding-top: 8px;
+`;
+
+export const MessageListDataContainer = styled.div`
   width: 90vw;
   min-width: 250px;
   max-width: 340px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding-top: 8px;
-`;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`

@@ -9,25 +9,27 @@ export const MessageFrame = styled.div`
 `
 
 export const MessageHolder = styled.div`
-  width: 64px;
-  height: 64px;
+  width: 15vw;
+  max-width: 64px;
+  height: 15vw;
+  max-height: 64px;
   border-radius: 10px;
-  background: #FFF;
+  background: #fff;
 
   /* default */
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const MessageImage = styled.img`
-  width: 52px;
-  height: 52px;
-`
+  width: 80%;
+`;
 
 export const MessageContent = styled.p`
-  width: 64px;
+  width: 15vw;
+  max-width: 64px;
   height: 13px;
   color: var(--font-black, #303030);
   text-align: left;
@@ -40,4 +42,7 @@ export const MessageContent = styled.p`
   margin-bottom: 30px;
   padding-left: 6px;
   padding-right: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;

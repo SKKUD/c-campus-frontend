@@ -28,8 +28,8 @@ export const MessageListHeaderMessageCount = styled.div`
 export const MessageListContainer = styled.div`
   width: 100vw;
   /* height: 100vh; */
-  background-color: #F7F7F7;
-  margin: auto;
+  background-color: #f7f7f7;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,7 +47,7 @@ export const MessageListHoder = styled.div`
 `;
 
 export const MessageListDate = styled.div`
-  width: 100vw;
+  width: 100%;
   min-width: 250px;
   max-width: 340px;
   display: flex;
@@ -63,10 +63,10 @@ export const MessageListDate = styled.div`
 `;
 
 export const MessageListContent = styled.div`
-  width: 100vw;
+  width: 100%;
   min-width: 250px;
   max-width: 340px;
-  
+
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, auto));
   padding-top: 8px;

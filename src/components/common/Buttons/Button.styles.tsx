@@ -44,3 +44,27 @@ export const WhiteButton = styled(Button)`
     background: rgba(255, 255, 255, 0.7);
   }
 `;
+
+export const LightGreenButton = styled(Button)`
+  width: 101px;
+  height: 32px;
+  flex-shrink: 0;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  border-radius: 3px;
+  background: rgba(22, 67, 0, 0.70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #FFF;
+  text-align: center;
+  font-family: GmarketSansMedium;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  &.MuiButton-root:hover {
+    background: rgba(255, 255, 255, 0.7);
+    color: rgba(22, 67, 0, 0.70);
+  }
+`

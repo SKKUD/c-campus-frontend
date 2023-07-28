@@ -115,7 +115,7 @@ const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
     <QuizBoxContainer>
       <QuizBoxQuitButtonContainer>
         <QuizBoxQuitButton onClick={handleClose}>
-          <CloseIcon />
+          <QuizBoxQuitButton />
         </QuizBoxQuitButton>
       </QuizBoxQuitButtonContainer>
 

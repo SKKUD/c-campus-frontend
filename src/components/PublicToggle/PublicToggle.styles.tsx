@@ -33,14 +33,14 @@ export const ToggleContainer = styled.div`
     width: 17px;
     height: 17px;
     border-radius: 50%;
-    background-color: #C8C8C8;
+    background-color: #8DC63F;
     transition : 0.5s;
   } 
 
   > .toggle--checked-circle {
     left: 4px;
     transition : 0.5s;
-    background-color: #8DC63F;
+    background-color: #C8C8C8;
   }
 `;
 

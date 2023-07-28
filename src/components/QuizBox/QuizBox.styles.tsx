@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 
+import CloseIcon from "@mui/icons-material/Close";
+
 export const QuizBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,14 +21,10 @@ export const QuizBoxQuitButtonContainer = styled.div`
   justify-content: right;
 `;
 
-export const QuizBoxQuitButton = styled.button`
-  background-color: #ffffff;
-  font-size: 25px;
-  color: #c8c8c8;
-  width: 25px;
-  height: 25px;
-  border: none;
-  margin: 10px 10px 0px 10px;
+export const QuizBoxQuitButton = styled(CloseIcon)`
+  background-color: #F5F5F5;
+  margin-top: 10px;
+  margin-right: 10px;
 `;
 
 export const QuizBoxQuizContent = styled.div`

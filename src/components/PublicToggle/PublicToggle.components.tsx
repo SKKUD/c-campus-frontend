@@ -18,8 +18,8 @@ export const PublicToggle = () => {
     <PublicToggleContainer>
       <ToggleDescriptionContainer>
         {isOn === false ?
-          <ToggleDescription color="#C8C8C8">쪽지 비공개</ToggleDescription> :
-          <ToggleDescription color="#808080">쪽지 공개</ToggleDescription>
+          <ToggleDescription color="#808080">쪽지 공개</ToggleDescription> :
+          <ToggleDescription color="#808080">쪽지 비공개</ToggleDescription>
         }
       </ToggleDescriptionContainer>
 

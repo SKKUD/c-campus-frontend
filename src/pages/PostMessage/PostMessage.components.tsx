@@ -1,6 +1,12 @@
 import { 
   PostMessageContainer,
   PostMessageColors,
+  PostMessageColor1,
+  PostMessageColor2,
+  PostMessageColor3,
+  PostMessageColor4,
+  PostMessageColor5,
+  PostMessageColorCheck,
   PostMessageRandomSubjectContainer,
   PostMessageRandomSubject,
   PostMessageUpdateButton,
@@ -16,6 +22,7 @@ import {
 
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import recycleIcon from "../../assets/images/randomUpdate.svg";
+import colorCheck from "../../assets/images/colorCheck.svg";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 
 import { useEffect, useState } from "react";
@@ -29,6 +36,14 @@ const SubjectData = [
   "과거로 간다면 같이 하고 싶은 것",
 ];
 
+const backgroundColor = [
+  "#D6EABA",
+  "#D9E1CE",
+  "#C1D3A7",
+  "#DAEFAE",
+  "#BFD8BA",
+]
+
 const PostMessage = () => {
   // state
   const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
@@ -37,7 +52,9 @@ const PostMessage = () => {
   const [nameCount, SetNameCount] = useState<number>(0);
   const [contentText, SetContentText] = useState<string>("");
   const [contentCount, SetContentCount] = useState<number>(0);
-
+  const [currentColorHex, SetCurrentColorHex] = useState<string>("");
+  const [currentColor, SetCurrentColor] = useState<number>(0);
+  
   // subject update button
   const updateButtonHandler = () => {
     // 처음 나왔던게 다시 안 나오게 하기
@@ -63,12 +80,50 @@ const PostMessage = () => {
     SetNameCount(event.target.value.length);
   };
 
+  const color1Handler = () => {
+    SetCurrentColor(0);
+    SetCurrentColorHex(backgroundColor[0]);
+  };
+
+  const color2Handler = () => {
+    SetCurrentColor(1);
+    SetCurrentColorHex(backgroundColor[1]);
+  };
+
+  const color3Handler = () => {
+    SetCurrentColor(2);
+    SetCurrentColorHex(backgroundColor[2]);
+  };
+
+  const color4Handler = () => {
+    SetCurrentColor(3);
+    SetCurrentColorHex(backgroundColor[3]);
+  };
+
+  const color5Handler = () => {
+    SetCurrentColor(4);
+    SetCurrentColorHex(backgroundColor[4]);
+  };
   // return
   return (
-    <PostMessageContainer>
+    <PostMessageContainer backgroundColor={currentColorHex}>
       {/* color */}
       <PostMessageColors>
-
+        <PostMessageColor1 onClick={color1Handler}>
+          {(currentColor === 0) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
+        </PostMessageColor1>
+        <PostMessageColor2 onClick={color2Handler}>
+          {(currentColor === 1) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
+        </PostMessageColor2>
+        <PostMessageColor3 onClick={color3Handler}>
+          {(currentColor === 2) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
+        </PostMessageColor3>
+        <PostMessageColor4 onClick={color4Handler}>
+          {(currentColor === 3) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
+        </PostMessageColor4>
+        <PostMessageColor5 onClick={color5Handler}>
+          {(currentColor === 4) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
+        </PostMessageColor5>
       </PostMessageColors>
       
       {/* subject */}

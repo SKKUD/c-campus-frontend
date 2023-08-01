@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-export const PostMessageContainer = styled.div`
-  background-color: #D6EABA;
+export const PostMessageContainer = styled.div<{ backgroundColor: string}>`
+  background-color: ${props => props.backgroundColor};
   width: 100%;
   max-width: 375px;
   display: flex;
@@ -16,8 +16,75 @@ export const PostMessageColors = styled.div`
   display: flex;
   width: 90%;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
+
+export const PostMessageColor1 = styled.div`
+  height: 40px;
+  width: 40px;
+  background-color: #D6EABA;
+  border-radius: 20px;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PostMessageColor2 = styled.div`
+  height: 40px;
+  width: 40px;
+  background-color: #D9E1CE;
+  border-radius: 20px;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PostMessageColor3= styled.div`
+  height: 40px;
+  width: 40px;
+  background-color: #C1D3A7;
+  border-radius: 20px;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PostMessageColor4 = styled.div`
+  height: 40px;
+  width: 40px;
+  background-color: #DAEFAE;
+  border-radius: 20px;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PostMessageColor5 = styled.div`
+  height: 40px;
+  width: 40px;
+  background-color: #BFD8BA;
+  border-radius: 20px;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PostMessageColorCheck = styled.img`
+  height: 12px;
+  width: 12px;
+`
 
 export const PostMessageRandomSubjectContainer = styled.div`
   width: 90%;
@@ -119,7 +186,7 @@ export const PostMessageContentText = styled.textarea`
   width: 60%;
   border: none;
   border-radius: 10px;
-  background: #f3f9ea;
+  background: rgba(255, 255, 255, 0.70);
   color: var(--black, #252525);
   font-family: YeongdeokSea;
   font-size: 16px;

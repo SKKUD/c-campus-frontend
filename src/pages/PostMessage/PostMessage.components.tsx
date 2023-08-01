@@ -1,5 +1,106 @@
+import { 
+  PostMessageContainer,
+  PostMessageColors,
+  PostMessageRandomSubjectContainer,
+  PostMessageRandomSubject,
+  PostMessageUpdateButton,
+  PostMessageRandomSubjectContent,
+  PostMessageContentContainer,
+  PostMessageContentTo,
+  PostMessageContentFrame,
+  PostMessageContentText,
+  PostMessageWriterContainer,
+  PostMessageWriter,
+  PostMessageWriterContent,
+} from "./PostMessage.styles";
+
+import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
+import recycleIcon from "../../assets/images/randomUpdate.svg";
+import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
+
+import { useEffect, useState } from "react";
+
+// 질문 데이터
+const SubjectData = [
+  "우리가 먹었던 최고의 학식 메뉴",
+  "우리가 처음 만난 날",
+  "학교 다니면서 있었던 재밌었던 일",
+  "꼭 해주고 싶은 말",
+  "과거로 간다면 같이 하고 싶은 것",
+];
+
 const PostMessage = () => {
-  return <div>PostMessage</div>;
+  // state
+  const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
+  const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
+  const [nameText, SetNameText] = useState<string>("");
+  const [nameCount, SetNameCount] = useState<number>(0);
+  const [contentText, SetContentText] = useState<string>("");
+  const [contentCount, SetContentCount] = useState<number>(0);
+
+  // subject update button
+  const updateButtonHandler = () => {
+    // 처음 나왔던게 다시 안 나오게 하기
+    var randomNumber: number;
+    while (true) {
+      randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
+
+      if (currentSubjectNumber !== randomNumber) { break; }
+    }
+    SetCurrentSubject(SubjectData[randomNumber]);
+    SetCurrentSubjectNumber(randomNumber);
+  };
+
+  // content event handler
+  const contentInputHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    SetContentText(event.target.value);
+    SetContentCount(event.target.value.length);
+  }
+
+  // name event handler
+  const nameInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    SetNameText(event.target.value);
+    SetNameCount(event.target.value.length);
+  };
+
+  // return
+  return (
+    <PostMessageContainer>
+      {/* color */}
+      <PostMessageColors>
+
+      </PostMessageColors>
+      
+      {/* subject */}
+      <PostMessageRandomSubjectContainer>
+        <PostMessageRandomSubject>랜덤 주제</PostMessageRandomSubject>
+        <PostMessageRandomSubjectContent>
+          {currentSubject}
+          <PostMessageUpdateButton src={recycleIcon} onClick={updateButtonHandler}/>
+        </PostMessageRandomSubjectContent>
+      </PostMessageRandomSubjectContainer>
+
+      <PostMessageContentTo>
+        <p className="PostMessageTo">To. </p>
+        <p className="PostMessageReceiver">명륜 귀요미</p>
+      </PostMessageContentTo>
+
+      {/* content */}
+      <PostMessageContentContainer>
+        <PostMessageContentFrame src={defaultFrameIcon}/>
+        <PostMessageContentText onChange={contentInputHandler} maxLength={240} placeholder="240글자까지만 입력됩니다"/>
+      </PostMessageContentContainer>
+
+      {/* writer */}
+      <PostMessageWriterContainer>
+        <PostMessageWriter>From. </PostMessageWriter>
+        <PostMessageWriterContent onChange={nameInputHandler} maxLength={10} placeholder="10글자까지만 입력됩니다"/>
+      </PostMessageWriterContainer>
+
+      {/* Button */}
+      <GreenBtn content="작성 완료"/>
+    </PostMessageContainer>
+  );
 };
 
 export default PostMessage;

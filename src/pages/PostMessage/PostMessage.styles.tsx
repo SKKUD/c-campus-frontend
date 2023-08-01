@@ -186,7 +186,7 @@ export const PostMessageContentText = styled.textarea`
   width: 60%;
   border: none;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.70);
+  background: transparent;
   color: var(--black, #252525);
   font-family: YeongdeokSea;
   font-size: 16px;

@@ -16,7 +16,7 @@ import frame4 from "../../assets/images/프레임04.png";
 import frame5 from "../../assets/images/프레임05.png";
 import frame6 from "../../assets/images/프레임06.png";
 import frame7 from "../../assets/images/프레임07.png";
-import example from "../../assets/images/4cut_c4.svg";
+import blank from "../../assets/images/blank.png";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
 
 // const videoConstraints = {
@@ -85,7 +85,10 @@ import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.c
 const PostPhoto = () => {
   const [frameNum, setFrame] = useState<number>(1);
   const frameImages = [frame1, frame2, frame3, frame4, frame5, frame6, frame7];
-
+  const [photo1, setPhoto1] = useState<string>("");
+  const [photo2, setPhoto2] = useState<string>("");
+  const [photo3, setPhoto3] = useState<string>("");
+  const [photo4, setPhoto4] = useState<string>("");
   return (
     <PhotoBoothContainer>
       <FourcutNPaletteWrapper>
@@ -93,19 +96,19 @@ const PostPhoto = () => {
           <FourcutFrame src={frameImages[frameNum - 1]} />
           <PhotoWrapper>
             <FourcutPhoto
-              src={example}
+              src={photo1 || blank}
               onClick={() => console.log("1 clicked")}
             />
             <FourcutPhoto
-              src={example}
+              src={photo2 || blank}
               onClick={() => console.log("2 clicked")}
             />
             <FourcutPhoto
-              src={example}
+              src={photo3 || blank}
               onClick={() => console.log("3 clicked")}
             />
             <FourcutPhoto
-              src={example}
+              src={photo4 || blank}
               onClick={() => console.log("4 clicked")}
             />
           </PhotoWrapper>

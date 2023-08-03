@@ -27,7 +27,7 @@ const Router = () => {
         <Route path="/message/post" element={<PostMessage />} /> {/*쪽지 작성*/}
         <Route path="/photo" element={<PhotoBox />} /> {/*네컷 보관함*/}
         <Route path="/photo/:id" element={<PhotoView />} /> {/*개별 네컷 조회*/}
-        <Route path="/photo/post" element={<PostPhoto />} /> {/*콩캠네컷 촬영*/}
+        <Route path="/photo/post" element={<PostPhoto />} /> {/*콩캠네컷 작성*/}
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

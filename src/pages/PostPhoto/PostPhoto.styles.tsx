@@ -20,6 +20,9 @@ export const FourcutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+
+  /* default */
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1);
   @media (max-width: 320px) {
     margin: 0 20px;
   }
@@ -37,16 +40,17 @@ export const FourcutFrame = styled.img`
 export const PhotoWrapper = styled.div`
   margin: 0 auto;
   width: 201px;
-  height: 455px;
+  height: 450px;
   padding-top: 4.26px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 `;
+
 export const FourcutPhoto = styled.img`
   width: 189px;
-  height: 113px;
+  height: 110px;
   flex-shrink: 0;
   background-color: #000;
   cursor: pointer;

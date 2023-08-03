@@ -45,6 +45,25 @@ export const WhiteButton = styled(Button)`
   }
 `;
 
+export const SmallWhiteButton = styled(Button)`
+  background: rgba(255, 255, 255, 0.7);
+  color: #164300;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  width: 30%;
+  height: 48px;
+  font-family: Cafe24Ssurround;
+  font-size: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  &.MuiButton-root:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+`;
+
 export const LightGreenButton = styled(Button)`
   width: 101px;
   height: 32px;

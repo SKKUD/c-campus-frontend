@@ -67,6 +67,17 @@ const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
 
   // 확인버튼 눌렸을 때, props로 들어온 Answer과 일치하는지 비교
   const onClickHandler = () => {
+    // 빈칸인지 확인
+    if (textArea === "") {
+      SetColor(RED_COLOR);
+      SetInformation(`정답을 우선 입력해주세요`);
+
+      return;
+    }
+
+    // reset the textarea
+    SetTextArea("");
+
     // 정답일 떄,
     if (Answer === textArea) {
       // 정답 처리
@@ -123,7 +134,7 @@ const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
 
       <QuizBoxTextAreaContainer>
         <QuizBoxTextArea
-          type="search"
+          id="QuizBoxAnswer"
           placeholder="정답"
           onChange={onAnswerChange}
         />

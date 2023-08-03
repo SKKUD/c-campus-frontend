@@ -40,7 +40,7 @@ export const FourcutFrame = styled.img`
 export const PhotoWrapper = styled.div`
   margin: 0 auto;
   width: 201px;
-  height: 450px;
+  height: 452px;
   padding-top: 4.26px;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@ export const PhotoWrapper = styled.div`
 
 export const FourcutPhoto = styled.img`
   width: 189px;
-  height: 110px;
+  height: 112px;
   flex-shrink: 0;
   background-color: #000;
   cursor: pointer;

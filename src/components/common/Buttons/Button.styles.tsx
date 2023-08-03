@@ -53,7 +53,7 @@ export const SmallWhiteButton = styled(Button)`
   width: 30%;
   height: 48px;
   font-family: Cafe24Ssurround;
-  font-size: 22px;
+  font-size: 100%;
   border-radius: 10px;
   display: flex;
   align-items: center;

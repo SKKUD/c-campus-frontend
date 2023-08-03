@@ -32,6 +32,7 @@ export const MakeQuizContentContainer = styled.div`
 `
 
 export const MakeQuizContentLabel = styled.div`
+  width: 10%;
   color: var(--font-grey-1, #808080);
   text-align: center;
   font-family: GmarketSansMedium;
@@ -69,6 +70,7 @@ export const MakeQuizAnswerContainer = styled.div`
 `
 
 export const MakeQuizAnswerLabel = styled.div`
+  width: 10%;
   color: var(--font-grey-1, #808080);
   text-align: center;
   font-family: GmarketSansMedium;

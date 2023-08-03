@@ -27,6 +27,7 @@ import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 
 import AskLock from "./modal/AskLock/AskLock.components";
 import MakeQuiz from "./modal/MakeQuiz/MakeQuiz.components";
+import SendMessage from "./modal/SendMessage/SendMessage.components";
 
 import { useEffect, useState } from "react";
 
@@ -161,6 +162,7 @@ const PostMessage = () => {
       <GreenBtn content="작성 완료"/>
       <AskLock />
       <MakeQuiz />
+      <SendMessage />
     </PostMessageContainer>
   );
 };

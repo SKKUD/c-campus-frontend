@@ -25,19 +25,19 @@ const MakeQuiz = () => {
       {/* quiz content */}
       <MakeQuizContentContainer>
         <MakeQuizContentLabel>문제</MakeQuizContentLabel>
-        <MakeQuizContent maxLength={20}/>
+        <MakeQuizContent maxLength={30} placeholder="30자까지 입력 가능합니다"/>
       </MakeQuizContentContainer>
 
       {/* answer */}
       <MakeQuizAnswerContainer>
         <MakeQuizAnswerLabel>정답</MakeQuizAnswerLabel>
-        <MakeQuizAnswer maxLength={10}/>
+        <MakeQuizAnswer maxLength={10} placeholder="닉네임은 10자까지 입력 가능합니다"/>
       </MakeQuizAnswerContainer>
 
       {/* button container */}
       <MakeQuizButtonContainer>
         <SmallWhiteBtn content="삭제"/>
-        <GreenBtn content="퀴즈 넣기"/>
+        <GreenBtn content="완료"/>
       </MakeQuizButtonContainer>
     </MakeQuizContainer>
   );

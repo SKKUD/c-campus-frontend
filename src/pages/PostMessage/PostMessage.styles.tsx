@@ -183,6 +183,7 @@ export const PostMessageContentFrame = styled.img`
 `;
 
 export const PostMessageContentText = styled.textarea`
+  resize: none;
   width: 60%;
   border: none;
   border-radius: 10px;

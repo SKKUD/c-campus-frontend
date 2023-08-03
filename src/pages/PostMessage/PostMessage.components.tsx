@@ -25,6 +25,9 @@ import recycleIcon from "../../assets/images/randomUpdate.svg";
 import colorCheck from "../../assets/images/colorCheck.svg";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 
+import AskLock from "./modal/AskLock/AskLock.components";
+import MakeQuiz from "./modal/MakeQuiz/MakeQuiz.components";
+
 import { useEffect, useState } from "react";
 
 // 질문 데이터
@@ -80,6 +83,7 @@ const PostMessage = () => {
     SetNameCount(event.target.value.length);
   };
 
+  // color button handler
   const color1Handler = () => {
     SetCurrentColor(0);
     SetCurrentColorHex(backgroundColor[0]);
@@ -104,6 +108,7 @@ const PostMessage = () => {
     SetCurrentColor(4);
     SetCurrentColorHex(backgroundColor[4]);
   };
+
   // return
   return (
     <PostMessageContainer backgroundColor={currentColorHex}>
@@ -154,6 +159,8 @@ const PostMessage = () => {
 
       {/* Button */}
       <GreenBtn content="작성 완료"/>
+      <AskLock />
+      <MakeQuiz />
     </PostMessageContainer>
   );
 };

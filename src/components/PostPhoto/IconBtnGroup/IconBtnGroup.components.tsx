@@ -11,10 +11,10 @@ const IconBtnGroup: React.FC<CaptureProps> = ({ takePhoto }) => {
   return (
     <ButtonGroup>
       <StyledIconButton onClick={takePhoto}>
-        <img src={cameraicon} className="camera" />
+        <img src={cameraicon} className="camera" alt="cameraBtn" />
       </StyledIconButton>
       <StyledIconButton>
-        <img src={albumicon} className="album" />
+        <img src={albumicon} className="album" alt="albumBtn" />
       </StyledIconButton>
     </ButtonGroup>
   );

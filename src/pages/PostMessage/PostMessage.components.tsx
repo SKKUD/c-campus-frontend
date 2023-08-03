@@ -85,6 +85,7 @@ const PostMessage = () => {
   };
 
   // color button handler
+  // 함수 하나로 해도 될 것 같긴한데..
   const color1Handler = () => {
     SetCurrentColor(0);
     SetCurrentColorHex(backgroundColor[0]);

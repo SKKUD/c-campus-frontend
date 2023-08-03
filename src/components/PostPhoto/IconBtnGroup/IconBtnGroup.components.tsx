@@ -10,8 +10,8 @@ interface CaptureProps {
 const IconBtnGroup: React.FC<CaptureProps> = ({ takePhoto }) => {
   return (
     <ButtonGroup>
-      <StyledIconButton>
-        <img src={cameraicon} className="camera" onClick={takePhoto} />
+      <StyledIconButton onClick={takePhoto}>
+        <img src={cameraicon} className="camera" />
       </StyledIconButton>
       <StyledIconButton>
         <img src={albumicon} className="album" />

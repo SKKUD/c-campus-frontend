@@ -7,7 +7,7 @@ const Header = () => {
 
   return (
     <>
-      <AppBar>{match1024 ? <WebHeader /> : <MobileHeader />}</AppBar>
+    <AppBar>{match1024 ? <WebHeader /> : <MobileHeader />}</AppBar>
     </>
   );
 };

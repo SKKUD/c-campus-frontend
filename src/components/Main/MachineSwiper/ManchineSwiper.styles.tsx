@@ -32,7 +32,7 @@ export const NavBtn = styled.button`
   background-color: transparent;
   position: absolute;
   top: 50%;
-  z-index: 99999;
+  z-index: 999;
   &.prev {
     left: 10px;
   }

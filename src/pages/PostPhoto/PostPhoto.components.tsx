@@ -18,6 +18,7 @@ import frame7 from "../../assets/images/프레임07.png";
 import blank from "../../assets/images/blank.png";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
+import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 
 const PostPhoto = () => {
   const [frameNum, setFrame] = useState<number>(1);
@@ -117,7 +118,17 @@ const PostPhoto = () => {
         </FourcutContainer>
         <FramePalette setFrame={setFrame} />
       </FourcutNPaletteWrapper>
-      <IconBtnGroup takePhoto={() => setOnCapture(true)} />
+      {done ? (
+        <WhiteBtn content="완료" onClick={(e) => console.log("dhksfy")} />
+      ) : (
+        <IconBtnGroup
+          takePhoto={() => setOnCapture(true)}
+          choosePhoto={dispatchArr[current - 1]}
+          current={current}
+          setCurrent={setCurrent}
+          done={done}
+        />
+      )}
     </PhotoBoothContainer>
   );
 };

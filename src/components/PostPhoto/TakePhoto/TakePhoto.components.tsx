@@ -14,7 +14,7 @@ interface ITakePhoto {
   dispatchArr: React.Dispatch<React.SetStateAction<string | null>>[];
   onCapture: boolean;
   setOnCapture: React.Dispatch<React.SetStateAction<boolean>>;
-  done: boolean;
+  done: string;
 }
 
 const TakePhoto = ({
@@ -39,7 +39,7 @@ const TakePhoto = ({
     if (imageSrc) {
       setUrl(imageSrc);
       setOnCapture(false);
-      done ? setCurrent(5) : setCurrent(current + 1);
+      done === "editing" ? setCurrent(5) : setCurrent(current + 1);
     }
   }, [webcamRef]);
 

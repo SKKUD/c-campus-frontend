@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import * as htmlToImage from "html-to-image";
 import {
   PhotoBoothContainer,
   FourcutNPaletteWrapper,
@@ -6,6 +7,7 @@ import {
   FourcutFrame,
   PhotoWrapper,
   FourcutPhoto,
+  DateContainer,
 } from "./PostPhoto.styles";
 import FramePalette from "../../components/PostPhoto/FramePalette/FramePalette.components";
 import frame1 from "../../assets/images/프레임01.png";
@@ -16,8 +18,11 @@ import frame5 from "../../assets/images/프레임05.png";
 import frame6 from "../../assets/images/프레임06.png";
 import frame7 from "../../assets/images/프레임07.png";
 import blank from "../../assets/images/blank.png";
+import { getDate } from "../../utils/getDate";
+import { handleShare } from "../../utils/handleShare";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
+import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 
 const PostPhoto = () => {
   const [frameNum, setFrame] = useState<number>(1);
@@ -28,25 +33,26 @@ const PostPhoto = () => {
   const [photo2, setPhoto2] = useState<string | null>(null);
   const [photo3, setPhoto3] = useState<string | null>(null);
   const [photo4, setPhoto4] = useState<string | null>(null);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
   const handleDelete = (num: number) => {
     if (window.confirm("선택한 사진을 지울까요?")) {
       dispatchArr[num - 1]("");
       setCurrent(num);
+      setDone("editing");
     }
   };
 
   useEffect(() => {
     if (current === 5) {
-      setDone(true);
+      setDone("done");
     }
   }, [current]);
 
   return (
     <PhotoBoothContainer>
       <FourcutNPaletteWrapper>
-        <FourcutContainer>
+        <FourcutContainer className="fourcutImage">
           <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
           <PhotoWrapper>
             {current === 1 ? (
@@ -114,10 +120,31 @@ const PostPhoto = () => {
               />
             )}
           </PhotoWrapper>
+          <DateContainer
+            brightFrame={
+              frameNum === 2 || frameNum === 6
+                ? "bright"
+                : frameNum === 5
+                ? "medium"
+                : "dark"
+            }
+          >
+            {getDate()}
+          </DateContainer>
         </FourcutContainer>
         <FramePalette setFrame={setFrame} />
       </FourcutNPaletteWrapper>
-      <IconBtnGroup takePhoto={() => setOnCapture(true)} />
+      {done === "done" ? (
+        <WhiteBtn content="완료" onClick={(e) => console.log("submit")} />
+      ) : (
+        <IconBtnGroup
+          takePhoto={() => setOnCapture(true)}
+          choosePhoto={dispatchArr[current - 1]}
+          current={current}
+          setCurrent={setCurrent}
+          done={done}
+        />
+      )}
     </PhotoBoothContainer>
   );
 };

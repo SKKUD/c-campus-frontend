@@ -40,6 +40,7 @@ export const WhiteButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
   &.MuiButton-root:hover {
     background: rgba(255, 255, 255, 0.7);
   }

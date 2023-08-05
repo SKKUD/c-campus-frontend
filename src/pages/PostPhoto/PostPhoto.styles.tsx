@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 
 export const PhotoBoothContainer = styled.div`
   background-color: #f5f5f5;
@@ -10,6 +11,7 @@ export const PhotoBoothContainer = styled.div`
 export const FourcutNPaletteWrapper = styled.div`
   position: relative;
   width: 100%;
+  margin-bottom: 30px;
 `;
 
 export const FourcutContainer = styled.div`
@@ -54,4 +56,20 @@ export const FourcutPhoto = styled.img`
   flex-shrink: 0;
   background-color: #000;
   cursor: pointer;
+`;
+
+export const DateContainer = styled.div<{ brightFrame: string }>`
+  position: absolute;
+  right: 6px;
+  bottom: 2px;
+  color: ${(props) =>
+    props.brightFrame === "bright"
+      ? "rgba(116, 116, 116, 0.73)"
+      : props.brightFrame === "medium"
+      ? "#AAAAAA"
+      : "rgba(255, 255, 255, 0.5)"};
+  font-family: GmarketSansMedium;
+  font-size: 12px;
+  font-weight: 300;
+  z-index: 999;
 `;

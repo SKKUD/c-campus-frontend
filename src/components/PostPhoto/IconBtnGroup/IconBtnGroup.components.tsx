@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import cameraicon from "../../../assets/images/camera_btn.png";
 import albumicon from "../../../assets/images/album_btn.png";
 import { ButtonGroup, StyledIconButton } from "./IconBtnGroup.styles";
@@ -9,7 +10,7 @@ interface CaptureProps {
   choosePhoto: React.Dispatch<React.SetStateAction<string | null>>;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
-  done: boolean;
+  done: string;
 }
 
 const IconBtnGroup: React.FC<CaptureProps> = ({
@@ -19,6 +20,7 @@ const IconBtnGroup: React.FC<CaptureProps> = ({
   setCurrent,
   done,
 }) => {
+  const isMobile = useMediaQuery("(max-width:900px)");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [inputImage, setInputImage] = useState<string | null>(null);
 
@@ -55,19 +57,35 @@ const IconBtnGroup: React.FC<CaptureProps> = ({
 
   return (
     <ButtonGroup>
-      <StyledIconButton onClick={takePhoto}>
-        <img src={cameraicon} className="camera" alt="cameraBtn" />
-      </StyledIconButton>
-      <StyledIconButton onClick={handleAlbumButtonClick}>
-        <img src={albumicon} className="album" alt="albumBtn" />
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={handleFileInputChange}
-        />
-      </StyledIconButton>
+      {isMobile ? (
+        <StyledIconButton onClick={handleAlbumButtonClick}>
+          <img src={cameraicon} className="camera" alt="cameraBtn" />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileInputChange}
+          />
+        </StyledIconButton>
+      ) : (
+        <>
+          <StyledIconButton onClick={takePhoto}>
+            <img src={cameraicon} className="camera" alt="cameraBtn" />
+          </StyledIconButton>
+          <StyledIconButton onClick={handleAlbumButtonClick}>
+            <img src={albumicon} className="album" alt="albumBtn" />
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleFileInputChange}
+            />
+          </StyledIconButton>
+        </>
+      )}
+
       <CropModal
         choosePhoto={choosePhoto}
         current={current}

@@ -6,6 +6,10 @@ export const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 48px auto;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
 `;
 
 export const StyledIconButton = styled(IconButton)`

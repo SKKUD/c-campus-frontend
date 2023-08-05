@@ -14,7 +14,7 @@ interface CaptureProps {
   choosePhoto: React.Dispatch<React.SetStateAction<string | null>>;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
-  done: boolean;
+  done: string;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   open: boolean;
   inputImage: string | null;
@@ -45,7 +45,7 @@ const CropModal: React.FC<CaptureProps> = ({
   };
   const onCrop = (image: string) => {
     choosePhoto(image);
-    done ? setCurrent(5) : setCurrent(current + 1);
+    done === "editing" ? setCurrent(5) : setCurrent(current + 1);
     handleClose();
   };
   return (

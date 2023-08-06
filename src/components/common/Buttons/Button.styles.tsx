@@ -23,6 +23,7 @@ export const GreenButton = styled(Button)`
   }
   &.Mui-disabled {
     background: rgba(98, 125, 85, 0.5);
+    color: #ffffff;
     backdrop-filter: blur(5px);
   }
 `;

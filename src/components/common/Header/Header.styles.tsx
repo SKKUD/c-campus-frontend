@@ -48,8 +48,8 @@ export const InfoIcon = styled.img`
 `;
 
 export const WebHeaderButton = styled(Button)`
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 40px;
   color: #fff;
   text-align: center;
   font-size: 20px;
@@ -64,8 +64,8 @@ export const WebButtonWrap = styled.div`
 `;
 
 export const SwipeButtonGroup = styled.div`
-  width: 220px;
-  margin-left: 20px;
+  width: 100%;
+  padding-right: 70px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;

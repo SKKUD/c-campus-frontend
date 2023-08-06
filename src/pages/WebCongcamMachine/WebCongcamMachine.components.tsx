@@ -6,7 +6,9 @@ import {
   InfoPaper,
   ContentConatiner,
 } from "../../components/WebMainPage/WebMainPage.styles";
+import MessageList from "../MessageBox/MessageBox.components";
 import infoDescImg from "../../assets/images/infoDescImg.png";
+
 const WebCongcamMachine = () => {
   return (
     <WebMainPageContainer>
@@ -15,7 +17,9 @@ const WebCongcamMachine = () => {
         <InfoImgConatiner>
           <InfoPaper src={infoDescImg} />
         </InfoImgConatiner>
-        <ContentConatiner></ContentConatiner>
+        <ContentConatiner>
+          <MessageList />
+        </ContentConatiner>
       </BoxAbove>
     </WebMainPageContainer>
   );

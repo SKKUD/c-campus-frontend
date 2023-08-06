@@ -6,6 +6,7 @@ import {
   InfoPaper,
   ContentConatiner,
 } from "../../components/WebMainPage/WebMainPage.styles";
+import PhotoBox from "../PhotoBox/PhotoBox.components";
 import infoDescImg from "../../assets/images/infoDescImg.png";
 const WebCongcamFourcut = () => {
   return (
@@ -15,7 +16,9 @@ const WebCongcamFourcut = () => {
         <InfoImgConatiner>
           <InfoPaper src={infoDescImg} />
         </InfoImgConatiner>
-        <ContentConatiner></ContentConatiner>
+        <ContentConatiner>
+          <PhotoBox />
+        </ContentConatiner>
       </BoxAbove>
     </WebMainPageContainer>
   );

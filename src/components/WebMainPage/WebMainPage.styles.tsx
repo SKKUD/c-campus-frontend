@@ -20,7 +20,8 @@ export const Ground = styled.div`
 
 export const BoxAbove = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  padding-top: 80px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -30,9 +31,7 @@ export const BoxAbove = styled.div`
 
 export const InfoImgConatiner = styled.div`
   width: 400px;
-  height: 665px;
   border-radius: 15px;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   z-index: 10;
 `;
 
@@ -43,9 +42,14 @@ export const InfoPaper = styled.img`
 export const ContentConatiner = styled.div`
   width: 400px;
   height: 708px;
+  max-height: 85vh;
   border-radius: 20px;
   border: 0.5px solid #164300;
   background: #f7f7f7;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  overflow: scroll;
+  > div {
+    padding-top: 30px;
+  }
 `;

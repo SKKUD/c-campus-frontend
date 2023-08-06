@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const PhotoBoxContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   background-color: #f5f5f5;
   padding: 92px 16px;
 `;

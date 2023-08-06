@@ -10,6 +10,12 @@ export const ButtonGroup = styled.div`
   @media (max-width: 900px) {
     justify-content: center;
   }
+  @media (min-width: 1024px) {
+    position: absolute;
+    top: 620px;
+    left: calc(50% + 220px);
+    transform: translate(-50%, 0);
+  }
 `;
 
 export const StyledIconButton = styled(IconButton)`

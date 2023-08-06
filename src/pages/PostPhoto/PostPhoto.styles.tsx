@@ -12,6 +12,9 @@ export const FourcutNPaletteWrapper = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 30px;
+  @media (min-width: 1024px) {
+    padding-top: 130px;
+  }
 `;
 
 export const FourcutContainer = styled.div`
@@ -72,4 +75,13 @@ export const DateContainer = styled.div<{ brightFrame: string }>`
   font-size: 12px;
   font-weight: 300;
   z-index: 999;
+`;
+
+export const WebGreenBtnWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
 `;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMediaQuery } from "@mui/material";
 import * as htmlToImage from "html-to-image";
 import {
   PhotoBoothContainer,
@@ -8,6 +9,7 @@ import {
   PhotoWrapper,
   FourcutPhoto,
   DateContainer,
+  WebGreenBtnWrap,
 } from "./PostPhoto.styles";
 import FramePalette from "../../components/PostPhoto/FramePalette/FramePalette.components";
 import frame1 from "../../assets/images/프레임01.png";
@@ -23,8 +25,10 @@ import { handleShare } from "../../utils/handleShare";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
+import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 
 const PostPhoto = () => {
+  const match1024 = useMediaQuery("(min-width:1024px)");
   const [frameNum, setFrame] = useState<number>(1);
   const frameImages = [frame1, frame2, frame3, frame4, frame5, frame6, frame7];
   const [current, setCurrent] = useState(1);
@@ -134,7 +138,24 @@ const PostPhoto = () => {
         </FourcutContainer>
         <FramePalette setFrame={setFrame} />
       </FourcutNPaletteWrapper>
-      {done === "done" ? (
+      {match1024 ? (
+        <>
+          <IconBtnGroup
+            takePhoto={() => setOnCapture(true)}
+            choosePhoto={dispatchArr[current - 1]}
+            current={current}
+            setCurrent={setCurrent}
+            done={done}
+          />
+          <WebGreenBtnWrap>
+            {done === "done" ? (
+              <GreenBtn content="완료" onClick={(e) => console.log("submit")} />
+            ) : (
+              <GreenBtn content="완료" disabled={true} />
+            )}
+          </WebGreenBtnWrap>
+        </>
+      ) : done === "done" ? (
         <WhiteBtn content="완료" onClick={(e) => console.log("submit")} />
       ) : (
         <IconBtnGroup

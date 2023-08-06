@@ -3,11 +3,12 @@ import { GreenButton } from "./Button.styles";
 interface IButton {
   content: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }
 
-const GreenBtn = ({ content, onClick }: IButton) => {
+const GreenBtn = ({ content, onClick, disabled = false }: IButton) => {
   return (
-    <GreenButton onClick={onClick} disabled={false}>
+    <GreenButton onClick={onClick} disabled={disabled}>
       {content}
     </GreenButton>
   );

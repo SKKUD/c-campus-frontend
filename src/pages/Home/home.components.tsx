@@ -1,6 +1,14 @@
+import { 
+  HomeContainer,
+} from "./home.styles";
+
+import KakaoLogin from "../../utils/login/KakaoLogin/KakaoLogin.components";
+
 const Home = () => {
   return (
-    <div>Home</div>
+    <HomeContainer>
+      <KakaoLogin />
+    </HomeContainer>
   );
 }
 

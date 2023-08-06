@@ -1,5 +1,14 @@
 import { useState, useEffect} from "react";
-import axios, {AxiosResponse} from "axios";
+import axios, {RawAxiosResponseHeaders, AxiosResponseHeaders, InternalAxiosRequestConfig}from "axios";
+
+interface AxiosResponse<T = any, D = any> {
+  data: T
+  status: number
+  statusText: string
+  headers: RawAxiosResponseHeaders | AxiosResponseHeaders
+  config: InternalAxiosRequestConfig<D>
+  request?: any
+}
 
 const KakaoLoginCallBack = () => {
   const [authCode, setAuthCode] = useState("");
@@ -26,7 +35,7 @@ const KakaoLoginCallBack = () => {
         },
       },
     ).then(async (response: AxiosResponse) => {
-      const kakaoUser = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
+      const kakaoUser: any = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
         headers: {
           Authorization: `Bearer ${response.data.access_token}`,
         },
@@ -35,7 +44,7 @@ const KakaoLoginCallBack = () => {
           console.log(error);
         }
       });
-      // console.log(kakaoUser.data.properties);
+      console.log(kakaoUser.data.properties);
       // setNickName(kakaoUser.data.properties.nickname);
       // setProfile(kakaoUser.data.properties.profile_image);
     }).catch((error) => {

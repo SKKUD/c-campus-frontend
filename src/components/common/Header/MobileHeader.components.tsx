@@ -28,7 +28,9 @@ const MobileHeader: FC = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
-
+  const handleLogoClick = () => {
+    navigate("/main");
+  };
   // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,7 +57,7 @@ const MobileHeader: FC = () => {
         handleModalClose={handleModalClose}
       />
 
-      <HeaderIMG src={HeaderImg} alt="header" />
+      <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
 
       <StyledIconButton onClick={handleMenuClick}>
         <MenuIcon src={menuIcon} />

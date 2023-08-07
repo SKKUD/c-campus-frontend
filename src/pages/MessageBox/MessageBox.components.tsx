@@ -12,6 +12,7 @@ import {
   MessageListDate,
   MessageListContent,
   MessageListDataContainer,
+  MessageBoxEmpty,
 } from "./MessageBox.styles"
 
 // Message type
@@ -219,35 +220,43 @@ const MessageList = () => {
   }
 
   return (
-    <MessageListContainer>
-      <MessageListHeader>
-        <MessageListHeaderMessageCount>{messageCount}개의 추억</MessageListHeaderMessageCount>
-        <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl}/>
-      </MessageListHeader>
-      {MessageData &&
-        MessageData.map((messageData: IMessages) => {
-          // SetMessageCount(messageCount+1);
-          return (
-            <MessageListHoder key={messageData.date}>
-              <MessageListDate>{messageData.date}</MessageListDate>
-              <MessageListContent>
-                {messageData.beans &&
-                  messageData.beans.map((bean: IBean) => {
-                    return (
-                      <Message
-                        key={bean.id}
-                        id={bean.id}
-                        isOpen={bean.isOpen}
-                        nickName={bean.nickName}
-                      />
-                    );
-                  })}
-              </MessageListContent>
-            </MessageListHoder>
-          );
-        })}
-    </MessageListContainer>
-  );
-};
+    <>
+      {
+        (MessageData.length !== 0) ? (
+          <MessageListContainer>
+            <MessageListHeader>
+              <MessageListHeaderMessageCount>{messageCount}개의 추억</MessageListHeaderMessageCount>
+              <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl}/>
+            </MessageListHeader>
+            {MessageData &&
+              MessageData.map((messageData: IMessages) => {
+                // SetMessageCount(messageCount+1);
+                return (
+                  <MessageListHoder key={messageData.date}>
+                    <MessageListDate>{messageData.date}</MessageListDate>
+                    <MessageListContent>
+                      {messageData.beans &&
+                        messageData.beans.map((bean: IBean) => {
+                          return (
+                            <Message
+                              key={bean.id}
+                              id={bean.id}
+                              isOpen={bean.isOpen}
+                              nickName={bean.nickName}
+                            />
+                          );
+                        })}
+                    </MessageListContent>
+                  </MessageListHoder>
+                );
+              })}
+          </MessageListContainer>
+        ): (
+          <MessageBoxEmpty>아직 열린 쪽지가 없습니다 <br/> 먼저 쪽지를 뽑아보세요!</MessageBoxEmpty>
+        )
+      }
+    </>
+  )
+}
 
 export default MessageList;

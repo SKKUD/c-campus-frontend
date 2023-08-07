@@ -13,4 +13,7 @@ export const ButtonGroupContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   z-index: 999;
+  @media (min-width: 1024px) {
+    height: 52px;
+  }
 `;

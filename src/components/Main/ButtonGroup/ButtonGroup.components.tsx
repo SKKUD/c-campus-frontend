@@ -5,10 +5,11 @@ import { FC } from "react";
 import { useNavigate } from "react-router";
 
 interface ButtonGroupProps {
-  slide: number;
+  slide?: number;
+  messagenum?: number;
 }
 
-const ButtonGroup: FC<ButtonGroupProps> = ({ slide }) => {
+const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
   const navigate = useNavigate();
   const pickNotes = () => {
     // 쪽지 뽑는 gif 재생 후
@@ -29,6 +30,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide }) => {
       <GreenBtn
         onClick={() => (!slide ? pickNotes() : takePhotos())}
         content={!slide ? "쪽지 뽑기" : "콩캠네컷 찍기"}
+        disabled={messagenum < 5 ? true : false}
       />
       <WhiteBtn
         onClick={() => (!slide ? movetoNoteBox() : movetoPhotoBox())}

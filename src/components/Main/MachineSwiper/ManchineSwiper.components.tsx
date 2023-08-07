@@ -1,18 +1,13 @@
 import { Navigation, Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  SwiperContainer,
-  SwiperSlideCard,
-  SwiperImage1,
-  SwiperImage2,
-} from "./ManchineSwiper.styles";
+import { SwiperContainer, SwiperSlideCard } from "./ManchineSwiper.styles";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PrevBtn, NextBtn } from "./SwiperNavigationBtn.components";
-import congmachine1 from "../../../assets/images/congmachine1.png";
-import congmachine2 from "../../../assets/images/congmachine2.png";
+import CongMachine from "../CongMachine/CongMachine.components";
 import { FC } from "react";
+import CongPhotoMachine from "../CongMachine/CongPhotoMachine.components";
 
 interface MachineSwiperProps {
   setSlide: React.Dispatch<React.SetStateAction<number>>;
@@ -34,12 +29,12 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ setSlide }) => {
       >
         <SwiperSlide>
           <SwiperSlideCard>
-            <SwiperImage1 src={congmachine1} />
+            <CongMachine />
           </SwiperSlideCard>
         </SwiperSlide>
         <SwiperSlide>
           <SwiperSlideCard>
-            <SwiperImage2 src={congmachine2} />
+            <CongPhotoMachine />
           </SwiperSlideCard>
         </SwiperSlide>
       </Swiper>

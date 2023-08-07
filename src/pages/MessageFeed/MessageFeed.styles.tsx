@@ -107,3 +107,23 @@ export const OpenMessageContentSender = styled.div`
     margin-bottom: 4px;
   }
 `;
+
+export const OpenMesageEmpty = styled.div`
+  width: 90%;
+  max-width: 375px;
+  margin: auto;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  color: var(--font-black, #303030);
+  text-align: center;
+  font-family: GmarketSansMedium;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: normal;
+  letter-spacing: -0.28px;
+
+  margin-top: 80px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+`

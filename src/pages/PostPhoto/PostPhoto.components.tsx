@@ -25,7 +25,6 @@ import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.c
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
-import { downloadPhoto } from "../../utils/downloadPhoto";
 import { exportElementAsPNG } from "../../utils/downloadPhoto";
 
 const PostPhoto = () => {

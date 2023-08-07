@@ -12,13 +12,14 @@ export const FourcutNPaletteWrapper = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
   @media (min-width: 1024px) {
     padding-top: 130px;
   }
 `;
 
 export const FourcutContainer = styled.div`
-  margin: 0 auto;
   width: 201px;
   height: 513px;
   display: flex;

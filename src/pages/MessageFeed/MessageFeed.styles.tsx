@@ -1,22 +1,22 @@
 import styled from "@emotion/styled";
 
 export const MessageFeedContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   padding-top: 80px;
-  background: var(--background, #F5F5F5);
+  background: var(--background, #f5f5f5);
 `;
 
 export const OpenMessageHeader = styled.div`
-  width: 100vw;
-  max-width: 300px;
+  width: 90%;
+  max-width: 380px;
   height: 30px;
   margin: auto;
-  background: var(--background, #F5F5F5);
+  background: var(--background, #f5f5f5);
 `;
 
 export const OpenMessageHeaderContent = styled.p`
-  padding-left: 15px;
+  padding-left: 5px;
   margin-bottom: 10px;
   color: var(--font-black, #303030);
   text-align: left;
@@ -29,18 +29,18 @@ export const OpenMessageHeaderContent = styled.p`
 `;
 
 export const OpenMessageContainer = styled.div`
-  background: var(--background, #F5F5F5);
+  background: var(--background, #f5f5f5);
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   margin: auto;
 `;
 
 export const OpenMessageContent = styled.div<{ color: string }>`
-  background-color: ${props => props.color};
-  width: 90vw;
-  max-width: 300px;
+  background-color: ${(props) => props.color};
+  width: 90%;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -48,8 +48,8 @@ export const OpenMessageContent = styled.div<{ color: string }>`
 
   border-radius: 10px;
   border: 0.3px solid var(--main-2, #164300);
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
-`
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+`;
 
 export const OpenMessageContentTitle = styled.p`
   text-align: left;
@@ -111,8 +111,9 @@ export const OpenMessageContentSender = styled.div`
 export const OpenMesageEmpty = styled.div`
   width: 90%;
   max-width: 375px;
-  margin: auto;
-  background-color: #FFFFFF;
+  margin: 100px auto;
+  padding: 30px 0;
+  background-color: #ffffff;
   border-radius: 10px;
   color: var(--font-black, #303030);
   text-align: center;
@@ -122,8 +123,7 @@ export const OpenMesageEmpty = styled.div`
   font-weight: 1000;
   line-height: normal;
   letter-spacing: -0.28px;
-
-  margin-top: 80px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-`
+  @media (min-width: 1024px) {
+    margin: 70px auto;
+  }
+`;

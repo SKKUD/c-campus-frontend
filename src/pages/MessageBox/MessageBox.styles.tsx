@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const MessageListHeader = styled.div`
   width: 100vw;
   min-width: 250px;
-  max-width: 340px;
+  max-width: 320px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -27,7 +27,7 @@ export const MessageListHeaderMessageCount = styled.div`
 
 export const MessageListContainer = styled.div`
   width: 100%;
-  /* height: 100vh; */
+  height: 100vh;
   background-color: #f7f7f7;
   margin: 0 auto;
   display: flex;
@@ -38,18 +38,43 @@ export const MessageListContainer = styled.div`
   padding-right: 5px;
 `;
 
+export const MessageDataContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: calc(100vh - 160px);
+  overflow: scroll;
+  @media (min-width: 320px) {
+    padding-top: 70px;
+  }
+  @media (min-width: 375px) {
+    padding-top: 130px;
+  }
+  @media (min-width: 425px) {
+    padding-top: 165px;
+  }
+  @media (min-width: 1024px) {
+    height: calc(708px - 110px);
+    padding-top: 270px;
+    padding-bottom: 10px;
+  }
+`;
+
 export const MessageListHoder = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90vw;
+  width: 90%;
   min-width: 250px;
-  max-width: 340px;
+  max-width: 320px;
+  margin: 0 auto;
 `;
 
 export const MessageListDate = styled.div`
   width: 100%;
   min-width: 250px;
-  max-width: 340px;
+  max-width: 320px;
   display: flex;
   justify-content: flex-start;
   padding-left: 10px;
@@ -65,21 +90,13 @@ export const MessageListDate = styled.div`
 export const MessageListContent = styled.div`
   width: 100%;
   min-width: 250px;
-  max-width: 340px;
+  max-width: 320px;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, auto));
   padding-top: 8px;
 `;
 
-export const MessageListDataContainer = styled.div`
-  width: 90vw;
-  min-width: 250px;
-  max-width: 340px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
 
 export const MessageBoxEmpty = styled.div`
   width: 90%;

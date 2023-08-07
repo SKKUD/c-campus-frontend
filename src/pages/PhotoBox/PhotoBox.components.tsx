@@ -21,6 +21,18 @@ const photoArr = [
   ExamplePhoto2,
   ExamplePhoto,
   ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
 ];
 
 const PhotoBox = () => {

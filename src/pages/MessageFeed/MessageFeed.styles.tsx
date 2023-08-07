@@ -5,6 +5,8 @@ export const MessageFeedContainer = styled.div`
   height: 100vh;
   padding-top: 80px;
   background: var(--background, #f5f5f5);
+  overflow: hidden;
+  box-sizing: border-box;
 `;
 
 export const OpenMessageHeader = styled.div`
@@ -34,7 +36,11 @@ export const OpenMessageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: auto;
+  height: calc(100vh - 140px);
+  overflow: scroll;
+  @media (min-width: 1024px) {
+    height: calc(100vh - 210px);
+  }
 `;
 
 export const OpenMessageContent = styled.div<{ color: string }>`

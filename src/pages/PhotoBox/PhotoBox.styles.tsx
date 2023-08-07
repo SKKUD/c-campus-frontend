@@ -2,8 +2,9 @@ import styled from "@emotion/styled";
 
 export const PhotoBoxContainer = styled.div`
   width: 100%;
+  height: 100vh;
   background-color: #f5f5f5;
-  padding: 92px 16px;
+  padding: 92px 16px 10px;
 `;
 
 export const PhotoBoxLabel = styled.div`
@@ -19,11 +20,16 @@ export const PhotoFlexBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 15px;
+  height: calc(100% - 60px);
+  overflow: scroll;
   > div {
     margin-right: 4%;
   }
   > div:nth-of-type(4n) {
     margin-right: 0;
+  }
+  @media (min-width: 1024px) {
+    padding-bottom: 110px;
   }
 `;
 

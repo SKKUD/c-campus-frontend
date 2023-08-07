@@ -11,9 +11,9 @@ import {
   MessageListHoder,
   MessageListDate,
   MessageListContent,
-  MessageListDataContainer,
   MessageBoxEmpty,
-} from "./MessageBox.styles"
+  MessageDataContainer,
+} from "./MessageBox.styles";
 
 // Message type
 interface IMessages {
@@ -30,7 +30,7 @@ interface IBean {
 
 const MessageList = () => {
   const navigate = useNavigate();
-  const [ messageCount, SetMessageCount ] = useState<number>(0);
+  const [messageCount, SetMessageCount] = useState<number>(0);
 
   const MessageData: IMessages[] = [
     {
@@ -217,17 +217,19 @@ const MessageList = () => {
   // navigate to message feed
   const RedirectToFeedUrl = () => {
     navigate(`/message/feed`);
-  }
+  };
 
   return (
     <>
-      {
-        (MessageData.length !== 0) ? (
-          <MessageListContainer>
-            <MessageListHeader>
-              <MessageListHeaderMessageCount>{messageCount}개의 추억</MessageListHeaderMessageCount>
-              <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl}/>
-            </MessageListHeader>
+      {MessageData.length !== 0 ? (
+        <MessageListContainer>
+          <MessageListHeader>
+            <MessageListHeaderMessageCount>
+              {messageCount}개의 추억
+            </MessageListHeaderMessageCount>
+            <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
+          </MessageListHeader>
+          <MessageDataContainer>
             {MessageData &&
               MessageData.map((messageData: IMessages) => {
                 // SetMessageCount(messageCount+1);
@@ -250,13 +252,15 @@ const MessageList = () => {
                   </MessageListHoder>
                 );
               })}
-          </MessageListContainer>
-        ): (
-          <MessageBoxEmpty>아직 열린 쪽지가 없습니다 <br/> 먼저 쪽지를 뽑아보세요!</MessageBoxEmpty>
-        )
-      }
+          </MessageDataContainer>
+        </MessageListContainer>
+      ) : (
+        <MessageBoxEmpty>
+          아직 열린 쪽지가 없습니다 <br /> 먼저 쪽지를 뽑아보세요!
+        </MessageBoxEmpty>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default MessageList;

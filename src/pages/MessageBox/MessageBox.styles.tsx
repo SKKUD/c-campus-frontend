@@ -42,23 +42,11 @@ export const MessageDataContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  height: calc(100vh - 160px);
+  height: 100vh;
   overflow: scroll;
-  @media (min-width: 320px) {
-    padding-top: 70px;
-  }
-  @media (min-width: 375px) {
-    padding-top: 130px;
-  }
-  @media (min-width: 425px) {
-    padding-top: 165px;
-  }
   @media (min-width: 1024px) {
     height: calc(708px - 110px);
-    padding-top: 270px;
-    padding-bottom: 10px;
+  }
   }
 `;
 

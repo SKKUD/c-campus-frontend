@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,FC } from "react";
+import { useNavigate } from "react-router";
+import { useMediaQuery } from "@mui/material";
 import cong0_top_img from "../../../assets/images/cong0_top.png";
 import cong1_top_img from "../../../assets/images/cong1_top.png";
 import cong2_top_img from "../../../assets/images/cong2_top.png";
@@ -27,9 +29,14 @@ import { CongMachineContainer, MachineImage } from "./CongMachine.styles";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
-import { useNavigate } from "react-router";
 
-const CongMachine = () => {
+
+interface CongMachineProps {
+  slide?: number;
+}
+
+const CongMachine: FC<CongMachineProps> = ({ slide }) => {
+  const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [topimgsrc, setTopImg] = useState(cong0_top_img);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_img);
@@ -58,13 +65,17 @@ const CongMachine = () => {
     <CongMachineContainer>
       <MachineImage src={topimgsrc} />
       <MachineImage src={bottomimgsrc} />
-      <ButtonGroupContainer>
-        <GreenBtn
-          content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
-          disabled={messagenum < 5 ? true : false}
-          onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
-        />
-      </ButtonGroupContainer>
+      {match1024 ? (
+        <ButtonGroupContainer>
+          <GreenBtn
+            content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
+            disabled={messagenum < 5 ? true : false}
+            onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
+          />
+        </ButtonGroupContainer>
+      ) : (
+        <ButtonGroup slide={slide} />
+      )}
     </CongMachineContainer>
   );
 };

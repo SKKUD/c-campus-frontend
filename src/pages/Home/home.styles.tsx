@@ -2,16 +2,22 @@ import styled from "@emotion/styled";
 
 export const HomeContainer = styled.div`
   width: 100vw;
+  background-color: #fff;
 `;
 
 export const LandingScreen = styled.div`
   width: 100vw;
   height: 100vh;
+  background-color: #d6eaba;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+`;
+
+export const LandingContent = styled.img`
+  width: 100vw;
 `;
 
 export const CongCapsuleImg = styled.img`
@@ -28,12 +34,8 @@ export const CongCapsuleImg = styled.img`
 `;
 
 export const DownIcon = styled.img`
-  width: 53px;
-  height: 45px;
+  width: 33px;
+  height: 29px;
   position: absolute;
   bottom: 30px;
-  @media (max-width: 425px) {
-    width: 33px;
-    height: 29px;
-  }
 `;

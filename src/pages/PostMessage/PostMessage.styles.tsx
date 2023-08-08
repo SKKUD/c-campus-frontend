@@ -3,6 +3,11 @@ import styled from "@emotion/styled";
 export const PostMessageContainer = styled.div<{ backgroundColor: string}>`
   background-color: ${props => props.backgroundColor};
   width: 100%;
+  height:100vh;
+  overflow:scroll;
+`;
+export const PostMessageFieldContainer = styled.div`
+  width: 100%;
   max-width: 375px;
   display: flex;
   flex-direction: column;

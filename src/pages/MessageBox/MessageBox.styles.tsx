@@ -17,7 +17,7 @@ export const MessageListHeader = styled.div`
 export const MessageListHeaderMessageCount = styled.div`
   color: var(--font-black, #303030);
   text-align: right;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 16px;
   font-style: normal;
   font-weight: 1000;
@@ -97,16 +97,15 @@ export const MessageListContent = styled.div`
   padding-top: 8px;
 `;
 
-
 export const MessageBoxEmpty = styled.div`
   width: 90%;
   max-width: 375px;
   margin: auto;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 10px;
   color: var(--font-black, #303030);
   text-align: center;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 16px;
   font-style: normal;
   font-weight: 1000;
@@ -116,4 +115,4 @@ export const MessageBoxEmpty = styled.div`
   margin-top: 80px;
   padding-top: 30px;
   padding-bottom: 30px;
-`
+`;

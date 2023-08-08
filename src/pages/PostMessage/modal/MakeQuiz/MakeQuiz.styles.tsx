@@ -35,7 +35,7 @@ export const MakeQuizContentLabel = styled.div`
   width: 10%;
   color: var(--font-grey-1, #808080);
   text-align: center;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -55,7 +55,7 @@ export const MakeQuizContent = styled.textarea`
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.32px;
-  background: #EDEDED;
+  background: #ededed;
   padding-left: 10px;
   margin-left: 10px;
   border: none;
@@ -67,13 +67,13 @@ export const MakeQuizAnswerContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const MakeQuizAnswerLabel = styled.div`
   width: 10%;
   color: var(--font-grey-1, #808080);
   text-align: center;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

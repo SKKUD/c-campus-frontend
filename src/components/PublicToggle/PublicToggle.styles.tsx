@@ -50,10 +50,10 @@ export const ToggleDescriptionContainer = styled.div`
   justify-content: right;
 `;
 
-export const ToggleDescription = styled.div<{ color: string}>`
+export const ToggleDescription = styled.div<{ color: string }>`
   //설명 부분의 CSS를 구현
-  font-family: GmarketSansMedium;
-  color: ${props => props.color};
+  font-family: GmarketSans;
+  color: ${(props) => props.color};
   text-align: center;
   margin: 20px;
   margin-right: 5px;

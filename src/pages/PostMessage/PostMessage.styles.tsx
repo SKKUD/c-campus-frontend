@@ -148,7 +148,7 @@ export const PostMessageContentTo = styled.div`
   > .PostMessageTo {
     height: 56px;
     color: var(--font-grey-1, #808080);
-    font-family: GmarketSansMedium;
+    font-family: GmarketSans;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -208,7 +208,7 @@ export const PostMessageWriter = styled.div`
   display: flex;
   align-items: start;
   color: var(--font-grey-1, #808080);
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
@@ -216,7 +216,7 @@ export const PostMessageWriter = styled.div`
 
   margin-top: 10px;
   margin-bottom: 10px;
-`
+`;
 
 export const PostMessageWriterContent = styled.input`
   height: 56px;

@@ -1,4 +1,4 @@
-import { toPng, toBlob } from "html-to-image";
+import { toPng } from "html-to-image";
 
 export const exportElementAsPNG = async () => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;

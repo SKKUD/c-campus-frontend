@@ -21,7 +21,6 @@ import frame6 from "../../assets/images/프레임06.png";
 import frame7 from "../../assets/images/프레임07.png";
 import blank from "../../assets/images/blank.png";
 import { getDate } from "../../utils/getDate";
-import { handleShare } from "../../utils/handleShare";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";

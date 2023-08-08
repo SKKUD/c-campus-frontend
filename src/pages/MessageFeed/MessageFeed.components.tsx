@@ -87,7 +87,7 @@ const MessageFeed = ({MessageNumber}: IOpenMessage) => {
         (OpenMessageDataSet.length !== 0) ? (
           <MessageFeedContainer>
             <OpenMessageHeader>
-              <OpenMessageHeaderContent>3개의 공개쪽지</OpenMessageHeaderContent>
+              <OpenMessageHeaderContent>{OpenMessageDataSet.length}개의 공개쪽지</OpenMessageHeaderContent>
             </OpenMessageHeader>
 
             <OpenMessageContainer>

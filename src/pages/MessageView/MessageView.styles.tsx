@@ -1,13 +1,18 @@
 import styled from "styled-components";
-
-export const MessageViewContainer = styled.div`
-  max-width: 375px;
-  display: flex;
-  flex-direction: column;
-  margin: 60px auto;
-  align-items: center;
-  background-color: #d6eaba;
-  font-family: YeongdeokSea;
+export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
+  background-color: ${props => props.backgroundColor};
+  width: 100%;
+  height:100vh;
+  overflow:scroll;
+`;
+export const MessageViewFieldContainer = styled.div`
+width: 100%;
+max-width: 375px;
+display: flex;
+flex-direction: column;
+margin: 60px auto;
+align-items: center;
+font-family: YeongdeokSea;
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`

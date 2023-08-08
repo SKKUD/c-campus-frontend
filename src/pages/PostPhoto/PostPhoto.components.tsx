@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "@mui/material";
-import * as htmlToImage from "html-to-image";
 import {
   PhotoBoothContainer,
   FourcutNPaletteWrapper,
@@ -26,6 +25,7 @@ import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.c
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
+import { exportElementAsPNG } from "../../utils/downloadPhoto";
 
 const PostPhoto = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
@@ -149,14 +149,14 @@ const PostPhoto = () => {
           />
           <WebGreenBtnWrap>
             {done === "done" ? (
-              <GreenBtn content="완료" onClick={(e) => console.log("submit")} />
+              <GreenBtn content="완료" onClick={(e) => exportElementAsPNG()} />
             ) : (
               <GreenBtn content="완료" disabled={true} />
             )}
           </WebGreenBtnWrap>
         </>
       ) : done === "done" ? (
-        <WhiteBtn content="완료" onClick={(e) => console.log("submit")} />
+        <WhiteBtn content="완료" onClick={(e) => exportElementAsPNG()} />
       ) : (
         <IconBtnGroup
           takePhoto={() => setOnCapture(true)}

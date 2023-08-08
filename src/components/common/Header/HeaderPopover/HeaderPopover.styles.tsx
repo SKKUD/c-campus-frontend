@@ -16,7 +16,7 @@ export const PopoverInner = styled(Button)`
   width: 105px;
   height: 40px;
   color: #808080;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   text-align: center;
   line-height: 40px;
   border-radius: 0px;

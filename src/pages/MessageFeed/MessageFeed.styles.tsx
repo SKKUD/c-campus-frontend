@@ -22,7 +22,7 @@ export const OpenMessageHeaderContent = styled.p`
   margin-bottom: 10px;
   color: var(--font-black, #303030);
   text-align: left;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 14px;
   font-style: normal;
   font-weight: 900;
@@ -123,7 +123,7 @@ export const OpenMesageEmpty = styled.div`
   border-radius: 10px;
   color: var(--font-black, #303030);
   text-align: center;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 16px;
   font-style: normal;
   font-weight: 1000;

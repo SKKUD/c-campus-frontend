@@ -18,7 +18,7 @@ export const conTheme = createTheme({
       '"YeongdeokSea"',
       '"Cafe24Ssurround"',
       '"Cafe24SsurroundAir"',
-      '"GmarketSansMedium"',
+      '"GmarketSans"',
       "-apple-system",
       "BlinkMacSystemFont",
       "system-ui",

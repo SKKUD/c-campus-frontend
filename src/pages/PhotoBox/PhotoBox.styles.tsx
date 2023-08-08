@@ -9,7 +9,7 @@ export const PhotoBoxContainer = styled.div`
 
 export const PhotoBoxLabel = styled.div`
   color: #303030;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.28px;

@@ -54,7 +54,7 @@ export const MessageViewContentReceiver = styled.div`
 
   > .MessageViewReceiverTo {
     color: var(--font-grey-1, #808080);
-    font-family: GmarketSansMedium;
+    font-family: GmarketSans;
     font-size: 16px;
     font-style: normal;
     font-weight: 800;
@@ -118,7 +118,7 @@ export const MessageViewContentSender = styled.div`
 
   > .MessageViewSenderFrom {
     color: var(--font-grey-1, #808080);
-    font-family: GmarketSansMedium;
+    font-family: GmarketSans;
     font-size: 16px;
     font-style: normal;
     font-weight: 800;

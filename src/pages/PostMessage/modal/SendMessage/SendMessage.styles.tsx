@@ -28,7 +28,7 @@ export const SendMessageContent = styled.div`
   width: 169px;
   color: var(--font-black, #303030);
   text-align: center;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 22px;
   font-style: normal;
   font-weight: 400;

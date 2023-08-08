@@ -72,7 +72,7 @@ export const DateContainer = styled.div<{ brightFrame: string }>`
       : props.brightFrame === "medium"
       ? "#AAAAAA"
       : "rgba(255, 255, 255, 0.5)"};
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 12px;
   font-weight: 300;
   z-index: 999;

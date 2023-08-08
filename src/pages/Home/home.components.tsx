@@ -1,4 +1,4 @@
-import LandingBtn from "../../components/Home/LandingBtn.components";
+import LandingBtn from "../../components/Home/LandingBtn/LandingBtn.components";
 import {
   HomeContainer,
   LandingScreen,
@@ -7,6 +7,7 @@ import {
 } from "./home.styles";
 import CongCapsule from "../../assets/animations/congcampus_logo.gif";
 import downicon from "../../assets/images/downicon.png";
+import MemberIntro from "../../components/Home/MemberIntro/MemberIntro.components";
 const Home = () => {
   return (
     <HomeContainer>
@@ -15,6 +16,7 @@ const Home = () => {
         <LandingBtn />
         <DownIcon src={downicon} alt="down icon" />
       </LandingScreen>
+      <MemberIntro />
     </HomeContainer>
   );
 };

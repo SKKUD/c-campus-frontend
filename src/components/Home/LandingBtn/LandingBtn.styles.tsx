@@ -15,9 +15,9 @@ export const InstaBtn = styled.div`
   width: 100%;
   height: 50px;
   color: #808080;
-  font-family: GmarketSansMedium;
+  font-family: GmarketSans;
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;

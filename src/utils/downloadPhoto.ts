@@ -1,8 +1,8 @@
-import { toPng, toBlob } from "html-to-image";
+import { toPng } from "html-to-image";
 
-export const exportElementAsPNG = () => {
+export const exportElementAsPNG = async () => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;
-  toPng(el).then((dataUrl) => {
+  await toPng(el).then((dataUrl) => {
     const link = document.createElement("a");
     link.download = "fourcut.png";
     link.href = dataUrl;

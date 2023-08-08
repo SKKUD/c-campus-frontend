@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { useMediaQuery } from "@mui/material";
 import {
   PhotoBoothContainer,
@@ -20,7 +21,6 @@ import frame6 from "../../assets/images/프레임06.png";
 import frame7 from "../../assets/images/프레임07.png";
 import blank from "../../assets/images/blank.png";
 import { getDate } from "../../utils/getDate";
-import { handleShare } from "../../utils/handleShare";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
@@ -29,6 +29,7 @@ import { exportElementAsPNG } from "../../utils/downloadPhoto";
 
 const PostPhoto = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
+  const navigate = useNavigate();
   const [frameNum, setFrame] = useState<number>(1);
   const frameImages = [frame1, frame2, frame3, frame4, frame5, frame6, frame7];
   const [current, setCurrent] = useState(1);
@@ -53,6 +54,17 @@ const PostPhoto = () => {
     }
   }, [current]);
 
+  const handleSubmit = async () => {
+    if (
+      window.confirm(
+        "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+      )
+    ) {
+      await exportElementAsPNG();
+      navigate("/photo");
+    }
+  };
+
   return (
     <PhotoBoothContainer>
       <FourcutNPaletteWrapper>
@@ -72,7 +84,7 @@ const PostPhoto = () => {
               <FourcutPhoto
                 alt="photo1"
                 src={photo1 || blank}
-                onClick={() => done && handleDelete(1)}
+                onClick={() => done === "done" && handleDelete(1)}
               />
             )}
             {current === 2 ? (
@@ -88,7 +100,7 @@ const PostPhoto = () => {
               <FourcutPhoto
                 alt="photo2"
                 src={photo2 || blank}
-                onClick={() => done && handleDelete(2)}
+                onClick={() => done === "done" && handleDelete(2)}
               />
             )}
             {current === 3 ? (
@@ -104,7 +116,7 @@ const PostPhoto = () => {
               <FourcutPhoto
                 alt="photo3"
                 src={photo3 || blank}
-                onClick={() => done && handleDelete(3)}
+                onClick={() => done === "done" && handleDelete(3)}
               />
             )}
             {current === 4 ? (
@@ -120,7 +132,7 @@ const PostPhoto = () => {
               <FourcutPhoto
                 alt="photo4"
                 src={photo4 || blank}
-                onClick={() => done && handleDelete(4)}
+                onClick={() => done === "done" && handleDelete(4)}
               />
             )}
           </PhotoWrapper>
@@ -149,14 +161,14 @@ const PostPhoto = () => {
           />
           <WebGreenBtnWrap>
             {done === "done" ? (
-              <GreenBtn content="완료" onClick={(e) => exportElementAsPNG()} />
+              <GreenBtn content="완료" onClick={(e) => handleSubmit()} />
             ) : (
               <GreenBtn content="완료" disabled={true} />
             )}
           </WebGreenBtnWrap>
         </>
       ) : done === "done" ? (
-        <WhiteBtn content="완료" onClick={(e) => exportElementAsPNG()} />
+        <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
       ) : (
         <IconBtnGroup
           takePhoto={() => setOnCapture(true)}

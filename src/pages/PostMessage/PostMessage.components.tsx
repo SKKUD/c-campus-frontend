@@ -18,6 +18,7 @@ import {
   PostMessageWriterContainer,
   PostMessageWriter,
   PostMessageWriterContent,
+  PostMessageFieldContainer
 } from "./PostMessage.styles";
 
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
@@ -114,6 +115,7 @@ const PostMessage = () => {
   // return
   return (
     <PostMessageContainer backgroundColor={currentColorHex}>
+      <PostMessageFieldContainer>
       {/* color */}
       <PostMessageColors>
         <PostMessageColor1 onClick={color1Handler}>
@@ -161,9 +163,8 @@ const PostMessage = () => {
 
       {/* Button */}
       <GreenBtn content="작성 완료"/>
-      <AskLock />
-      <MakeQuiz />
-      <SendMessage />
+      </PostMessageFieldContainer>
+
     </PostMessageContainer>
   );
 };

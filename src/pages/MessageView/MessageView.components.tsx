@@ -11,7 +11,8 @@ import {
   MessageViewFourcutFrameContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
-  GreenBtnContainer
+  GreenBtnContainer,
+  MessageViewFieldContainer
 } from "./MessageView.styles";
 
 // import components
@@ -36,6 +37,7 @@ interface IMessageView {
   pictureUrl2: string;
   pictureUrl3: string;
   pictureUrl4: string;
+  backgroundColorCode: string;
 }
 
 const MessageView = () => {
@@ -64,12 +66,14 @@ const MessageView = () => {
     pictureUrl2: "https://i.pravatar.cc/500",
     pictureUrl3: "https://i.pravatar.cc/500",
     pictureUrl4: "https://i.pravatar.cc/500",
+    backgroundColorCode: "#D6EABA",
   };
 
   return (
-    <MessageViewContainer>
-      {/* Public Toggle */}
-      <MessageViewPublicToggleContainer>
+    <MessageViewContainer backgroundColor={MessageData.backgroundColorCode}>
+<MessageViewFieldContainer>
+{/* Public Toggle */}
+<MessageViewPublicToggleContainer>
         <PublicToggle />
       </MessageViewPublicToggleContainer>
 
@@ -123,6 +127,8 @@ const MessageView = () => {
       <GreenBtnContainer className="MessageViewCenter">
         <GreenBtn content="공유하기"/>
       </GreenBtnContainer>
+</MessageViewFieldContainer>
+      
     </MessageViewContainer>
   );
 };

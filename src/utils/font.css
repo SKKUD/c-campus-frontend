@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "omyu_pretty";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Cafe24Ssurround";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cafe24SsurroundAir";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24SsurroundAir.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSans";
+  src: url('../assets/font/GmarketSansTTF/GmarketSansTTFLight.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url('../assets/font/GmarketSansTTF/GmarketSansTTFMedium.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: "GmarketSans";
+  src: url('../assets/font/GmarketSansTTF/GmarketSansTTFBold.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'YeongdeokSea';
+  src: url('../assets/font/Yeongdeok Sea.ttf') format('truetype');
+}

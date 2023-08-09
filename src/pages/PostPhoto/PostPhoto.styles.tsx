@@ -4,8 +4,9 @@ import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 export const PhotoBoothContainer = styled.div`
   background-color: #f5f5f5;
   width: 100vw;
-  height: 100vh;
   padding-top: 100px;
+  overflow: scroll;
+  min-height: 100vh;
 `;
 
 export const FourcutNPaletteWrapper = styled.div`

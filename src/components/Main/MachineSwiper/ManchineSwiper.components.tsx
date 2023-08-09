@@ -10,10 +10,11 @@ import { FC } from "react";
 import CongPhotoMachine from "../CongMachine/CongPhotoMachine.components";
 
 interface MachineSwiperProps {
+  slide: number;
   setSlide: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MachineSwiper: FC<MachineSwiperProps> = ({ setSlide }) => {
+const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
   return (
     <SwiperContainer>
       <PrevBtn />
@@ -29,12 +30,12 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ setSlide }) => {
       >
         <SwiperSlide>
           <SwiperSlideCard>
-            <CongMachine />
+            <CongMachine slide={slide} />
           </SwiperSlideCard>
         </SwiperSlide>
         <SwiperSlide>
           <SwiperSlideCard>
-            <CongPhotoMachine />
+            <CongPhotoMachine slide={slide} />
           </SwiperSlideCard>
         </SwiperSlide>
       </Swiper>

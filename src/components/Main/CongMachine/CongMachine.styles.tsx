@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const CongMachineContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  max-height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -14,11 +14,28 @@ export const CongMachineContainer = styled.div`
 `;
 
 export const MachineImage = styled.img`
-  width: 80%;
-  max-width: 320px;
+  width: 40vh;
+  min-width: 280px;
+  max-width: 100%;
+  @media (max-width: 375px) {
+    min-width: 250px;
+  }
+  @media (max-width: 290px) {
+    min-width: 200px;
+  }
 `;
 
 export const MachinePhotoImage = styled.img`
-  width: 90%;
-  max-width: 380px;
+  padding: 50px 0 50px;
+  width: 45vh;
+  min-width: 320px;
+  max-width: calc(100% + 30px);
+  @media (max-width: 375px) {
+    min-width: 290px;
+    padding: 50px 0 35px;
+  }
+  @media (max-width: 290px) {
+    min-width: 240px;
+    padding: 50px 0 28px;
+  }
 `;

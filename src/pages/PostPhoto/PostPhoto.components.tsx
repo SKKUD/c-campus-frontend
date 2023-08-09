@@ -26,6 +26,7 @@ import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import { exportElementAsPNG } from "../../utils/downloadPhoto";
+import { handleShare } from "../../utils/handleShare";
 
 const PostPhoto = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
@@ -57,11 +58,13 @@ const PostPhoto = () => {
   const handleSubmit = async () => {
     if (
       window.confirm(
-        "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+        match1024
+          ? "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+          : "사진을 공유하시겠습니까?"
       )
     ) {
-      await exportElementAsPNG();
-      navigate("/photo");
+      match1024 ? await exportElementAsPNG() : handleShare();
+      // navigate("/photo");
     }
   };
 

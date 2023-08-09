@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // import styled-components
 import {
@@ -40,14 +40,14 @@ interface IData {
   author: string,
   isOpened: boolean,
   isPulled: boolean,
-  pulledAt: string,
-  imageUuid: string,
+  pulledAt?: string,
+  imageUuid?: string,
   backgroundColorCode: string,
   isPublic: boolean,
-  quizContent: string,
-  quizAnswer: string,
-  quizIsSolved: boolean,
-  imageUrl: string,
+  quizContent?: string,
+  quizAnswer?: string,
+  quizIsSolved?: boolean,
+  imageUrl?: string,
 }
 
 // message data sample
@@ -74,6 +74,9 @@ const MessageDataAxios: IMessageData = {
 }	
 
 const MessageView = () => {
+  // axios state
+  const [axiosMessage, SetAxiosMessage] = useState<IData>();
+
   // mui-modal variable
   const [open, setOpen] = useState<boolean>(false);
 
@@ -88,6 +91,14 @@ const MessageView = () => {
     console.log(open);
   };
   
+  useEffect(()=>{
+    // axios get
+    // const response: IMessageData = axios.get(``);
+
+    // check response status 200 or 400
+
+    // set the response data to axiosMessage state
+  }, []); 
   return (
     <MessageViewContainer backgroundColor={MessageDataAxios.data.backgroundColorCode}>
       {/* Public Toggle */}

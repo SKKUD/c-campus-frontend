@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { 
   MessageFeedContainer,
   OpenMessageHeader,
@@ -25,14 +27,14 @@ interface IAxiosData {
   author: string,
   isOpened: boolean,
   isPulled: boolean,
-  pulledAt: string,
-  imageUuid: string,
+  pulledAt?: string,
+  imageUuid?: string,
   backgroundColorCode: string,
   isPublic: boolean,
-  quizContent: string,
-  quizAnswer: string,
-  quizIsSolved: boolean,
-  imageUrl: string,
+  quizContent?: string,
+  quizAnswer?: string,
+  quizIsSolved?: boolean,
+  imageUrl?: string,
 }
 
 // data sample
@@ -108,29 +110,144 @@ const AxiosMessageData: IAxiosMessageData = {
       quizIsSolved: true,
       imageUrl: "https://www.skku.edu"
     },
+    {
+      messageId: 5,
+      userId: 13,
+      catergory: "우리가 먹었던 최고의 학식 메뉴",
+      content: "하이 헬로 봉주르",
+      author: "명륜 짱짱맨",
+      isOpened: true,
+      isPulled: true,
+      pulledAt: "2023-07-10T16:34:30.388",
+      imageUuid: "2103980192830981209",
+      backgroundColorCode: "#D6EABA",
+      isPublic: false,
+      quizContent: "우리가 처음 만났던 장소는?",
+      quizAnswer: "수선관",
+      quizIsSolved: true,
+      imageUrl: "https://www.skku.edu"
+    },
+    {
+      messageId: 6,
+      userId: 13,
+      catergory: "우리가 먹었던 최고의 학식 메뉴",
+      content: "하이 헬로 봉주르",
+      author: "명륜 짱짱맨",
+      isOpened: true,
+      isPulled: true,
+      pulledAt: "2023-07-10T16:34:30.388",
+      imageUuid: "2103980192830981209",
+      backgroundColorCode: "#D6EABA",
+      isPublic: false,
+      quizContent: "우리가 처음 만났던 장소는?",
+      quizAnswer: "수선관",
+      quizIsSolved: true,
+      imageUrl: "https://www.skku.edu"
+    },
+    {
+      messageId: 7,
+      userId: 13,
+      catergory: "우리가 먹었던 최고의 학식 메뉴",
+      content: "하이 헬로 봉주르",
+      author: "명륜 짱짱맨",
+      isOpened: true,
+      isPulled: true,
+      pulledAt: "2023-07-10T16:34:30.388",
+      imageUuid: "2103980192830981209",
+      backgroundColorCode: "#D6EABA",
+      isPublic: false,
+      quizContent: "우리가 처음 만났던 장소는?",
+      quizAnswer: "수선관",
+      quizIsSolved: true,
+      imageUrl: "https://www.skku.edu"
+    },
+    {
+      messageId: 8,
+      userId: 13,
+      catergory: "우리가 먹었던 최고의 학식 메뉴",
+      content: "하이 헬로 봉주르",
+      author: "명륜 짱짱맨",
+      isOpened: true,
+      isPulled: true,
+      pulledAt: "2023-07-10T16:34:30.388",
+      imageUuid: "2103980192830981209",
+      backgroundColorCode: "#D6EABA",
+      isPublic: false,
+      quizContent: "우리가 처음 만났던 장소는?",
+      quizAnswer: "수선관",
+      quizIsSolved: true,
+      imageUrl: "https://www.skku.edu"
+    },
+    {
+      messageId: 9,
+      userId: 13,
+      catergory: "우리가 먹었던 최고의 학식 메뉴",
+      content: "하이 헬로 봉주르",
+      author: "명륜 짱짱맨",
+      isOpened: true,
+      isPulled: true,
+      pulledAt: "2023-07-10T16:34:30.388",
+      imageUuid: "2103980192830981209",
+      backgroundColorCode: "#D6EABA",
+      isPublic: false,
+      quizContent: "우리가 처음 만났던 장소는?",
+      quizAnswer: "수선관",
+      quizIsSolved: true,
+      imageUrl: "https://www.skku.edu"
+    },
+    {
+      messageId: 10,
+      userId: 13,
+      catergory: "우리가 먹었던 최고의 학식 메뉴",
+      content: "하이 헬로 봉주르",
+      author: "명륜 짱짱맨",
+      isOpened: true,
+      isPulled: true,
+      pulledAt: "2023-07-10T16:34:30.388",
+      imageUuid: "2103980192830981209",
+      backgroundColorCode: "#D6EABA",
+      isPublic: false,
+      quizContent: "우리가 처음 만났던 장소는?",
+      quizAnswer: "수선관",
+      quizIsSolved: true,
+      imageUrl: "https://www.skku.edu"
+    },
   ]
 }
 
 const MessageFeed = () => {
+  // State for public filter
+  const [filteredData, SetFilteredData] = useState<IAxiosData[]>();
+
+  // filter
+  useEffect(()=> {
+    // get axios
+
+    // filter
+    const filtered = AxiosMessageData.data?.filter((Data: IAxiosData) => Data.isPublic);
+
+    // set to state
+    SetFilteredData(filtered);
+  }, []);
 
   return (
     <>
       {
-        (AxiosMessageData.data?.length !== 0) ? (
+        (filteredData?.length !== 0) ? (
           <MessageFeedContainer>
             <OpenMessageHeader>
-              <OpenMessageHeaderContent>개의 공개쪽지</OpenMessageHeaderContent>
+              <OpenMessageHeaderContent>{filteredData?.length}개의 공개쪽지</OpenMessageHeaderContent>
             </OpenMessageHeader>
 
             <OpenMessageContainer>
               {
-                AxiosMessageData.data?.map((OpenMessageData) => {
+                filteredData?.map((MessageData: IAxiosData) => {
                   return (
-                    <OpenMessageContent key={OpenMessageData.messageId} color={OpenMessageData.backgroundColorCode}>
-                      <OpenMessageContentTitle>{OpenMessageData.catergory}</OpenMessageContentTitle>
-                      <OpenMessageContentMainText>{OpenMessageData.content}</OpenMessageContentMainText>
+                    <OpenMessageContent key={MessageData.messageId} color={MessageData.backgroundColorCode}>
+                      <OpenMessageContentTitle>{MessageData.catergory}</OpenMessageContentTitle>
+                      <OpenMessageContentMainText>{MessageData.content}</OpenMessageContentMainText>
                       <OpenMessageContentSender>
-                        <p className="SenderFrom">From.</p> {OpenMessageData.author}
+                        <p className="SenderFrom">From.</p> {MessageData.author}
                       </OpenMessageContentSender>
                     </OpenMessageContent>
                   )

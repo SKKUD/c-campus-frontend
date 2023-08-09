@@ -64,7 +64,7 @@ const MessageDataAxios: IMessageData = {
     isPulled: true,
     pulledAt: "2023-07-10T16:34:30.388",
     imageUuid: "2103980192830981209",
-    backgroundColorCode: "#0xff",
+    backgroundColorCode: "#D6EABA",
     isPublic: true,
     quizContent: "우리가 처음 만났던 장소는?",
     quizAnswer: "수선관",

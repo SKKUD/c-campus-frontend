@@ -15,6 +15,7 @@ import NotFound from "./pages/NotFound/NotFound.components";
 import WebCongcamMachine from "./pages/WebCongcamMachine/WebCongcamMachine.components";
 import WebCongcamFourcut from "./pages/WebCongcamFourcut/WebCongcamFourcut.components";
 import WebCongcamFeed from "./pages/WebCongcamFeed/WebCongcamFeed.components";
+import KakaoLoginCallBack from "./utils/login/KakaoLoginCallback/KakaoLoginCallback.components";
 
 const Router = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
@@ -34,6 +35,7 @@ const Router = () => {
             <Route path="/photo" element={<WebCongcamFourcut />} />{" "}
             {/*콩캠네컷 메인화면*/}
             <Route path="/photo/post" element={<PostPhoto />} />
+            <Route path="/kakaoLogin" element={<KakaoLoginCallBack />} />
           </>
         ) : (
           <>
@@ -53,6 +55,7 @@ const Router = () => {
             <Route path="/photo/post" element={<PostPhoto />} />{" "}
             {/*콩캠네컷 작성*/}
             <Route path="/*" element={<NotFound />} />
+            <Route path="/kakaoLogin" element={<KakaoLoginCallBack />} />
           </>
         )}
       </Routes>

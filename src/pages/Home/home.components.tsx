@@ -9,6 +9,8 @@ import {
 import CongCapsule from "../../assets/animations/congcampus_logo.gif";
 import downicon from "../../assets/images/downicon.png";
 import MemberIntro from "../../components/Home/MemberIntro/MemberIntro.components";
+import KakaoLogin from "../../utils/login/KakaoLogin/KakaoLogin.components";
+
 import mobilelandingtop from "../../assets/images/mobileLandingtop.png";
 import mobilelandingbottom from "../../assets/images/mobileLandingbottom.png";
 import mobilelandingFooter from "../../assets/images/mobileLandingFooter.png";

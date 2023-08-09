@@ -47,7 +47,6 @@ export const MessageDataContainer = styled.div`
   @media (min-width: 1024px) {
     height: calc(708px - 110px);
   }
-  }
 `;
 
 export const MessageListHoder = styled.div`

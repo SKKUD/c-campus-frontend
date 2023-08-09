@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react";
 import axios, {RawAxiosResponseHeaders, AxiosResponseHeaders, InternalAxiosRequestConfig}from "axios";
+import { useNavigate } from "react-router";
 
 interface AxiosResponse<T = any, D = any> {
   data: T
@@ -11,6 +12,7 @@ interface AxiosResponse<T = any, D = any> {
 }
 
 const KakaoLoginCallBack = () => {
+  const navigate = useNavigate();
   const [authCode, setAuthCode] = useState("");
   const [token, setToken] = useState("");
 
@@ -22,18 +24,8 @@ const KakaoLoginCallBack = () => {
   }
 
   const getToken = async (code: string) => {
-    const grant_type = 'authorization_code'
-    const client_id = "XXXXXXXXXXXXXXXXXX"
-    const REDIRECT_URI = "http://localhost:3000/loginCallback";
-    console.log(code);
-
-    const res = await axios.post(
-      `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${code}`,
-      {
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-        },
-      },
+    const res = await axios.get(
+      `${process.env.REACT_APP_BACKEND_SERVER}/oauth2/callback/kakao?code=${code}`,
     ).then(async (response: AxiosResponse) => {
       const kakaoUser: any = await axios.get(`https://kapi.kakao.com/v2/user/me`, {
         headers: {
@@ -57,14 +49,15 @@ const KakaoLoginCallBack = () => {
   useEffect(() => {
     const code = getAuthCode();
     if (code) {      
+      console.log(code);
       getToken(code);
     }
-
+    navigate(`/main`);
   }, [new URL(document.location.toString()).searchParams]);
 
   return (
     <div>
-      
+      로그인 중...
     </div>
   );
 };

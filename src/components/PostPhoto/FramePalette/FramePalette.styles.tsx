@@ -11,14 +11,9 @@ export const PaletteContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
   @media (max-width: 320px) {
-    right: 18px;
-  }
-  @media (max-width: 290px) {
     right: 5px;
   }
-
   @media (min-width: 425px) {
     right: 10%;
   }

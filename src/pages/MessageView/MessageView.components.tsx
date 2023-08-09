@@ -11,8 +11,7 @@ import {
   MessageViewFourcutFrameContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
-  GreenBtnContainer,
-  MessageViewFieldContainer
+  GreenBtnContainer
 } from "./MessageView.styles";
 
 // import components
@@ -25,20 +24,54 @@ import PublicToggle from "../../components/PublicToggle/PublicToggle.components"
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
-// interface of MessageView (prototype)
-interface IMessageView {
-  public: boolean;
-  title: string;
-  receiver: string;
-  mainText: string;
-  sender: string;
-  isPicture: boolean;
-  pictureUrl1: string;
-  pictureUrl2: string;
-  pictureUrl3: string;
-  pictureUrl4: string;
-  backgroundColorCode: string;
+// interface
+interface IMessageData {
+  status: number,
+  message: string,
+  data: IData,
 }
+
+// interface
+interface IData {
+  messageId: number,
+  userId: number,
+  catergory: string,
+  content: string,
+  author: string,
+  isOpened: boolean,
+  isPulled: boolean,
+  pulledAt: string,
+  imageUuid: string,
+  backgroundColorCode: string,
+  isPublic: boolean,
+  quizContent: string,
+  quizAnswer: string,
+  quizIsSolved: boolean,
+  imageUrl: string,
+}
+
+// message data sample
+const MessageDataAxios: IMessageData = {
+  status: 200,
+  message: "메시지 조회에 성공했습니다",
+  data: {
+    messageId: 1,
+    userId: 13,
+    catergory: "우리가 먹었던 최고의 학식 메뉴",
+    content: "하이 헬로 봉주르",
+    author: "명륜 짱짱맨",
+    isOpened: true,
+    isPulled: true,
+    pulledAt: "2023-07-10T16:34:30.388",
+    imageUuid: "2103980192830981209",
+    backgroundColorCode: "#0xff",
+    isPublic: true,
+    quizContent: "우리가 처음 만났던 장소는?",
+    quizAnswer: "수선관",
+    quizIsSolved: true,
+    imageUrl: "https://www.skku.edu"
+  }
+}	
 
 const MessageView = () => {
   // mui-modal variable
@@ -54,43 +87,29 @@ const MessageView = () => {
     setOpen(false);
     console.log(open);
   };
-
-  const MessageData: IMessageView = {
-    public: true,
-    title: "우리가 먹었던 최고의 학식 메뉴",
-    receiver: "명륜귀요미",
-    mainText: "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다. 그들의 청춘이 가슴이 용기가 사막이다. 그들의 그들은 주는 얼음에 커다란 용기가 밥을 것이다. 주는 같은 때까지 것이다. 우리 창공에 청춘 인생을 붙잡아 곧 원질이 부패뿐이다. 크고 맺어, 사람은 얼마나 그림자는 방지하는 착목한는 예가 약동하다. 있는 희망의 내려온 인생을 피는 따뜻한 뭇 것이다. 따뜻한 두기 영원히 구하지 창공에 예수는 되는",
-    sender: "율전짱짱맨",
-    isPicture: true,
-    pictureUrl1: "https://i.pravatar.cc/500",
-    pictureUrl2: "https://i.pravatar.cc/500",
-    pictureUrl3: "https://i.pravatar.cc/500",
-    pictureUrl4: "https://i.pravatar.cc/500",
-    backgroundColorCode: "#D6EABA",
-  };
-
+  
   return (
-    <MessageViewContainer backgroundColor={MessageData.backgroundColorCode}>
-<MessageViewFieldContainer>
-{/* Public Toggle */}
-<MessageViewPublicToggleContainer>
+    <MessageViewContainer backgroundColor={MessageDataAxios.data.backgroundColorCode}>
+      {/* Public Toggle */}
+      <MessageViewPublicToggleContainer>
         <PublicToggle />
       </MessageViewPublicToggleContainer>
 
       {/* Title */}
-      <MessageViewTitle className="MessageViewCenter">{MessageData.title}</MessageViewTitle>
+      <MessageViewTitle className="MessageViewCenter">{MessageDataAxios.data.catergory}</MessageViewTitle>
 
       {/* Content */}
       <MessageViewContent >
         {/* Receiver */}
         <MessageViewContentReceiver>
           <p className="MessageViewReceiverTo">To. </p>
-          <p className="MessageViewReceiverMessageData">{MessageData.receiver}</p>
+          {/* author말고 로그인 정보에서 이름 가져오기 */}
+          <p className="MessageViewReceiverMessageData">{MessageDataAxios.data.author}</p>
         </MessageViewContentReceiver>
 
         {/* Main Content */}
         <MessageViewContentMainContainer className="MessageViewCenter">
-          <MessageViewFourcutFrameContainer onClick={handleOpen}>
+          {/* <MessageViewFourcutFrameContainer onClick={handleOpen}>
             {MessageData.isPicture ? (
               <FourcutFrame
                 firstPicture={MessageData.pictureUrl1}
@@ -101,7 +120,7 @@ const MessageView = () => {
             ) : (
               <></>
             )}
-          </MessageViewFourcutFrameContainer>
+          </MessageViewFourcutFrameContainer> */}
           <Modal open={open} onClose={handleClose}>
             <Box>
               <QuizBox
@@ -112,14 +131,14 @@ const MessageView = () => {
             </Box>
           </Modal>
           <MessageViewContentMainText>
-            {MessageData.mainText}
+            {MessageDataAxios.data.content}
           </MessageViewContentMainText>
         </MessageViewContentMainContainer>
         
         {/* Sender */}
         <MessageViewContentSender>
           <p className="MessageViewSenderFrom">From. </p>
-          <p className="MessageViewSenderMessageData">{MessageData.sender}</p>
+          <p className="MessageViewSenderMessageData">{MessageDataAxios.data.author}</p>
         </MessageViewContentSender>
       </MessageViewContent>
       
@@ -127,8 +146,6 @@ const MessageView = () => {
       <GreenBtnContainer className="MessageViewCenter">
         <GreenBtn content="공유하기"/>
       </GreenBtnContainer>
-</MessageViewFieldContainer>
-      
     </MessageViewContainer>
   );
 };

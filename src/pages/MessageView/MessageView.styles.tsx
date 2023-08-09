@@ -1,10 +1,12 @@
 import styled from "styled-components";
+
 export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
   background-color: ${props => props.backgroundColor};
   width: 100%;
   height:100vh;
   overflow:scroll;
 `;
+
 export const MessageViewFieldContainer = styled.div`
 width: 100%;
 max-width: 375px;

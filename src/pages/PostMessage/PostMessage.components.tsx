@@ -25,12 +25,16 @@ import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import recycleIcon from "../../assets/images/randomUpdate.svg";
 import colorCheck from "../../assets/images/colorCheck.svg";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
-
-import AskLock from "./modal/AskLock/AskLock.components";
-import MakeQuiz from "./modal/MakeQuiz/MakeQuiz.components";
-import SendMessage from "./modal/SendMessage/SendMessage.components";
+import lockedFrameIcon from "../../assets/images/4cut_lock.png";
+import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
+import MakeQuiz from "../../components/PostMessage/modal/MakeQuiz/MakeQuiz.components";
+import SendMessage from "../../components/PostMessage/modal/SendMessage/SendMessage.components";
 
 import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { IsWritingMessage, MessageState, QuizState } from "../../recoil/recoil";
+import { useNavigate } from "react-router";
+import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 
 // 질문 데이터
 const SubjectData = [
@@ -41,25 +45,23 @@ const SubjectData = [
   "과거로 간다면 같이 하고 싶은 것",
 ];
 
-const backgroundColor = [
-  "#D6EABA",
-  "#D9E1CE",
-  "#C1D3A7",
-  "#DAEFAE",
-  "#BFD8BA",
-]
+const backgroundColor = ["#D6EABA", "#D9E1CE", "#C1D3A7", "#DAEFAE", "#BFD8BA"];
 
 const PostMessage = () => {
   // state
+  const [Message, setMessage] = useRecoilState(MessageState);
+  const setIsWriting = useSetRecoilState(IsWritingMessage);
+  const IsQuizGiven = useRecoilValue(QuizState);
   const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
-  const [nameText, SetNameText] = useState<string>("");
+  const [nameText, SetNameText] = useState<string>(Message.name);
   const [nameCount, SetNameCount] = useState<number>(0);
-  const [contentText, SetContentText] = useState<string>("");
+  const [contentText, SetContentText] = useState<string>(Message.content);
   const [contentCount, SetContentCount] = useState<number>(0);
   const [currentColorHex, SetCurrentColorHex] = useState<string>("");
   const [currentColor, SetCurrentColor] = useState<number>(0);
-  
+  const [done, setDone] = useState<boolean>(false);
+
   // subject update button
   const updateButtonHandler = () => {
     // 처음 나왔던게 다시 안 나오게 하기
@@ -67,17 +69,21 @@ const PostMessage = () => {
     while (true) {
       randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
 
-      if (currentSubjectNumber !== randomNumber) { break; }
+      if (currentSubjectNumber !== randomNumber) {
+        break;
+      }
     }
     SetCurrentSubject(SubjectData[randomNumber]);
     SetCurrentSubjectNumber(randomNumber);
   };
 
   // content event handler
-  const contentInputHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const contentInputHandler = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     SetContentText(event.target.value);
     SetContentCount(event.target.value.length);
-  }
+  };
 
   // name event handler
   const nameInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,85 +92,131 @@ const PostMessage = () => {
   };
 
   // color button handler
-  // 함수 하나로 해도 될 것 같긴한데..
-  const color1Handler = () => {
-    SetCurrentColor(0);
-    SetCurrentColorHex(backgroundColor[0]);
+  const colorHandler = (num: number) => {
+    SetCurrentColor(num - 1);
+    SetCurrentColorHex(backgroundColor[num - 1]);
   };
 
-  const color2Handler = () => {
-    SetCurrentColor(1);
-    SetCurrentColorHex(backgroundColor[1]);
+  // click photo handler
+  const navigate = useNavigate();
+  const PostPhotoHandler = () => {
+    setIsWriting(true);
+    setMessage({ name: nameText, content: contentText });
+    navigate("/photo/post");
   };
 
-  const color3Handler = () => {
-    SetCurrentColor(2);
-    SetCurrentColorHex(backgroundColor[2]);
-  };
+  const ChangeQuizHandler = () => {};
 
-  const color4Handler = () => {
-    SetCurrentColor(3);
-    SetCurrentColorHex(backgroundColor[3]);
-  };
-
-  const color5Handler = () => {
-    SetCurrentColor(4);
-    SetCurrentColorHex(backgroundColor[4]);
+  // submit handler
+  const submitHandler = () => {
+    if (nameText !== "" && contentText !== "") {
+      setMessage({ name: nameText, content: contentText });
+      //submit 함수 넣기
+      setDone(true);
+    } else if (nameText === "") {
+      alert("이름을 입력해주세요.");
+    } else if (contentText === "") {
+      alert("편지 내용을 입력해주세요.");
+    }
   };
 
   // return
   return (
     <PostMessageContainer backgroundColor={currentColorHex}>
       <PostMessageFieldContainer>
-      {/* color */}
-      <PostMessageColors>
-        <PostMessageColor1 onClick={color1Handler}>
-          {(currentColor === 0) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
-        </PostMessageColor1>
-        <PostMessageColor2 onClick={color2Handler}>
-          {(currentColor === 1) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
-        </PostMessageColor2>
-        <PostMessageColor3 onClick={color3Handler}>
-          {(currentColor === 2) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
-        </PostMessageColor3>
-        <PostMessageColor4 onClick={color4Handler}>
-          {(currentColor === 3) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
-        </PostMessageColor4>
-        <PostMessageColor5 onClick={color5Handler}>
-          {(currentColor === 4) ? <PostMessageColorCheck src={colorCheck}/> : <></>}
-        </PostMessageColor5>
-      </PostMessageColors>
-      
-      {/* subject */}
-      <PostMessageRandomSubjectContainer>
-        <PostMessageRandomSubject>랜덤 주제</PostMessageRandomSubject>
-        <PostMessageRandomSubjectContent>
-          {currentSubject}
-          <PostMessageUpdateButton src={recycleIcon} onClick={updateButtonHandler}/>
-        </PostMessageRandomSubjectContent>
-      </PostMessageRandomSubjectContainer>
+        {/* color */}
+        <PostMessageColors>
+          <PostMessageColor1 onClick={() => colorHandler(1)}>
+            {currentColor === 0 ? (
+              <PostMessageColorCheck src={colorCheck} />
+            ) : (
+              <></>
+            )}
+          </PostMessageColor1>
+          <PostMessageColor2 onClick={() => colorHandler(2)}>
+            {currentColor === 1 ? (
+              <PostMessageColorCheck src={colorCheck} />
+            ) : (
+              <></>
+            )}
+          </PostMessageColor2>
+          <PostMessageColor3 onClick={() => colorHandler(3)}>
+            {currentColor === 2 ? (
+              <PostMessageColorCheck src={colorCheck} />
+            ) : (
+              <></>
+            )}
+          </PostMessageColor3>
+          <PostMessageColor4 onClick={() => colorHandler(4)}>
+            {currentColor === 3 ? (
+              <PostMessageColorCheck src={colorCheck} />
+            ) : (
+              <></>
+            )}
+          </PostMessageColor4>
+          <PostMessageColor5 onClick={() => colorHandler(5)}>
+            {currentColor === 4 ? (
+              <PostMessageColorCheck src={colorCheck} />
+            ) : (
+              <></>
+            )}
+          </PostMessageColor5>
+        </PostMessageColors>
 
-      <PostMessageContentTo>
-        <p className="PostMessageTo">To. </p>
-        <p className="PostMessageReceiver">명륜 귀요미</p>
-      </PostMessageContentTo>
+        {/* subject */}
+        <PostMessageRandomSubjectContainer>
+          <PostMessageRandomSubject>랜덤 주제</PostMessageRandomSubject>
+          <PostMessageRandomSubjectContent>
+            {currentSubject}
+            <PostMessageUpdateButton
+              src={recycleIcon}
+              onClick={updateButtonHandler}
+            />
+          </PostMessageRandomSubjectContent>
+        </PostMessageRandomSubjectContainer>
 
-      {/* content */}
-      <PostMessageContentContainer>
-        <PostMessageContentFrame src={defaultFrameIcon}/>
-        <PostMessageContentText onChange={contentInputHandler} maxLength={240} placeholder="240글자까지만 입력됩니다"/>
-      </PostMessageContentContainer>
+        <PostMessageContentTo>
+          <p className="PostMessageTo">To. </p>
+          <p className="PostMessageReceiver">명륜 귀요미</p>
+        </PostMessageContentTo>
 
-      {/* writer */}
-      <PostMessageWriterContainer>
-        <PostMessageWriter>From. </PostMessageWriter>
-        <PostMessageWriterContent onChange={nameInputHandler} maxLength={10} placeholder="10글자까지만 입력됩니다"/>
-      </PostMessageWriterContainer>
+        {/* content */}
+        <PostMessageContentContainer>
+          <PostMessageContentFrame
+            src={IsQuizGiven.givenQuiz ? lockedFrameIcon : defaultFrameIcon}
+            onClick={
+              IsQuizGiven.givenQuiz ? ChangeQuizHandler : PostPhotoHandler
+            }
+          />
+          <PostMessageContentText
+            value={contentText}
+            onChange={contentInputHandler}
+            maxLength={240}
+            placeholder="ㅇㅇ님에게 하고 싶은 말을 작성해주세요!"
+          />
+        </PostMessageContentContainer>
 
-      {/* Button */}
-      <GreenBtn content="작성 완료"/>
+        {/* writer */}
+        <PostMessageWriterContainer>
+          <PostMessageWriter>From. </PostMessageWriter>
+          <PostMessageWriterContent
+            value={nameText}
+            onChange={nameInputHandler}
+            maxLength={10}
+            placeholder="작성자 이름"
+          />
+        </PostMessageWriterContainer>
+
+        {/* Button */}
+        {done ? (
+          <WhiteBtn
+            content="쪽지함 가기"
+            onClick={() => navigate("/message")}
+          />
+        ) : (
+          <GreenBtn content="작성 완료" onClick={submitHandler} />
+        )}
       </PostMessageFieldContainer>
-
     </PostMessageContainer>
   );
 };

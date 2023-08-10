@@ -16,14 +16,15 @@ export const MessageState = atom({
 export const PhotoState = atom({
   key: "Photo",
   default: {
-    PhotoURl: "",
+    PhotoTaken: false,
+    PhotoURL: "",
   },
 });
 
 export const QuizState = atom({
   key: "Quiz",
   default: {
-    givenQuiz: false,
+    QuizGiven: false,
     QuizContent: "",
     QuizAnswer: "",
   },

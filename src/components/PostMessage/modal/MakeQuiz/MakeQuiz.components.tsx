@@ -1,7 +1,5 @@
 import {
   MakeQuizContainer,
-  MakeQuizQuitButtonContainer,
-  MakeQuizQuitButton,
   MakeQuizContentContainer,
   MakeQuizContentLabel,
   MakeQuizContent,
@@ -13,12 +11,16 @@ import {
 } from "./MakeQuiz.styles";
 
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import { useRecoilState } from "recoil";
 import { QuizState } from "../../../../recoil/recoil";
 import { useNavigate } from "react-router";
 
-const MakeQuiz = () => {
+interface MakeQuizProps {
+  handleModalClose: () => void;
+}
+
+const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
   const [Quiz, setQuiz] = useRecoilState(QuizState);
   const [quizContent, setQuizContent] = useState(Quiz.QuizContent);
   const [quizAnswer, setQuizAnswer] = useState(Quiz.QuizAnswer);
@@ -33,13 +35,14 @@ const MakeQuiz = () => {
   const navigate = useNavigate();
 
   const handleQuizDelete = () => {
-    setQuiz({ givenQuiz: false, QuizContent: "", QuizAnswer: "" });
+    setQuiz({ QuizGiven: false, QuizContent: "", QuizAnswer: "" });
+    handleModalClose();
     navigate("/message/post");
   };
 
   const handleQuizSubmit = () => {
     setQuiz({
-      givenQuiz: true,
+      QuizGiven: true,
       QuizContent: quizContent,
       QuizAnswer: quizAnswer,
     });

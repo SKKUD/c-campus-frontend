@@ -1,7 +1,11 @@
 import { FC, ReactNode } from "react";
 import Modal from "@mui/material/Modal";
-import closeIcon from "../../../assets/images/close_icon.png";
-import { ModalContainer, BtnWrapper, CloseBtn } from "./ModalLayout.styles";
+import {
+  ModalContainer,
+  ModalContentContainer,
+  CloseButtonContainer,
+  CloseButton,
+} from "./ModalLayout.styles";
 
 interface ModalLayoutProps {
   modalOpen: boolean;
@@ -17,12 +21,12 @@ const ModalLayout: FC<ModalLayoutProps> = ({
   return (
     <Modal open={modalOpen} onClose={handleModalClose}>
       <ModalContainer>
-        {/* <BtnWrapper>
-          <CloseBtn onClick={handleModalClose}>
-            <img src={closeIcon} alt="Close Icon" />
-          </CloseBtn>
-        </BtnWrapper> */}
-        {children}
+        <ModalContentContainer>
+          <CloseButtonContainer>
+            <CloseButton onClick={handleModalClose} />
+          </CloseButtonContainer>
+          {children}
+        </ModalContentContainer>
       </ModalContainer>
     </Modal>
   );

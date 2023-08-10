@@ -14,15 +14,6 @@ export const MakeQuizContainer = styled.div`
   align-items: center;
 `;
 
-export const MakeQuizQuitButtonContainer = styled.div`
-  width: 90%;
-  display: flex;
-  justify-content: right;
-  padding-top: 10px;
-`;
-
-export const MakeQuizQuitButton = styled(CloseIcon)``;
-
 export const MakeQuizContentContainer = styled.div`
   width: 90%;
   display: flex;

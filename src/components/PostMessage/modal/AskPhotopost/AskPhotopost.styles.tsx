@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { Button } from "@mui/material";
 
-export const SendMessageContainer = styled.div`
+export const AskPhotopostContainer = styled.div`
   width: 100%;
   border-radius: 15px;
   background: var(--background, #f5f5f5);
@@ -13,18 +14,7 @@ export const SendMessageContainer = styled.div`
   align-items: center;
 `;
 
-export const SendMessageQuitButtonContainer = styled.div`
-  width: 90%;
-  display: flex;
-  justify-content: right;
-  padding-top: 10px;
-`;
-
-export const SendMessageQuitButton = styled(CloseIcon)`
-
-`;
-
-export const SendMessageContent = styled.div`
+export const AskPhotopostContent = styled.div`
   width: 169px;
   color: var(--font-black, #303030);
   text-align: center;
@@ -37,6 +27,19 @@ export const SendMessageContent = styled.div`
   padding-bottom: 30px;
 `;
 
-export const SendMessageButtonContainer = styled.div`
+export const AskPhotopostButtonContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding-bottom: 10px;
+`;
+
+export const AskPhotopostWhiteBtn = styled(Button)`
+  width: 30%;
+  color: #808080;
+  text-align: center;
+  font-family: Cafe24Ssurround;
+  font-size: 22px;
+  font-weight: 700;
 `;

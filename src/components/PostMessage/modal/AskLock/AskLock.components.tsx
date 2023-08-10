@@ -3,8 +3,6 @@ import { useNavigate } from "react-router";
 import {
   AskLockButtonContainer,
   AskLockContent,
-  AskLockQuitButton,
-  AskLockQuitButtonContainer,
   AskLockContainer,
   AskLockWhiteBtn,
 } from "./AskLock.styles";
@@ -20,9 +18,6 @@ const AskLock: FC<AskLockProps> = ({ handleModalClose }) => {
   const navigate = useNavigate();
   return (
     <AskLockContainer>
-      <AskLockQuitButtonContainer>
-        <AskLockQuitButton onClick={handleModalClose} />
-      </AskLockQuitButtonContainer>
       {!IsMakingQuiz ? (
         <>
           <AskLockContent>
@@ -39,7 +34,7 @@ const AskLock: FC<AskLockProps> = ({ handleModalClose }) => {
           </AskLockButtonContainer>
         </>
       ) : (
-        <MakeQuiz />
+        <MakeQuiz handleModalClose={handleModalClose} />
       )}
     </AskLockContainer>
   );

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 
 export const ModalContainer = styled.div`
@@ -10,18 +11,24 @@ export const ModalContainer = styled.div`
   max-width: 341px;
 `;
 
-export const InfoPaper = styled.img`
+export const ModalContentContainer = styled.div`
   width: 100%;
+  border-radius: 15px;
+  background: var(--background, #f5f5f5);
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const BtnWrapper = styled.div`
-  position: relative;
+export const CloseButtonContainer = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: right;
+  padding-top: 10px;
 `;
 
-export const CloseBtn = styled(IconButton)`
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  top: 8px;
-  right: 8px;
-`;
+export const CloseButton = styled(CloseIcon)``;
+
+

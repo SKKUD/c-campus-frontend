@@ -12,9 +12,16 @@ export const PhotoBoothContainer = styled.div`
 export const FourcutNPaletteWrapper = styled.div`
   position: relative;
   width: 100%;
+  padding-left: 53px;
   margin-bottom: 30px;
   display: flex;
   justify-content: center;
+  @media (max-width: 319px) {
+    padding-left: 0;
+  }
+  @media (min-width: 768px) {
+    padding-left: 65px;
+  }
   @media (min-width: 1024px) {
     padding-top: 130px;
   }
@@ -27,12 +34,11 @@ export const FourcutContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  box-sizing: border-box;
+  margin: 1px;
 
   /* default */
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1);
-  @media (max-width: 320px) {
-    margin: 0 20px;
-  }
 `;
 
 export const FourcutFrame = styled.img`

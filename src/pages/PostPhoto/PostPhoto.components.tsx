@@ -25,9 +25,15 @@ import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.c
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
-import { exportElementAsPNG } from "../../utils/downloadPhoto";
-
+import { ExportElementAsPNG } from "../../utils/downloadPhoto";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { IsWritingMessage, PhotoState } from "../../recoil/recoil";
+import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
+import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
+import { setPhotoURL } from "../../utils/setPhotoURL";
 const PostPhoto = () => {
+  const IsWriting = useRecoilValue(IsWritingMessage);
+  const setPhotoTaken = useSetRecoilState(PhotoState);
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [frameNum, setFrame] = useState<number>(1);
@@ -60,10 +66,17 @@ const PostPhoto = () => {
         "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
       )
     ) {
-      await exportElementAsPNG();
+      await ExportElementAsPNG();
       navigate("/photo");
     }
   };
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => {
+    setModalOpen(true);
+    setPhotoURL(setPhotoTaken);
+  };
+  const handleModalClose = () => setModalOpen(false);
 
   return (
     <PhotoBoothContainer>
@@ -161,14 +174,38 @@ const PostPhoto = () => {
           />
           <WebGreenBtnWrap>
             {done === "done" ? (
-              <GreenBtn content="완료" onClick={(e) => handleSubmit()} />
+              IsWriting ? (
+                <>
+                  <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+                  <ModalLayout
+                    modalOpen={modalOpen}
+                    handleModalClose={handleModalClose}
+                  >
+                    <AskLock handleModalClose={handleModalClose} />
+                  </ModalLayout>
+                </>
+              ) : (
+                <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+              )
             ) : (
               <GreenBtn content="완료" disabled={true} />
             )}
           </WebGreenBtnWrap>
         </>
       ) : done === "done" ? (
-        <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+        IsWriting ? (
+          <>
+            <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+            <ModalLayout
+              modalOpen={modalOpen}
+              handleModalClose={handleModalClose}
+            >
+              <AskLock handleModalClose={handleModalClose} />
+            </ModalLayout>
+          </>
+        ) : (
+          <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+        )
       ) : (
         <IconBtnGroup
           takePhoto={() => setOnCapture(true)}

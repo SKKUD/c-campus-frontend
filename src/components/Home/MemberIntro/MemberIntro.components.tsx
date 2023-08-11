@@ -75,9 +75,6 @@ const MemberIntro = () => {
           </ProfileBox>
           <ProfileBox to="">
             <ProfilePhoto src={rjy} />
-            <ProfileIcon>
-              <img src={githubicon} alt="icon" />
-            </ProfileIcon>
             <ProfileName>이주용</ProfileName>
           </ProfileBox>
         </ProfileCotainer>
@@ -96,9 +93,6 @@ const MemberIntro = () => {
           </ProfileBox>
           <ProfileBox to="">
             <ProfilePhoto src={kdk} />
-            <ProfileIcon>
-              <img src={instaicon} alt="icon" />
-            </ProfileIcon>
             <ProfileName>김도경</ProfileName>
             <ProfileDetail>3D디자인</ProfileDetail>
           </ProfileBox>

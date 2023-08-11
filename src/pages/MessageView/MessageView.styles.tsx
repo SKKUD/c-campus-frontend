@@ -3,22 +3,25 @@ import styled from "styled-components";
 export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
   background-color: ${props => props.backgroundColor};
   width: 100%;
+  max-width: 375px;
   height:100vh;
   overflow:scroll;
+  margin: auto;
+  padding-top: 60px;
 `;
 
 export const MessageViewFieldContainer = styled.div`
-width: 100%;
-max-width: 375px;
-display: flex;
-flex-direction: column;
-margin: 60px auto;
-align-items: center;
-font-family: YeongdeokSea;
+  width: 100%;
+  max-width: 375px;
+  display: flex;
+  flex-direction: column;
+  margin: 60px auto;
+  align-items: center;
+  font-family: YeongdeokSea;
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
-  width: 90vw;
+  width: 95%;
   max-width: 375px;
   display: flex;
   justify-content: right;
@@ -29,6 +32,7 @@ export const MessageViewTitle = styled.div`
   width: 90vw;
   max-width: 343px;
   height: 56px;
+  margin: auto;
   /* flex-shrink: 0; */
   border-radius: 7px;
   border: 0.5px solid var(--main-2, #164300);
@@ -90,7 +94,7 @@ export const MessageViewContentMainContainer = styled.div`
   margin-bottom: 5px;
   padding: 20px 10px 10px 10px;
   display: flex;
-
+  margin: auto;
   flex-direction: row;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);

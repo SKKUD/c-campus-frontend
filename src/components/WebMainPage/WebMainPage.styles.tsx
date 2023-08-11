@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const WebMainPageContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   position: relative;
   background-color: #f5f5f5;
   padding: 32px 40px;
@@ -13,8 +14,8 @@ export const Ground = styled.div`
   left: 0;
   bottom: 0;
   width: 100vw;
-  height: calc(100vh - 600px);
-  background-color: #4b5745;
+  height: calc(21.6vh + 2px);
+  background-color: #41523c;
   z-index: 1;
 `;
 

@@ -12,7 +12,7 @@ import OpenIcon from "../../assets/images/congball_open_color.svg";
 import { useNavigate } from "react-router";
 
 interface IMessage {
-  id: string,
+  id: number,
   isOpen: boolean,
   nickName: string,
 }
@@ -25,7 +25,7 @@ const Message = ({id, isOpen, nickName}: IMessage) => {
   }
 
   return (
-    <MessageFrame id={id}>
+    <MessageFrame>
       <MessageHolder onClick={RedirectToID}>
         {isOpen ? (<MessageImage src={OpenIcon}></MessageImage>) : (<MessageImage src={CloseIcon}></MessageImage>)}
       </MessageHolder>

@@ -10,9 +10,9 @@ export const MessageFrame = styled.div`
 
 export const MessageHolder = styled.div`
   width: 15vw;
-  max-width: 64px;
+  max-width: 60px;
   height: 15vw;
-  max-height: 64px;
+  max-height: 60px;
   border-radius: 10px;
   background: #fff;
 
@@ -25,14 +25,15 @@ export const MessageHolder = styled.div`
 
 export const MessageImage = styled.img`
   width: 80%;
+  max-width: 60px;
 `;
 
 export const MessageContent = styled.p`
   width: 15vw;
-  max-width: 64px;
+  max-width: 60px;
   height: 20px;
   color: var(--font-black, #303030);
-  text-align: left;
+  text-align: center;
   font-family: YeongdeokSea;
   font-size: 11px;
   font-style: normal;

@@ -17,19 +17,21 @@ export const PhotoBoxLabel = styled.div`
 
 export const PhotoFlexBox = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
   margin-top: 15px;
   height: calc(100% - 60px);
   overflow: scroll;
+`;
+
+export const PhotoScrollContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 150px;
   > div {
     margin-right: 4%;
   }
   > div:nth-of-type(4n) {
     margin-right: 0;
-  }
-  @media (min-width: 1024px) {
-    padding-bottom: 110px;
   }
 `;
 

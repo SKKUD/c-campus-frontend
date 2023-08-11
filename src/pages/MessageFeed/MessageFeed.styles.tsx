@@ -43,6 +43,14 @@ export const OpenMessageContainer = styled.div`
   }
 `;
 
+export const OpenMessageScrollContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+`;
+
 export const OpenMessageContent = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
   width: 90%;

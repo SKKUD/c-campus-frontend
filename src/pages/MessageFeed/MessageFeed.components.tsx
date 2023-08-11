@@ -1,115 +1,105 @@
-import { 
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+
+import {
   MessageFeedContainer,
   OpenMessageHeader,
   OpenMessageHeaderContent,
   OpenMessageContainer,
   OpenMessageContent,
+  OpenMessageScrollContainer,
   OpenMessageContentTitle,
   OpenMessageContentMainText,
   OpenMessageContentSender,
   OpenMesageEmpty,
 } from "./MessageFeed.styles";
 
-interface IOpenMessage {
-  MessageNumber?: number,
+// interface
+interface IAxiosMessageData {
+  status: number,
+  message: string,
+  data?: IAxiosData[],
 }
 
-interface IOpenMessageData {
-  id: string,
-  color: string,
-  title: string,
-  mainText: string,
-  sender: string,
+interface IAxiosData {
+  message_id: number,
+  user_id: number,
+  category: string,
+  content: string,
+  author: string,
+  is_opened: boolean,
+  is_pulled: boolean,
+  pulled_at: string,
+  image_uuid?: string,
+  background_color_code: string,
+  is_quiz: boolean,
+  is_public: boolean,
+  quiz_content?: string,
+  quiz_answer?: string,
+  quiz_is_solved?: boolean,
+  image_url?: string,
 }
 
-const MessageFeed = ({MessageNumber}: IOpenMessage) => {
-  const OpenMessageDataSet: IOpenMessageData[] = [
-    // {
-    //   id: "0",
-    //   color: "#D6EABA",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText:
-    //     "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다. 그들의 청춘이 가슴이 용기가 사막이다. 그들의 그들은 주는 얼음에 커다란 용기가 밥을 것이다. 주는 같은 때까지 것이다. 우리 창공에 청춘 인생을 붙잡아 곧 원질이 부패뿐이다. 크고 맺어, 사람은 얼마나 그림자는 방지하는 착목한는 예가 약동하다. 있는 희망의 내려온 인생을 피는 따뜻한 뭇 것이다. 따뜻한 두기 영원히 구하지 창공에 예수는 되는",
-    //   sender: "율전짱짱걸",
-    // },
-    // {
-    //   id: "1",
-    //   color: "#B5D589",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText:
-    //     "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다.",
-    //   sender: "명륜짱짱걸",
-    // },
-    // {
-    //   id: "2",
-    //   color: "#B0C7AB",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText: "가는 유소년에게서",
-    //   sender: "닉네임은최대10글자",
-    // },
-    // {
-    //   id: "3",
-    //   color: "#D6EABA",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText:
-    //     "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다. 그들의 청춘이 가슴이 용기가 사막이다. 그들의 그들은 주는 얼음에 커다란 용기가 밥을 것이다. 주는 같은 때까지 것이다. 우리 창공에 청춘 인생을 붙잡아 곧 원질이 부패뿐이다. 크고 맺어, 사람은 얼마나 그림자는 방지하는 착목한는 예가 약동하다. 있는 희망의 내려온 인생을 피는 따뜻한 뭇 것이다. 따뜻한 두기 영원히 구하지 창공에 예수는 되는",
-    //   sender: "율전짱짱걸",
-    // },
-    // {
-    //   id: "4",
-    //   color: "#D6EABA",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText:
-    //     "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다. 그들의 청춘이 가슴이 용기가 사막이다. 그들의 그들은 주는 얼음에 커다란 용기가 밥을 것이다. 주는 같은 때까지 것이다. 우리 창공에 청춘 인생을 붙잡아 곧 원질이 부패뿐이다. 크고 맺어, 사람은 얼마나 그림자는 방지하는 착목한는 예가 약동하다. 있는 희망의 내려온 인생을 피는 따뜻한 뭇 것이다. 따뜻한 두기 영원히 구하지 창공에 예수는 되는",
-    //   sender: "율전짱짱걸",
-    // },
-    // {
-    //   id: "5",
-    //   color: "#D6EABA",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText:
-    //     "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다. 그들의 청춘이 가슴이 용기가 사막이다. 그들의 그들은 주는 얼음에 커다란 용기가 밥을 것이다. 주는 같은 때까지 것이다. 우리 창공에 청춘 인생을 붙잡아 곧 원질이 부패뿐이다. 크고 맺어, 사람은 얼마나 그림자는 방지하는 착목한는 예가 약동하다. 있는 희망의 내려온 인생을 피는 따뜻한 뭇 것이다. 따뜻한 두기 영원히 구하지 창공에 예수는 되는",
-    //   sender: "율전짱짱걸",
-    // },
-    // {
-    //   id: "6",
-    //   color: "#D6EABA",
-    //   title: "우리가 먹었던 최고의 학식 메뉴",
-    //   mainText:
-    //     "가는 유소년에게서 것은 두손을 보는 그와 부패뿐이다. 우는 반짝이는 가는 봄바람이다. 그들의 청춘이 가슴이 용기가 사막이다. 그들의 그들은 주는 얼음에 커다란 용기가 밥을 것이다. 주는 같은 때까지 것이다. 우리 창공에 청춘 인생을 붙잡아 곧 원질이 부패뿐이다. 크고 맺어, 사람은 얼마나 그림자는 방지하는 착목한는 예가 약동하다. 있는 희망의 내려온 인생을 피는 따뜻한 뭇 것이다. 따뜻한 두기 영원히 구하지 창공에 예수는 되는",
-    //   sender: "율전짱짱걸",
-    // },
-  ];
+const MessageFeed = () => {
+  // State for public filter
+  const [filteredData, SetFilteredData] = useState<IAxiosData[]>();
+
+  // filter
+  useEffect(()=> {
+    // get axios
+    const res = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/pulled`)
+                .then((response) => {
+                  const axiosData: IAxiosMessageData = response.data;
+                  // filter
+                  const filtered = axiosData.data?.filter((Data: IAxiosData) => Data.is_public);
+
+                  // set to state
+                  SetFilteredData(filtered);
+                })
+                .catch((error) => {
+                  if (axios.isAxiosError(error)) {
+                    console.log(error);
+                  }
+                });
+  }, []);
 
   return (
     <>
-      {
-        (OpenMessageDataSet.length !== 0) ? (
-          <MessageFeedContainer>
-            <OpenMessageHeader>
-              <OpenMessageHeaderContent>{OpenMessageDataSet.length}개의 공개쪽지</OpenMessageHeaderContent>
-            </OpenMessageHeader>
+      {filteredData?.length !== 0 ? (
+        <MessageFeedContainer>
+          <OpenMessageHeader>
+            <OpenMessageHeaderContent>
+              {filteredData?.length}개의 공개쪽지
+            </OpenMessageHeaderContent>
+          </OpenMessageHeader>
 
-            <OpenMessageContainer>
-              {
-                OpenMessageDataSet.map((OpenMessageData) => {
-                  return (
-                    <OpenMessageContent key={OpenMessageData.id} color={OpenMessageData.color}>
-                      <OpenMessageContentTitle>{OpenMessageData.title}</OpenMessageContentTitle>
-                      <OpenMessageContentMainText>{OpenMessageData.mainText}</OpenMessageContentMainText>
-                      <OpenMessageContentSender>
-                        <p className="SenderFrom">From.</p> {OpenMessageData.sender}
-                      </OpenMessageContentSender>
-                    </OpenMessageContent>
-                  )
-                })
-              }
-            </OpenMessageContainer>
-          </MessageFeedContainer>
-        ) : (
-          <OpenMesageEmpty>공개로 설정된 메시지가 없습니다</OpenMesageEmpty>
-        ) 
-      }
+          <OpenMessageContainer>
+            <OpenMessageScrollContainer>
+              {filteredData?.map((MessageData: IAxiosData) => {
+                return (
+                  <OpenMessageContent
+                    key={MessageData.message_id}
+                    color={MessageData.background_color_code}
+                  >
+                    <OpenMessageContentTitle>
+                      {MessageData.category}
+                    </OpenMessageContentTitle>
+                    <OpenMessageContentMainText>
+                      {MessageData.content}
+                    </OpenMessageContentMainText>
+                    <OpenMessageContentSender>
+                      <p className="SenderFrom">From.</p> {MessageData.author}
+                    </OpenMessageContentSender>
+                  </OpenMessageContent>
+                );
+              })}
+            </OpenMessageScrollContainer>
+          </OpenMessageContainer>
+        </MessageFeedContainer>
+      ) : (
+        <OpenMesageEmpty>공개로 설정된 메시지가 없습니다</OpenMesageEmpty>
+      )}
     </>
   );
 };

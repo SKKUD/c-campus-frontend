@@ -9,8 +9,8 @@ export const MainContainer = styled.div`
 
 export const MainBackground = styled.div`
   width: 100%;
-  height: calc(100vh - 500px);
-  background-color: #4b5745;
+  height: calc(21.6vh + 2px);
+  background-color: #41523c;
   position: absolute;
   bottom: 0;
   left: 0;

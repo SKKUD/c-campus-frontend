@@ -13,8 +13,8 @@ export const Ground = styled.div`
   left: 0;
   bottom: 0;
   width: 100vw;
-  height: calc(100vh - 600px);
-  background-color: #4b5745;
+  height: calc(21.6vh + 2px);
+  background-color: #41523c;
   z-index: 1;
 `;
 

@@ -17,10 +17,15 @@ import cong15_top_gif from "../../../assets/animations/cong15_top_bf.gif";
 import cong15_top_come_out_gif from "../../../assets/animations/cong15_top_af.gif";
 import cong30_top_gif from "../../../assets/animations/cong30_top_bf.gif";
 import cong30_top_come_out_gif from "../../../assets/animations/cong30_top_af.gif";
-import { CongMachineContainer, MachineImage } from "./CongMachine.styles";
+import {
+  CongMachineContainer,
+  CongMachineContentContainer,
+  MachineImage,
+} from "./CongMachine.styles";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
+import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
 interface CongMachineProps {
   slide?: number;
@@ -54,19 +59,21 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
   return (
     <CongMachineContainer>
-      <MachineImage src={topimgsrc} />
-      <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
-      {match1024 ? (
-        <ButtonGroupContainer>
-          <GreenBtn
-            content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
-            disabled={messagenum < 5 ? true : false}
-            onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
-          />
-        </ButtonGroupContainer>
-      ) : (
-        <ButtonGroup slide={slide} />
-      )}
+      <CongMachineContentContainer>
+        <MachineImage src={topimgsrc} />
+        <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
+        {match1024 ? (
+          <ButtonGroupContainer>
+            <GreenBtn
+              content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
+              disabled={messagenum < 5 ? true : false}
+              onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
+            />
+          </ButtonGroupContainer>
+        ) : (
+          <ButtonGroup slide={slide} />
+        )}
+      </CongMachineContentContainer>
     </CongMachineContainer>
   );
 };

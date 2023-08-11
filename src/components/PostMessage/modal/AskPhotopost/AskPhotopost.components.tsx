@@ -13,18 +13,21 @@ interface AskPhotopostProps {
   handleModalClose: () => void;
   PostPhotoHandler: () => void;
   setModalContent: React.Dispatch<React.SetStateAction<string>>;
+  submitHandler: () => void;
 }
 
 const AskPhotopost: FC<AskPhotopostProps> = ({
   handleModalClose,
   PostPhotoHandler,
   setModalContent,
+  submitHandler,
 }) => {
   const [IsMakingQuiz, setIsMakingQuiz] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = () => {
     setModalContent("");
     // submit 함수
+    submitHandler();
   };
 
   return (

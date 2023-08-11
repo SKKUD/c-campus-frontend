@@ -68,7 +68,7 @@ const PostPhoto = () => {
           : "사진을 공유하시겠습니까?"
       )
     ) {
-      await exportElementAsPNG();
+      await ExportElementAsPNG();
       navigate("/photo");
     }
   };

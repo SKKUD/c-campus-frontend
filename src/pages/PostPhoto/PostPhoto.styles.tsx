@@ -23,6 +23,7 @@ export const FourcutNPaletteWrapper = styled.div`
     padding-left: 65px;
   }
   @media (min-width: 1024px) {
+    padding-left: 0px;
     padding-top: 130px;
   }
 `;

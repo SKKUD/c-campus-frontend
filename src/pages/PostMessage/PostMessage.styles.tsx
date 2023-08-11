@@ -289,11 +289,16 @@ export const PostMessageWriterContent = styled.input`
 `;
 export const PostMessageWebFourcutContaner = styled.div``;
 
-export const ButtonWrapper = styled.div`
+
+interface ButtonWrapperProps {
+  done: boolean;
+}
+
+export const ButtonWrapper = styled.div<ButtonWrapperProps>`
   @media (min-width: 1280px) {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-left: 400px;
+    margin-left: ${(props) => (props.done ? "650px" : "400px")};
   }
 `;

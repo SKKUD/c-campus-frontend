@@ -304,7 +304,7 @@ const PostMessage = () => {
         </PostMessageWriterContainer>
 
         {/* Button */}
-        <ButtonWrapper>
+        <ButtonWrapper done={done}>
           {done ? (
             <WhiteBtn
               content="쪽지함 가기"

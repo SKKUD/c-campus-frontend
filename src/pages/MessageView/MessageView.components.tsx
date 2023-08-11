@@ -24,6 +24,9 @@ import PublicToggle from "../../components/PublicToggle/PublicToggle.components"
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 
+// 
+import axios from "axios";
+
 // interface
 interface IMessageData {
   status: number,
@@ -91,9 +94,34 @@ const MessageView = () => {
     console.log(open);
   };
   
+  const extractMessageID = () => {
+    // get current url
+    const currentUrl: string = window.location.href;
+
+    // find message/
+    const position: number = currentUrl.search("message/");
+
+    // extract messageID
+    const returnID: string = currentUrl.slice(position+8);
+
+    return returnID;
+  };
+
   useEffect(()=>{
+    // extract messageID
+    const messageID: string = extractMessageID();
+
     // axios get
-    // const response: IMessageData = axios.get(``);
+    const response = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/${messageID}`)
+                    .then((response) => {
+                      console.log(response);
+                      SetAxiosMessage(response.data);
+                    })
+                    .catch((error) => {
+                      if (axios.isAxiosError(error)) {
+                        console.log(error);
+                      }
+                    });
 
     // check response status 200 or 400
 

@@ -6,11 +6,20 @@ import {
   PhotoBoxContainer,
   PhotoBoxLabel,
   PhotoFlexBox,
+  PhotoScrollContainer,
   PhotoWrapper,
   Photo,
 } from "./PhotoBox.styles";
 
 const photoArr = [
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
+  ExamplePhoto,
+  ExamplePhoto2,
   ExamplePhoto,
   ExamplePhoto2,
   ExamplePhoto,
@@ -42,17 +51,19 @@ const PhotoBox = () => {
     <PhotoBoxContainer>
       <PhotoBoxLabel>{photoArr.length}개의 콩캠네컷</PhotoBoxLabel>
       <PhotoFlexBox>
-        {photoArr.map((item, idx) => (
-          <PhotoWrapper
-            onClick={() => {
-              setOpen(true);
-              setImgSrc(item);
-            }}
-            key={idx}
-          >
-            <Photo src={item} alt="congcam photo" />
-          </PhotoWrapper>
-        ))}
+        <PhotoScrollContainer>
+          {photoArr.map((item, idx) => (
+            <PhotoWrapper
+              onClick={() => {
+                setOpen(true);
+                setImgSrc(item);
+              }}
+              key={idx}
+            >
+              <Photo src={item} alt="congcam photo" />
+            </PhotoWrapper>
+          ))}
+        </PhotoScrollContainer>
       </PhotoFlexBox>
       <PhotoModal open={open} setOpen={setOpen} imgSrc={imgSrc} />
     </PhotoBoxContainer>

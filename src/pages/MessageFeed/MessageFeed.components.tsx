@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import { 
+import {
   MessageFeedContainer,
   OpenMessageHeader,
   OpenMessageHeaderContent,
   OpenMessageContainer,
   OpenMessageContent,
+  OpenMessageScrollContainer,
   OpenMessageContentTitle,
   OpenMessageContentMainText,
   OpenMessageContentSender,
@@ -65,33 +66,40 @@ const MessageFeed = () => {
 
   return (
     <>
-      {
-        (filteredData?.length !== 0) ? (
-          <MessageFeedContainer>
-            <OpenMessageHeader>
-              <OpenMessageHeaderContent>{filteredData?.length}개의 공개쪽지</OpenMessageHeaderContent>
-            </OpenMessageHeader>
+      {filteredData?.length !== 0 ? (
+        <MessageFeedContainer>
+          <OpenMessageHeader>
+            <OpenMessageHeaderContent>
+              {filteredData?.length}개의 공개쪽지
+            </OpenMessageHeaderContent>
+          </OpenMessageHeader>
 
-            <OpenMessageContainer>
-              {
-                filteredData?.map((MessageData: IAxiosData) => {
-                  return (
-                    <OpenMessageContent key={MessageData.message_id} color={MessageData.background_color_code}>
-                      <OpenMessageContentTitle>{MessageData.category}</OpenMessageContentTitle>
-                      <OpenMessageContentMainText>{MessageData.content}</OpenMessageContentMainText>
-                      <OpenMessageContentSender>
-                        <p className="SenderFrom">From.</p> {MessageData.author}
-                      </OpenMessageContentSender>
-                    </OpenMessageContent>
-                  )
-                })
-              }
-            </OpenMessageContainer>
-          </MessageFeedContainer>
-        ) : (
-          <OpenMesageEmpty>공개로 설정된 메시지가 없습니다</OpenMesageEmpty>
-        ) 
-      }
+          <OpenMessageContainer>
+            <OpenMessageScrollContainer>
+              {filteredData?.map((MessageData: IAxiosData) => {
+                return (
+                  <OpenMessageContent
+                    key={MessageData.message_id}
+                    color={MessageData.background_color_code}
+                  >
+                    <OpenMessageContentTitle>
+                      {MessageData.category}
+                    </OpenMessageContentTitle>
+                    <OpenMessageContentMainText>
+                      {MessageData.content}
+                    </OpenMessageContentMainText>
+                    <OpenMessageContentSender>
+                      <p className="SenderFrom">From.</p> {MessageData.author}
+                    </OpenMessageContentSender>
+                  </OpenMessageContent>
+                );
+              })}
+            </OpenMessageScrollContainer>
+          </OpenMessageContainer>
+        </MessageFeedContainer>
+      ) : (
+        <OpenMesageEmpty>공개로 설정된 메시지가 없습니다</OpenMesageEmpty>
+      )}
     </>
   );
 };

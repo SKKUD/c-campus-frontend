@@ -36,45 +36,23 @@ interface IMessageData {
 
 // interface
 interface IData {
-  messageId: number,
-  userId: number,
-  catergory: string,
+  message_id: number,
+  user_id: number,
+  category: string,
   content: string,
   author: string,
-  isOpened: boolean,
-  isPulled: boolean,
-  pulledAt?: string,
-  imageUuid?: string,
-  backgroundColorCode: string,
-  isPublic: boolean,
-  quizContent?: string,
-  quizAnswer?: string,
-  quizIsSolved?: boolean,
-  imageUrl?: string,
+  is_opened: boolean,
+  is_pulled: boolean,
+  pulled_at: string,
+  image_uuid?: string,
+  background_color_code: string,
+  is_quiz: boolean,
+  is_public: boolean,
+  quiz_content?: string,
+  quiz_answer?: string,
+  quiz_is_solved?: boolean,
+  image_url?: string,
 }
-
-// message data sample
-const MessageDataAxios: IMessageData = {
-  status: 200,
-  message: "메시지 조회에 성공했습니다",
-  data: {
-    messageId: 1,
-    userId: 13,
-    catergory: "우리가 먹었던 최고의 학식 메뉴",
-    content: "하이 헬로 봉주르",
-    author: "명륜 짱짱맨",
-    isOpened: true,
-    isPulled: true,
-    pulledAt: "2023-07-10T16:34:30.388",
-    imageUuid: "2103980192830981209",
-    backgroundColorCode: "#D6EABA",
-    isPublic: true,
-    quizContent: "우리가 처음 만났던 장소는?",
-    quizAnswer: "수선관",
-    quizIsSolved: true,
-    imageUrl: "https://www.skku.edu"
-  }
-}	
 
 const MessageView = () => {
   // axios state
@@ -114,8 +92,10 @@ const MessageView = () => {
     // axios get
     const response = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/${messageID}`)
                     .then((response) => {
-                      console.log(response);
-                      SetAxiosMessage(response.data);
+                      if (response.data.status === 200) {
+                        console.log(response.data.data);
+                        SetAxiosMessage(response.data.data);
+                      }
                     })
                     .catch((error) => {
                       if (axios.isAxiosError(error)) {
@@ -128,14 +108,14 @@ const MessageView = () => {
     // set the response data to axiosMessage state
   }, []); 
   return (
-    <MessageViewContainer backgroundColor={MessageDataAxios.data.backgroundColorCode}>
+    <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
       {/* Public Toggle */}
       <MessageViewPublicToggleContainer>
         <PublicToggle />
       </MessageViewPublicToggleContainer>
 
       {/* Title */}
-      <MessageViewTitle className="MessageViewCenter">{MessageDataAxios.data.catergory}</MessageViewTitle>
+      <MessageViewTitle className="MessageViewCenter">{axiosMessage?.category}</MessageViewTitle>
 
       {/* Content */}
       <MessageViewContent >
@@ -143,7 +123,7 @@ const MessageView = () => {
         <MessageViewContentReceiver>
           <p className="MessageViewReceiverTo">To. </p>
           {/* author말고 로그인 정보에서 이름 가져오기 */}
-          <p className="MessageViewReceiverMessageData">{MessageDataAxios.data.author}</p>
+          <p className="MessageViewReceiverMessageData">{axiosMessage?.author}</p>
         </MessageViewContentReceiver>
 
         {/* Main Content */}
@@ -170,14 +150,14 @@ const MessageView = () => {
             </Box>
           </Modal>
           <MessageViewContentMainText>
-            {MessageDataAxios.data.content}
+            {axiosMessage?.content}
           </MessageViewContentMainText>
         </MessageViewContentMainContainer>
         
         {/* Sender */}
         <MessageViewContentSender>
           <p className="MessageViewSenderFrom">From. </p>
-          <p className="MessageViewSenderMessageData">{MessageDataAxios.data.author}</p>
+          <p className="MessageViewSenderMessageData">{axiosMessage?.author}</p>
         </MessageViewContentSender>
       </MessageViewContent>
       

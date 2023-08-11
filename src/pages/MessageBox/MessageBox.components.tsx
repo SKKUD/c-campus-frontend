@@ -40,7 +40,7 @@ interface IAxiosMessageData {
 interface IAxiosData {
   message_id: number,
   user_id: number,
-  catergory: string,
+  category: string,
   content: string,
   author: string,
   is_opened: boolean,

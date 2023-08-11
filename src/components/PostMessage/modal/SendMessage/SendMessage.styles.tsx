@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
 
 export const SendMessageContainer = styled.div`
-  width: 90%;
+  width: 100%;
   border-radius: 15px;
-  background: var(--background, #F5F5F5);
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.30);
+  background: var(--background, #f5f5f5);
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;

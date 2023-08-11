@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { Button } from "@mui/material";
 
 export const AskLockContainer = styled.div`
-  width: 90%;
+  width: 100%;
   border-radius: 15px;
-  background: var(--background, #F5F5F5);
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.30);
+  background: var(--background, #f5f5f5);
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +33,6 @@ export const AskLockButtonContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding-bottom: 10px;
-
 `;
 
 export const AskLockQuitButtonContainer = styled.div`
@@ -40,12 +40,16 @@ export const AskLockQuitButtonContainer = styled.div`
   display: flex;
   justify-content: right;
   padding-top: 10px;
+  margin-bottom: 10px;
 `;
 
-export const AskLockQuitButton = styled(CloseIcon)`
+export const AskLockQuitButton = styled(CloseIcon)``;
 
-`;
-
-export const AskLockWhiteBtn = styled.button`
+export const AskLockWhiteBtn = styled(Button)`
   width: 30%;
+  color: #808080;
+  text-align: center;
+  font-family: Cafe24Ssurround;
+  font-size: 22px;
+  font-weight: 700;
 `;

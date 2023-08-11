@@ -64,7 +64,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   return (
     <CongMachineContainer>
       <MachineImage src={topimgsrc} />
-      <MachineImage src={bottomimgsrc} />
+      <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
       {match1024 ? (
         <ButtonGroupContainer>
           <GreenBtn

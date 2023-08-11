@@ -201,6 +201,9 @@ export const PostMessageContentText = styled.textarea`
   line-height: 130%;
   letter-spacing: -0.32px;
   padding: 10px;
+  :focus {
+    outline: none;
+  }
 `;
 
 export const PostMessageWriterContainer = styled.div`
@@ -228,7 +231,7 @@ export const PostMessageWriterContent = styled.input`
   flex-shrink: 0;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.7);
 
   color: var(--font-black, #303030);
   font-family: YeongdeokSea;
@@ -237,9 +240,11 @@ export const PostMessageWriterContent = styled.input`
   font-weight: 400;
   line-height: normal;
   /* default */
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
   padding-left: 20px;
   margin-bottom: 20px;
-
+  :focus {
+    outline: none;
+  }
 `;

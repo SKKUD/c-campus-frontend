@@ -1,4 +1,4 @@
-import { 
+import {
   PostMessageContainer,
   PostMessageColors,
   PostMessageColor1,
@@ -18,7 +18,9 @@ import {
   PostMessageWriterContainer,
   PostMessageWriter,
   PostMessageWriterContent,
-  PostMessageFieldContainer
+  PostMessageFieldContainer,
+  PostMessageWebFourcutContaner,
+  ButtonWrapper,
 } from "./PostMessage.styles";
 
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
@@ -42,6 +44,7 @@ import { useNavigate } from "react-router";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import AskPhotopost from "../../components/PostMessage/modal/AskPhotopost/AskPhotopost.components";
+import { useMediaQuery } from "@mui/material";
 
 // 질문 데이터
 const SubjectData = [
@@ -55,6 +58,7 @@ const SubjectData = [
 const backgroundColor = ["#D6EABA", "#D9E1CE", "#C1D3A7", "#DAEFAE", "#BFD8BA"];
 
 const PostMessage = () => {
+  const match1024 = useMediaQuery("(min-width:1024px)");
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
@@ -71,7 +75,6 @@ const PostMessage = () => {
   const [done, setDone] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
 
-  console.log(Photo);
   // subject update button
   const updateButtonHandler = () => {
     // 처음 나왔던게 다시 안 나오게 하기
@@ -128,22 +131,24 @@ const PostMessage = () => {
 
   // submit handler
   const submitHandler = () => {
+    handleModalClose();
     console.log(modalContent);
-    if (Photo.PhotoTaken) {
-      if (nameText !== "" && contentText !== "") {
-        setMessage({ name: nameText, content: contentText });
-        //submit 함수 넣기
-        setDone(true);
-        handleModalOpen();
-      } else if (nameText === "") {
-        alert("이름을 입력해주세요.");
-      } else if (contentText === "") {
-        alert("편지 내용을 입력해주세요.");
-      }
-    } else {
-      setModalContent("PhotoNotTaken");
+    if (nameText !== "" && contentText !== "") {
+      setMessage({ name: nameText, content: contentText });
+      //submit 함수 넣기
+      setDone(true);
+      setModalContent("");
       handleModalOpen();
+    } else if (nameText === "") {
+      alert("이름을 입력해주세요.");
+    } else if (contentText === "") {
+      alert("편지 내용을 입력해주세요.");
     }
+  };
+
+  const handlePhotoNotTaken = () => {
+    setModalContent("PhotoNotTaken");
+    handleModalOpen();
   };
 
   // modal
@@ -158,6 +163,44 @@ const PostMessage = () => {
   // return
   return (
     <PostMessageContainer backgroundColor={currentColorHex}>
+      {/* web fourcut photo */}
+      {match1024 && (
+        <PostMessageWebFourcutContaner>
+          <PostMessageContentFrame
+            src={
+              Quiz.QuizGiven
+                ? lockedFrameIcon
+                : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                ? Photo.PhotoURL
+                : defaultFrameIcon
+            }
+            onClick={
+              Quiz.QuizGiven
+                ? ChangeQuizHandler
+                : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                ? ChangeQuizHandler
+                : PostPhotoHandler
+            }
+          />
+          <WhiteBtn
+            content={
+              Quiz.QuizGiven
+                ? "퀴즈 수정"
+                : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                ? "네컷 잠금"
+                : "콩캠네컷 찍기"
+            }
+            onClick={
+              Quiz.QuizGiven
+                ? ChangeQuizHandler
+                : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                ? ChangeQuizHandler
+                : PostPhotoHandler
+            }
+          />
+        </PostMessageWebFourcutContaner>
+      )}
+
       <PostMessageFieldContainer>
         {/* color */}
         <PostMessageColors>
@@ -217,22 +260,24 @@ const PostMessage = () => {
 
         {/* content */}
         <PostMessageContentContainer>
-          <PostMessageContentFrame
-            src={
-              Quiz.QuizGiven
-                ? lockedFrameIcon
-                : Photo.PhotoTaken && Photo.PhotoURL !== ""
-                ? Photo.PhotoURL
-                : defaultFrameIcon
-            }
-            onClick={
-              Quiz.QuizGiven
-                ? ChangeQuizHandler
-                : Photo.PhotoTaken && Photo.PhotoURL !== ""
-                ? ChangePhotoHandler
-                : PostPhotoHandler
-            }
-          />
+          {!match1024 && (
+            <PostMessageContentFrame
+              src={
+                Quiz.QuizGiven
+                  ? lockedFrameIcon
+                  : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                  ? Photo.PhotoURL
+                  : defaultFrameIcon
+              }
+              onClick={
+                Quiz.QuizGiven
+                  ? ChangeQuizHandler
+                  : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                  ? ChangeQuizHandler
+                  : PostPhotoHandler
+              }
+            />
+          )}
           <PostMessageContentText
             value={contentText}
             onChange={contentInputHandler}
@@ -253,23 +298,31 @@ const PostMessage = () => {
         </PostMessageWriterContainer>
 
         {/* Button */}
-        {done ? (
-          <WhiteBtn
-            content="쪽지함 가기"
-            onClick={() => navigate("/message")}
-          />
-        ) : (
-          <GreenBtn content="작성 완료" onClick={submitHandler} />
-        )}
+        <ButtonWrapper>
+          {done ? (
+            <WhiteBtn
+              content="쪽지함 가기"
+              onClick={() => navigate("/message")}
+            />
+          ) : (
+            <GreenBtn
+              content="작성 완료"
+              onClick={Photo.PhotoTaken ? submitHandler : handlePhotoNotTaken}
+            />
+          )}
+        </ButtonWrapper>
       </PostMessageFieldContainer>
+
+      {/* modal */}
       <ModalLayout modalOpen={modalOpen} handleModalClose={handleModalClose}>
-        {modalContent === "" ? (
+        {modalContent === "" && done ? (
           <SendMessage handleModalClose={handleModalClose} />
         ) : modalContent === "PhotoNotTaken" ? (
           <AskPhotopost
             handleModalClose={handleModalClose}
             PostPhotoHandler={PostPhotoHandler}
             setModalContent={setModalContent}
+            submitHandler={submitHandler}
           />
         ) : (
           modalContent === "ChangeQuiz" && (

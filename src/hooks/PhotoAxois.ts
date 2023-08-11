@@ -46,7 +46,7 @@ export const usePhotoDeleteApi = () => {
   const deleteFourcutPhoto = (photoid: string) => {
     axios
       .delete(
-        `${process.env.REACT_APP_BACKEND_SERVER}/users/${userId}/photos${photoid}`
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${userId}/photos/${photoid}`
       )
       .then((data) => console.log(data))
       .catch((error) => console.log(error));

@@ -10,7 +10,7 @@ import {
   PhotoWrapper,
   Photo,
 } from "./PhotoBox.styles";
-import { usePhotoGetApi } from "../../hooks/PhotoAxois";
+// import { usePhotoGetApi } from "../../hooks/PhotoAxois";
 
 const photoArr = [
   ExamplePhoto,
@@ -46,7 +46,7 @@ const photoArr = [
 ];
 
 const PhotoBox = () => {
-  const [photo] = usePhotoGetApi();
+  // const [photo] = usePhotoGetApi();
   const [open, setOpen] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string>("");
   return (
@@ -54,8 +54,8 @@ const PhotoBox = () => {
       <PhotoBoxLabel>{photoArr.length}개의 콩캠네컷</PhotoBoxLabel>
       <PhotoFlexBox>
         <PhotoScrollContainer>
-          {photo &&
-            photo.map((item, idx) => (
+          {photoArr &&
+            photoArr.map((item, idx) => (
               <PhotoWrapper
                 onClick={() => {
                   setOpen(true);

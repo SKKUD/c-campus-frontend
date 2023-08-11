@@ -31,6 +31,8 @@ import { IsWritingMessage, PhotoState } from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
+
+
 const PostPhoto = () => {
   const IsWriting = useRecoilValue(IsWritingMessage);
   const setPhotoTaken = useSetRecoilState(PhotoState);
@@ -46,6 +48,7 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
+  
   const handleDelete = (num: number) => {
     if (window.confirm("선택한 사진을 지울까요?")) {
       dispatchArr[num - 1]("");

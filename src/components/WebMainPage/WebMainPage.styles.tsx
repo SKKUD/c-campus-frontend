@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const WebMainPageContainer = styled.div`
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   position: relative;
   background-color: #f5f5f5;
   padding: 32px 40px;

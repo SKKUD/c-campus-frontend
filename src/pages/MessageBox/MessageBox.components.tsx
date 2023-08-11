@@ -9,6 +9,7 @@ import {
   MessageListHeader,
   MessageListHeaderMessageCount,
   MessageListContainer,
+  MessageScrollContainer,
   MessageListHoder,
   MessageListDate,
   MessageListContent,
@@ -32,28 +33,28 @@ interface IBean {
 
 // interface
 interface IAxiosMessageData {
-  status: number,
-  message: string,
-  data?: IAxiosData[],
+  status: number;
+  message: string;
+  data?: IAxiosData[];
 }
 
 interface IAxiosData {
-  message_id: number,
-  user_id: number,
-  category: string,
-  content: string,
-  author: string,
-  is_opened: boolean,
-  is_pulled: boolean,
-  pulled_at: string,
-  image_uuid?: string,
-  background_color_code: string,
-  is_quiz: boolean,
-  is_public: boolean,
-  quiz_content?: string,
-  quiz_answer?: string,
-  quiz_is_solved?: boolean,
-  image_url?: string,
+  message_id: number;
+  user_id: number;
+  category: string;
+  content: string;
+  author: string;
+  is_opened: boolean;
+  is_pulled: boolean;
+  pulled_at: string;
+  image_uuid?: string;
+  background_color_code: string;
+  is_quiz: boolean;
+  is_public: boolean;
+  quiz_content?: string;
+  quiz_answer?: string;
+  quiz_is_solved?: boolean;
+  image_url?: string;
 }
 
 // data sample
@@ -91,94 +92,98 @@ const MessageList = () => {
   const parseDate = (data: string): string => {
     // input: <string> 2023-07-09T16:34:30.388
     // output: <string> 7월 9일
-  
+
     var positionT: number = data.indexOf("T");
-    var extractedDate: string = data.slice(0,positionT);
-  
-    var monthAndDay:string = extractedDate.slice((extractedDate.indexOf("-")+1));
-    var positionSlice: number= monthAndDay.indexOf("-");
-  
-    var month: number = parseInt(monthAndDay.slice(0,positionSlice));
-    var day: number = parseInt(monthAndDay.slice(positionSlice+1));
-  
+    var extractedDate: string = data.slice(0, positionT);
+
+    var monthAndDay: string = extractedDate.slice(
+      extractedDate.indexOf("-") + 1
+    );
+    var positionSlice: number = monthAndDay.indexOf("-");
+
+    var month: number = parseInt(monthAndDay.slice(0, positionSlice));
+    var day: number = parseInt(monthAndDay.slice(positionSlice + 1));
+
     const returnValue = month + "월 " + day + "일";
-  
+
     return returnValue;
-  }
+  };
 
   useEffect(() => {
-    const res= axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/pulled`)
-              .then((response) => {
-                const axiosData: IAxiosMessageData = response.data;
-                SetAxiosMessage(axiosData);
-                console.log(axiosData);
-                // check whether status is 200
-                if (axiosData.status === 200) {
-                  // while axios message data is not 0
-                  if (axiosData.data?.length) {
-                    // save number
-                    console.log(axiosData.data);
-                    SetCountMessage(axiosData.data?.length);
+    const res = axios
+      .get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/pulled`)
+      .then((response) => {
+        const axiosData: IAxiosMessageData = response.data;
+        SetAxiosMessage(axiosData);
+        console.log(axiosData);
+        // check whether status is 200
+        if (axiosData.status === 200) {
+          // while axios message data is not 0
+          if (axiosData.data?.length) {
+            // save number
+            console.log(axiosData.data);
+            SetCountMessage(axiosData.data?.length);
 
-                    // set first value
-                    var Date: string = parseDate(axiosData.data[0].pulled_at);
-                    var Beans: IBean[] = [];
-                    var BeanObject: IBean = {
-                      messageId: axiosData.data[0].message_id,
-                      author: axiosData.data[0].author,
-                      isOpened: axiosData.data[0].is_opened
-                    };
-                    Beans.push(BeanObject);
+            // set first value
+            var Date: string = parseDate(axiosData.data[0].pulled_at);
+            var Beans: IBean[] = [];
+            var BeanObject: IBean = {
+              messageId: axiosData.data[0].message_id,
+              author: axiosData.data[0].author,
+              isOpened: axiosData.data[0].is_opened,
+            };
+            Beans.push(BeanObject);
 
-                    var willSetToFilteredIMessages: IMessages[] = [];
-                    for (let i=1; i<axiosData.data?.length ; i++) {
-                      // parse date
-                      const currentDate = parseDate(axiosData.data[i].pulled_at);
+            var willSetToFilteredIMessages: IMessages[] = [];
+            for (let i = 1; i < axiosData.data?.length; i++) {
+              // parse date
+              const currentDate = parseDate(axiosData.data[i].pulled_at);
 
-                      // check date is eqaul or not
-                      // if date is equal, push data to beans
-                      if (currentDate === Date) {
-                        BeanObject.messageId = axiosData.data[i].message_id;
-                        BeanObject.author = axiosData.data[i].author;
-                        BeanObject.isOpened = axiosData.data[i].is_opened;
-                        Beans.push(BeanObject);
-                        console.log(BeanObject);
-                      } 
-                      // if date is not equal, push beans to filteredToIMessage, remove beans
-                      else {
-                        // push beans to filteredToIMessage
-                        var IMessage: IMessages = { 
-                          date: Date,
-                          beans: Beans,
-                        };
-                        willSetToFilteredIMessages.push(IMessage);
+              // check date is eqaul or not
+              // if date is equal, push data to beans
+              if (currentDate === Date) {
+                BeanObject.messageId = axiosData.data[i].message_id;
+                BeanObject.author = axiosData.data[i].author;
+                BeanObject.isOpened = axiosData.data[i].is_opened;
+                Beans.push(BeanObject);
+                console.log(BeanObject);
+              }
+              // if date is not equal, push beans to filteredToIMessage, remove beans
+              else {
+                // push beans to filteredToIMessage
+                var IMessage: IMessages = {
+                  date: Date,
+                  beans: Beans,
+                };
+                willSetToFilteredIMessages.push(IMessage);
 
-                        // remove beans update date
-                        Date = currentDate;
-                        Beans = [];
-                      }
+                // remove beans update date
+                Date = currentDate;
+                Beans = [];
+              }
 
-                      // check if i is last value to push it to filteredToIMessage
-                      if (i === (axiosData.data?.length-1)) {
-                        var LastIMessage: IMessages = { 
-                          date: Date,
-                          beans: Beans,
-                        };
-                        willSetToFilteredIMessages.push(LastIMessage);
-                      }
-                    }
-                    console.log(willSetToFilteredIMessages);
-                    SetFilteredToIMessage(willSetToFilteredIMessages);
-                  }
-                } else {
-                  console.log("error");
-                  return;
-                }
-              }).catch((error) => {
-                if (axios.isAxiosError(error)) {
-                  console.log(error);
-                }
-              });
+              // check if i is last value to push it to filteredToIMessage
+              if (i === axiosData.data?.length - 1) {
+                var LastIMessage: IMessages = {
+                  date: Date,
+                  beans: Beans,
+                };
+                willSetToFilteredIMessages.push(LastIMessage);
+              }
+            }
+            console.log(willSetToFilteredIMessages);
+            SetFilteredToIMessage(willSetToFilteredIMessages);
+          }
+        } else {
+          console.log("error");
+          return;
+        }
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error)) {
+          console.log(error);
+        }
+      });
   }, []);
 
   // navigate to message feed
@@ -197,27 +202,29 @@ const MessageList = () => {
             <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
           </MessageListHeader>
           <MessageDataContainer>
-            {filteredToIMessage &&
-              filteredToIMessage.map((messageData: IMessages) => {
-                return (
-                  <MessageListHoder key={messageData.date}>
-                    <MessageListDate>{messageData.date}</MessageListDate>
-                    <MessageListContent>
-                      {messageData.beans &&
-                        messageData.beans.map((bean: IBean) => {
-                          return (
-                            <Message
-                              key={bean.messageId}
-                              id={bean.messageId}
-                              isOpen={bean.isOpened}
-                              nickName={bean.author}
-                            />
-                          );
-                        })}
-                    </MessageListContent>
-                  </MessageListHoder>
-                );
-              })}
+            <MessageScrollContainer>
+              {filteredToIMessage &&
+                filteredToIMessage.map((messageData: IMessages) => {
+                  return (
+                    <MessageListHoder key={messageData.date}>
+                      <MessageListDate>{messageData.date}</MessageListDate>
+                      <MessageListContent>
+                        {messageData.beans &&
+                          messageData.beans.map((bean: IBean) => {
+                            return (
+                              <Message
+                                key={bean.messageId}
+                                id={bean.messageId}
+                                isOpen={bean.isOpened}
+                                nickName={bean.author}
+                              />
+                            );
+                          })}
+                      </MessageListContent>
+                    </MessageListHoder>
+                  );
+                })}
+            </MessageScrollContainer>
           </MessageDataContainer>
         </MessageListContainer>
       ) : (

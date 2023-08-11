@@ -86,13 +86,9 @@ export const DateContainer = styled.div<{ brightFrame: string }>`
 `;
 
 export const WebGreenBtnWrap = styled.div`
-  width: 201px;
-  max-width: 1440px;
-  position: absolute;
-  bottom: 10px;
-  right: 16px;
-  margin: 0 auto;
-  @media (min-width: 1440px) {
-    right: calc((100vw - 1280px) / 2);
-  }
+  width: 100%;
+  max-width: 1600px;
+  padding-right: 50px;
+  display: flex;
+  justify-content: flex-end;
 `;

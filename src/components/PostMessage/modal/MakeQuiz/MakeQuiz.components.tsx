@@ -46,6 +46,7 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
       QuizContent: quizContent,
       QuizAnswer: quizAnswer,
     });
+    handleModalClose();
     navigate("/message/post");
   };
   return (

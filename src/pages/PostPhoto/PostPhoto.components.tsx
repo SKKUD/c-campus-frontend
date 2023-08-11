@@ -177,7 +177,7 @@ const PostPhoto = () => {
             setCurrent={setCurrent}
             done={done}
           />
-          <WebGreenBtnWrap>
+          <WebGreenBtnWrap done={done === "done"}>
             {done === "done" ? (
               IsWriting ? (
                 <>

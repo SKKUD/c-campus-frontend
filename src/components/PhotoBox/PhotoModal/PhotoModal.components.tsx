@@ -2,11 +2,14 @@ import * as React from "react";
 import Modal from "@mui/material/Modal";
 import {
   CloseModalBtn,
+  PhotoDeleteBtn,
+  PhotoModalButtonGroup,
   PhotoModalContainer,
   PhotoModalIMG,
   PhotoShareBtn,
 } from "./PhotoModal.styles";
 import closeIcon from "../../../assets/images/close_icon.png";
+import deleteIcon from "../../../assets/images/delete_icon.png";
 
 interface PhotoModalProps {
   open: boolean;
@@ -45,9 +48,12 @@ function ChildModal() {
 
   return (
     <>
-      <PhotoShareBtn variant="contained" onClick={handleOpen}>
-        공유하기
-      </PhotoShareBtn>
+      <PhotoModalButtonGroup>
+        <PhotoDeleteBtn src={deleteIcon} />
+        <PhotoShareBtn variant="contained" onClick={handleOpen}>
+          공유하기
+        </PhotoShareBtn>
+      </PhotoModalButtonGroup>
       <Modal
         open={open}
         onClose={handleClose}

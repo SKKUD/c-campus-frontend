@@ -1,5 +1,6 @@
 import * as React from "react";
 import Modal from "@mui/material/Modal";
+import ModalLayout from "../../PostMessage/ModalLayout/ModalLayout.components";
 import {
   CloseModalBtn,
   PhotoDeleteBtn,
@@ -7,9 +8,11 @@ import {
   PhotoModalContainer,
   PhotoModalIMG,
   PhotoShareBtn,
+  PhotoDeleteConfirmBtn,
 } from "./PhotoModal.styles";
 import closeIcon from "../../../assets/images/close_icon.png";
 import deleteIcon from "../../../assets/images/delete_icon.png";
+import { usePhotoDeleteApi } from "../../../hooks/PhotoAxios";
 
 interface PhotoModalProps {
   open: boolean;
@@ -30,14 +33,18 @@ export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
             <img src={closeIcon} alt="close" />
           </CloseModalBtn>
           <PhotoModalIMG src={imgSrc} />
-          <ChildModal />
+          <ChildModal img={imgSrc} />
         </PhotoModalContainer>
       </Modal>
     </div>
   );
 }
 
-function ChildModal() {
+interface ChildModalProps {
+  img: string;
+}
+
+function ChildModal({ img }: ChildModalProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -46,13 +53,19 @@ function ChildModal() {
     setOpen(false);
   };
 
+  const imgFileParser = img.split("/");
+  const [deleteFourcutPhoto] = usePhotoDeleteApi();
+  const handleDelete = async () => {
+    await deleteFourcutPhoto(imgFileParser[3]);
+    handleClose();
+    window.location.reload();
+  };
+
   return (
     <>
       <PhotoModalButtonGroup>
-        <PhotoDeleteBtn src={deleteIcon} />
-        <PhotoShareBtn variant="contained" onClick={handleOpen}>
-          공유하기
-        </PhotoShareBtn>
+        <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
+        <PhotoShareBtn variant="contained">공유하기</PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}
@@ -60,10 +73,12 @@ function ChildModal() {
         aria-labelledby="child-modal-title"
         aria-describedby="child-modal-description"
       >
-        <PhotoModalContainer>
-          공유하기 내용
-          <PhotoShareBtn onClick={handleClose}>Close</PhotoShareBtn>
-        </PhotoModalContainer>
+        <ModalLayout modalOpen={open} handleModalClose={handleClose}>
+          선택하신 콩캠네컷을 지울까요?
+          <PhotoDeleteConfirmBtn onClick={handleDelete}>
+            삭제
+          </PhotoDeleteConfirmBtn>
+        </ModalLayout>
       </Modal>
     </>
   );

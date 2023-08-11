@@ -21,6 +21,8 @@ import {
   PostMessageFieldContainer,
   PostMessageWebFourcutContaner,
   ButtonWrapper,
+  PostMessageContentFrameContainer,
+  TakePicIcon,
 } from "./PostMessage.styles";
 
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
@@ -28,6 +30,7 @@ import recycleIcon from "../../assets/images/randomUpdate.svg";
 import colorCheck from "../../assets/images/colorCheck.svg";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 import lockedFrameIcon from "../../assets/images/4cut_lock.png";
+import takepicIcon from "../../assets/images/takepic_mobile_icon.png";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import MakeQuiz from "../../components/PostMessage/modal/MakeQuiz/MakeQuiz.components";
 import SendMessage from "../../components/PostMessage/modal/SendMessage/SendMessage.components";
@@ -261,22 +264,25 @@ const PostMessage = () => {
         {/* content */}
         <PostMessageContentContainer>
           {!match1024 && (
-            <PostMessageContentFrame
-              src={
-                Quiz.QuizGiven
-                  ? lockedFrameIcon
-                  : Photo.PhotoTaken && Photo.PhotoURL !== ""
-                  ? Photo.PhotoURL
-                  : defaultFrameIcon
-              }
-              onClick={
-                Quiz.QuizGiven
-                  ? ChangeQuizHandler
-                  : Photo.PhotoTaken && Photo.PhotoURL !== ""
-                  ? ChangeQuizHandler
-                  : PostPhotoHandler
-              }
-            />
+            <PostMessageContentFrameContainer>
+              <PostMessageContentFrame
+                src={
+                  Quiz.QuizGiven
+                    ? lockedFrameIcon
+                    : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                    ? Photo.PhotoURL
+                    : defaultFrameIcon
+                }
+                onClick={
+                  Quiz.QuizGiven
+                    ? ChangeQuizHandler
+                    : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                    ? ChangeQuizHandler
+                    : PostPhotoHandler
+                }
+              />
+              {!Photo.PhotoTaken && <TakePicIcon src={takepicIcon} />}
+            </PostMessageContentFrameContainer>
           )}
           <PostMessageContentText
             value={contentText}

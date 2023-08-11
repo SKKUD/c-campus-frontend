@@ -86,10 +86,13 @@ export const DateContainer = styled.div<{ brightFrame: string }>`
   z-index: 999;
 `;
 
-export const WebGreenBtnWrap = styled.div`
+interface WebGreenBtnWrapProps {
+  done: boolean;
+}
+export const WebGreenBtnWrap = styled.div<WebGreenBtnWrapProps>`
   width: 100%;
   max-width: 1600px;
-  padding-right: 50px;
+  padding-right: ${(props) => (props.done ? "0px" : "50px")};
   display: flex;
   justify-content: flex-end;
 `;

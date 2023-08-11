@@ -192,15 +192,31 @@ export const PostMessageContentTo = styled.div`
   }
 `;
 
-export const PostMessageContentFrame = styled.img`
+export const PostMessageContentFrameContainer = styled.div`
   width: 99.591px;
   height: 254px;
   margin: 10px;
+  position: relative;
+`;
+
+export const PostMessageContentFrame = styled.img`
+  width: 100%;
+  height: 254px;
 
   @media (min-width: 1024px) {
     width: 205.814px;
     height: 525px;
   }
+`;
+
+export const TakePicIcon = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 66px;
+  height: 66px;
 `;
 
 export const PostMessageContentText = styled.textarea`

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const userId = 1;
+const AUTHORIZATION =
+  "eyJraWQiOiJrZXkxIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiIxIiwibmlja25hbWUiOiJiYiIsImlhdCI6MTY0MzQ2MTQyNSwiZXhwIjoxNjUyMTAxNDI1fQ.1NmXe_fmyHMwWqmr1uylgn-fvmLgEjZI27bj4hOjN3VchOoZ9D4OutvxjgZLRbLzjjEuhLpFoY9TeIMj44Hqgw";
 
 export const usePhotoGetApi = () => {
   const [photo, setPhoto] = useState([]);
@@ -9,7 +11,12 @@ export const usePhotoGetApi = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_SERVER + `/users/${userId}/photos`
+        process.env.REACT_APP_BACKEND_SERVER + `/users/${userId}/photos`,
+        {
+          headers: {
+            AUTHORIZATION: AUTHORIZATION,
+          },
+        }
       );
       setPhoto(res.data.data);
     };

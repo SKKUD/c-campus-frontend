@@ -31,7 +31,7 @@ import { IsWritingMessage, PhotoState } from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
-
+import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 
 const PostPhoto = () => {
   const IsWriting = useRecoilValue(IsWritingMessage);
@@ -48,7 +48,7 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
-  
+
   const handleDelete = (num: number) => {
     if (window.confirm("선택한 사진을 지울까요?")) {
       dispatchArr[num - 1]("");
@@ -63,6 +63,7 @@ const PostPhoto = () => {
     }
   }, [current]);
 
+  const [postFourcutPhoto] = usePhotoPostApi();
   const handleSubmit = async () => {
     if (
       window.confirm(
@@ -72,6 +73,8 @@ const PostPhoto = () => {
       )
     ) {
       await ExportElementAsPNG();
+      await postFourcutPhoto();
+
       navigate("/photo");
     }
   };

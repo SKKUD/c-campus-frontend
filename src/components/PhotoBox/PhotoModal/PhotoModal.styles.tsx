@@ -41,10 +41,24 @@ export const PhotoDeleteBtn = styled.img`
 export const PhotoShareBtn = styled(Button)`
   width: 180px;
   height: 48px;
-  color: #164300;
   background-color: #fff;
   border-radius: 10px;
   color: #164300;
+  font-family: Cafe24Ssurround;
+  font-size: 22px;
+  font-weight: 700;
+  :hover {
+    background-color: #fff;
+  }
+`;
+
+export const PhotoDeleteConfirmBtn = styled(Button)`
+  width: 180px;
+  height: 48px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #972424;
   font-family: Cafe24Ssurround;
   font-size: 22px;
   font-weight: 700;

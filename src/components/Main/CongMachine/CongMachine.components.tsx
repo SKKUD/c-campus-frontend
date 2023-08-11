@@ -1,18 +1,10 @@
 import { useEffect, useState,FC } from "react";
 import { useNavigate } from "react-router";
 import { useMediaQuery } from "@mui/material";
-import cong0_top_img from "../../../assets/images/cong0_top.png";
-import cong1_top_img from "../../../assets/images/cong1_top.png";
-import cong2_top_img from "../../../assets/images/cong2_top.png";
-import cong3_top_img from "../../../assets/images/cong3_top.png";
-import cong4_top_img from "../../../assets/images/cong4_top.png";
-import cong5_top_img from "../../../assets/images/cong5_top.png";
-import cong10_top_img from "../../../assets/images/cong10_top.png";
-import cong15_top_img from "../../../assets/images/cong15_top.png";
-import cong30_top_img from "../../../assets/images/cong30_top.png";
-import cong_bot_empty_img from "../../../assets/images/cong_bot_empty.png";
-import cong_bot_full_img from "../../../assets/images/cong_bot_full.png";
+
 import cong_bot_come_out_gif from "../../../assets/animations/cong_bot_af.gif";
+import cong_bot_empty_gif from "../../../assets/animations/cong_bot_bf.gif";
+import cong0_top_gif from "../../../assets/animations/cong0_top.gif";
 import cong1_top_gif from "../../../assets/animations/cong1_top.gif";
 import cong2_top_gif from "../../../assets/animations/cong2_top.gif";
 import cong3_top_gif from "../../../assets/animations/cong3_top.gif";
@@ -25,11 +17,15 @@ import cong15_top_gif from "../../../assets/animations/cong15_top_bf.gif";
 import cong15_top_come_out_gif from "../../../assets/animations/cong15_top_af.gif";
 import cong30_top_gif from "../../../assets/animations/cong30_top_bf.gif";
 import cong30_top_come_out_gif from "../../../assets/animations/cong30_top_af.gif";
-import { CongMachineContainer, MachineImage } from "./CongMachine.styles";
+import {
+  CongMachineContainer,
+  CongMachineContentContainer,
+  MachineImage,
+} from "./CongMachine.styles";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
-
+import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
 interface CongMachineProps {
   slide?: number;
@@ -38,8 +34,8 @@ interface CongMachineProps {
 const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
-  const [topimgsrc, setTopImg] = useState(cong0_top_img);
-  const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_img);
+  const [topimgsrc, setTopImg] = useState(cong1_top_gif);
+  const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const messagenum: number = 5;
   useEffect(() => {
     if (messagenum === 1) {
@@ -63,19 +59,21 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
   return (
     <CongMachineContainer>
-      <MachineImage src={topimgsrc} />
-      <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
-      {match1024 ? (
-        <ButtonGroupContainer>
-          <GreenBtn
-            content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
-            disabled={messagenum < 5 ? true : false}
-            onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
-          />
-        </ButtonGroupContainer>
-      ) : (
-        <ButtonGroup slide={slide} />
-      )}
+      <CongMachineContentContainer>
+        <MachineImage src={topimgsrc} />
+        <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
+        {match1024 ? (
+          <ButtonGroupContainer>
+            <GreenBtn
+              content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
+              disabled={messagenum < 5 ? true : false}
+              onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
+            />
+          </ButtonGroupContainer>
+        ) : (
+          <ButtonGroup slide={slide} />
+        )}
+      </CongMachineContentContainer>
     </CongMachineContainer>
   );
 };

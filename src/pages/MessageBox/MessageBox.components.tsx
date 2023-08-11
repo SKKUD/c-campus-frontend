@@ -40,7 +40,7 @@ interface IAxiosMessageData {
 interface IAxiosData {
   message_id: number,
   user_id: number,
-  catergory: string,
+  category: string,
   content: string,
   author: string,
   is_opened: boolean,
@@ -117,6 +117,7 @@ const MessageList = () => {
                   // while axios message data is not 0
                   if (axiosData.data?.length) {
                     // save number
+                    console.log(axiosData.data);
                     SetCountMessage(axiosData.data?.length);
 
                     // set first value
@@ -166,6 +167,7 @@ const MessageList = () => {
                         willSetToFilteredIMessages.push(LastIMessage);
                       }
                     }
+                    console.log(willSetToFilteredIMessages);
                     SetFilteredToIMessage(willSetToFilteredIMessages);
                   }
                 } else {

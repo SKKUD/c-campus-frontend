@@ -24,7 +24,7 @@ interface IAxiosMessageData {
 interface IAxiosData {
   message_id: number,
   user_id: number,
-  catergory: string,
+  category: string,
   content: string,
   author: string,
   is_opened: boolean,
@@ -77,7 +77,7 @@ const MessageFeed = () => {
                 filteredData?.map((MessageData: IAxiosData) => {
                   return (
                     <OpenMessageContent key={MessageData.message_id} color={MessageData.background_color_code}>
-                      <OpenMessageContentTitle>{MessageData.catergory}</OpenMessageContentTitle>
+                      <OpenMessageContentTitle>{MessageData.category}</OpenMessageContentTitle>
                       <OpenMessageContentMainText>{MessageData.content}</OpenMessageContentMainText>
                       <OpenMessageContentSender>
                         <p className="SenderFrom">From.</p> {MessageData.author}

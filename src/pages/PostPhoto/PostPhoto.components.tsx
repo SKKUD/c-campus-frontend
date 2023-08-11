@@ -31,6 +31,8 @@ import { IsWritingMessage, PhotoState } from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
+
+
 const PostPhoto = () => {
   const IsWriting = useRecoilValue(IsWritingMessage);
   const setPhotoTaken = useSetRecoilState(PhotoState);
@@ -46,6 +48,7 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
+  
   const handleDelete = (num: number) => {
     if (window.confirm("선택한 사진을 지울까요?")) {
       dispatchArr[num - 1]("");
@@ -63,7 +66,9 @@ const PostPhoto = () => {
   const handleSubmit = async () => {
     if (
       window.confirm(
-        "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+        match1024
+          ? "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+          : "사진을 공유하시겠습니까?"
       )
     ) {
       await ExportElementAsPNG();

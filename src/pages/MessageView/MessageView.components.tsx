@@ -118,7 +118,7 @@ const MessageView = () => {
     <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
       { match1024 && (
         <MessageViewWebFourcutContainer>
-          <MessageViewContentFrame src={defaultFrameIcon}/>
+          <MessageViewContentFrame src={axiosMessage?.image_url ? defaultFrameIcon : (axiosMessage?.image_url)}/>
         </MessageViewWebFourcutContainer>
       )}
       <MessageViewMobileContainer>

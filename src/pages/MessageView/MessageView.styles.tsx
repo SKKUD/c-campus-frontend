@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+// mobile
+
+export const MessageViewMobileContainer = styled.div`
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
+`;
+
 export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
   background-color: ${props => props.backgroundColor};
   width: 100%;
@@ -8,6 +16,14 @@ export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
   overflow:scroll;
   margin: auto;
   padding-top: 60px;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1024px;
+    padding-top: 80px;
+  }
 `;
 
 export const MessageViewFieldContainer = styled.div`
@@ -18,6 +34,11 @@ export const MessageViewFieldContainer = styled.div`
   margin: 60px auto;
   align-items: center;
   font-family: YeongdeokSea;
+
+  @media (min-width: 1024px) {
+    max-width: 450px;
+    margin: 0;
+  }
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
@@ -26,6 +47,13 @@ export const MessageViewPublicToggleContainer = styled.div`
   display: flex;
   justify-content: right;
   margin-right: 10px;
+
+  @media (min-width: 1024px) {
+    width: 100%;
+    max-width: 450px;
+    margin: 0;
+    margin-right: 0px;
+  }
 `;
 
 export const MessageViewTitle = styled.div`
@@ -49,9 +77,15 @@ export const MessageViewTitle = styled.div`
   line-height: normal;
   letter-spacing: -0.4px;
   word-break: keep-all;
+
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
-export const MessageViewContent = styled.div``;
+export const MessageViewContent = styled.div`
+
+`;
 
 export const MessageViewContentReceiver = styled.div`
   margin: 0px;
@@ -83,6 +117,9 @@ export const MessageViewContentReceiver = styled.div`
     line-height: normal;
     letter-spacing: -0.48px;
   }
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
 export const MessageViewContentMainContainer = styled.div`
@@ -99,9 +136,28 @@ export const MessageViewContentMainContainer = styled.div`
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
   background: rgba(255, 255, 255, 0.7);
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
-export const MessageViewFourcutFrameContainer = styled.div``;
+export const MessageViewFourcutFrameContainer = styled.div`
+  @media (min-width: 1024px) {
+    
+  }
+`;
+
+export const MessageViewContentFrame = styled.img`
+  width: 100%;
+  height: 254px;
+
+  @media (min-width: 1024px) {
+    width: 205.814px;
+    height: 525px;
+    margin-top: 85px;
+    margin-right: 20px;
+  }
+`;
 
 export const MessageViewContentMainText = styled.p`
   text-align: left;
@@ -115,6 +171,9 @@ export const MessageViewContentMainText = styled.p`
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.32px;
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
 export const MessageViewContentSender = styled.div`
@@ -147,10 +206,20 @@ export const MessageViewContentSender = styled.div`
     line-height: normal;
     letter-spacing: -0.48px;
   }
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
 export const GreenBtnContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+    justify-content: right;
+  }
 `
+
+// web
+export const MessageViewWebFourcutContainer = styled.div``;

@@ -9,6 +9,9 @@ import {
   MessageViewContentReceiver,
   MessageViewContentMainContainer,
   MessageViewFourcutFrameContainer,
+  MessageViewContentFrame,
+  MessageViewMobileContainer,
+  MessageViewWebFourcutContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
   GreenBtnContainer
@@ -19,10 +22,12 @@ import FourcutFrame from "../../components/FourcutFrame/FourcutFrame.components"
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import QuizBox from "../../components/QuizBox/QuizBox.components";
 import PublicToggle from "../../components/PublicToggle/PublicToggle.components";
+import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 
 // import mui for modal
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { useMediaQuery } from "@mui/material";
 
 // 
 import axios from "axios";
@@ -55,6 +60,8 @@ interface IData {
 }
 
 const MessageView = () => {
+  const match1024 = useMediaQuery("(min-width:1024px)");
+
   // axios state
   const [axiosMessage, SetAxiosMessage] = useState<IData>();
 
@@ -109,64 +116,68 @@ const MessageView = () => {
   }, []); 
   return (
     <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
-      {/* Public Toggle */}
-      <MessageViewPublicToggleContainer>
-        <PublicToggle />
-      </MessageViewPublicToggleContainer>
+      { match1024 && (
+        <MessageViewWebFourcutContainer>
+          <MessageViewContentFrame src={defaultFrameIcon}/>
+        </MessageViewWebFourcutContainer>
+      )}
+      <MessageViewMobileContainer>
+        {/* Public Toggle */}
+        <MessageViewPublicToggleContainer>
+          <PublicToggle />
+        </MessageViewPublicToggleContainer>
 
-      {/* Title */}
-      <MessageViewTitle className="MessageViewCenter">{axiosMessage?.category}</MessageViewTitle>
+        {/* Title */}
+        <MessageViewTitle className="MessageViewCenter">{axiosMessage?.category}</MessageViewTitle>
 
-      {/* Content */}
-      <MessageViewContent >
-        {/* Receiver */}
-        <MessageViewContentReceiver>
-          <p className="MessageViewReceiverTo">To. </p>
-          {/* author말고 로그인 정보에서 이름 가져오기 */}
-          <p className="MessageViewReceiverMessageData">{axiosMessage?.author}</p>
-        </MessageViewContentReceiver>
+        {/* Content */}
+        <MessageViewContent >
+          {/* Receiver */}
+          <MessageViewContentReceiver>
+            <p className="MessageViewReceiverTo">To. </p>
+            {/* author말고 로그인 정보에서 이름 가져오기 */}
+            <p className="MessageViewReceiverMessageData">{axiosMessage?.author}</p>
+          </MessageViewContentReceiver>
 
-        {/* Main Content */}
-        <MessageViewContentMainContainer className="MessageViewCenter">
-          {/* <MessageViewFourcutFrameContainer onClick={handleOpen}>
-            {MessageData.isPicture ? (
-              <FourcutFrame
-                firstPicture={MessageData.pictureUrl1}
-                secondPicture={MessageData.pictureUrl2}
-                thirdPicture={MessageData.pictureUrl3}
-                fourthPicture={MessageData.pictureUrl4}
-              />
-            ) : (
-              <></>
-            )}
-          </MessageViewFourcutFrameContainer> */}
-          <Modal open={open} onClose={handleClose}>
-            <Box>
-              <QuizBox
-                Quiz="우리가 처음 만난 곳은?"
-                Answer="수선관"
-                handleClose={handleClose}
-              />
-            </Box>
-          </Modal>
-          <MessageViewContentMainText>
-            {axiosMessage?.content}
-          </MessageViewContentMainText>
-        </MessageViewContentMainContainer>
+          {/* Main Content */}
+          <MessageViewContentMainContainer className="MessageViewCenter">
+            {
+              !match1024 ? (
+                <MessageViewFourcutFrameContainer onClick={handleOpen}>
+                  <MessageViewContentFrame src={defaultFrameIcon}/>
+                </MessageViewFourcutFrameContainer>
+              ) : (
+                <></>
+              )
+            }
+            <Modal open={open} onClose={handleClose}>
+              <Box>
+                <QuizBox
+                  Quiz="우리가 처음 만난 곳은?"
+                  Answer="수선관"
+                  handleClose={handleClose}
+                />
+              </Box>
+            </Modal>
+            <MessageViewContentMainText>
+              {axiosMessage?.content}
+            </MessageViewContentMainText>
+          </MessageViewContentMainContainer>
+          
+          {/* Sender */}
+          <MessageViewContentSender>
+            <p className="MessageViewSenderFrom">From. </p>
+            <p className="MessageViewSenderMessageData">{axiosMessage?.author}</p>
+          </MessageViewContentSender>
+        </MessageViewContent>
         
-        {/* Sender */}
-        <MessageViewContentSender>
-          <p className="MessageViewSenderFrom">From. </p>
-          <p className="MessageViewSenderMessageData">{axiosMessage?.author}</p>
-        </MessageViewContentSender>
-      </MessageViewContent>
-      
-      {/* Sharing Button */}
-      <GreenBtnContainer className="MessageViewCenter">
-        <GreenBtn content="공유하기"/>
-      </GreenBtnContainer>
+        {/* Sharing Button */}
+        <GreenBtnContainer className="MessageViewCenter">
+          <GreenBtn content="공유하기"/>
+        </GreenBtnContainer>
+      </MessageViewMobileContainer>
     </MessageViewContainer>
-  );
+  )
 };
 
 export default MessageView;

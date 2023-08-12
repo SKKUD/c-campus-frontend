@@ -8,12 +8,12 @@ export const MessageViewMobileContainer = styled.div`
   }
 `;
 
-export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
-  background-color: ${props => props.backgroundColor};
+export const MessageViewContainer = styled.div<{ backgroundColor: string }>`
+  background-color: ${(props) => props.backgroundColor};
   width: 100%;
   max-width: 375px;
-  height:100vh;
-  overflow:scroll;
+
+  overflow: scroll;
   margin: auto;
   padding-top: 60px;
 
@@ -83,9 +83,7 @@ export const MessageViewTitle = styled.div`
   }
 `;
 
-export const MessageViewContent = styled.div`
-
-`;
+export const MessageViewContent = styled.div``;
 
 export const MessageViewContentReceiver = styled.div`
   margin: 0px;
@@ -143,7 +141,6 @@ export const MessageViewContentMainContainer = styled.div`
 
 export const MessageViewFourcutFrameContainer = styled.div`
   @media (min-width: 1024px) {
-    
   }
 `;
 
@@ -173,6 +170,8 @@ export const MessageViewContentMainText = styled.p`
   letter-spacing: -0.32px;
   @media (min-width: 1024px) {
     max-width: 450px;
+    height: 250px;
+    overflow: scroll;
   }
 `;
 
@@ -218,8 +217,9 @@ export const GreenBtnContainer = styled.div`
   @media (min-width: 1024px) {
     max-width: 1024px;
     justify-content: right;
+    margin-top: 20px;
   }
-`
+`;
 
 // web
 export const MessageViewWebFourcutContainer = styled.div``;

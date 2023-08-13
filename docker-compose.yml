@@ -1,0 +1,13 @@
+version: "3"
+services:
+  myapp:
+    container_name: cc
+    image: wndyd0131/c-campus
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://cc-db.clmhc3rptgzb.ap-northeast-2.rds.amazonaws.com:3306/cc?useSSL=true&useUnicode=true&serverTimezone=Asia/Seoul&rewriteBatchedStatements=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=_PQwAQ.hDCnNHWd8X-YW
+    ports:
+      - 8080:8080
+    tty: true

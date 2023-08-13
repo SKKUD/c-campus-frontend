@@ -1,11 +1,11 @@
 import { ButtonGroupContainer } from "./ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import WhiteBtn from "../../common/Buttons/WhiteBtn.components";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { IsLoginRecoil } from "../../../recoil/recoil";
+import { IsLoginRecoil, UserAuth } from "../../../recoil/recoil";
 import { useRecoilState } from "recoil";
 
 interface ButtonGroupProps {
@@ -16,6 +16,24 @@ interface ButtonGroupProps {
 const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
   const navigate = useNavigate();
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+
+  const [currentID, SetCurrentID] = useState<string>("");
+
+  // extract url id
+  const extractID = () => {
+    // get current url
+    const currentUrl: string = window.location.href;
+    const searchString: string = "/main";
+    
+    // extract until first /
+    var positionSliceMain: number = currentUrl.indexOf(searchString);
+    
+    var extractedID: string = currentUrl.slice(positionSliceMain+searchString.length+1);
+    console.log("extracted " + extractedID);
+    // set it to currentID
+    SetCurrentID(extractedID);
+  };
 
   const pickNotes = () => {
     // 쪽지 뽑는 gif 재생 후
@@ -34,10 +52,14 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
     navigate("/message/post");
   }
 
+  useEffect(() => {
+    extractID();
+  }, []);
+
   return (
     <ButtonGroupContainer>
-      {
-        isLogin ? (
+      {  // 현재 url의 /message/${id} 뽑아와서 비교하는 코드로
+        (isLogin && (userAuth.userID === currentID)) ? (
           <>
             <GreenBtn
               onClick={() => (!slide ? pickNotes() : takePhotos())}

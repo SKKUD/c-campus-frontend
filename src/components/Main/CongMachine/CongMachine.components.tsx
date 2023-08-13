@@ -29,7 +29,7 @@ import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
 // import for recoil
-import { IsLoginRecoil } from "../../../recoil/recoil";
+import { IsLoginRecoil, UserAuth } from "../../../recoil/recoil";
 import { useRecoilState } from "recoil";
 
 interface CongMachineProps {
@@ -43,8 +43,37 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const messagenum: number = 5;
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+
+  const [currentID, SetCurrentID] = useState<string>("");
+
+  // extract url id
+  const extractID = () => {
+    // get current url
+    
+    const currentUrl: string = window.location.href;
+    
+    // check /main
+    const searchString: string = "/main";
+    var extractedID: string = "";
+
+    // extract until first /
+    var positionSliceMain: number = currentUrl.indexOf(searchString);
+    if (positionSliceMain === -1) {
+      const secondSearchString: string = "/message";
+      positionSliceMain = currentUrl.indexOf(secondSearchString);
+      extractedID = currentUrl.slice(positionSliceMain+secondSearchString.length+1);
+    } else {
+      extractedID = currentUrl.slice(positionSliceMain+searchString.length+1);
+    }
+    
+    console.log("extracted " + extractedID);
+    // set it to currentID
+    SetCurrentID(extractedID);
+  };
 
   useEffect(() => {
+    extractID();
     if (messagenum === 1) {
       setTopImg(cong1_top_gif);
     } else if (messagenum === 2) {
@@ -69,7 +98,6 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   };
 
   const handleWriteMessage = () => {
-    console.log("click write")
     // go to message write
     navigate("/message/post");
   };
@@ -83,7 +111,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
         {match1024 ? (
           <ButtonGroupContainer>
             {
-              isLogin ? (
+              (isLogin && (userAuth.userID === currentID)) ? (
                 <GreenBtn
                   content={"쪽지 뽑기"}
                   disabled={messagenum < 5 ? true : false}

@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Popover } from "@mui/material";
 import { PopoverContainer, PopoverInner } from "./HeaderPopover.styles";
 // import for recoil
-import { IsLoginRecoil } from "../../../../recoil/recoil";
+import { IsLoginRecoil, UserAuth } from "../../../../recoil/recoil";
 import { useRecoilState } from "recoil";
 
 // import for redirect
@@ -20,6 +20,7 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
   handleClose,
 }) => {
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+
   const navigate = useNavigate();
 
   const handleLogin = () => {

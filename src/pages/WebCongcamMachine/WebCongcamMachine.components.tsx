@@ -12,11 +12,34 @@ import infoDescImg from "../../assets/images/infoDescImg.png";
 import CongMachine from "../../components/Main/CongMachine/CongMachine.components";
 
 // import for recoil
-import { IsLoginRecoil } from "../../recoil/recoil";
+import { IsLoginRecoil, UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 
 const WebCongcamMachine = () => {
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+
+  const [currentID, SetCurrentID] = useState<string>("");
+
+  // extract url id
+  const extractID = () => {
+    // get current url
+    const currentUrl: string = window.location.href;
+    const searchString: string = "/message";
+    
+    // extract until first /
+    var positionSliceMain: number = currentUrl.indexOf(searchString);
+    
+    var extractedID: string = currentUrl.slice(positionSliceMain+searchString.length+1);
+
+    // set it to currentID
+    SetCurrentID(extractedID);
+  };
+
+  useEffect(() => {
+    extractID();
+  }, [])
 
   return (
     <WebMainPageContainer>
@@ -28,7 +51,7 @@ const WebCongcamMachine = () => {
         </InfoImgConatiner>
         <ContentConatiner>
           {
-            isLogin ? (
+            (isLogin && (userAuth.userID === currentID)) ? (
               <MessageList />
             ) : (
               <MessageFeed />

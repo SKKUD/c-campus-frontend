@@ -8,7 +8,7 @@ export const IsLoginRecoil = atom({
 export const UserAuth = atom({
   key: "User",
   default: {
-    userID: "1",
+    userID: "2",
     nickName: "",
     profile_image: "",
   }

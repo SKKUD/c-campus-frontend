@@ -1,5 +1,10 @@
 import { atom } from "recoil";
 
+export const IsLoginRecoil = atom({
+  key: "IsLogin",
+  default: false,
+});
+
 export const IsWritingMessage = atom({
   key: "IsWriting",
   default: false,

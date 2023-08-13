@@ -27,6 +27,10 @@ import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
+// import for recoil
+import { IsLoginRecoil } from "../../../recoil/recoil";
+import { useRecoilState } from "recoil";
+
 interface CongMachineProps {
   slide?: number;
 }
@@ -37,6 +41,8 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const messagenum: number = 5;
+  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+
   useEffect(() => {
     if (messagenum === 1) {
       setTopImg(cong1_top_gif);
@@ -57,6 +63,15 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     }
   });
 
+  const handleMessage = () => {
+    // message pull
+  };
+
+  const handleWriteMessage = () => {
+    // go to message write
+    navigate("/message/post");
+  };
+
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
@@ -64,11 +79,20 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
         <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
         {match1024 ? (
           <ButtonGroupContainer>
-            <GreenBtn
-              content={true ? "쪽지 뽑기" : "쪽지 쓰기"}
-              disabled={messagenum < 5 ? true : false}
-              onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
-            />
+            {
+              isLogin ? (
+                <GreenBtn
+                  content={"쪽지 뽑기"}
+                  disabled={messagenum < 5 ? true : false}
+                  onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
+                />
+              ) : (
+                <GreenBtn
+                  content={"쪽지 쓰기"}
+                  onClick={() => (isLogin ? "쪽지 뽑기" : navigate("/message/post"))}
+                />
+              )
+            }
           </ButtonGroupContainer>
         ) : (
           <ButtonGroup slide={slide} />

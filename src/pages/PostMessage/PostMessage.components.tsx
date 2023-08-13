@@ -42,6 +42,7 @@ import {
   MessageState,
   PhotoState,
   QuizState,
+  UserState,
 } from "../../recoil/recoil";
 import { useNavigate } from "react-router";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
@@ -61,6 +62,7 @@ const SubjectData = [
 const backgroundColor = ["#D6EABA", "#D9E1CE", "#C1D3A7", "#DAEFAE", "#BFD8BA"];
 
 const PostMessage = () => {
+  const userid = useRecoilValue(UserState);
   const match1024 = useMediaQuery("(min-width:1024px)");
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
@@ -118,7 +120,7 @@ const PostMessage = () => {
   const PostPhotoHandler = () => {
     setIsWriting(true);
     setMessage({ name: nameText, content: contentText });
-    navigate("/photo/post");
+    navigate(`/photo/post/${userid}`);
   };
 
   const ChangeQuizHandler = () => {
@@ -308,7 +310,7 @@ const PostMessage = () => {
           {done ? (
             <WhiteBtn
               content="쪽지함 가기"
-              onClick={() => navigate("/message")}
+              onClick={() => navigate(`/message/${userid}`)}
             />
           ) : (
             <GreenBtn

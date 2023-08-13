@@ -17,6 +17,8 @@ import {
   MessageDataContainer,
 } from "./MessageBox.styles";
 import { count } from "console";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../recoil/recoil";
 
 // Message type
 interface IMessages {
@@ -82,6 +84,7 @@ interface IAxiosData {
 // }
 
 const MessageList = () => {
+  const userid = useRecoilValue(UserState);
   // state for transformed to IMessage
   const [axiosMessage, SetAxiosMessage] = useState<IAxiosMessageData>();
   const [filteredToIMessage, SetFilteredToIMessage] = useState<IMessages[]>([]);
@@ -110,85 +113,67 @@ const MessageList = () => {
   };
 
   useEffect(() => {
-    const res = axios
-      .get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/pulled`)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_SERVER}/users/${userid}/messages/pulled`
+        );
+
         const axiosData: IAxiosMessageData = response.data;
-        SetAxiosMessage(axiosData);
-        console.log(axiosData);
-        // check whether status is 200
-        if (axiosData.status === 200) {
-          // while axios message data is not 0
-          if (axiosData.data?.length) {
-            // save number
-            console.log(axiosData.data);
-            SetCountMessage(axiosData.data?.length);
 
-            // set first value
-            var Date: string = parseDate(axiosData.data[0].pulled_at);
-            var Beans: IBean[] = [];
-            var BeanObject: IBean = {
-              messageId: axiosData.data[0].message_id,
-              author: axiosData.data[0].author,
-              isOpened: axiosData.data[0].is_opened,
-            };
-            Beans.push(BeanObject);
+        if (axiosData.status === 200 && axiosData.data?.length) {
+          const willSetToFilteredIMessages: IMessages[] = [];
+          let currentDate: string | null = null;
+          let beans: IBean[] = [];
 
-            var willSetToFilteredIMessages: IMessages[] = [];
-            for (let i = 1; i < axiosData.data?.length; i++) {
-              // parse date
-              const currentDate = parseDate(axiosData.data[i].pulled_at);
+          for (const message of axiosData.data) {
+            const messageDate = parseDate(message.pulled_at);
 
-              // check date is eqaul or not
-              // if date is equal, push data to beans
-              if (currentDate === Date) {
-                BeanObject.messageId = axiosData.data[i].message_id;
-                BeanObject.author = axiosData.data[i].author;
-                BeanObject.isOpened = axiosData.data[i].is_opened;
-                Beans.push(BeanObject);
-                console.log(BeanObject);
-              }
-              // if date is not equal, push beans to filteredToIMessage, remove beans
-              else {
-                // push beans to filteredToIMessage
-                var IMessage: IMessages = {
-                  date: Date,
-                  beans: Beans,
+            if (messageDate !== currentDate) {
+              if (currentDate !== null) {
+                const IMessage: IMessages = {
+                  date: currentDate,
+                  beans: beans,
                 };
                 willSetToFilteredIMessages.push(IMessage);
-
-                // remove beans update date
-                Date = currentDate;
-                Beans = [];
               }
 
-              // check if i is last value to push it to filteredToIMessage
-              if (i === axiosData.data?.length - 1) {
-                var LastIMessage: IMessages = {
-                  date: Date,
-                  beans: Beans,
-                };
-                willSetToFilteredIMessages.push(LastIMessage);
-              }
+              currentDate = messageDate;
+              beans = [];
             }
-            console.log(willSetToFilteredIMessages);
-            SetFilteredToIMessage(willSetToFilteredIMessages);
+
+            const beanObject: IBean = {
+              messageId: message.message_id,
+              author: message.author,
+              isOpened: message.is_opened,
+            };
+            beans.push(beanObject);
           }
-        } else {
-          console.log("error");
-          return;
+
+          if (currentDate !== null) {
+            const lastIMessage: IMessages = {
+              date: currentDate,
+              beans: beans,
+            };
+            willSetToFilteredIMessages.push(lastIMessage);
+          }
+
+          SetFilteredToIMessage(willSetToFilteredIMessages);
+          SetCountMessage(axiosData.data.length);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         if (axios.isAxiosError(error)) {
           console.log(error);
         }
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   // navigate to message feed
   const RedirectToFeedUrl = () => {
-    navigate(`/message/feed`);
+    navigate(`/message/feed/${userid}`);
   };
 
   return (

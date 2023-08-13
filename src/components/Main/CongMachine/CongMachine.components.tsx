@@ -29,14 +29,15 @@ import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth } from "../../../recoil/recoil";
-import { useRecoilState } from "recoil";
+import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 interface CongMachineProps {
   slide?: number;
 }
 
 const CongMachine: FC<CongMachineProps> = ({ slide }) => {
+  const userid = useRecoilValue(UserState);
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);
@@ -50,9 +51,9 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   // extract url id
   const extractID = () => {
     // get current url
-    
+
     const currentUrl: string = window.location.href;
-    
+
     // check /main
     const searchString: string = "/main";
     var extractedID: string = "";
@@ -62,11 +63,15 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     if (positionSliceMain === -1) {
       const secondSearchString: string = "/message";
       positionSliceMain = currentUrl.indexOf(secondSearchString);
-      extractedID = currentUrl.slice(positionSliceMain+secondSearchString.length+1);
+      extractedID = currentUrl.slice(
+        positionSliceMain + secondSearchString.length + 1
+      );
     } else {
-      extractedID = currentUrl.slice(positionSliceMain+searchString.length+1);
+      extractedID = currentUrl.slice(
+        positionSliceMain + searchString.length + 1
+      );
     }
-    
+
     console.log("extracted " + extractedID);
     // set it to currentID
     SetCurrentID(extractedID);
@@ -99,7 +104,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
   const handleWriteMessage = () => {
     // go to message write
-    navigate("/message/post");
+    navigate(`/message/post/${userid}`);
   };
 
   return (
@@ -110,20 +115,15 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}
         {match1024 ? (
           <ButtonGroupContainer>
-            {
-              (isLogin && (userAuth.userID === currentID)) ? (
-                <GreenBtn
-                  content={"쪽지 뽑기"}
-                  disabled={messagenum < 5 ? true : false}
-                  onClick={handleMessage}
-                />
-              ) : (
-                <GreenBtn
-                  content={"쪽지 쓰기"}
-                  onClick={handleWriteMessage}
-                />
-              )
-            }
+            {isLogin && userAuth.userID === currentID ? (
+              <GreenBtn
+                content={"쪽지 뽑기"}
+                disabled={messagenum < 5 ? true : false}
+                onClick={handleMessage}
+              />
+            ) : (
+              <GreenBtn content={"쪽지 쓰기"} onClick={handleWriteMessage} />
+            )}
           </ButtonGroupContainer>
         ) : (
           <ButtonGroup slide={slide} />

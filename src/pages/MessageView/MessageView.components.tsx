@@ -87,28 +87,31 @@ const MessageView = () => {
     const position: number = currentUrl.search("message/");
 
     // extract messageID
-    const returnID: string = currentUrl.slice(position+8);
+    const returnID: string[] = currentUrl.slice(position + 8).split("/");
 
     return returnID;
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     // extract messageID
-    const messageID: string = extractMessageID();
+    const messageID: string[] = extractMessageID();
 
     // axios get
-    const response = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/${messageID}`)
-                    .then((response) => {
-                      if (response.data.status === 200) {
-                        console.log(response.data.data);
-                        SetAxiosMessage(response.data.data);
-                      }
-                    })
-                    .catch((error) => {
-                      if (axios.isAxiosError(error)) {
-                        console.log(error);
-                      }
-                    });
+    const response = axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`
+      )
+      .then((response) => {
+        if (response.data.status === 200) {
+          console.log(response.data.data);
+          SetAxiosMessage(response.data.data);
+        }
+      })
+      .catch((error) => {
+        if (axios.isAxiosError(error)) {
+          console.log(error);
+        }
+      });
 
     // check response status 200 or 400
 

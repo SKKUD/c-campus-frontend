@@ -10,11 +10,12 @@ import WebHeaderSwitch from "./WebHeaderSwitch/WebHeaderSwitch.components";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth} from "../../../recoil/recoil";
-import { useRecoilState } from "recoil";
+import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
 
 const WebHeader = () => {
+  const userid = useRecoilValue(UserState);
   const navigate = useNavigate();
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
@@ -27,19 +28,21 @@ const WebHeader = () => {
     // get current url
     const currentUrl: string = window.location.href;
     const searchString: string = "/message";
-    
+
     // extract until first /
     var positionSliceMain: number = currentUrl.indexOf(searchString);
-    
-    var extractedID: string = currentUrl.slice(positionSliceMain+searchString.length+1);
-    console.log("extracted "+ extractedID);
+
+    var extractedID: string = currentUrl.slice(
+      positionSliceMain + searchString.length + 1
+    );
+    console.log("extracted " + extractedID);
 
     // set it to currentID
     SetCurrentID(extractedID);
   };
 
   const handleLogoClick = () => {
-    navigate("/message");
+    navigate(`/message/${userid}`);
     window.location.reload();
   };
 

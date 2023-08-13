@@ -5,8 +5,8 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth } from "../../../recoil/recoil";
-import { useRecoilState } from "recoil";
+import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 interface ButtonGroupProps {
   slide?: number;
@@ -14,6 +14,7 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
+  const userid = useRecoilValue(UserState);
   const navigate = useNavigate();
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
@@ -25,11 +26,13 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
     // get current url
     const currentUrl: string = window.location.href;
     const searchString: string = "/main";
-    
+
     // extract until first /
     var positionSliceMain: number = currentUrl.indexOf(searchString);
-    
-    var extractedID: string = currentUrl.slice(positionSliceMain+searchString.length+1);
+
+    var extractedID: string = currentUrl.slice(
+      positionSliceMain + searchString.length + 1
+    );
     console.log("extracted " + extractedID);
     // set it to currentID
     SetCurrentID(extractedID);
@@ -37,29 +40,32 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
 
   const pickNotes = () => {
     // 쪽지 뽑는 gif 재생 후
-    navigate("/message");
+    navigate(`/message/${userid}`);
   };
   const takePhotos = () => {
-    navigate("/photo/post");
+    navigate(`/photo/post/${userid}`);
   };
   const movetoNoteBox = () => {
-    navigate("/message");
+    navigate(`/message/${userid}`);
   };
   const movetoPhotoBox = () => {
-    navigate("/photo");
+    navigate(`/photo/${userid}`);
   };
   const movetoMessagePost = () => {
-    navigate("/message/post");
-  }
-
+    navigate(`/message/post/${userid}`);
+  };
+  const movetoMessageFeed = () => {
+    navigate(`/message/feed/${userid}`);
+  };
   useEffect(() => {
     extractID();
   }, []);
 
   return (
     <ButtonGroupContainer>
-      {  // 현재 url의 /message/${id} 뽑아와서 비교하는 코드로
-        (isLogin && (userAuth.userID === currentID)) ? (
+      {
+        // 현재 url의 /message/${id} 뽑아와서 비교하는 코드로
+        isLogin && userAuth.userID === currentID ? (
           <>
             <GreenBtn
               onClick={() => (!slide ? pickNotes() : takePhotos())}
@@ -74,12 +80,12 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
         ) : (
           <>
             <GreenBtn
-              onClick={() => (!slide ? movetoMessagePost() : takePhotos())}
+              onClick={() => movetoMessagePost()}
               content={"쪽지 쓰기"}
               disabled={messagenum < 5 ? true : false}
             />
             <WhiteBtn
-              onClick={() => (!slide ? movetoNoteBox() : movetoPhotoBox())}
+              onClick={() => movetoMessageFeed()}
               content={"피드보기"}
             />
           </>

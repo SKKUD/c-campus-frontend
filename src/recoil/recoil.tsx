@@ -5,6 +5,15 @@ export const IsLoginRecoil = atom({
   default: false,
 });
 
+export const UserAuth = atom({
+  key: "User",
+  default: {
+    userID: "1",
+    nickName: "",
+    profile_image: "",
+  }
+})
+
 export const IsWritingMessage = atom({
   key: "IsWriting",
   default: false,

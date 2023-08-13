@@ -21,6 +21,7 @@ import {
   CongMachineContainer,
   CongMachineContentContainer,
   MachineImage,
+  CongMachineProfileContainer,
 } from "./CongMachine.styles";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
@@ -68,6 +69,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   };
 
   const handleWriteMessage = () => {
+    console.log("click write")
     // go to message write
     navigate("/message/post");
   };
@@ -77,6 +79,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
       <CongMachineContentContainer>
         <MachineImage src={topimgsrc} />
         <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
+        {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}
         {match1024 ? (
           <ButtonGroupContainer>
             {
@@ -84,12 +87,12 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
                 <GreenBtn
                   content={"쪽지 뽑기"}
                   disabled={messagenum < 5 ? true : false}
-                  onClick={() => (true ? "쪽지 뽑기" : navigate("/message/post"))}
+                  onClick={handleMessage}
                 />
               ) : (
                 <GreenBtn
                   content={"쪽지 쓰기"}
-                  onClick={() => (isLogin ? "쪽지 뽑기" : navigate("/message/post"))}
+                  onClick={handleWriteMessage}
                 />
               )
             }

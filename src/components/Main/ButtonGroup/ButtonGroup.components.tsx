@@ -30,6 +30,9 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
   const movetoPhotoBox = () => {
     navigate("/photo");
   };
+  const movetoMessagePost = () => {
+    navigate("/message/post");
+  }
 
   return (
     <ButtonGroupContainer>
@@ -49,7 +52,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
         ) : (
           <>
             <GreenBtn
-              onClick={() => (!slide ? pickNotes() : takePhotos())}
+              onClick={() => (!slide ? movetoMessagePost() : takePhotos())}
               content={"쪽지 쓰기"}
               disabled={messagenum < 5 ? true : false}
             />

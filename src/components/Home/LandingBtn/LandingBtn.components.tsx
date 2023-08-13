@@ -13,7 +13,7 @@ const LandingBtn = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
-  
+
   const onClickKakaoLogin = () => {
     // isLogin true하고
     SetIsLogin(true);
@@ -28,7 +28,7 @@ const LandingBtn = () => {
         isLogin ? (
           <WhiteBtn
             content="콩캠퍼스 가기"
-            onClick={(e) => (match1024 ? navigate("/message") : navigate("/main"))}
+            onClick={(e) => (match1024 ? navigate("/message/1") : navigate("/main/1"))}
           />
         ) : (
           <WhiteBtn

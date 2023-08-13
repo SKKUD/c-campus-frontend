@@ -26,7 +26,7 @@ const Router = () => {
         {match1024 ? (
           <>
             <Route path="/" element={<Home />} /> {/*서비스 소개*/}
-            <Route path="/message" element={<WebCongcamMachine />} />{" "}
+            <Route path="/message/:id" element={<WebCongcamMachine />} />{" "}
             {/*콩캠머신 및 메세지 메인 화면*/}
             <Route path="/message/feed" element={<WebCongcamFeed />} />{" "}
             {/*쪽지 피드*/}
@@ -40,7 +40,7 @@ const Router = () => {
         ) : (
           <>
             <Route path="/" element={<Home />} /> {/*서비스 소개*/}
-            <Route path="/main" element={<Main />} /> {/*콩머신 화면*/}
+            <Route path="/main/:id" element={<Main />} /> {/*콩머신 화면*/}
             <Route path="/message/feed" element={<MessageFeed />} />{" "}
             {/*쪽지 피드*/}
             <Route path="/message" element={<MessageBox />} />

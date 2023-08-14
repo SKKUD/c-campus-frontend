@@ -16,7 +16,8 @@ interface AskLockProps {
 }
 
 const AskLock: FC<AskLockProps> = ({ handleModalClose }) => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const [IsMakingQuiz, setIsMakingQuiz] = useState(false);
   const navigate = useNavigate();
   return (

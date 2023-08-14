@@ -29,25 +29,26 @@ import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 interface CongMachineProps {
   slide?: number;
 }
 
 const CongMachine: FC<CongMachineProps> = ({ slide }) => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const messagenum: number = 5;
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-  const [currentID] = useExtractID();
-
+  const currentID = useExtractID();
+  const [checkAuth] = useAuthCheckApi();
 
   useEffect(() => {
     if (messagenum === 1) {
@@ -86,7 +87,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}
         {match1024 ? (
           <ButtonGroupContainer>
-            {isLogin && userAuth.userID === currentID ? (
+            {checkAuth && userAuth === currentID ? (
               <GreenBtn
                 content={"쪽지 뽑기"}
                 disabled={messagenum < 5 ? true : false}

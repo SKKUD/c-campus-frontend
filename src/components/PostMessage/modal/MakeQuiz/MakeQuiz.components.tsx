@@ -32,7 +32,8 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
   const handleQuizAnswerChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuizAnswer(event.target.value);
   };
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const navigate = useNavigate();
 
   const handleQuizDelete = () => {

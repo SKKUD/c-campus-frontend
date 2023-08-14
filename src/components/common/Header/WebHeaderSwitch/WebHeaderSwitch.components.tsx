@@ -6,7 +6,7 @@ import { UserState } from "../../../../recoil/recoil";
 import { useRecoilValue } from "recoil";
 
 const WebHeaderSwitch = () => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
   const [isOn, setisOn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,10 +20,10 @@ const WebHeaderSwitch = () => {
   const toggleHandler = () => {
     setisOn(!isOn);
     if (isOn) {
-      // redirect to userID
-      navigate(`/${userid}`);
+      // redirect to profileUser.userID
+      navigate(`/${profileUser.userID}`);
     } else {
-      navigate(`/photo/${userid}`);
+      navigate(`/photo/${profileUser.userID}`);
     }
     window.scrollTo(0, 0);
   };

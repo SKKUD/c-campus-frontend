@@ -10,9 +10,10 @@ import { FC, useEffect, useState } from "react";
 import CongPhotoMachine from "../CongMachine/CongPhotoMachine.components";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth} from "../../../recoil/recoil";
 import { useRecoilState } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
+import { UserAuth } from "../../../recoil/recoil";
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 interface MachineSwiperProps {
   slide: number;
@@ -20,20 +21,20 @@ interface MachineSwiperProps {
 }
 
 const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
+  const checkAuth = useAuthCheckApi();
 
   return (
     <SwiperContainer>
       {
         // login and userID match | 현재 url에서의 id와 비교
-        isLogin && userAuth.userID === currentID ? <PrevBtn /> : <></>
+        checkAuth && userAuth === currentID ? <PrevBtn /> : <></>
       }
 
       {
         // 로그인이 되어있으면 message와 콩캠네컷 스와이프 가능 | 로그인 안되어있으면 CongMachine화면에서 쪽지쓰고 피드보는 것만 가능
-        isLogin && userAuth.userID === currentID ? (
+        checkAuth && userAuth === currentID ? (
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             navigation={{
@@ -59,7 +60,7 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
           <CongMachine slide={slide} />
         )
       }
-      {isLogin && userAuth.userID === currentID ? <NextBtn /> : <></>}
+      {checkAuth && userAuth === currentID ? <NextBtn /> : <></>}
     </SwiperContainer>
   );
 };

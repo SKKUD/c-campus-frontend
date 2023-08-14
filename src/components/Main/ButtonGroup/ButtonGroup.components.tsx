@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 // import for recoil
 import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useExtractID } from "../../../hooks/useExtractID";
 
 interface ButtonGroupProps {
   slide?: number;
@@ -18,25 +19,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
   const navigate = useNavigate();
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-
-  const [currentID, SetCurrentID] = useState<string>("");
-
-  // extract url id
-  const extractID = () => {
-    // get current url
-    const currentUrl: string = window.location.href;
-    const searchString: string = "/main";
-
-    // extract until first /
-    var positionSliceMain: number = currentUrl.indexOf(searchString);
-
-    var extractedID: string = currentUrl.slice(
-      positionSliceMain + searchString.length + 1
-    );
-    console.log("extracted " + extractedID);
-    // set it to currentID
-    SetCurrentID(extractedID);
-  };
+  const [currentID] = useExtractID();
 
   const pickNotes = () => {
     // 쪽지 뽑는 gif 재생 후
@@ -57,9 +40,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
   const movetoMessageFeed = () => {
     navigate(`/message/feed/${userid}`);
   };
-  useEffect(() => {
-    extractID();
-  }, []);
 
   return (
     <ButtonGroupContainer>

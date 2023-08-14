@@ -12,6 +12,7 @@ import {
   useAuthCheckApi,
   useUserLogoutApi,
 } from "../../../../hooks/LoginAxios";
+import { kakaoURL } from "../../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 interface HeaderPopoverProps {
   open: boolean;
@@ -24,23 +25,27 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
   anchorEl,
   handleClose,
 }) => {
-  const checkAuth = useAuthCheckApi();
+  const [checkAuth] = useAuthCheckApi();
   const [logout] = useUserLogoutApi();
 
   const navigate = useNavigate();
 
-  const handleMakeAccount = () => {
+  const handleGoHome = () => {
     navigate("/");
+  };
+
+  const handleLogin = () => {
+    window.location.href = kakaoURL;
   };
 
   const handleLogout = () => {
     // handle logout
-
-    // 로그아웃 처리가 잘 되면
     logout();
   };
 
-  const handleDeleteAccount = () => {};
+  const handleGoMyaccount = () => {
+    navigate(`/${checkAuth}`);
+  };
 
   return (
     <Popover
@@ -59,12 +64,12 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
       {checkAuth ? (
         <PopoverContainer>
           <PopoverInner onClick={handleLogout}>로그아웃</PopoverInner>
-          <PopoverInner onClick={handleDeleteAccount}>계정삭제</PopoverInner>
+          <PopoverInner onClick={handleGoMyaccount}>내 콩캠 가기</PopoverInner>
         </PopoverContainer>
       ) : (
         <PopoverContainer>
-          <PopoverInner onClick={handleMakeAccount}>로그인하기</PopoverInner>
-          <PopoverInner onClick={handleMakeAccount}>계정 만들기</PopoverInner>
+          <PopoverInner onClick={handleLogin}>로그인하기</PopoverInner>
+          <PopoverInner onClick={handleGoHome}>콩캠퍼스 소개</PopoverInner>
         </PopoverContainer>
       )}
     </Popover>

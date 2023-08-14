@@ -14,13 +14,14 @@ import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
+import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 const WebHeader = () => {
   const profileUser = useRecoilValue(UserState);
   const navigate = useNavigate();
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
-  const checkAuth = useAuthCheckApi();
+  const [checkAuth] = useAuthCheckApi();
   const [logout] = useUserLogoutApi();
 
   const handleLogoClick = () => {
@@ -34,8 +35,7 @@ const WebHeader = () => {
   };
 
   const handleMakeAccount = () => {
-    // home으로 redirect?
-    navigate("/");
+    window.location.href = kakaoURL;
   };
 
   return (
@@ -54,7 +54,7 @@ const WebHeader = () => {
             <WebHeaderButton onClick={handleLogout}>로그아웃</WebHeaderButton>
           ) : (
             <WebHeaderButton onClick={handleMakeAccount}>
-              계정 만들기
+              로그인
             </WebHeaderButton>
           )
         }

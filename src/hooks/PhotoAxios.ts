@@ -1,16 +1,16 @@
 import * as htmlToImage from "html-to-image";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-const userId = 1;
+import { useExtractID } from "./useExtractID";
 
 export const usePhotoGetApi = () => {
+  const [currentID] = useExtractID();
   const [photo, setPhoto] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_SERVER + `/users/${userId}/photos`
+        process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`
         // {
         //   headers: {
         //     AUTHORIZATION: AUTHORIZATION,
@@ -27,6 +27,7 @@ export const usePhotoGetApi = () => {
 };
 
 export const usePhotoPostApi = () => {
+  const [currentID] = useExtractID();
   const postFourcutPhoto = async () => {
     try {
       const blob = await htmlToImage.toBlob(
@@ -47,7 +48,7 @@ export const usePhotoPostApi = () => {
         formData.append("file", data.files[0]);
         axios
           .post(
-            process.env.REACT_APP_BACKEND_SERVER + `/users/${userId}/photos`,
+            process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`,
             formData
           )
           .then((response) => {
@@ -66,10 +67,11 @@ export const usePhotoPostApi = () => {
 };
 
 export const usePhotoDeleteApi = () => {
+  const [currentID] = useExtractID();
   const deleteFourcutPhoto = async (photoid: string) => {
     await axios
       .delete(
-        `${process.env.REACT_APP_BACKEND_SERVER}/users/${userId}/photos/${photoid}`
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos/${photoid}`
       )
       .then((data) => console.log(data))
       .catch((error) => console.log(error));

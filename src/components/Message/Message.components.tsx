@@ -20,7 +20,8 @@ interface IMessage {
 }
 
 const Message = ({ id, isOpen, nickName }: IMessage) => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const navigate = useNavigate();
 
   const RedirectToID = () => {

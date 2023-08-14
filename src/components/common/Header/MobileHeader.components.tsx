@@ -18,7 +18,8 @@ import { useRecoilValue } from "recoil";
 import { UserState } from "../../../recoil/recoil";
 
 const MobileHeader: FC = () => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);

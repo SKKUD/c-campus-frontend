@@ -13,5 +13,5 @@ export const useExtractID = () => {
     SetCurrentID(splitparams[splitparams.length - 1]);
   });
 
-  return [currentID];
+  return currentID;
 };

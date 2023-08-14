@@ -19,6 +19,7 @@ import {
 import { count } from "console";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../recoil/recoil";
+import { useExtractID } from "../../hooks/useExtractID";
 
 // Message type
 interface IMessages {
@@ -84,7 +85,7 @@ interface IAxiosData {
 // }
 
 const MessageList = () => {
-  const userid = useRecoilValue(UserState);
+  const currentID = useExtractID();
   // state for transformed to IMessage
   const [axiosMessage, SetAxiosMessage] = useState<IAxiosMessageData>();
   const [filteredToIMessage, SetFilteredToIMessage] = useState<IMessages[]>([]);
@@ -113,67 +114,69 @@ const MessageList = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}/users/${userid}/messages/pulled`
-        );
+    if (currentID !== "") {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`
+          );
 
-        const axiosData: IAxiosMessageData = response.data;
+          const axiosData: IAxiosMessageData = response.data;
 
-        if (axiosData.status === 200 && axiosData.data?.length) {
-          const willSetToFilteredIMessages: IMessages[] = [];
-          let currentDate: string | null = null;
-          let beans: IBean[] = [];
+          if (axiosData.status === 200 && axiosData.data?.length) {
+            const willSetToFilteredIMessages: IMessages[] = [];
+            let currentDate: string | null = null;
+            let beans: IBean[] = [];
 
-          for (const message of axiosData.data) {
-            const messageDate = parseDate(message.pulled_at);
+            for (const message of axiosData.data) {
+              const messageDate = parseDate(message.pulled_at);
 
-            if (messageDate !== currentDate) {
-              if (currentDate !== null) {
-                const IMessage: IMessages = {
-                  date: currentDate,
-                  beans: beans,
-                };
-                willSetToFilteredIMessages.push(IMessage);
+              if (messageDate !== currentDate) {
+                if (currentDate !== null) {
+                  const IMessage: IMessages = {
+                    date: currentDate,
+                    beans: beans,
+                  };
+                  willSetToFilteredIMessages.push(IMessage);
+                }
+
+                currentDate = messageDate;
+                beans = [];
               }
 
-              currentDate = messageDate;
-              beans = [];
+              const beanObject: IBean = {
+                messageId: message.message_id,
+                author: message.author,
+                isOpened: message.is_opened,
+              };
+              beans.push(beanObject);
             }
 
-            const beanObject: IBean = {
-              messageId: message.message_id,
-              author: message.author,
-              isOpened: message.is_opened,
-            };
-            beans.push(beanObject);
+            if (currentDate !== null) {
+              const lastIMessage: IMessages = {
+                date: currentDate,
+                beans: beans,
+              };
+              willSetToFilteredIMessages.push(lastIMessage);
+            }
+
+            SetFilteredToIMessage(willSetToFilteredIMessages);
+            SetCountMessage(axiosData.data.length);
           }
-
-          if (currentDate !== null) {
-            const lastIMessage: IMessages = {
-              date: currentDate,
-              beans: beans,
-            };
-            willSetToFilteredIMessages.push(lastIMessage);
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            console.log(error);
           }
-
-          SetFilteredToIMessage(willSetToFilteredIMessages);
-          SetCountMessage(axiosData.data.length);
         }
-      } catch (error) {
-        if (axios.isAxiosError(error)) {
-          console.log(error);
-        }
-      }
-    };
+      };
 
-    fetchData();
-  }, []);
+      fetchData();
+    }
+  }, [currentID]);
 
   // navigate to message feed
   const RedirectToFeedUrl = () => {
-    navigate(`/message/feed/${userid}`);
+    navigate(`/message/feed/${currentID}`);
   };
 
   return (

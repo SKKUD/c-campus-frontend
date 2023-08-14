@@ -62,7 +62,8 @@ const SubjectData = [
 const backgroundColor = ["#D6EABA", "#D9E1CE", "#C1D3A7", "#DAEFAE", "#BFD8BA"];
 
 const PostMessage = () => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const match1024 = useMediaQuery("(min-width:1024px)");
   // state
   const [Message, setMessage] = useRecoilState(MessageState);

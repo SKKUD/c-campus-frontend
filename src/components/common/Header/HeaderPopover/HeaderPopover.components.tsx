@@ -1,12 +1,18 @@
 import { FC, useState } from "react";
 import { Popover } from "@mui/material";
 import { PopoverContainer, PopoverInner } from "./HeaderPopover.styles";
+
 // import for recoil
-import { IsLoginRecoil, UserAuth } from "../../../../recoil/recoil";
+import { UserAuth } from "../../../../recoil/recoil";
 import { useRecoilState } from "recoil";
 
 // import for redirect
 import { useNavigate } from "react-router";
+import {
+  useAuthCheckApi,
+  useUserLogoutApi,
+} from "../../../../hooks/LoginAxios";
+import { kakaoURL } from "../../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 interface HeaderPopoverProps {
   open: boolean;
@@ -19,30 +25,26 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
   anchorEl,
   handleClose,
 }) => {
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+  const [checkAuth] = useAuthCheckApi();
+  const [logout] = useUserLogoutApi();
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // handle login
-
-    // 
-    SetIsLogin(true);
+  const handleGoHome = () => {
+    navigate("/");
   };
 
-  const handleMakeAccount = () => {
-    navigate("/");
+  const handleLogin = () => {
+    window.location.href = kakaoURL;
   };
 
   const handleLogout = () => {
     // handle logout
-
-    // 로그아웃 처리가 잘 되면
-    SetIsLogin(false);
+    logout();
   };
 
-  const handleDeleteAccount = () => {
-
+  const handleGoMyaccount = () => {
+    navigate(`/${checkAuth}`);
   };
 
   return (
@@ -58,20 +60,18 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
         vertical: "top",
         horizontal: "right",
       }}
-    > 
-      {
-        isLogin ? (
-          <PopoverContainer>
-            <PopoverInner onClick={handleLogout}>로그아웃</PopoverInner>
-            <PopoverInner onClick={handleDeleteAccount}>계정삭제</PopoverInner>
-          </PopoverContainer>
-        ) : (
-          <PopoverContainer>
-            <PopoverInner onClick={handleMakeAccount}>로그인하기</PopoverInner>
-            <PopoverInner onClick={handleMakeAccount}>계정 만들기</PopoverInner>
-          </PopoverContainer>
-        )
-      }
+    >
+      {checkAuth ? (
+        <PopoverContainer>
+          <PopoverInner onClick={handleLogout}>로그아웃</PopoverInner>
+          <PopoverInner onClick={handleGoMyaccount}>내 콩캠 가기</PopoverInner>
+        </PopoverContainer>
+      ) : (
+        <PopoverContainer>
+          <PopoverInner onClick={handleLogin}>로그인하기</PopoverInner>
+          <PopoverInner onClick={handleGoHome}>콩캠퍼스 소개</PopoverInner>
+        </PopoverContainer>
+      )}
     </Popover>
   );
 };

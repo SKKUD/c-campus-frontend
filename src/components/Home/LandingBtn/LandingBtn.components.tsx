@@ -6,32 +6,30 @@ import WhiteBtn from "../../common/Buttons/WhiteBtn.components";
 import instabtn from "../../../assets/images/instabtn.png";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 const LandingBtn = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
-  const userAuth = useRecoilValue(UserState);
-
-  const onClickKakaoLogin = () => {
-    // isLogin true하고
-    SetIsLogin(true);
-
-    // 카카오로그인 처리하러 리다이렉트 시키기
-    //
-  };
+  const [checkAuth] = useAuthCheckApi();
 
   return (
     <BtnWrapper>
-      {isLogin ? (
+      {checkAuth ? (
         <WhiteBtn
           content="콩캠퍼스 가기"
-          onClick={(e) => navigate(`/${userAuth}`)}
+          onClick={(e) => navigate(`/${checkAuth}`)}
         />
       ) : (
-        <WhiteBtn content="로그인하기" onClick={onClickKakaoLogin} />
+        <WhiteBtn
+          content="로그인하기"
+          onClick={() => {
+            window.location.href = kakaoURL;
+          }}
+        />
       )}
       <Link
         to="https://instagram.com/cong_skku?igshid=MzRlODBiNWFlZA=="

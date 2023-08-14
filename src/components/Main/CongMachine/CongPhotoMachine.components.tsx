@@ -19,7 +19,8 @@ interface CongPhotoMachineProps {
 }
 
 const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   return (

@@ -12,15 +12,30 @@ import infoDescImg from "../../assets/images/infoDescImg.png";
 import CongMachine from "../../components/Main/CongMachine/CongMachine.components";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth } from "../../recoil/recoil";
+import { UserAuth, UserState } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
+import { useAuthCheckApi, useUserProfileGetApi } from "../../hooks/LoginAxios";
 import { useExtractID } from "../../hooks/useExtractID";
 
 const WebCongcamMachine = () => {
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
+  const currentID = useExtractID();
+  const [checkAuth] = useAuthCheckApi();
+  const [profile] = useUserProfileGetApi();
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-  const [currentID] = useExtractID();
+  const [userProfile, SetUserProfile] = useRecoilState(UserState);
+
+  useEffect(() => {
+    checkAuth && SetUserAuth(checkAuth.toString());
+  }, [checkAuth]);
+
+  useEffect(() => {
+    SetUserProfile({
+      userID: currentID,
+      nickname: profile.nickname,
+      profile_image: "",
+    });
+  }, [profile]);
 
   return (
     <WebMainPageContainer>
@@ -31,7 +46,7 @@ const WebCongcamMachine = () => {
           <InfoPaper src={infoDescImg} />
         </InfoImgConatiner>
         <ContentConatiner>
-          {isLogin && userAuth.userID === currentID ? (
+          {checkAuth && userAuth === currentID ? (
             <MessageList />
           ) : (
             <MessageFeed />

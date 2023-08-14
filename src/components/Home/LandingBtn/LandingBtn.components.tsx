@@ -14,15 +14,14 @@ import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 const LandingBtn = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
-  const checkAuth = useAuthCheckApi();
-  const userAuth = useRecoilValue(UserState);
+  const [checkAuth] = useAuthCheckApi();
 
   return (
     <BtnWrapper>
       {checkAuth ? (
         <WhiteBtn
           content="콩캠퍼스 가기"
-          onClick={(e) => navigate(`/${userAuth}`)}
+          onClick={(e) => navigate(`/${checkAuth}`)}
         />
       ) : (
         <WhiteBtn

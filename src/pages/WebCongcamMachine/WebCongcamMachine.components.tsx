@@ -16,35 +16,14 @@ import { IsLoginRecoil, UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useAuthCheckApi } from "../../hooks/LoginAxios";
+import { useExtractID } from "../../hooks/useExtractID";
 
 const WebCongcamMachine = () => {
   const [auth] = useAuthCheckApi();
   
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-
-  const [currentID, SetCurrentID] = useState<string>("");
-
-  // extract url id
-  const extractID = () => {
-    // get current url
-    const currentUrl: string = window.location.href;
-    const searchString: string = "/message";
-
-    // extract until first /
-    var positionSliceMain: number = currentUrl.indexOf(searchString);
-
-    var extractedID: string = currentUrl.slice(
-      positionSliceMain + searchString.length + 1
-    );
-
-    // set it to currentID
-    SetCurrentID(extractedID);
-  };
-
-  useEffect(() => {
-    extractID();
-  }, []);
+  const [currentID] = useExtractID();
 
   return (
     <WebMainPageContainer>

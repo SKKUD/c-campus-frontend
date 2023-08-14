@@ -31,6 +31,7 @@ import { Ground } from "../../WebMainPage/WebMainPage.styles";
 // import for recoil
 import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
+import { useExtractID } from "../../../hooks/useExtractID";
 
 interface CongMachineProps {
   slide?: number;
@@ -45,40 +46,10 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const messagenum: number = 5;
   const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const [currentID] = useExtractID();
 
-  const [currentID, SetCurrentID] = useState<string>("");
-
-  // extract url id
-  const extractID = () => {
-    // get current url
-
-    const currentUrl: string = window.location.href;
-
-    // check /main
-    const searchString: string = "/main";
-    var extractedID: string = "";
-
-    // extract until first /
-    var positionSliceMain: number = currentUrl.indexOf(searchString);
-    if (positionSliceMain === -1) {
-      const secondSearchString: string = "/message";
-      positionSliceMain = currentUrl.indexOf(secondSearchString);
-      extractedID = currentUrl.slice(
-        positionSliceMain + secondSearchString.length + 1
-      );
-    } else {
-      extractedID = currentUrl.slice(
-        positionSliceMain + searchString.length + 1
-      );
-    }
-
-    console.log("extracted " + extractedID);
-    // set it to currentID
-    SetCurrentID(extractedID);
-  };
 
   useEffect(() => {
-    extractID();
     if (messagenum === 1) {
       setTopImg(cong1_top_gif);
     } else if (messagenum === 2) {

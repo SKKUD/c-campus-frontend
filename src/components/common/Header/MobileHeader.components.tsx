@@ -14,8 +14,11 @@ import infoIcon from "../../../assets/images/info_icon.svg";
 import menuIcon from "../../../assets/images/menu_icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import HeaderInfoModal from "./HeaderInfoModal/HeaderInfoModal.components";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../../recoil/recoil";
 
 const MobileHeader: FC = () => {
+  const userid = useRecoilValue(UserState);
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
@@ -29,7 +32,7 @@ const MobileHeader: FC = () => {
     navigate(-1);
   };
   const handleLogoClick = () => {
-    navigate("/main");
+    navigate(`/main/${userid}`);
   };
   // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);

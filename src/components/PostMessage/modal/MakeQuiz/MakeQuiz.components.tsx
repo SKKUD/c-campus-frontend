@@ -12,8 +12,8 @@ import {
 
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
 import { ChangeEvent, FC, useState } from "react";
-import { useRecoilState } from "recoil";
-import { QuizState } from "../../../../recoil/recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { QuizState, UserState } from "../../../../recoil/recoil";
 import { useNavigate } from "react-router";
 
 interface MakeQuizProps {
@@ -32,12 +32,13 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
   const handleQuizAnswerChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuizAnswer(event.target.value);
   };
+  const userid = useRecoilValue(UserState);
   const navigate = useNavigate();
 
   const handleQuizDelete = () => {
     setQuiz({ QuizGiven: false, QuizContent: "", QuizAnswer: "" });
     handleModalClose();
-    navigate("/message/post");
+    navigate(`/message/post/${userid}`);
   };
 
   const handleQuizSubmit = () => {
@@ -47,7 +48,7 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
       QuizAnswer: quizAnswer,
     });
     handleModalClose();
-    navigate("/message/post");
+    navigate(`/message/post/${userid}`);
   };
   return (
     <>

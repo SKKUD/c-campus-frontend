@@ -44,7 +44,7 @@ interface IAxiosData {
 const MessageFeed = () => {
   // State for public filter
   const [filteredData, SetFilteredData] = useState<IAxiosData[]>();
-
+  const [messageNumber, SetMessageNumber] = useState<number>(0);
   // filter
   useEffect(()=> {
     // get axios
@@ -53,7 +53,12 @@ const MessageFeed = () => {
                   const axiosData: IAxiosMessageData = response.data;
                   // filter
                   const filtered = axiosData.data?.filter((Data: IAxiosData) => Data.is_public);
-
+                  
+                  // Set to number
+                  if (filtered) {
+                    SetMessageNumber(filtered.length);
+                  }
+                  
                   // set to state
                   SetFilteredData(filtered);
                 })
@@ -66,11 +71,11 @@ const MessageFeed = () => {
 
   return (
     <>
-      {filteredData?.length !== 0 ? (
+      {messageNumber!== 0 ? (
         <MessageFeedContainer>
           <OpenMessageHeader>
             <OpenMessageHeaderContent>
-              {filteredData?.length}개의 공개쪽지
+              {messageNumber}개의 공개쪽지
             </OpenMessageHeaderContent>
           </OpenMessageHeader>
 

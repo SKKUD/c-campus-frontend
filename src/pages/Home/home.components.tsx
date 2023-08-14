@@ -22,6 +22,7 @@ const Home = () => {
   const match500 = useMediaQuery("(max-width:500px)");
   return (
     <HomeContainer>
+      <KakaoLogin></KakaoLogin>
       <LandingScreen>
         <CongCapsuleImg src={CongCapsule} />
         <LandingBtn />

@@ -11,12 +11,15 @@ import congcam_bf_gif from "../../../assets/animations/congcam_bf.gif";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../../recoil/recoil";
 
 interface CongPhotoMachineProps {
   slide?: number;
 }
 
 const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
+  const userid = useRecoilValue(UserState);
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   return (
@@ -27,7 +30,7 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
           <ButtonGroupContainer>
             <GreenBtn
               content="콩캠네컷 찍기"
-              onClick={() => navigate("/photo/post")}
+              onClick={() => navigate(`/photo/post/${userid}`)}
             />
           </ButtonGroupContainer>
         ) : (

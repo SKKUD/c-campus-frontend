@@ -9,6 +9,10 @@ export const CongMachineContainer = styled.div`
   z-index: 10;
 `;
 
+export const CongMachineProfileContainer = styled.div`
+  margin-top: -50vh;
+`;
+
 export const CongMachineContentContainer = styled.div`
   width: 100%;
   max-height: 100vh;

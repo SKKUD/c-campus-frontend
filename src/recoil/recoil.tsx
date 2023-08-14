@@ -1,5 +1,19 @@
 import { atom } from "recoil";
 
+export const IsLoginRecoil = atom({
+  key: "IsLogin",
+  default: true,
+});
+
+export const UserAuth = atom({
+  key: "UserAuth",
+  default: {
+    userID: "1",
+    nickName: "사용자",
+    profile_image: "",
+  },
+});
+
 export const IsWritingMessage = atom({
   key: "IsWriting",
   default: false,
@@ -30,3 +44,7 @@ export const QuizState = atom({
   },
 });
 
+export const UserState = atom({
+  key: "User",
+  default: "1",
+});

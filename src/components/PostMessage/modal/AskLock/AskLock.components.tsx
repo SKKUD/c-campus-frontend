@@ -8,12 +8,15 @@ import {
 } from "./AskLock.styles";
 import MakeQuiz from "../MakeQuiz/MakeQuiz.components";
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../../../recoil/recoil";
 
 interface AskLockProps {
   handleModalClose: () => void;
 }
 
 const AskLock: FC<AskLockProps> = ({ handleModalClose }) => {
+  const userid = useRecoilValue(UserState);
   const [IsMakingQuiz, setIsMakingQuiz] = useState(false);
   const navigate = useNavigate();
   return (
@@ -24,7 +27,9 @@ const AskLock: FC<AskLockProps> = ({ handleModalClose }) => {
             콩캠네컷을 <br /> 퀴즈로 잠글까요?
           </AskLockContent>
           <AskLockButtonContainer>
-            <AskLockWhiteBtn onClick={() => navigate("/message/post")}>
+            <AskLockWhiteBtn
+              onClick={() => navigate(`/message/post/${userid}`)}
+            >
               아니요
             </AskLockWhiteBtn>
             <GreenBtn

@@ -27,13 +27,14 @@ import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import { ExportElementAsPNG } from "../../utils/downloadPhoto";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { IsWritingMessage, PhotoState } from "../../recoil/recoil";
+import { IsWritingMessage, PhotoState, UserState } from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 
 const PostPhoto = () => {
+  const userid = useRecoilValue(UserState);
   const IsWriting = useRecoilValue(IsWritingMessage);
   const setPhotoTaken = useSetRecoilState(PhotoState);
   const match1024 = useMediaQuery("(min-width:1024px)");
@@ -75,7 +76,7 @@ const PostPhoto = () => {
       await ExportElementAsPNG();
       await postFourcutPhoto();
 
-      navigate("/photo");
+      navigate(`/photo/${userid}`);
     }
   };
 

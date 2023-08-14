@@ -42,7 +42,7 @@ const WebHeader = () => {
   };
 
   const handleLogoClick = () => {
-    navigate(`/message/${userid}`);
+    navigate(`/${userid}`);
     window.location.reload();
   };
 

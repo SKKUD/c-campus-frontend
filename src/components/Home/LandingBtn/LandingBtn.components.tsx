@@ -28,11 +28,7 @@ const LandingBtn = () => {
       {isLogin ? (
         <WhiteBtn
           content="콩캠퍼스 가기"
-          onClick={(e) =>
-            match1024
-              ? navigate(`/message/${userAuth}`)
-              : navigate(`/main/${userAuth}`)
-          }
+          onClick={(e) => navigate(`/${userAuth}`)}
         />
       ) : (
         <WhiteBtn content="로그인하기" onClick={onClickKakaoLogin} />

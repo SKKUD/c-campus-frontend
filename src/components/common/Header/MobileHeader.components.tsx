@@ -32,7 +32,7 @@ const MobileHeader: FC = () => {
     navigate(-1);
   };
   const handleLogoClick = () => {
-    navigate(`/main/${userid}`);
+    navigate(`/${userid}`);
   };
   // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);

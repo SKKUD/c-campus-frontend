@@ -21,7 +21,7 @@ const WebHeaderSwitch = () => {
     setisOn(!isOn);
     if (isOn) {
       // redirect to userID
-      navigate(`/message/${userid}`);
+      navigate(`/${userid}`);
     } else {
       navigate(`/photo/${userid}`);
     }

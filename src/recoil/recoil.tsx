@@ -1,17 +1,25 @@
 import { atom } from "recoil";
 
-export const IsLoginRecoil = atom({
-  key: "IsLogin",
-  default: true,
-});
 
-export const UserAuth = atom({
-  key: "UserAuth",
+interface UserProfile {
+  userID: string;
+  nickname: string;
+  profile_image: string;
+}
+// 방문한 페이지의 유저 정보 (프로필 표시)
+export const UserState = atom<UserProfile>({
+  key: "User",
   default: {
-    userID: "1",
-    nickName: "사용자",
+    userID: "",
+    nickname: "",
     profile_image: "",
   },
+});
+
+// 현재 유저(로그인한 유저)의 userid
+export const UserAuth = atom({
+  key: "UserAuth",
+  default: "",
 });
 
 export const IsWritingMessage = atom({
@@ -44,7 +52,5 @@ export const QuizState = atom({
   },
 });
 
-export const UserState = atom({
-  key: "User",
-  default: "1",
-});
+
+

@@ -5,9 +5,10 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 interface ButtonGroupProps {
   slide?: number;
@@ -15,11 +16,12 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const navigate = useNavigate();
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
+  const checkAuth = useAuthCheckApi();
 
   const pickNotes = () => {
     // 쪽지 뽑는 gif 재생 후
@@ -45,7 +47,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 5 }) => {
     <ButtonGroupContainer>
       {
         // 현재 url의 /message/${id} 뽑아와서 비교하는 코드로
-        isLogin && userAuth.userID === currentID ? (
+        checkAuth && userAuth === currentID ? (
           <>
             <GreenBtn
               onClick={() => (!slide ? pickNotes() : takePhotos())}

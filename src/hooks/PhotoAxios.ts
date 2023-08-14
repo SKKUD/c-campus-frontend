@@ -4,7 +4,7 @@ import axios from "axios";
 import { useExtractID } from "./useExtractID";
 
 export const usePhotoGetApi = () => {
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
   const [photo, setPhoto] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const usePhotoGetApi = () => {
 };
 
 export const usePhotoPostApi = () => {
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
   const postFourcutPhoto = async () => {
     try {
       const blob = await htmlToImage.toBlob(
@@ -67,7 +67,7 @@ export const usePhotoPostApi = () => {
 };
 
 export const usePhotoDeleteApi = () => {
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
   const deleteFourcutPhoto = async (photoid: string) => {
     await axios
       .delete(

@@ -10,28 +10,27 @@ import WebHeaderSwitch from "./WebHeaderSwitch/WebHeaderSwitch.components";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { IsLoginRecoil, UserAuth, UserState } from "../../../recoil/recoil";
+import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { useEffect, useState } from "react";
 import { useExtractID } from "../../../hooks/useExtractID";
+import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
 
 const WebHeader = () => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
   const navigate = useNavigate();
-  const [isLogin, SetIsLogin] = useRecoilState(IsLoginRecoil);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
+  const checkAuth = useAuthCheckApi();
+  const [logout] = useUserLogoutApi();
 
   const handleLogoClick = () => {
-    navigate(`/${userid}`);
+    navigate(`/${profileUser.userID}`);
     window.location.reload();
   };
 
   const handleLogout = () => {
     // 로그아웃 처리하기
-
-    // isLogin false로 만들기
-    SetIsLogin(false);
+    logout();
   };
 
   const handleMakeAccount = () => {
@@ -46,16 +45,12 @@ const WebHeader = () => {
         <SwipeButtonGroup>
           {
             // 로그인이 되어있어야 switch 가능 | 로그인한 auth와 현재 url ID 비교
-            isLogin && userAuth.userID === currentID ? (
-              <WebHeaderSwitch />
-            ) : (
-              <></>
-            )
+            checkAuth && userAuth === currentID ? <WebHeaderSwitch /> : <></>
           }
         </SwipeButtonGroup>
         {
           // 로그인만 되어있는지만 여부 체크
-          isLogin ? (
+          checkAuth ? (
             <WebHeaderButton onClick={handleLogout}>로그아웃</WebHeaderButton>
           ) : (
             <WebHeaderButton onClick={handleMakeAccount}>

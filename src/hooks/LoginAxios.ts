@@ -1,39 +1,43 @@
 import * as htmlToImage from "html-to-image";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-const userId = 1;
+import { useExtractID } from "./useExtractID";
+import { useSetRecoilState } from "recoil";
+import { UserAuth } from "../recoil/recoil";
 
 export const useAuthCheckApi = () => {
-  const [auth, setAuth] = useState([]);
+  const [checkAuth, setAuth] = useState("");
 
   useEffect(() => {
-    const fetchEvents = async () => {
+    const fetchAuth = async () => {
       const res = await axios.get(
-        process.env.REACT_APP_BACKEND_SERVER + `/auth/authentication`
+        process.env.REACT_APP_BACKEND_SERVER + `/auth/authentication`,
+        { withCredentials: true }
       );
-      setAuth(res.data);
-      console.log(res.data);
+      setAuth(res.data.userId);
     };
-    fetchEvents();
+    fetchAuth();
   }, []);
 
-  return [auth];
+  return [checkAuth];
 };
 
 export const useUserProfileGetApi = () => {
-  const [profile, setProfile] = useState({});
+  const currentID = useExtractID();
+  const [profile, setProfile] = useState({ userId: currentID, nickname: "" });
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const res = await axios.get(
-        process.env.REACT_APP_BACKEND_SERVER + `/users/${userId}`
-      );
-      setProfile(res.data.data);
-      console.log(res.data.data);
+    const fetchUserProfile = async () => {
+      if (currentID) {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}`,
+          { withCredentials: true }
+        );
+        setProfile(res.data);
+      }
     };
-    fetchEvents();
-  }, []);
+    fetchUserProfile();
+  }, [currentID]);
 
   return [profile];
 };
@@ -41,7 +45,9 @@ export const useUserProfileGetApi = () => {
 export const useUserLogoutApi = () => {
   const logout = () => {
     axios
-      .post(process.env.REACT_APP_BACKEND_SERVER + `/oauth2/kakao/logout`)
+      .post(process.env.REACT_APP_BACKEND_SERVER + `/oauth2/kakao/logout`, {
+        withCredentials: true,
+      })
       .then((response) => {
         console.log(response.status);
       })

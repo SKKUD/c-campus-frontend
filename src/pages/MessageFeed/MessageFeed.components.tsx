@@ -14,64 +14,73 @@ import {
   OpenMessageContentSender,
   OpenMesageEmpty,
 } from "./MessageFeed.styles";
+import { useExtractID } from "../../hooks/useExtractID";
 
 // interface
 interface IAxiosMessageData {
-  status: number,
-  message: string,
-  data?: IAxiosData[],
+  status: number;
+  message: string;
+  data?: IAxiosData[];
 }
 
 interface IAxiosData {
-  message_id: number,
-  user_id: number,
-  category: string,
-  content: string,
-  author: string,
-  is_opened: boolean,
-  is_pulled: boolean,
-  pulled_at: string,
-  image_uuid?: string,
-  background_color_code: string,
-  is_quiz: boolean,
-  is_public: boolean,
-  quiz_content?: string,
-  quiz_answer?: string,
-  quiz_is_solved?: boolean,
-  image_url?: string,
+  message_id: number;
+  user_id: number;
+  category: string;
+  content: string;
+  author: string;
+  is_opened: boolean;
+  is_pulled: boolean;
+  pulled_at: string;
+  image_uuid?: string;
+  background_color_code: string;
+  is_quiz: boolean;
+  is_public: boolean;
+  quiz_content?: string;
+  quiz_answer?: string;
+  quiz_is_solved?: boolean;
+  image_url?: string;
 }
 
 const MessageFeed = () => {
+  const currentId = useExtractID();
   // State for public filter
   const [filteredData, SetFilteredData] = useState<IAxiosData[]>();
   const [messageNumber, SetMessageNumber] = useState<number>(0);
   // filter
-  useEffect(()=> {
+  useEffect(() => {
     // get axios
-    const res = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/1/messages/pulled`)
-                .then((response) => {
-                  const axiosData: IAxiosMessageData = response.data;
-                  // filter
-                  const filtered = axiosData.data?.filter((Data: IAxiosData) => Data.is_public);
-                  
-                  // Set to number
-                  if (filtered) {
-                    SetMessageNumber(filtered.length);
-                  }
-                  
-                  // set to state
-                  SetFilteredData(filtered);
-                })
-                .catch((error) => {
-                  if (axios.isAxiosError(error)) {
-                    console.log(error);
-                  }
-                });
-  }, []);
+    if (currentId !== "") {
+      const res = axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentId}/messages/pulled`
+        )
+        .then((response) => {
+          const axiosData: IAxiosMessageData = response.data;
+          // filter
+          const filtered = axiosData.data?.filter(
+            (Data: IAxiosData) => Data.is_public
+          );
+
+          // Set to number
+          if (filtered) {
+            SetMessageNumber(filtered.length);
+          }
+
+          // set to state
+          SetFilteredData(filtered);
+        })
+        .catch((error) => {
+          if (axios.isAxiosError(error)) {
+            console.log(error);
+          }
+        });
+    }
+  }, [currentId]);
 
   return (
     <>
-      {messageNumber!== 0 ? (
+      {messageNumber !== 0 ? (
         <MessageFeedContainer>
           <OpenMessageHeader>
             <OpenMessageHeaderContent>

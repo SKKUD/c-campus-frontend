@@ -4,7 +4,7 @@ import { useExtractID } from "./useExtractID";
 import { useRecoilValue } from "recoil";
 
 export const useProjectPostApi = () => {
-  const [currentID] = useExtractID();
+  const currentID = useExtractID();
   //   const UserState = useRecoilValue()
   const formData = new FormData();
   // formData.append("category",)

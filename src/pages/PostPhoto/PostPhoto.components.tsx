@@ -34,7 +34,8 @@ import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 
 const PostPhoto = () => {
-  const userid = useRecoilValue(UserState);
+  const profileUser = useRecoilValue(UserState);
+  const userid = profileUser.userID;
   const IsWriting = useRecoilValue(IsWritingMessage);
   const setPhotoTaken = useSetRecoilState(PhotoState);
   const match1024 = useMediaQuery("(min-width:1024px)");

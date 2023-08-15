@@ -8,20 +8,23 @@ export const usePhotoGetApi = () => {
   const [photo, setPhoto] = useState([]);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const res = await axios.get(
-        process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`
-        // {
-        //   headers: {
-        //     AUTHORIZATION: AUTHORIZATION,
-        //   },
-        // }
-      );
-      setPhoto(res.data.data);
-      console.log(res.data.data);
-    };
-    fetchEvents();
-  }, []);
+    if (currentID) {
+      const fetchEvents = async () => {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`
+          // {
+          //   headers: {
+          //     AUTHORIZATION: AUTHORIZATION,
+          //   },
+          // }
+        );
+        setPhoto(res.data.data);
+        console.log(res.data.data);
+      };
+
+      fetchEvents();
+    }
+  }, [currentID]);
 
   return [photo];
 };

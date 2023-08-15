@@ -61,7 +61,6 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   useEffect(() => {
     // check message number
     // console.log("MessageNumber " + messageNumber);
-    console.log(messageNumber);
     SetMessageNum(Number(messageNumber));
 
     if (!isPulled) { //뽑히는 모션이 나와야됨

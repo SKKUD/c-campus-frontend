@@ -49,6 +49,8 @@ import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import AskPhotopost from "../../components/PostMessage/modal/AskPhotopost/AskPhotopost.components";
 import { useMediaQuery } from "@mui/material";
+import { useMessageSubmitApi } from "../../hooks/MessageAxios";
+import { useExtractID } from "../../hooks/useExtractID";
 
 // 질문 데이터
 const SubjectData = [
@@ -62,8 +64,7 @@ const SubjectData = [
 const backgroundColor = ["#D6EABA", "#D9E1CE", "#C1D3A7", "#DAEFAE", "#BFD8BA"];
 
 const PostMessage = () => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
@@ -136,12 +137,14 @@ const PostMessage = () => {
   };
 
   // submit handler
+  const [submitMessage] = useMessageSubmitApi(currentSubject, currentColorHex);
   const submitHandler = () => {
     handleModalClose();
     console.log(modalContent);
+    // submit
     if (nameText !== "" && contentText !== "") {
       setMessage({ name: nameText, content: contentText });
-      //submit 함수 넣기
+      submitMessage();
       setDone(true);
       setModalContent("");
       handleModalOpen();
@@ -311,7 +314,11 @@ const PostMessage = () => {
           {done ? (
             <WhiteBtn
               content="쪽지함 가기"
-              onClick={() => navigate(`/message/${userid}`)}
+              onClick={() =>
+                match1024
+                  ? navigate(`/${userid}`)
+                  : navigate(`/message/${userid}`)
+              }
             />
           ) : (
             <GreenBtn

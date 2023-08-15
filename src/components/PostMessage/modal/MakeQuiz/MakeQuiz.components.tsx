@@ -15,6 +15,7 @@ import { ChangeEvent, FC, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { QuizState, UserState } from "../../../../recoil/recoil";
 import { useNavigate } from "react-router";
+import { useExtractID } from "../../../../hooks/useExtractID";
 
 interface MakeQuizProps {
   handleModalClose: () => void;
@@ -32,8 +33,7 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
   const handleQuizAnswerChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuizAnswer(event.target.value);
   };
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const navigate = useNavigate();
 
   const handleQuizDelete = () => {

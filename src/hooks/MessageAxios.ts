@@ -24,8 +24,11 @@ export const useMessageSubmitApi = (
       quizAnswer: Quiz.QuizAnswer,
     };
     Photo && formData.append("file", Photo);
-    console.log(Photo);
-    formData.append("request", JSON.stringify(jsonObject));
+    formData.append(
+      "request",
+      new Blob([JSON.stringify(jsonObject)], { type: "application/json" })
+    );
+
     axios
       .post(
         process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/messages`,

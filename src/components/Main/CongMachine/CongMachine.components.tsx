@@ -33,6 +33,7 @@ import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import Profile from "../../common/Profile/Profile.components";
 
 interface CongMachineProps {
   slide?: number;
@@ -81,6 +82,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
+        {match1024 && <Profile />}
         <MachineImage src={topimgsrc} />
         <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}

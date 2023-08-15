@@ -43,6 +43,11 @@ export const PhotoState = atom({
   },
 });
 
+export const PhotoFile = atom({
+  key: "File",
+  default: null as File | null,
+});
+
 export const QuizState = atom({
   key: "Quiz",
   default: {

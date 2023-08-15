@@ -1,4 +1,4 @@
-import { MessageState, PhotoState, QuizState } from "./../recoil/recoil";
+import { MessageState, QuizState, PhotoFile } from "./../recoil/recoil";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
 import { useRecoilValue } from "recoil";
@@ -9,12 +9,11 @@ export const useMessageSubmitApi = (
 ) => {
   const currentID = useExtractID();
   const Message = useRecoilValue(MessageState);
-  const Photo = useRecoilValue(PhotoState);
+  const Photo = useRecoilValue(PhotoFile);
   const Quiz = useRecoilValue(QuizState);
 
   const submitMessage = () => {
     const formData = new FormData();
-    formData.append("file", Photo.PhotoURL);
     const jsonObject = {
       category: messageCategory,
       content: Message.content,
@@ -24,10 +23,13 @@ export const useMessageSubmitApi = (
       quizQontent: Quiz.QuizContent,
       quizAnswer: Quiz.QuizAnswer,
     };
+    Photo && formData.append("file", Photo);
+    console.log(Photo);
+    formData.append("request", JSON.stringify(jsonObject));
     axios
       .post(
         process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/messages`,
-        { file: formData, request: JSON.stringify(jsonObject) }
+        formData
       )
       .then((response) => {
         console.log(response.status);

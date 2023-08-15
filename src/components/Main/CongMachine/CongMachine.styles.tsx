@@ -27,6 +27,7 @@ export const MachineImage = styled.img`
   width: 40vh;
   min-width: 280px;
   max-width: 100%;
+
   @media (max-width: 375px) {
     min-width: 250px;
   }

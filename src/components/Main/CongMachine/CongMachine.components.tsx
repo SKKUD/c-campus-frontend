@@ -134,7 +134,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
-        {match1024 && <Profile />}
+        {match1024 && <Profile coin={messagenum}/>}
         <MachineImage src={topimgsrc} />
         <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}

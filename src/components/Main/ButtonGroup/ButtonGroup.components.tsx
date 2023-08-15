@@ -110,7 +110,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 0, setTopImg, s
               !slide ? (
                 <GreenBtn
                   onClick={() => (pickNotes())}
-                  content={"콩캠네컷 찍기"}
+                  content={"쪽지 뽑기"}
                   disabled={messagenum < 5 ? true : false}
                 />
               ) : (

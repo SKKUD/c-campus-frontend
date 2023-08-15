@@ -1,25 +1,33 @@
-import { UserState } from "./../recoil/recoil";
+import { MessageState, PhotoState, QuizState } from "./../recoil/recoil";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
 import { useRecoilValue } from "recoil";
 
-export const useProjectPostApi = () => {
+export const useMessageSubmitApi = (
+  messageCategory: string,
+  backgroundHex: string
+) => {
   const currentID = useExtractID();
-  //   const UserState = useRecoilValue()
-  const formData = new FormData();
-  // formData.append("category",)
-  // formData.append("author",)
-  // formData.append("background_color_code",)
-  // formData.append("isQuiz",)
-  // formData.append("quizQontent",)
-  // formData.append("quizAnswer",)
-  // formData.append("file",)
+  const Message = useRecoilValue(MessageState);
+  const Photo = useRecoilValue(PhotoState);
+  const Quiz = useRecoilValue(QuizState);
 
-  const postProjectPost = () =>
+  const submitMessage = () => {
+    const formData = new FormData();
+    formData.append("file", Photo.PhotoURL);
+    const jsonObject = {
+      category: messageCategory,
+      content: Message.content,
+      author: Message.name,
+      background_color_code: backgroundHex,
+      isQuiz: Quiz.QuizGiven,
+      quizQontent: Quiz.QuizContent,
+      quizAnswer: Quiz.QuizAnswer,
+    };
     axios
       .post(
         process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/messages`,
-        formData
+        { file: formData, request: JSON.stringify(jsonObject) }
       )
       .then((response) => {
         console.log(response.status);
@@ -27,5 +35,7 @@ export const useProjectPostApi = () => {
       .catch((error) => {
         console.log(error);
       });
-  return [postProjectPost];
+  };
+
+  return [submitMessage];
 };

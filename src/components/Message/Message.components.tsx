@@ -12,6 +12,7 @@ import OpenIcon from "../../assets/images/congball_open_color.svg";
 import { useNavigate } from "react-router";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../recoil/recoil";
+import { useExtractID } from "../../hooks/useExtractID";
 
 interface IMessage {
   id: number;
@@ -20,8 +21,7 @@ interface IMessage {
 }
 
 const Message = ({ id, isOpen, nickName }: IMessage) => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const navigate = useNavigate();
 
   const RedirectToID = () => {

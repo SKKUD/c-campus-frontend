@@ -39,8 +39,7 @@ interface CongMachineProps {
 }
 
 const CongMachine: FC<CongMachineProps> = ({ slide }) => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);

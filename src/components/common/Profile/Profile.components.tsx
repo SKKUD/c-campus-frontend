@@ -15,11 +15,14 @@ import LightGreenBtn from "../Buttons/LightGreenBtn.components";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 import { useExtractID } from "../../../hooks/useExtractID";
 
-const Profile = () => {
+interface IProfile {
+  coin: number
+}
+const Profile = ({coin}: IProfile) => {
   const profiledata = useRecoilValue(UserState);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
-  const coin = 16;
+  // const coin = 16;
 
   return (
     <ProfileContainer>

@@ -99,6 +99,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 0, setTopImg, s
 
     }
   }, [])
+  
   return (
     <ButtonGroupContainer>
       {

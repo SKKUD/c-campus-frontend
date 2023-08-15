@@ -13,19 +13,21 @@ import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../../recoil/recoil";
+import { useExtractID } from "../../../hooks/useExtractID";
+import Profile from "../../common/Profile/Profile.components";
 
 interface CongPhotoMachineProps {
   slide?: number;
 }
 
 const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
+        {match1024 && <Profile />}
         <MachinePhotoImage src={congcam_bf_gif} />
         {match1024 ? (
           <ButtonGroupContainer>

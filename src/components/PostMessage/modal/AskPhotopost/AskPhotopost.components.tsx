@@ -10,6 +10,7 @@ import MakeQuiz from "../MakeQuiz/MakeQuiz.components";
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../../../recoil/recoil";
+import { useExtractID } from "../../../../hooks/useExtractID";
 
 interface AskPhotopostProps {
   handleModalClose: () => void;
@@ -24,8 +25,7 @@ const AskPhotopost: FC<AskPhotopostProps> = ({
   setModalContent,
   submitHandler,
 }) => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const [IsMakingQuiz, setIsMakingQuiz] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = () => {

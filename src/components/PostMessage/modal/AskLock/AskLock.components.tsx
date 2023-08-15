@@ -10,14 +10,14 @@ import MakeQuiz from "../MakeQuiz/MakeQuiz.components";
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../../../recoil/recoil";
+import { useExtractID } from "../../../../hooks/useExtractID";
 
 interface AskLockProps {
   handleModalClose: () => void;
 }
 
 const AskLock: FC<AskLockProps> = ({ handleModalClose }) => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const [IsMakingQuiz, setIsMakingQuiz] = useState(false);
   const navigate = useNavigate();
   return (

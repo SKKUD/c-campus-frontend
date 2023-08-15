@@ -33,14 +33,14 @@ import { UserAuth, UserState } from "../../../recoil/recoil";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import Profile from "../../common/Profile/Profile.components";
 
 interface CongMachineProps {
   slide?: number;
 }
 
 const CongMachine: FC<CongMachineProps> = ({ slide }) => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);
@@ -82,6 +82,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
+        {match1024 && <Profile />}
         <MachineImage src={topimgsrc} />
         <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}

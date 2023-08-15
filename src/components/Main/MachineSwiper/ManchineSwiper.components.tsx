@@ -14,6 +14,7 @@ import { useRecoilState } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { UserAuth } from "../../../recoil/recoil";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import { check } from "prettier";
 
 interface MachineSwiperProps {
   slide: number;
@@ -25,6 +26,9 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
   const currentID = useExtractID();
   const checkAuth = useAuthCheckApi();
 
+  // useEffect(() => {
+  //   console.log("checkAuth in Machine " + checkAuth);
+  // }, [])
   return (
     <SwiperContainer>
       {

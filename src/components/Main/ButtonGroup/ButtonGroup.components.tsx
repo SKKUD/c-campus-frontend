@@ -31,7 +31,7 @@ interface ButtonGroupProps {
 
 const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 0, setTopImg, setBottomImg, SetIsPulled}) => {
   const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const navigate = useNavigate();
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();

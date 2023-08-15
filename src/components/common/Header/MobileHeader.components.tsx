@@ -16,10 +16,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HeaderInfoModal from "./HeaderInfoModal/HeaderInfoModal.components";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../../recoil/recoil";
+import { useExtractID } from "../../../hooks/useExtractID";
 
 const MobileHeader: FC = () => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);

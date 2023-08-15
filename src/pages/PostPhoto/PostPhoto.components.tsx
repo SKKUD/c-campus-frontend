@@ -32,10 +32,10 @@ import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.componen
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
+import { useExtractID } from "../../hooks/useExtractID";
 
 const PostPhoto = () => {
-  const profileUser = useRecoilValue(UserState);
-  const userid = profileUser.userID;
+  const userid = useExtractID();
   const IsWriting = useRecoilValue(IsWritingMessage);
   const setPhotoTaken = useSetRecoilState(PhotoState);
   const match1024 = useMediaQuery("(min-width:1024px)");

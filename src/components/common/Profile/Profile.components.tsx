@@ -48,9 +48,9 @@ const Profile = ({coin}: IProfile) => {
               <path
                 d="M4 4L1 1M4 4L7 7M4 4L7 1M4 4L1 7"
                 stroke="#164300"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
             <div>{coin ? coin : 0}</div>

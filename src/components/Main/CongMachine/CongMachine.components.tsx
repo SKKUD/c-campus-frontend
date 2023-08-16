@@ -40,6 +40,7 @@ import { CheckRemainCount } from "../../../hooks/PullMessage";
 
 // 
 import axios from "axios";
+import PullMessageModal from "../../PullMessageModal/PullMessageModal.components";
 
 interface CongMachineProps {
   slide?: number;
@@ -57,13 +58,15 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const [checkAuth] = useAuthCheckApi();
   const messageNumber = CheckRemainCount(userid);
   const [isPulled, SetIsPulled] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     // check message number
     // console.log("MessageNumber " + messageNumber);
     SetMessageNum(Number(messageNumber));
 
-    if (!isPulled) { //뽑히는 모션이 나와야됨
+    if (!isPulled) {
+      //뽑히는 모션이 나와야됨
       // set gif image
       if (messagenum === 0) {
         setTopImg(cong0_top_gif);
@@ -83,29 +86,31 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
         setTopImg(cong15_top_gif);
       } else if (30 <= messagenum) {
         setTopImg(cong30_top_gif);
-      } 
+      }
     }
   });
 
-  const handleMessage = () => { // web에서 핸들링
+  const handleMessage = () => {
+    // web에서 핸들링
     // pull
     if (messagenum >= 5) {
-      const res = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`, 
-                            { withCredentials: true }
-                          )
-                          .then((response) => {
-                            if (response.status === 400) {
-                              console.log("5개 미만임")
-                            } else if (response.status === 200) {
-                              console.log("성공적으로 뽑음")
-                            } else {
-                              console.log("이외의 오류")
-                            }
-                            
-                          })
-                          .catch((error) => {
-                            console.log(error);
-                          });
+      const res = axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`,
+          { withCredentials: true }
+        )
+        .then((response) => {
+          if (response.status === 400) {
+            console.log("5개 미만임");
+          } else if (response.status === 200) {
+            console.log("성공적으로 뽑음");
+          } else {
+            console.log("이외의 오류");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     // 쪽지 뽑는 gif 재생 후
     SetIsPulled(true);
@@ -115,14 +120,19 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
     // set top img
     if (30 <= messagenum) {
-      setTopImg(cong30_top_come_out_gif)
+      setTopImg(cong30_top_come_out_gif);
     } else if (15 <= messagenum) {
-      setTopImg(cong15_top_come_out_gif)
+      setTopImg(cong15_top_come_out_gif);
     } else if (10 <= messagenum) {
-      setTopImg(cong10_top_come_out_gif)
+      setTopImg(cong10_top_come_out_gif);
     } else if (5 <= messagenum) {
-      setTopImg(cong5_top_come_out_gif)
+      setTopImg(cong5_top_come_out_gif);
     }
+
+    // 모달 보여주기
+    setTimeout(() => {
+      setOpen(true);
+    }, 2600);
   };
 
   const handleWriteMessage = () => {
@@ -133,24 +143,37 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
-        {match1024 && <Profile coin={messagenum}/>}
+        {match1024 && <Profile coin={messagenum} />}
         <MachineImage src={topimgsrc} />
         <MachineImage src={bottomimgsrc} style={{ marginTop: "-1px" }} />
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}
         {match1024 ? ( // 웹일 때
           <ButtonGroupContainer>
             {checkAuth && userAuth === currentID ? (
-              <GreenBtn
-                content={"쪽지 뽑기"}
-                disabled={messagenum < 5 ? true : false}
-                onClick={handleMessage}
-              />
+              <>
+                <GreenBtn
+                  content={"쪽지 뽑기"}
+                  disabled={messagenum < 5 ? true : false}
+                  onClick={handleMessage}
+                />
+                <PullMessageModal
+                  modalOpen={open}
+                  handleModalClose={() => setOpen(false)}
+                />
+              </>
             ) : (
               <GreenBtn content={"쪽지 쓰기"} onClick={handleWriteMessage} />
             )}
           </ButtonGroupContainer>
-        ) : ( // 모바일일 때
-          <ButtonGroup slide={slide} messagenum={messagenum} setTopImg={setTopImg} setBottomImg={setBottomImg} SetIsPulled={SetIsPulled}/>
+        ) : (
+          // 모바일일 때
+          <ButtonGroup
+            slide={slide}
+            messagenum={messagenum}
+            setTopImg={setTopImg}
+            setBottomImg={setBottomImg}
+            SetIsPulled={SetIsPulled}
+          />
         )}
       </CongMachineContentContainer>
     </CongMachineContainer>

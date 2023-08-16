@@ -128,8 +128,25 @@ const MessageView = () => {
       { (currentID === userAuth && axiosMessage) ? ( // check if currentID matched to current userAuth
         <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
           { match1024 && (
-            <MessageViewWebFourcutContainer>
-              <MessageViewContentFrame src={axiosMessage?.image_url ? defaultFrameIcon : (axiosMessage?.image_url)}/>
+            <MessageViewWebFourcutContainer onClick={handleOpen}>
+              {
+                (axiosMessage?.is_quiz || false) ? ( // 퀴즈가 있는지 없는지 확인
+                  // 퀴즈가 없음 (그냥 사진 보여줌)
+                  <MessageViewContentFrame src={lockedFourcut}/>
+                ) : ( // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
+                  <>
+                    {
+                      (axiosMessage?.quiz_is_solved) ? (
+                        // 퀴즈가 풀림
+                        <MessageViewContentFrame src={axiosMessage?.image_url || defaultFrameIcon}/>
+                      )  : (
+                        // 퀴즈가 안 풀림
+                        <MessageViewContentFrame src={lockedFourcut}/>
+                      )
+                    }
+                  </>
+                )
+              }
             </MessageViewWebFourcutContainer>
           )}
           <MessageViewMobileContainer>

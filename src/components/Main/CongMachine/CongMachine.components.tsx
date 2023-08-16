@@ -52,7 +52,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const navigate = useNavigate();
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
-  const [messagenum, SetMessageNum] = useState<number>(5);
+  const [messagenum, SetMessageNum] = useState<number>(0);
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
@@ -63,7 +63,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   useEffect(() => {
     // check message number
     // console.log("MessageNumber " + messageNumber);
-    // SetMessageNum(Number(messageNumber));
+    SetMessageNum(Number(messageNumber));
 
     if (!isPulled) {
       //뽑히는 모션이 나와야됨

@@ -5,24 +5,38 @@ import { useRecoilValue } from "recoil";
 
 export const useMessageSubmitApi = (
   messageCategory: string,
-  backgroundHex: string
+  backgroundHex: string,
+  Message: { content: string; name: string }
 ) => {
   const currentID = useExtractID();
-  const Message = useRecoilValue(MessageState);
+  // const Message = useRecoilValue(MessageState);
   const Photo = useRecoilValue(PhotoFile);
   const Quiz = useRecoilValue(QuizState);
-
+  console.log(messageCategory);
+  console.log(Message.content);
+  console.log(Message.name);
+  console.log(backgroundHex);
+  console.log(Quiz.QuizGiven);
   const submitMessage = () => {
     const formData = new FormData();
-    const jsonObject = {
-      category: messageCategory,
-      content: Message.content,
-      author: Message.name,
-      background_color_code: backgroundHex,
-      is_quiz: Quiz.QuizGiven,
-      quiz_content: Quiz.QuizContent,
-      quiz_answer: Quiz.QuizAnswer,
-    };
+    const jsonObject = Quiz.QuizGiven
+      ? {
+          category: messageCategory,
+          content: Message.content,
+          author: Message.name,
+          background_color_code: backgroundHex,
+          is_quiz: Quiz.QuizGiven,
+          quiz_content: Quiz.QuizContent,
+          quiz_answer: Quiz.QuizAnswer,
+        }
+      : {
+          category: messageCategory,
+          content: Message.content,
+          author: Message.name,
+          background_color_code: backgroundHex,
+          is_quiz: Quiz.QuizGiven,
+        };
+
     Photo && formData.append("file", Photo);
     formData.append(
       "request",

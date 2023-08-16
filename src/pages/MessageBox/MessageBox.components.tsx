@@ -21,6 +21,10 @@ import { useRecoilValue } from "recoil";
 import { UserState } from "../../recoil/recoil";
 import { useExtractID } from "../../hooks/useExtractID";
 
+// import for userAuth
+import { UserAuth } from "../../recoil/recoil";
+import { useRecoilState } from "recoil";
+
 // Message type
 interface IMessages {
   date: string;
@@ -60,32 +64,11 @@ interface IAxiosData {
   image_url?: string;
 }
 
-// data sample
-// const AxiosMessageData: IAxiosMessageData = {
-//   status: 200,
-//   message: "유저 메시지 전체 조회에 성공했습니다",
-//   data: [
-//     {
-//       messageId: 1,
-//       userId: 13,
-//       catergory: "우리가 먹었던 최고의 학식 메뉴",
-//       content: "하이 헬로 봉주르",
-//       author: "명륜 짱짱맨",
-//       isOpened: true,
-//       isPulled: true,
-//       pulledAt: "2023-07-10T16:34:30.388",
-//       imageUuid: "2103980192830981209",
-//       backgroundColorCode: "#D6EABA",
-//       isPublic: true,
-//       quizContent: "우리가 처음 만났던 장소는?",
-//       quizAnswer: "수선관",
-//       quizIsSolved: true,
-//       imageUrl: "https://www.skku.edu"
-//     },
-// }
-
 const MessageList = () => {
+  // auth
+  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
+
   // state for transformed to IMessage
   const [axiosMessage, SetAxiosMessage] = useState<IAxiosMessageData>();
   const [filteredToIMessage, SetFilteredToIMessage] = useState<IMessages[]>([]);
@@ -114,6 +97,8 @@ const MessageList = () => {
   };
 
   useEffect(() => {
+    console.log("userAUth " + userAuth);
+    console.log("currentID " + currentID);
     if (currentID !== "") {
       const fetchData = async () => {
         try {
@@ -172,7 +157,7 @@ const MessageList = () => {
 
       fetchData();
     }
-  }, [currentID]);
+  }, [currentID, userAuth]);
 
   // navigate to message feed
   const RedirectToFeedUrl = () => {
@@ -181,45 +166,55 @@ const MessageList = () => {
 
   return (
     <>
-      {countMessage !== 0 ? (
-        <MessageListContainer>
-          <MessageListHeader>
-            <MessageListHeaderMessageCount>
-              {countMessage}개의 추억
-            </MessageListHeaderMessageCount>
-            <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
-          </MessageListHeader>
-          <MessageDataContainer>
-            <MessageScrollContainer>
-              {filteredToIMessage &&
-                filteredToIMessage.map((messageData: IMessages) => {
-                  return (
-                    <MessageListHoder key={messageData.date}>
-                      <MessageListDate>{messageData.date}</MessageListDate>
-                      <MessageListContent>
-                        {messageData.beans &&
-                          messageData.beans.map((bean: IBean) => {
-                            return (
-                              <Message
-                                key={bean.messageId}
-                                id={bean.messageId}
-                                isOpen={bean.isOpened}
-                                nickName={bean.author}
-                              />
-                            );
-                          })}
-                      </MessageListContent>
-                    </MessageListHoder>
-                  );
-                })}
-            </MessageScrollContainer>
-          </MessageDataContainer>
-        </MessageListContainer>
-      ) : (
-        <MessageBoxEmpty>
-          아직 열린 쪽지가 없습니다 <br /> 먼저 쪽지를 뽑아보세요!
-        </MessageBoxEmpty>
-      )}
+      { // check if it is current userID
+        (userAuth === currentID) ? (
+          <>
+            {countMessage !== 0 ? (
+              <MessageListContainer>
+                <MessageListHeader>
+                  <MessageListHeaderMessageCount>
+                    {countMessage}개의 추억
+                  </MessageListHeaderMessageCount>
+                  <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
+                </MessageListHeader>
+                <MessageDataContainer>
+                  <MessageScrollContainer>
+                    {filteredToIMessage &&
+                      filteredToIMessage.map((messageData: IMessages) => {
+                        return (
+                          <MessageListHoder key={messageData.date}>
+                            <MessageListDate>{messageData.date}</MessageListDate>
+                            <MessageListContent>
+                              {messageData.beans &&
+                                messageData.beans.map((bean: IBean) => {
+                                  return (
+                                    <Message
+                                      key={bean.messageId}
+                                      id={bean.messageId}
+                                      isOpen={bean.isOpened}
+                                      nickName={bean.author}
+                                    />
+                                  );
+                                })}
+                            </MessageListContent>
+                          </MessageListHoder>
+                        );
+                      })}
+                  </MessageScrollContainer>
+                </MessageDataContainer>
+              </MessageListContainer>
+            ) : (
+              <MessageBoxEmpty>
+                아직 열린 쪽지가 없습니다 <br /> 먼저 쪽지를 뽑아보세요!
+              </MessageBoxEmpty>
+            )}
+          </>
+        ) : (
+          <MessageBoxEmpty>
+            다른 사람의 쪽지입니다
+          </MessageBoxEmpty>
+        )
+      }
     </>
   );
 };

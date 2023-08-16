@@ -105,7 +105,7 @@ export const MessageBoxEmpty = styled.div`
   line-height: normal;
   letter-spacing: -0.28px;
 
-  margin-top: 80px;
+  margin-top: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
 `;

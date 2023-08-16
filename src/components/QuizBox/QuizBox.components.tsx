@@ -16,11 +16,19 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import GreenBtn from "../common/Buttons/GreenBtn.components";
 
+// import axios
+import axios from "axios";
+
+// import
+import { useNavigate } from "react-router";
+
 // QuizBox interface
 interface IQuizBox {
   Quiz: string;
   Answer: string;
   handleClose: () => void;
+  userID: string,
+  messageID: string,
 }
 
 // information 색깔 코드
@@ -29,7 +37,8 @@ const GREEN_COLOR = "#8DC63F";
 const GREY_COLOR = "#808080";
 
 // Quiz와 Answer을 props로 받음
-const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
+const QuizBox = ({ Quiz, Answer, handleClose, userID, messageID}: IQuizBox) => {
+  const navigate = useNavigate();
   const [color, SetColor] = useState<string>(""); // information color 색깔 변수
   const [wrongCount, SetWrongCount] = useState<number>(3); // 틀린 횟수 저장하는 변수
   const [isHint, SetIsHint] = useState<boolean>(false); // 힌트가 나오기 시작하는지 저장하는 변수
@@ -84,10 +93,18 @@ const QuizBox = ({ Quiz, Answer, handleClose }: IQuizBox) => {
       SetColor(GREEN_COLOR);
       SetInformation(`정답입니다!`);
 
-      // 변수 초기화 필요하면,,, 아마 다른 컴포넌트로 넘어갈 것 같아서 일단 주석처리
-      // SetWrongCount(3);
-      // SetIsHint(false);
-      // SetHintCount(1);
+      // 정답
+      const res = axios.post(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userID}/messages/${messageID}/quiz`, {
+                                      withCredentials: true,
+                                    })  
+                                    .then((response) => {
+                                      console.log(response);
+                                      // 정상적으로 처리되면 리다이렉트 시켜줌
+                                      setTimeout(() => navigate(`/message/${userID}/${messageID}`), 2000);
+                                    })
+                                    .catch((error) => {
+
+                                    });
     }
 
     // 정답이 아닐 때,

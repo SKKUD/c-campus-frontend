@@ -27,12 +27,18 @@ import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import { ExportElementAsPNG } from "../../utils/downloadPhoto";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { IsWritingMessage, PhotoState, UserState } from "../../recoil/recoil";
+import {
+  IsWritingMessage,
+  PhotoFile,
+  PhotoState,
+  UserState,
+} from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
+import { toBlob } from "html-to-image";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -82,9 +88,31 @@ const PostPhoto = () => {
   };
 
   const [modalOpen, setModalOpen] = useState(false);
+  const setPhotoFile = useSetRecoilState(PhotoFile);
+  // isWriting일때 사진 처리
+  const setRecoilPhotoFile = async () => {
+    const blob = await toBlob(
+      document.querySelector(".fourcutImage") as HTMLElement
+    );
+
+    if (blob) {
+      const data = {
+        title: "fourcut",
+        files: [
+          new File([blob], "CongcamFourcut.png", {
+            type: blob.type,
+          }),
+        ],
+      };
+      setPhotoFile(data.files[0]);
+      console.log(data.files[0]);
+    }
+  };
+
   const handleModalOpen = () => {
     setModalOpen(true);
     setPhotoURL(setPhotoTaken);
+    setRecoilPhotoFile();
   };
   const handleModalClose = () => setModalOpen(false);
 

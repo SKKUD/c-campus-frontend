@@ -108,4 +108,8 @@ export const MessageBoxEmpty = styled.div`
   margin-top: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
+
+  @media (min-width: 1024px) {
+    margin-top: 80px;
+  }
 `;

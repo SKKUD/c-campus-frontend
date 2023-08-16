@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PrevBtn, NextBtn } from "./SwiperNavigationBtn.components";
 import CongMachine from "../CongMachine/CongMachine.components";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import CongPhotoMachine from "../CongMachine/CongPhotoMachine.components";
 
 // import for recoil
@@ -28,7 +28,7 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const checkAuth = useAuthCheckApi();
-  const messageNumber = CheckRemainCount(userAuth);
+  const messageNumber = CheckRemainCount(currentID);
 
   // useEffect(() => {
   //   console.log("checkAuth in Machine " + checkAuth);

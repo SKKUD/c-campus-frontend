@@ -55,7 +55,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
-  const messageNumber = CheckRemainCount(userAuth);
+  const messageNumber = CheckRemainCount(userid);
   const [isPulled, SetIsPulled] = useState<boolean>(false);
 
   useEffect(() => {

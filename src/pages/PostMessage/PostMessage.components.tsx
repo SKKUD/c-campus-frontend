@@ -137,8 +137,11 @@ const PostMessage = () => {
   };
 
   // submit handler
-  const [submitMessage] = useMessageSubmitApi(currentSubject, currentColorHex);
-  const submitHandler = () => {
+  const [submitMessage] = useMessageSubmitApi(currentSubject, currentColorHex, {
+    name: nameText,
+    content: contentText,
+  });
+  const submitHandler = async () => {
     handleModalClose();
     console.log(modalContent);
     // submit

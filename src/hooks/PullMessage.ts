@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { UserAuth } from "../recoil/recoil";
-import { useRecoilState } from "recoil";
-
-import { useAuthCheckApi } from "./LoginAxios";
 
 // 뽑지않은 메시지 확인하기
 export const CheckRemainCount = (userAuth: string) => {
@@ -13,26 +9,29 @@ export const CheckRemainCount = (userAuth: string) => {
   useEffect(() => {
     // console.log("auth " + checkAuth);
     const fetchRemainCount = async () => {
-      if (userAuth) { // check userAuth exist
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/message/remain-count`,
-                      { withCredentials: true }
-                    )
-                    .then((response) => {
-                      if (response.status === 200) {
-                        SetMessageNumber(response.data.data);
-                      } else {
-                        // error occured
-                        console.log("error");
-                        SetMessageNumber("0");
-                      }
-                    })
-                    .catch((error) => {
-                      console.log(error);
-                    });
+      if (userAuth) {
+        // check userAuth exist
+        const res = await axios
+          .get(
+            `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/message/remain-count`,
+            { withCredentials: true }
+          )
+          .then((response) => {
+            if (response.status === 200) {
+              SetMessageNumber(response.data.data);
+            } else {
+              // error occured
+              console.log("error");
+              SetMessageNumber("0");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     };
     fetchRemainCount();
-  }, []);
+  }, [userAuth]);
   
   // return
   return [messageNumber];

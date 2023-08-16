@@ -14,8 +14,7 @@ import {
 import { usePhotoGetApi } from "../../hooks/PhotoAxios";
 
 // import for auth
-import { UserAuth } from "../../recoil/recoil";
-import { useRecoilState } from "recoil";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // import for extract current ID
 import { useExtractID } from "../../hooks/useExtractID";
@@ -56,7 +55,7 @@ const photoArr = [
 const PhotoBox = () => {
   // check ID
   const currentID = useExtractID();
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const [userAuth] = useAuthCheckApi();
 
   // photo
   const [photo] = usePhotoGetApi();
@@ -69,6 +68,7 @@ const PhotoBox = () => {
   useEffect(() => {
     console.log("userAuth " + userAuth);
     console.log("currentID " + currentID);
+    console.log(typeof(userAuth));
     console.log(photo.length);
     console.log(photo);
     SetPhotoNumber(photo.length);
@@ -77,7 +77,7 @@ const PhotoBox = () => {
   return (
     <>
       {
-        (userAuth === currentID) ? (
+        (String(userAuth) === (currentID)) ? (
           <>
             { (photoNumber !== 0) ? (
                 <PhotoBoxContainer>

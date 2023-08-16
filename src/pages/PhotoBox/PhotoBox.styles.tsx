@@ -42,3 +42,23 @@ export const PhotoWrapper = styled.div`
 export const Photo = styled.img`
   width: 100%;
 `;
+
+export const PhotoBoxEmpty = styled.div`
+  width: 90%;
+  max-width: 375px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: var(--font-black, #303030);
+  text-align: center;
+  font-family: GmarketSans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: normal;
+  letter-spacing: -0.28px;
+
+  margin-top: 100px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+`;

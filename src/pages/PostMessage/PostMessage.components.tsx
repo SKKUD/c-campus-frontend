@@ -77,7 +77,7 @@ const PostMessage = () => {
   const [nameCount, SetNameCount] = useState<number>(0);
   const [contentText, SetContentText] = useState<string>(Message.content);
   const [contentCount, SetContentCount] = useState<number>(0);
-  const [currentColorHex, SetCurrentColorHex] = useState<string>("");
+  const [currentColorHex, SetCurrentColorHex] = useState<string>("#D6EABA");
   const [currentColor, SetCurrentColor] = useState<number>(0);
   const [done, setDone] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");

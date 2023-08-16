@@ -130,7 +130,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ slide, messagenum = 0, setTopImg, s
             <GreenBtn
               onClick={() => movetoMessagePost()}
               content={"쪽지 쓰기"}
-              disabled={messagenum < 5 ? true : false}
             />
             <WhiteBtn
               onClick={() => movetoMessageFeed()}

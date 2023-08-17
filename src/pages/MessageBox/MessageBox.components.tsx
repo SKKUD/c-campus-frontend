@@ -98,8 +98,8 @@ const MessageList = () => {
   };
 
   useEffect(() => {
-    console.log("userAUth " + userAuth);
-    console.log("currentID " + currentID);
+    console.log("userAUth " + typeof(userAuth));
+    console.log("currentID " + typeof(currentID));
     if (currentID !== "") {
       const fetchData = async () => {
         try {
@@ -169,7 +169,7 @@ const MessageList = () => {
   return (
     <>
       { // check if it is current userID
-        (userAuth === currentID) ? (
+        (String(userAuth) === currentID) ? (
           <>
             {countMessage !== 0 ? (
               <MessageListContainer>

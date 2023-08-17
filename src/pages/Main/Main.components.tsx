@@ -1,5 +1,9 @@
 import { FC, useEffect, useState } from "react";
-import { MainContainer, MainBackground } from "./Main.styles";
+import {
+  MainContainer,
+  MainBackground,
+  BackgroundOfMainContainer,
+} from "./Main.styles";
 import ManchineSwiper from "../../components/Main/MachineSwiper/ManchineSwiper.components";
 import { useExtractID } from "../../hooks/useExtractID";
 import { useAuthCheckApi, useUserProfileGetApi } from "../../hooks/LoginAxios";
@@ -27,10 +31,12 @@ const Main: FC = () => {
   }, [profile]);
 
   return (
-    <MainContainer>
-      <ManchineSwiper slide={slide} setSlide={setSlide} />
-      <MainBackground />
-    </MainContainer>
+    <BackgroundOfMainContainer>
+      <MainContainer>
+        <ManchineSwiper slide={slide} setSlide={setSlide} />
+        <MainBackground />
+      </MainContainer>
+    </BackgroundOfMainContainer>
   );
 };
 

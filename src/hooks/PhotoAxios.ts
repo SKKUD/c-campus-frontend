@@ -10,20 +10,18 @@ export const usePhotoGetApi = () => {
   useEffect(() => {
     if (currentID) {
       const fetchEvents = async () => {
-        const res = await axios.get(
-          process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`
-          // {
-          //   headers: {
-          //     AUTHORIZATION: AUTHORIZATION,
-          //   },
-          // }
-        ).then((response) => {
-          setPhoto(response.data.data);
-          console.log(response.data.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        })
+        const res = await axios
+          .get(
+            process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`,
+            { withCredentials: true }
+          )
+          .then((response) => {
+            setPhoto(response.data.data);
+            console.log(response.data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       };
 
       fetchEvents();
@@ -78,7 +76,8 @@ export const usePhotoDeleteApi = () => {
   const deleteFourcutPhoto = async (photoid: string) => {
     await axios
       .delete(
-        `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos/${photoid}`
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos/${photoid}`,
+        { withCredentials: true }
       )
       .then((data) => console.log(data))
       .catch((error) => console.log(error));

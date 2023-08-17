@@ -32,8 +32,10 @@ import { useMediaQuery } from "@mui/material";
 // 
 import axios from "axios";
 
+// auth
 import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // interface
 interface IMessageData {
@@ -67,7 +69,7 @@ const MessageView = () => {
 
   // axios state
   const [axiosMessage, SetAxiosMessage] = useState<IData>();
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const [userAuth] = useAuthCheckApi();
 
   // mui-modal variable
   const [open, setOpen] = useState<boolean>(false);
@@ -104,15 +106,15 @@ const MessageView = () => {
   useEffect(() => {
     // extract messageID
     const messageID: string[] = extractMessageID();
-
-    SetMessageID(messageID[1]);
-    SetCurrentID(messageID[0]);
+    SetMessageID(messageID[0]);
+    SetCurrentID(messageID[1]);
 
     // axios get
-    console.log(`${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`);
+    console.log(`${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`);
     const response = axios
       .get(
-        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`,
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === 200) {
@@ -132,7 +134,7 @@ const MessageView = () => {
 
   return (
     <>
-      { (currentID === userAuth && axiosMessage) ? ( // check if currentID matched to current userAuth
+      { (currentID === String(userAuth) && axiosMessage) ? ( // check if currentID matched to current userAuth
         <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
           { match1024 && ( // 웹 환경일 때
             <MessageViewWebFourcutContainer onClick={handleOpen}>

@@ -24,6 +24,7 @@ import { useExtractID } from "../../hooks/useExtractID";
 // import for userAuth
 import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // Message type
 interface IMessages {
@@ -66,7 +67,7 @@ interface IAxiosData {
 
 const MessageList = () => {
   // auth
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const [userAuth] = useAuthCheckApi();
   const currentID = useExtractID();
 
   // state for transformed to IMessage
@@ -97,13 +98,14 @@ const MessageList = () => {
   };
 
   useEffect(() => {
-    console.log("userAUth " + userAuth);
-    console.log("currentID " + currentID);
+    console.log("userAUth " + typeof(userAuth));
+    console.log("currentID " + typeof(currentID));
     if (currentID !== "") {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`
+            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`,
+            { withCredentials: true }
           );
 
           const axiosData: IAxiosMessageData = response.data;
@@ -167,7 +169,7 @@ const MessageList = () => {
   return (
     <>
       { // check if it is current userID
-        (userAuth === currentID) ? (
+        (String(userAuth) === currentID) ? (
           <>
             {countMessage !== 0 ? (
               <MessageListContainer>

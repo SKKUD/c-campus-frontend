@@ -128,7 +128,7 @@ const MessageView = () => {
 
   return (
     <>
-      { (currentID === userAuth && axiosMessage) ? ( // check if currentID matched to current userAuth
+      { (currentID === String(userAuth) && axiosMessage) ? ( // check if currentID matched to current userAuth
         <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
           { match1024 && (
             <MessageViewWebFourcutContainer onClick={handleOpen}>

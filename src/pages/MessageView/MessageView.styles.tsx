@@ -44,7 +44,8 @@ export const MessageViewPublicToggleContainer = styled.div`
   max-width: 375px;
   display: flex;
   justify-content: right;
-  margin-right: 10px;
+  margin: 0 auto;
+  padding-right: 15px;
 
   @media (min-width: 1024px) {
     width: 100%;

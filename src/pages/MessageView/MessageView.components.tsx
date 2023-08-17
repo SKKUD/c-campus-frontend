@@ -76,6 +76,9 @@ const MessageView = () => {
   const [stateMessageID, SetMessageID] = useState<string>("");
   const [currentID, SetCurrentID] = useState<string>("");
 
+  // state for answer
+  const [isAnswer, SetIsAnswer] = useState<boolean>(false);
+
   // mui-modal function
   const handleOpen = () => {
     setOpen(true);
@@ -101,6 +104,7 @@ const MessageView = () => {
   useEffect(() => {
     // extract messageID
     const messageID: string[] = extractMessageID();
+
     SetMessageID(messageID[1]);
     SetCurrentID(messageID[0]);
 
@@ -113,6 +117,7 @@ const MessageView = () => {
       .then((response) => {
         if (response.data.status === 200) {
           console.log(response.data.data);
+          SetIsAnswer(response.data.data.quiz_is_solved || false);
           SetAxiosMessage(response.data.data);
         }
       })
@@ -121,29 +126,40 @@ const MessageView = () => {
           console.log(error);
         }
       });
+      console.log(axiosMessage);
+      console.log(currentID === userAuth);
   }, []); 
 
   return (
     <>
       { (currentID === userAuth && axiosMessage) ? ( // check if currentID matched to current userAuth
         <MessageViewContainer backgroundColor={axiosMessage?.background_color_code || ""}>
-          { match1024 && (
+          { match1024 && ( // 웹 환경일 때
             <MessageViewWebFourcutContainer onClick={handleOpen}>
               {
-                (axiosMessage?.is_quiz || false) ? ( // 퀴즈가 있는지 없는지 확인
-                  // 퀴즈가 없음 (그냥 사진 보여줌)
-                  <MessageViewContentFrame src={lockedFourcut}/>
-                ) : ( // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
+                (axiosMessage?.image_url || false) ? ( // 이미지가 있는지 없는지 확인
                   <>
                     {
-                      (axiosMessage?.quiz_is_solved) ? (
-                        // 퀴즈가 풀림
-                        <MessageViewContentFrame src={axiosMessage?.image_url || defaultFrameIcon}/>
-                      )  : (
-                        // 퀴즈가 안 풀림
+                      (axiosMessage?.is_quiz || false) ? ( // 퀴즈가 있는지 없는지 확인
+                        // 퀴즈가 없음 (그냥 사진 보여줌)
                         <MessageViewContentFrame src={lockedFourcut}/>
+                      ) : ( // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
+                        <>
+                          {
+                            (isAnswer) ? (
+                              // 퀴즈가 풀림
+                              <MessageViewContentFrame src={axiosMessage?.image_url || defaultFrameIcon}/>
+                            )  : (
+                              // 퀴즈가 안 풀림
+                              <MessageViewContentFrame src={lockedFourcut}/>
+                            )
+                          }
+                        </>
                       )
                     }
+                  </>
+                ) : (
+                  <>
                   </>
                 )
               }
@@ -170,23 +186,32 @@ const MessageView = () => {
               {/* Main Content */}
               <MessageViewContentMainContainer className="MessageViewCenter">
                 {
-                  !match1024 ? (
+                  !match1024 ? ( // 모바일일 때
                     <MessageViewFourcutFrameContainer onClick={handleOpen}>
                       {
-                        (axiosMessage?.is_quiz || false) ? ( // 퀴즈가 있는지 없는지 확인
-                          // 퀴즈가 없음 (그냥 사진 보여줌)
-                          <MessageViewContentFrame src={lockedFourcut}/>
-                        ) : ( // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
+                        (axiosMessage?.image_url || false) ? ( // 이미지가 있는지 없는지 확인
                           <>
                             {
-                              (axiosMessage?.quiz_is_solved) ? (
-                                // 퀴즈가 풀림
-                                <MessageViewContentFrame src={axiosMessage?.image_url || defaultFrameIcon}/>
-                              )  : (
-                                // 퀴즈가 안 풀림
+                              (axiosMessage?.is_quiz || false) ? ( // 퀴즈가 있는지 없는지 확인
+                                // 퀴즈가 없음 (그냥 사진 보여줌)
                                 <MessageViewContentFrame src={lockedFourcut}/>
+                              ) : ( // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
+                                <>
+                                  {
+                                    (isAnswer) ? (
+                                      // 퀴즈가 풀림
+                                      <MessageViewContentFrame src={axiosMessage?.image_url || defaultFrameIcon}/>
+                                    )  : (
+                                      // 퀴즈가 안 풀림
+                                      <MessageViewContentFrame src={lockedFourcut}/>
+                                    )
+                                  }
+                                </>
                               )
                             }
+                          </>
+                        ) : (
+                          <>
                           </>
                         )
                       }

@@ -53,7 +53,8 @@ const MessageFeed = () => {
     if (currentId !== "") {
       const res = axios
         .get(
-          `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentId}/messages/pulled`
+          `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentId}/messages/pulled`,
+          { withCredentials: true }
         )
         .then((response) => {
           const axiosData: IAxiosMessageData = response.data;

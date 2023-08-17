@@ -34,6 +34,9 @@ export const InfoImgConatiner = styled.div`
   width: 400px;
   border-radius: 15px;
   z-index: 10;
+  @media (max-width: 1280px) {
+    width: 280px;
+  }
 `;
 
 export const InfoPaper = styled.img`
@@ -52,5 +55,9 @@ export const ContentConatiner = styled.div`
   overflow: hidden;
   > div {
     padding-top: 30px;
+  }
+  @media (max-width: 1280px) {
+    width: 280px;
+    height: 500px;
   }
 `;

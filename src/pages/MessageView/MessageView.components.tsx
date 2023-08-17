@@ -108,7 +108,8 @@ const MessageView = () => {
     console.log(`${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`);
     const response = axios
       .get(
-        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`,
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === 200) {

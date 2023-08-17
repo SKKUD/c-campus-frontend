@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import Modal from "@mui/material/Modal";
 import {
   ModalContainer,
-  ModalContentContainer,
+  ModalContainerInner,
   CloseButtonContainer,
   CloseButton,
 } from "./ModalLayout.styles";
@@ -21,7 +21,7 @@ const ModalLayout: FC<ModalLayoutProps> = ({
   return (
     <Modal open={modalOpen} onClose={handleModalClose}>
       <ModalContainer>
-        {children}
+        <ModalContainerInner>{children}</ModalContainerInner>
       </ModalContainer>
     </Modal>
   );

@@ -11,7 +11,6 @@ export const ShowImgContainer = styled.div`
 
   border-radius: 20px;
   margin: auto;
-  margin-top: 100px;
 `;
 
 export const ShowImgQuitButtonContainer = styled.div`

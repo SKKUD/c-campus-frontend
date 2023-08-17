@@ -76,8 +76,8 @@ const MessageView = () => {
   const [userAuth] = useAuthCheckApi();
 
   // mui-modal variable
-  const [open, setOpen] = useState<boolean>(false);
-  const [modalContent, SetModalContent] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(true);
+  const [modalContent, SetModalContent] = useState<string>("d");
 
   // ID state
   const [stateMessageID, SetMessageID] = useState<string>("");

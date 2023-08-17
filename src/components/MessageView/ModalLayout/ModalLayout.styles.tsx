@@ -9,6 +9,16 @@ export const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
 `;
 
+export const ModalContainerInner = styled.div`
+  height: calc(100vh + 60px);
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+`;
+
 export const ModalContentContainer = styled.div`
   width: 100%;
   border-radius: 15px;

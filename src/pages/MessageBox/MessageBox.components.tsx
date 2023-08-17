@@ -24,6 +24,7 @@ import { useExtractID } from "../../hooks/useExtractID";
 // import for userAuth
 import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // Message type
 interface IMessages {
@@ -66,7 +67,7 @@ interface IAxiosData {
 
 const MessageList = () => {
   // auth
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const [userAuth] = useAuthCheckApi();
   const currentID = useExtractID();
 
   // state for transformed to IMessage

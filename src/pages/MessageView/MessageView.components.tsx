@@ -93,8 +93,9 @@ const MessageView = () => {
 
   const handleClose = () => {
     setOpen(false);
+    window.location.reload();
   };
-  
+
   const extractMessageID = () => {
     // get current url
     const currentUrl: string = window.location.href;

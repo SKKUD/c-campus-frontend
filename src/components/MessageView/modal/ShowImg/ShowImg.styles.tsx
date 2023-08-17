@@ -7,7 +7,7 @@ export const ShowImgContainer = styled.div`
   flex-direction: column;
 
   width: 90vw;
-  max-width: 370px;
+  max-width: 300px;
 
   border-radius: 20px;
   margin: auto;
@@ -25,7 +25,15 @@ export const ShowImgQuitButton = styled(CloseIcon)`
   margin-right: 10px;
 `;
 
+export const ShowImgImgContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 export const ShowImgImgContent = styled.img`
   width: 236px;
   height: 602px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;

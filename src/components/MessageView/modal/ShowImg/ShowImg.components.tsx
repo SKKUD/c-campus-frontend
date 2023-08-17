@@ -2,6 +2,7 @@ import {
   ShowImgContainer,
   ShowImgQuitButtonContainer,
   ShowImgQuitButton,
+  ShowImgImgContainer,
   ShowImgImgContent
 } from "./ShowImg.styles";
 
@@ -19,7 +20,9 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
       <ShowImgQuitButtonContainer>
         <ShowImgQuitButton onClick={handleClose}/>
       </ShowImgQuitButtonContainer>
-      <ShowImgImgContent src={image_url || defaultFrame}/>
+      <ShowImgImgContainer>
+        <ShowImgImgContent src={image_url || defaultFrame}/>
+      </ShowImgImgContainer>
       <WhiteBtn content="공유하기"/>
     </ShowImgContainer>
   );

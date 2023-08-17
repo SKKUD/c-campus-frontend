@@ -10,18 +10,16 @@ export const MessageViewMobileContainer = styled.div`
 
 export const MessageViewContainer = styled.div<{ backgroundColor: string }>`
   background-color: ${(props) => props.backgroundColor};
-  width: 100%;
-  max-width: 375px;
-
+  width: 100vw;
+  height: 100vh;
   overflow: scroll;
-  margin: auto;
   padding-top: 60px;
 
   @media (min-width: 1024px) {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    max-width: 1024px;
+
     padding-top: 80px;
   }
 `;
@@ -83,7 +81,13 @@ export const MessageViewTitle = styled.div`
   }
 `;
 
-export const MessageViewContent = styled.div``;
+export const MessageViewContent = styled.div`
+  max-width: 375px;
+  margin: 0 auto;
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
+`;
 
 export const MessageViewContentReceiver = styled.div`
   margin: 0px;

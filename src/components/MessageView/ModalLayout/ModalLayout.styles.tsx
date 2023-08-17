@@ -12,6 +12,9 @@ export const ModalContainer = styled.div`
 export const ModalContainerInner = styled.div`
   height: calc(100vh + 60px);
   overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;

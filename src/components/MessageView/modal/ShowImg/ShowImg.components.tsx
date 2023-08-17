@@ -3,7 +3,8 @@ import {
   ShowImgQuitButtonContainer,
   ShowImgQuitButton,
   ShowImgImgContainer,
-  ShowImgImgContent
+  ShowImgImgContent,
+  ShowImgButtonContainer
 } from "./ShowImg.styles";
 
 import WhiteBtn from "../../../common/Buttons/WhiteBtn.components";
@@ -23,7 +24,9 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
       <ShowImgImgContainer>
         <ShowImgImgContent src={image_url || defaultFrame}/>
       </ShowImgImgContainer>
-      <WhiteBtn content="공유하기"/>
+      <ShowImgButtonContainer>
+        <WhiteBtn content="공유하기"/>
+      </ShowImgButtonContainer>
     </ShowImgContainer>
   );
 }

@@ -16,11 +16,11 @@ export const ShowImgContainer = styled.div`
 export const ShowImgQuitButtonContainer = styled.div`
   display: flex;
   justify-content: right;
+  margin-top: 60px;
 `;
 
 export const ShowImgQuitButton = styled(CloseIcon)`
   background-color: transparent;
-  margin-top: 10px;
   margin-right: 10px;
 `;
 
@@ -35,4 +35,8 @@ export const ShowImgImgContent = styled.img`
   height: 602px;
   margin-top: 10px;
   margin-bottom: 10px;
+`;
+
+export const ShowImgButtonContainer = styled.div`
+  margin-bottom: 20px;
 `;

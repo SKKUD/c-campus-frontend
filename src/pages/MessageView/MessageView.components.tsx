@@ -76,7 +76,7 @@ const MessageView = () => {
   const [userAuth] = useAuthCheckApi();
 
   // mui-modal variable
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const [modalContent, SetModalContent] = useState<string>("d");
 
   // ID state
@@ -126,6 +126,9 @@ const MessageView = () => {
         if (response.data.status === 200) {
           console.log(response.data.data);
           SetIsAnswer(response.data.data.quiz_is_solved || false);
+          if (response.data.data.quiz_is_solved) { // if quiz is solved, change modal to fourcut
+            SetModalContent("정답입니다");
+          }
           SetAxiosMessage(response.data.data);
         }
       })

@@ -103,7 +103,8 @@ const MessageList = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`
+            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`,
+            { withCredentials: true }
           );
 
           const axiosData: IAxiosMessageData = response.data;

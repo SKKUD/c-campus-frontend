@@ -29,7 +29,7 @@ const Router = () => {
             <Route path="/message/feed/:id" element={<WebCongcamFeed />} />{" "}
             {/*쪽지 피드*/}
             <Route
-              path="/message/:userid/:messageid"
+              path="/message/:messageid/:userid"
               element={<MessageView />}
             />
             <Route path="/message/post/:id" element={<PostMessage />} />
@@ -46,7 +46,7 @@ const Router = () => {
             <Route path="/message/:id" element={<MessageBox />} />
             {/*쪽지 보관함(포켓볼)*/}
             <Route
-              path="/message/:userid/:messageid"
+              path="/message/:messageid/:userid"
               element={<MessageView />}
             />
             {/*개별 쪽지 조희*/}

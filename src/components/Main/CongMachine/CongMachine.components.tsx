@@ -92,7 +92,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
       setTopImg(topImg);
     }
-  }, [checkAuth, messagenum, isPulled]);
+  }, [checkAuth, messagenum, isPulled, messageNumber]);
   
 
   const handleMessage = () => {

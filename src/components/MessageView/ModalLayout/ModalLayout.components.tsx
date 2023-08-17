@@ -21,12 +21,7 @@ const ModalLayout: FC<ModalLayoutProps> = ({
   return (
     <Modal open={modalOpen} onClose={handleModalClose}>
       <ModalContainer>
-        <ModalContentContainer>
-          <CloseButtonContainer>
-            <CloseButton onClick={handleModalClose} />
-          </CloseButtonContainer>
-          {children}
-        </ModalContentContainer>
+        {children}
       </ModalContainer>
     </Modal>
   );

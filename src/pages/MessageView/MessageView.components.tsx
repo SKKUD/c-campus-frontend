@@ -37,6 +37,10 @@ import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
 import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
+// import modal
+import ShowImg from "../../components/MessageView/modal/ShowImg/ShowImg.components";
+import ModalLayout from "../../components/MessageView/ModalLayout/ModalLayout.components";
+
 // interface
 interface IMessageData {
   status: number,
@@ -73,6 +77,7 @@ const MessageView = () => {
 
   // mui-modal variable
   const [open, setOpen] = useState<boolean>(false);
+  const [modalContent, SetModalContent] = useState<string>("");
 
   // ID state
   const [stateMessageID, SetMessageID] = useState<string>("");
@@ -191,7 +196,7 @@ const MessageView = () => {
                   !match1024 ? ( // 모바일일 때
                     <MessageViewFourcutFrameContainer onClick={handleOpen}>
                       {
-                        (axiosMessage?.image_url || false) ? ( // 이미지가 있는지 없는지 확인
+                        (axiosMessage?.image_url || true) ? ( // 이미지가 있는지 없는지 확인
                           <>
                             {
                               (axiosMessage?.is_quiz || false) ? ( // 퀴즈가 있는지 없는지 확인
@@ -222,17 +227,28 @@ const MessageView = () => {
                     <></>
                   )
                 }
-                <Modal open={open} onClose={handleClose}>
+                <ModalLayout modalOpen={open} handleModalClose={handleClose}>
+                  {
+                    modalContent === "" ? (
+                      <QuizBox
+                        Quiz={axiosMessage.quiz_content || "우리가 처음 만난 곳은?"}
+                        Answer={axiosMessage.quiz_answer || "수선관"}
+                        handleClose={handleClose}
+                        SetModalContent={SetModalContent}
+                        userID={userAuth}
+                        messageID={String(axiosMessage.message_id)}
+                      />
+                    ) : (
+                      <ShowImg handleClose={handleClose} image_url={axiosMessage.image_url}/>
+                    )
+                  }
+                </ModalLayout>
+
+                {/* <Modal>
                   <Box>
-                    <QuizBox
-                      Quiz={axiosMessage.quiz_content || "우리가 처음 만난 곳은?"}
-                      Answer={axiosMessage.quiz_answer || "수선관"}
-                      handleClose={handleClose}
-                      userID={userAuth}
-                      messageID={String(axiosMessage.message_id)}
-                    />
+      
                   </Box>
-                </Modal>
+                </Modal> */}
                 <MessageViewContentMainText>
                   {axiosMessage?.content}
                 </MessageViewContentMainText>

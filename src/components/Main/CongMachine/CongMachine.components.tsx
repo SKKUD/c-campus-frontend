@@ -61,35 +61,39 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    // check message number
-    checkAuth && String(checkAuth) === userid
-      ? SetMessageNum(Number(messageNumber))
-      : SetMessageNum(5);
+    if (checkAuth && String(checkAuth) === userid) {
+      SetMessageNum(Number(messageNumber));
+    } else {
+      SetMessageNum(5);
+    }
 
     if (!isPulled) {
-      //뽑히는 모션이 나와야됨
-      // set gif image
+      let topImg;
+
       if (messagenum === 0) {
-        setTopImg(cong0_top_gif);
+        topImg = cong0_top_gif;
       } else if (messagenum === 1) {
-        setTopImg(cong1_top_gif);
+        topImg = cong1_top_gif;
       } else if (messagenum === 2) {
-        setTopImg(cong2_top_gif);
+        topImg = cong2_top_gif;
       } else if (messagenum === 3) {
-        setTopImg(cong3_top_gif);
+        topImg = cong3_top_gif;
       } else if (messagenum === 4) {
-        setTopImg(cong4_top_gif);
+        topImg = cong4_top_gif;
       } else if (5 <= messagenum && messagenum < 10) {
-        setTopImg(cong5_top_gif);
+        topImg = cong5_top_gif;
       } else if (10 <= messagenum && messagenum < 15) {
-        setTopImg(cong10_top_gif);
+        topImg = cong10_top_gif;
       } else if (15 <= messagenum && messagenum < 30) {
-        setTopImg(cong15_top_gif);
+        topImg = cong15_top_gif;
       } else if (30 <= messagenum) {
-        setTopImg(cong30_top_gif);
+        topImg = cong30_top_gif;
       }
+
+      setTopImg(topImg);
     }
-  }, [checkAuth]);
+  }, [checkAuth, messagenum, isPulled]);
+  
 
   const handleMessage = () => {
     // web에서 핸들링

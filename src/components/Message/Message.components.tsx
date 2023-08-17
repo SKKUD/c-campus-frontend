@@ -25,7 +25,7 @@ const Message = ({ id, isOpen, nickName }: IMessage) => {
   const navigate = useNavigate();
 
   const RedirectToID = () => {
-    navigate(`/message/${userid}/${id}`);
+    navigate(`/message/${id}/${userid}`);
   };
 
   return (

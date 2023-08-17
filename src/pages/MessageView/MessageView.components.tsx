@@ -101,14 +101,14 @@ const MessageView = () => {
   useEffect(() => {
     // extract messageID
     const messageID: string[] = extractMessageID();
-    SetMessageID(messageID[1]);
-    SetCurrentID(messageID[0]);
+    SetMessageID(messageID[0]);
+    SetCurrentID(messageID[1]);
 
     // axios get
-    console.log(`${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`);
+    console.log(`${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`);
     const response = axios
       .get(
-        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`,
+        `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`,
         { withCredentials: true }
       )
       .then((response) => {

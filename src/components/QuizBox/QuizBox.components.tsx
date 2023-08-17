@@ -100,7 +100,7 @@ const QuizBox = ({ Quiz, Answer, handleClose, userID, messageID}: IQuizBox) => {
                                     .then((response) => {
                                       console.log(response);
                                       // 정상적으로 처리되면 리다이렉트 시켜줌
-                                      setTimeout(() => navigate(`/message/${userID}/${messageID}`), 2000);
+                                      setTimeout(() => navigate(`/message/${messageID}/${userID}`), 2000);
                                     })
                                     .catch((error) => {
 

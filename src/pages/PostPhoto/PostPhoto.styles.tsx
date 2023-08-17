@@ -94,4 +94,5 @@ export const WebGreenBtnWrap = styled.div<WebGreenBtnWrapProps>`
   padding-right: ${(props) => (props.done ? "0px" : "50px")};
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 30px;
 `;

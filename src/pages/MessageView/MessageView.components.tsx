@@ -32,8 +32,10 @@ import { useMediaQuery } from "@mui/material";
 // 
 import axios from "axios";
 
+// auth
 import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // interface
 interface IMessageData {
@@ -67,7 +69,7 @@ const MessageView = () => {
 
   // axios state
   const [axiosMessage, SetAxiosMessage] = useState<IData>();
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const [userAuth] = useAuthCheckApi();
 
   // mui-modal variable
   const [open, setOpen] = useState<boolean>(false);

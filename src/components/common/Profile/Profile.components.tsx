@@ -7,7 +7,7 @@ import {
   CoinOrBtnWrapper,
 } from "./Profile.styles";
 import coinicon from "../../../assets/images/congCoin.png";
-import profileimage from "../../../assets/images/img_profile_ohe.jpeg";
+import profileimage from "../../../assets/images/default_profile.jpeg";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../../recoil/recoil";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
@@ -16,9 +16,9 @@ import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 import { useExtractID } from "../../../hooks/useExtractID";
 
 interface IProfile {
-  coin: number
+  coin: number;
 }
-const Profile = ({coin}: IProfile) => {
+const Profile = ({ coin }: IProfile) => {
   const profiledata = useRecoilValue(UserState);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
@@ -27,7 +27,13 @@ const Profile = ({coin}: IProfile) => {
   return (
     <ProfileContainer>
       <ProfileWrapper>
-        <ProfileImage src={profileimage} />
+        <ProfileImage
+          src={
+            profiledata.profileImageUrl
+              ? profiledata.profileImageUrl
+              : profileimage
+          }
+        />
         <ProfileName>
           {profiledata.nickname && profiledata.nickname}님
         </ProfileName>

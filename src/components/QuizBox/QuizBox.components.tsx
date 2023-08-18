@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, Dispatch, SetStateAction } from "react";
 
 // import styles
 import {
@@ -27,6 +27,7 @@ interface IQuizBox {
   Quiz: string;
   Answer: string;
   handleClose: () => void;
+  SetModalContent: Dispatch<SetStateAction<string>>;
   userID: string,
   messageID: string,
 }
@@ -37,7 +38,7 @@ const GREEN_COLOR = "#8DC63F";
 const GREY_COLOR = "#808080";
 
 // Quiz와 Answer을 props로 받음
-const QuizBox = ({ Quiz, Answer, handleClose, userID, messageID}: IQuizBox) => {
+const QuizBox = ({ Quiz, Answer, handleClose, SetModalContent, userID, messageID}: IQuizBox) => {
   const navigate = useNavigate();
   const [color, SetColor] = useState<string>(""); // information color 색깔 변수
   const [wrongCount, SetWrongCount] = useState<number>(3); // 틀린 횟수 저장하는 변수
@@ -92,6 +93,9 @@ const QuizBox = ({ Quiz, Answer, handleClose, userID, messageID}: IQuizBox) => {
       // 정답 처리
       SetColor(GREEN_COLOR);
       SetInformation(`정답입니다!`);
+
+      // modal State 변경
+      SetModalContent("정답입니다");
 
       // 정답
       const res = axios.post(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userID}/messages/${messageID}/quiz`, {

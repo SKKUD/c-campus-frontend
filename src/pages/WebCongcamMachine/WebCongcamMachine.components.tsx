@@ -33,7 +33,7 @@ const WebCongcamMachine = () => {
     SetUserProfile({
       userID: currentID,
       nickname: profile.nickname,
-      profile_image: "",
+      profileImageUrl: profile.profileImageUrl,
     });
   }, [profile]);
 

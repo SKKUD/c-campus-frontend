@@ -12,7 +12,9 @@ export const useAuthCheckApi = () => {
     const fetchAuth = async () => {
       const res = await axios.get(
         process.env.REACT_APP_BACKEND_SERVER + `/auth/authentication`,
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
       setAuth(res.data.userId);
     };
@@ -24,7 +26,11 @@ export const useAuthCheckApi = () => {
 
 export const useUserProfileGetApi = () => {
   const currentID = useExtractID();
-  const [profile, setProfile] = useState({ userId: currentID, nickname: "" });
+  const [profile, setProfile] = useState({
+    userId: currentID,
+    nickname: "",
+    profileImageUrl: "",
+  });
 
   useEffect(() => {
     const fetchUserProfile = async () => {

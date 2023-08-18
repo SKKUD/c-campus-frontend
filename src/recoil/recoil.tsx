@@ -4,7 +4,7 @@ import { atom } from "recoil";
 interface UserProfile {
   userID: string;
   nickname: string;
-  profile_image: string;
+  profileImageUrl: string;
 }
 // 방문한 페이지의 유저 정보 (프로필 표시)
 export const UserState = atom<UserProfile>({
@@ -12,7 +12,7 @@ export const UserState = atom<UserProfile>({
   default: {
     userID: "",
     nickname: "",
-    profile_image: "",
+    profileImageUrl: "",
   },
 });
 

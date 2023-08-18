@@ -10,10 +10,9 @@ export const QuizBoxContainer = styled.div`
   width: 90vw;
   max-width: 370px;
 
-  background: var(--background, #F5F5F5);
+  background: var(--background, #f5f5f5);
   border-radius: 20px;
   margin: auto;
-  margin-top: 100px;
 `;
 
 export const QuizBoxQuitButtonContainer = styled.div`

@@ -165,7 +165,7 @@ export const MessageViewContentMainText = styled.p`
   text-align: left;
   margin-top: 0px;
   margin-left: 5px;
-
+  min-height: 200px;
   color: var(--black, #252525);
   /* font-family: Yeongdeok Sea; */
   font-size: 16px;

@@ -25,9 +25,25 @@ import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.c
 import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
-import { exportElementAsPNG } from "../../utils/downloadPhoto";
+import { ExportElementAsPNG } from "../../utils/downloadPhoto";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  IsWritingMessage,
+  PhotoFile,
+  PhotoState,
+  UserState,
+} from "../../recoil/recoil";
+import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
+import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
+import { setPhotoURL } from "../../utils/setPhotoURL";
+import { usePhotoPostApi } from "../../hooks/PhotoAxios";
+import { useExtractID } from "../../hooks/useExtractID";
+import { toBlob } from "html-to-image";
 
 const PostPhoto = () => {
+  const userid = useExtractID();
+  const IsWriting = useRecoilValue(IsWritingMessage);
+  const setPhotoTaken = useSetRecoilState(PhotoState);
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [frameNum, setFrame] = useState<number>(1);
@@ -40,6 +56,7 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
+
   const handleDelete = (num: number) => {
     if (window.confirm("선택한 사진을 지울까요?")) {
       dispatchArr[num - 1]("");
@@ -54,16 +71,50 @@ const PostPhoto = () => {
     }
   }, [current]);
 
+  const [postFourcutPhoto] = usePhotoPostApi();
   const handleSubmit = async () => {
     if (
       window.confirm(
-        "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+        match1024
+          ? "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
+          : "사진을 공유하시겠습니까?"
       )
     ) {
-      await exportElementAsPNG();
-      navigate("/photo");
+      await ExportElementAsPNG();
+      await postFourcutPhoto();
+
+      navigate(`/photo/${userid}`);
     }
   };
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const setPhotoFile = useSetRecoilState(PhotoFile);
+  // isWriting일때 사진 처리
+  const setRecoilPhotoFile = async () => {
+    const blob = await toBlob(
+      document.querySelector(".fourcutImage") as HTMLElement
+    );
+
+    if (blob) {
+      const data = {
+        title: "fourcut",
+        files: [
+          new File([blob], "CongcamFourcut.png", {
+            type: blob.type,
+          }),
+        ],
+      };
+      setPhotoFile(data.files[0]);
+      console.log(data.files[0]);
+    }
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+    setPhotoURL(setPhotoTaken);
+    setRecoilPhotoFile();
+  };
+  const handleModalClose = () => setModalOpen(false);
 
   return (
     <PhotoBoothContainer>
@@ -159,16 +210,40 @@ const PostPhoto = () => {
             setCurrent={setCurrent}
             done={done}
           />
-          <WebGreenBtnWrap>
+          <WebGreenBtnWrap done={done === "done"}>
             {done === "done" ? (
-              <GreenBtn content="완료" onClick={(e) => handleSubmit()} />
+              IsWriting ? (
+                <>
+                  <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+                  <ModalLayout
+                    modalOpen={modalOpen}
+                    handleModalClose={handleModalClose}
+                  >
+                    <AskLock handleModalClose={handleModalClose} />
+                  </ModalLayout>
+                </>
+              ) : (
+                <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+              )
             ) : (
               <GreenBtn content="완료" disabled={true} />
             )}
           </WebGreenBtnWrap>
         </>
       ) : done === "done" ? (
-        <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+        IsWriting ? (
+          <>
+            <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+            <ModalLayout
+              modalOpen={modalOpen}
+              handleModalClose={handleModalClose}
+            >
+              <AskLock handleModalClose={handleModalClose} />
+            </ModalLayout>
+          </>
+        ) : (
+          <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+        )
       ) : (
         <IconBtnGroup
           takePhoto={() => setOnCapture(true)}

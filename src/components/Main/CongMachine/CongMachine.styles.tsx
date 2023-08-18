@@ -6,17 +6,28 @@ export const CongMachineContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 10;
+`;
+
+export const CongMachineProfileContainer = styled.div`
+  margin-top: -50vh;
+`;
+
+export const CongMachineContentContainer = styled.div`
+  width: 100%;
+  max-height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 10;
 `;
 
 export const MachineImage = styled.img`
   width: 40vh;
   min-width: 280px;
   max-width: 100%;
+
   @media (max-width: 375px) {
     min-width: 250px;
   }

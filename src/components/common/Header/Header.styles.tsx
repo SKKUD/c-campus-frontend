@@ -48,7 +48,7 @@ export const InfoIcon = styled.img`
 `;
 
 export const WebHeaderButton = styled(Button)`
-  width: 120px;
+  width: 140px;
   height: 40px;
   color: #fff;
   text-align: center;

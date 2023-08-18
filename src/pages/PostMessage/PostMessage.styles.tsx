@@ -1,10 +1,16 @@
 import styled from "@emotion/styled";
 
-export const PostMessageContainer = styled.div<{ backgroundColor: string}>`
-  background-color: ${props => props.backgroundColor};
+export const PostMessageContainer = styled.div<{ backgroundColor: string }>`
+  background-color: ${(props) => props.backgroundColor};
   width: 100%;
-  height:100vh;
-  overflow:scroll;
+  height: 100vh;
+  overflow: scroll;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 export const PostMessageFieldContainer = styled.div`
   width: 100%;
@@ -15,6 +21,10 @@ export const PostMessageFieldContainer = styled.div`
   margin: auto;
   padding-top: 90px;
   padding-bottom: 40px;
+  @media (min-width: 1024px) {
+    max-width: 450px;
+    margin: 0;
+  }
 `;
 
 export const PostMessageColors = styled.div`
@@ -29,10 +39,10 @@ export const PostMessageColors = styled.div`
 export const PostMessageColor1 = styled.div`
   height: 40px;
   width: 40px;
-  background-color: #D6EABA;
+  background-color: #d6eaba;
   border-radius: 20px;
-  border: 1.5px solid #FFFFFF;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,22 +51,22 @@ export const PostMessageColor1 = styled.div`
 export const PostMessageColor2 = styled.div`
   height: 40px;
   width: 40px;
-  background-color: #D9E1CE;
+  background-color: #d9e1ce;
   border-radius: 20px;
-  border: 1.5px solid #FFFFFF;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const PostMessageColor3= styled.div`
+export const PostMessageColor3 = styled.div`
   height: 40px;
   width: 40px;
-  background-color: #C1D3A7;
+  background-color: #c1d3a7;
   border-radius: 20px;
-  border: 1.5px solid #FFFFFF;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,10 +75,10 @@ export const PostMessageColor3= styled.div`
 export const PostMessageColor4 = styled.div`
   height: 40px;
   width: 40px;
-  background-color: #DAEFAE;
+  background-color: #daefae;
   border-radius: 20px;
-  border: 1.5px solid #FFFFFF;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,10 +87,10 @@ export const PostMessageColor4 = styled.div`
 export const PostMessageColor5 = styled.div`
   height: 40px;
   width: 40px;
-  background-color: #BFD8BA;
+  background-color: #bfd8ba;
   border-radius: 20px;
-  border: 1.5px solid #FFFFFF;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,12 +99,13 @@ export const PostMessageColor5 = styled.div`
 export const PostMessageColorCheck = styled.img`
   height: 12px;
   width: 12px;
-`
+`;
 
 export const PostMessageRandomSubjectContainer = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 `;
 
 export const PostMessageRandomSubject = styled.div`
@@ -115,7 +126,7 @@ export const PostMessageRandomSubjectContent = styled.div`
   flex-shrink: 0;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.7);
 
   color: var(--font-black, #303030);
   text-align: left;
@@ -131,7 +142,7 @@ export const PostMessageRandomSubjectContent = styled.div`
 export const PostMessageUpdateButton = styled.img`
   height: 48px;
   width: 48px;
-`
+`;
 
 export const PostMessageContentContainer = styled.div`
   display: flex;
@@ -139,7 +150,7 @@ export const PostMessageContentContainer = styled.div`
   width: 90%;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.7);
 `;
 
 export const PostMessageContentTo = styled.div`
@@ -156,7 +167,7 @@ export const PostMessageContentTo = styled.div`
     font-family: GmarketSans;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
     letter-spacing: -0.32px;
     height: 50px;
@@ -181,10 +192,31 @@ export const PostMessageContentTo = styled.div`
   }
 `;
 
-export const PostMessageContentFrame = styled.img`
+export const PostMessageContentFrameContainer = styled.div`
   width: 99.591px;
   height: 254px;
-  margin: 10px 10px 10px 10px;
+  margin: 10px;
+  position: relative;
+`;
+
+export const PostMessageContentFrame = styled.img`
+  width: 100%;
+  height: 254px;
+
+  @media (min-width: 1024px) {
+    width: 205.814px;
+    height: 525px;
+  }
+`;
+
+export const TakePicIcon = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 66px;
+  height: 66px;
 `;
 
 export const PostMessageContentText = styled.textarea`
@@ -201,6 +233,16 @@ export const PostMessageContentText = styled.textarea`
   line-height: 130%;
   letter-spacing: -0.32px;
   padding: 10px;
+  :focus {
+    outline: none;
+  }
+  @media (min-width: 1024px) {
+    width: 100%;
+    height: 300px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 150%;
+  }
 `;
 
 export const PostMessageWriterContainer = styled.div`
@@ -228,7 +270,7 @@ export const PostMessageWriterContent = styled.input`
   flex-shrink: 0;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
-  background: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.7);
 
   color: var(--font-black, #303030);
   font-family: YeongdeokSea;
@@ -237,9 +279,26 @@ export const PostMessageWriterContent = styled.input`
   font-weight: 400;
   line-height: normal;
   /* default */
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
   padding-left: 20px;
   margin-bottom: 20px;
+  :focus {
+    outline: none;
+  }
+`;
+export const PostMessageWebFourcutContaner = styled.div``;
 
+
+interface ButtonWrapperProps {
+  done: boolean;
+}
+
+export const ButtonWrapper = styled.div<ButtonWrapperProps>`
+  @media (min-width: 1280px) {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: ${(props) => (props.done ? "650px" : "400px")};
+  }
 `;

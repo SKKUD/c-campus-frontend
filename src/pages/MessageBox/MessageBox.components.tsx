@@ -3,17 +3,28 @@ import Message from "../../components/Message/Message.components";
 import LightGreenBtn from "../../components/common/Buttons/LightGreenBtn.components";
 
 import { useNavigate } from "react-router";
+import axios from "axios";
 
 import {
   MessageListHeader,
   MessageListHeaderMessageCount,
   MessageListContainer,
+  MessageScrollContainer,
   MessageListHoder,
   MessageListDate,
   MessageListContent,
   MessageBoxEmpty,
   MessageDataContainer,
 } from "./MessageBox.styles";
+import { count } from "console";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../recoil/recoil";
+import { useExtractID } from "../../hooks/useExtractID";
+
+// import for userAuth
+import { UserAuth } from "../../recoil/recoil";
+import { useRecoilState } from "recoil";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // Message type
 interface IMessages {
@@ -23,242 +34,189 @@ interface IMessages {
 
 // Bean type
 interface IBean {
-  id: string;
-  nickName: string;
-  isOpen: boolean;
+  messageId: number;
+  author: string;
+  isOpened: boolean;
+}
+
+// interface
+interface IAxiosMessageData {
+  status: number;
+  message: string;
+  data?: IAxiosData[];
+}
+
+interface IAxiosData {
+  message_id: number;
+  user_id: number;
+  category: string;
+  content: string;
+  author: string;
+  is_opened: boolean;
+  is_pulled: boolean;
+  pulled_at: string;
+  image_uuid?: string;
+  background_color_code: string;
+  is_quiz: boolean;
+  is_public: boolean;
+  quiz_content?: string;
+  quiz_answer?: string;
+  quiz_is_solved?: boolean;
+  image_url?: string;
 }
 
 const MessageList = () => {
-  const navigate = useNavigate();
-  const [messageCount, SetMessageCount] = useState<number>(0);
+  // auth
+  const [userAuth] = useAuthCheckApi();
+  const currentID = useExtractID();
 
-  const MessageData: IMessages[] = [
-    {
-      date: "5월 23일",
-      beans: [
-        {
-          id: "0",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "1",
-          nickName: "스꾸디입니당",
-          isOpen: true,
-        },
-        {
-          id: "2",
-          nickName: "누구세요",
-          isOpen: false,
-        },
-        {
-          id: "3",
-          nickName: "누굴까",
-          isOpen: true,
-        },
-        {
-          id: "4",
-          nickName: "이닉네임은열글자임니",
-          isOpen: false,
-        },
-        {
-          id: "5",
-          nickName: "하하하ㅏ",
-          isOpen: true,
-        },
-        {
-          id: "6",
-          nickName: "아무노래나",
-          isOpen: false,
-        },
-        {
-          id: "7",
-          nickName: "닉넴없음",
-          isOpen: false,
-        },
-        {
-          id: "8",
-          nickName: "나야너야연결고리",
-          isOpen: true,
-        },
-        {
-          id: "9",
-          nickName: "물통에있는물",
-          isOpen: true,
-        },
-      ],
-    },
-    {
-      date: "5월 20일",
-      beans: [
-        {
-          id: "10",
-          nickName: "장갑",
-          isOpen: true,
-        },
-        {
-          id: "11",
-          nickName: "사실근처보이는거",
-          isOpen: true,
-        },
-        {
-          id: "12",
-          nickName: "적는중",
-          isOpen: false,
-        },
-        {
-          id: "13",
-          nickName: "또다른닉네임",
-          isOpen: false,
-        },
-        {
-          id: "14",
-          nickName: "English",
-          isOpen: false,
-        },
-      ],
-    },
-    {
-      date: "5월 19일",
-      beans: [
-        {
-          id: "15",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "16",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "17",
-          nickName: "닉네임입니당",
-          isOpen: false,
-        },
-        {
-          id: "18",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "19",
-          nickName: "닉네임입니당",
-          isOpen: false,
-        },
-      ],
-    },
-    {
-      date: "5월 18일",
-      beans: [
-        {
-          id: "20",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "21",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "22",
-          nickName: "닉네임입니당",
-          isOpen: false,
-        },
-        {
-          id: "23",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "24",
-          nickName: "닉네임입니당",
-          isOpen: false,
-        },
-      ],
-    },
-    {
-      date: "5월 17일",
-      beans: [
-        {
-          id: "25",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "26",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "27",
-          nickName: "닉네임입니당",
-          isOpen: false,
-        },
-        {
-          id: "28",
-          nickName: "닉네임입니당",
-          isOpen: true,
-        },
-        {
-          id: "29",
-          nickName: "닉네임입니당",
-          isOpen: false,
-        },
-      ],
-    },
-  ];
+  // state for transformed to IMessage
+  const [axiosMessage, SetAxiosMessage] = useState<IAxiosMessageData>();
+  const [filteredToIMessage, SetFilteredToIMessage] = useState<IMessages[]>([]);
+  const [countMessage, SetCountMessage] = useState<number>(0);
+
+  const navigate = useNavigate();
+
+  const parseDate = (data: string): string => {
+    // input: <string> 2023-07-09T16:34:30.388
+    // output: <string> 7월 9일
+
+    var positionT: number = data.indexOf("T");
+    var extractedDate: string = data.slice(0, positionT);
+
+    var monthAndDay: string = extractedDate.slice(
+      extractedDate.indexOf("-") + 1
+    );
+    var positionSlice: number = monthAndDay.indexOf("-");
+
+    var month: number = parseInt(monthAndDay.slice(0, positionSlice));
+    var day: number = parseInt(monthAndDay.slice(positionSlice + 1));
+
+    const returnValue = month + "월 " + day + "일";
+
+    return returnValue;
+  };
 
   useEffect(() => {
-    SetMessageCount(20);
-  }, []);
+    console.log("userAUth " + typeof(userAuth));
+    console.log("currentID " + typeof(currentID));
+    if (currentID !== "") {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`,
+            { withCredentials: true }
+          );
+
+          const axiosData: IAxiosMessageData = response.data;
+
+          if (axiosData.status === 200 && axiosData.data?.length) {
+            const willSetToFilteredIMessages: IMessages[] = [];
+            let currentDate: string | null = null;
+            let beans: IBean[] = [];
+
+            for (const message of axiosData.data) {
+              const messageDate = parseDate(message.pulled_at);
+
+              if (messageDate !== currentDate) {
+                if (currentDate !== null) {
+                  const IMessage: IMessages = {
+                    date: currentDate,
+                    beans: beans,
+                  };
+                  willSetToFilteredIMessages.push(IMessage);
+                }
+
+                currentDate = messageDate;
+                beans = [];
+              }
+
+              const beanObject: IBean = {
+                messageId: message.message_id,
+                author: message.author,
+                isOpened: message.is_opened,
+              };
+              beans.push(beanObject);
+            }
+
+            if (currentDate !== null) {
+              const lastIMessage: IMessages = {
+                date: currentDate,
+                beans: beans,
+              };
+              willSetToFilteredIMessages.push(lastIMessage);
+            }
+
+            SetFilteredToIMessage(willSetToFilteredIMessages);
+            SetCountMessage(axiosData.data.length);
+          }
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            console.log(error);
+          }
+        }
+      };
+
+      fetchData();
+    }
+  }, [currentID, userAuth]);
 
   // navigate to message feed
   const RedirectToFeedUrl = () => {
-    navigate(`/message/feed`);
+    navigate(`/message/feed/${currentID}`);
   };
 
   return (
     <>
-      {MessageData.length !== 0 ? (
-        <MessageListContainer>
-          <MessageListHeader>
-            <MessageListHeaderMessageCount>
-              {messageCount}개의 추억
-            </MessageListHeaderMessageCount>
-            <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
-          </MessageListHeader>
-          <MessageDataContainer>
-            {MessageData &&
-              MessageData.map((messageData: IMessages) => {
-                // SetMessageCount(messageCount+1);
-                return (
-                  <MessageListHoder key={messageData.date}>
-                    <MessageListDate>{messageData.date}</MessageListDate>
-                    <MessageListContent>
-                      {messageData.beans &&
-                        messageData.beans.map((bean: IBean) => {
-                          return (
-                            <Message
-                              key={bean.id}
-                              id={bean.id}
-                              isOpen={bean.isOpen}
-                              nickName={bean.nickName}
-                            />
-                          );
-                        })}
-                    </MessageListContent>
-                  </MessageListHoder>
-                );
-              })}
-          </MessageDataContainer>
-        </MessageListContainer>
-      ) : (
-        <MessageBoxEmpty>
-          아직 열린 쪽지가 없습니다 <br /> 먼저 쪽지를 뽑아보세요!
-        </MessageBoxEmpty>
-      )}
+      { // check if it is current userID
+        (String(userAuth) === currentID) ? (
+          <>
+            {countMessage !== 0 ? (
+              <MessageListContainer>
+                <MessageListHeader>
+                  <MessageListHeaderMessageCount>
+                    {countMessage}개의 추억
+                  </MessageListHeaderMessageCount>
+                  <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
+                </MessageListHeader>
+                <MessageDataContainer>
+                  <MessageScrollContainer>
+                    {filteredToIMessage &&
+                      filteredToIMessage.map((messageData: IMessages) => {
+                        return (
+                          <MessageListHoder key={messageData.date}>
+                            <MessageListDate>{messageData.date}</MessageListDate>
+                            <MessageListContent>
+                              {messageData.beans &&
+                                messageData.beans.map((bean: IBean) => {
+                                  return (
+                                    <Message
+                                      key={bean.messageId}
+                                      id={bean.messageId}
+                                      isOpen={bean.isOpened}
+                                      nickName={bean.author}
+                                    />
+                                  );
+                                })}
+                            </MessageListContent>
+                          </MessageListHoder>
+                        );
+                      })}
+                  </MessageScrollContainer>
+                </MessageDataContainer>
+              </MessageListContainer>
+            ) : (
+              <MessageBoxEmpty>
+                아직 열린 쪽지가 없습니다 <br /> 먼저 쪽지를 뽑아보세요!
+              </MessageBoxEmpty>
+            )}
+          </>
+        ) : (
+          <MessageBoxEmpty>
+            다른 사람의 쪽지입니다
+          </MessageBoxEmpty>
+        )
+      }
     </>
   );
 };

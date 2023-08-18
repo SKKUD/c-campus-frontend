@@ -4,16 +4,33 @@ import { useMediaQuery } from "@mui/material";
 import { BtnWrapper, InstaBtn } from "./LandingBtn.styles";
 import WhiteBtn from "../../common/Buttons/WhiteBtn.components";
 import instabtn from "../../../assets/images/instabtn.png";
+
+// import for recoil
+import { UserAuth, UserState } from "../../../recoil/recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
+
 const LandingBtn = () => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
+  const [checkAuth] = useAuthCheckApi();
 
   return (
     <BtnWrapper>
-      <WhiteBtn
-        content="콩캠퍼스 가기"
-        onClick={(e) => (match1024 ? navigate("/message") : navigate("/main"))}
-      />
+      {checkAuth ? (
+        <WhiteBtn
+          content="콩캠퍼스 가기"
+          onClick={(e) => navigate(`/${checkAuth}`)}
+        />
+      ) : (
+        <WhiteBtn
+          content="로그인하기"
+          onClick={() => {
+            window.location.href = kakaoURL;
+          }}
+        />
+      )}
       <Link
         to="https://instagram.com/cong_skku?igshid=MzRlODBiNWFlZA=="
         style={{ textDecoration: "none" }}

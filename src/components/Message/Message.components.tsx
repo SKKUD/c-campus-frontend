@@ -10,29 +10,37 @@ import CloseIcon from "../../assets/images/congball.svg";
 import OpenIcon from "../../assets/images/congball_open_color.svg";
 
 import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
+import { UserState } from "../../recoil/recoil";
+import { useExtractID } from "../../hooks/useExtractID";
 
 interface IMessage {
-  id: string,
-  isOpen: boolean,
-  nickName: string,
+  id: number;
+  isOpen: boolean;
+  nickName: string;
 }
 
-const Message = ({id, isOpen, nickName}: IMessage) => {
+const Message = ({ id, isOpen, nickName }: IMessage) => {
+  const userid = useExtractID();
   const navigate = useNavigate();
 
   const RedirectToID = () => {
-    navigate(`/message/${id}`);
-  }
+    navigate(`/message/${id}/${userid}`);
+  };
 
   return (
-    <MessageFrame id={id}>
+    <MessageFrame>
       <MessageHolder onClick={RedirectToID}>
-        {isOpen ? (<MessageImage src={OpenIcon}></MessageImage>) : (<MessageImage src={CloseIcon}></MessageImage>)}
+        {isOpen ? (
+          <MessageImage src={OpenIcon}></MessageImage>
+        ) : (
+          <MessageImage src={CloseIcon}></MessageImage>
+        )}
       </MessageHolder>
 
       <MessageContent>{nickName}</MessageContent>
     </MessageFrame>
-  );  
+  );
 };
 
 export default Message;

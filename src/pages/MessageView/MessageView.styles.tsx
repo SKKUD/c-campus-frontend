@@ -1,34 +1,65 @@
 import styled from "styled-components";
 
-export const MessageViewContainer = styled.div<{ backgroundColor: string}>`
-  background-color: ${props => props.backgroundColor};
-  width: 100%;
-  height:100vh;
-  overflow:scroll;
+// mobile
+
+export const MessageViewMobileContainer = styled.div`
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
+`;
+
+export const MessageViewContainer = styled.div<{ backgroundColor: string }>`
+  background-color: ${(props) => props.backgroundColor};
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  padding-top: 60px;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    padding-top: 80px;
+  }
 `;
 
 export const MessageViewFieldContainer = styled.div`
-width: 100%;
-max-width: 375px;
-display: flex;
-flex-direction: column;
-margin: 60px auto;
-align-items: center;
-font-family: YeongdeokSea;
+  width: 100%;
+  max-width: 375px;
+  display: flex;
+  flex-direction: column;
+  margin: 60px auto;
+  align-items: center;
+  font-family: YeongdeokSea;
+
+  @media (min-width: 1024px) {
+    max-width: 450px;
+    margin: 0;
+  }
 `;
 
 export const MessageViewPublicToggleContainer = styled.div`
-  width: 90vw;
+  width: 95%;
   max-width: 375px;
   display: flex;
   justify-content: right;
-  margin-right: 10px;
+  margin: 0 auto;
+  padding-right: 15px;
+
+  @media (min-width: 1024px) {
+    width: 100%;
+    max-width: 450px;
+    margin: 0;
+    margin-right: 0px;
+  }
 `;
 
 export const MessageViewTitle = styled.div`
   width: 90vw;
   max-width: 343px;
   height: 56px;
+  margin: auto;
   /* flex-shrink: 0; */
   border-radius: 7px;
   border: 0.5px solid var(--main-2, #164300);
@@ -45,9 +76,19 @@ export const MessageViewTitle = styled.div`
   line-height: normal;
   letter-spacing: -0.4px;
   word-break: keep-all;
+
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
-export const MessageViewContent = styled.div``;
+export const MessageViewContent = styled.div`
+  max-width: 375px;
+  margin: 0 auto;
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
+`;
 
 export const MessageViewContentReceiver = styled.div`
   margin: 0px;
@@ -79,6 +120,9 @@ export const MessageViewContentReceiver = styled.div`
     line-height: normal;
     letter-spacing: -0.48px;
   }
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
 export const MessageViewContentMainContainer = styled.div`
@@ -90,20 +134,38 @@ export const MessageViewContentMainContainer = styled.div`
   margin-bottom: 5px;
   padding: 20px 10px 10px 10px;
   display: flex;
-
+  margin: auto;
   flex-direction: row;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
   background: rgba(255, 255, 255, 0.7);
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
-export const MessageViewFourcutFrameContainer = styled.div``;
+export const MessageViewFourcutFrameContainer = styled.div`
+  @media (min-width: 1024px) {
+  }
+`;
+
+export const MessageViewContentFrame = styled.img`
+  width: 100%;
+  height: 254px;
+
+  @media (min-width: 1024px) {
+    width: 205.814px;
+    height: 525px;
+    margin-top: 85px;
+    margin-right: 20px;
+  }
+`;
 
 export const MessageViewContentMainText = styled.p`
   text-align: left;
   margin-top: 0px;
   margin-left: 5px;
-
+  min-height: 200px;
   color: var(--black, #252525);
   /* font-family: Yeongdeok Sea; */
   font-size: 16px;
@@ -111,6 +173,11 @@ export const MessageViewContentMainText = styled.p`
   font-weight: 400;
   line-height: 130%;
   letter-spacing: -0.32px;
+  @media (min-width: 1024px) {
+    max-width: 450px;
+    height: 250px;
+    overflow: scroll;
+  }
 `;
 
 export const MessageViewContentSender = styled.div`
@@ -143,10 +210,21 @@ export const MessageViewContentSender = styled.div`
     line-height: normal;
     letter-spacing: -0.48px;
   }
+  @media (min-width: 1024px) {
+    max-width: 450px;
+  }
 `;
 
 export const GreenBtnContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 50px;
-`
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+    justify-content: right;
+    margin-top: 20px;
+  }
+`;
+
+// web
+export const MessageViewWebFourcutContainer = styled.div``;

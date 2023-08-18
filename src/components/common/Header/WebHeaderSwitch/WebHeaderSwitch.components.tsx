@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { ToggleContainer } from "./WebHeaderSwitch.styles";
 
+import { UserState } from "../../../../recoil/recoil";
+import { useRecoilValue } from "recoil";
+
 const WebHeaderSwitch = () => {
+  const profileUser = useRecoilValue(UserState);
   const [isOn, setisOn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,9 +20,10 @@ const WebHeaderSwitch = () => {
   const toggleHandler = () => {
     setisOn(!isOn);
     if (isOn) {
-      navigate(`/message`);
+      // redirect to profileUser.userID
+      navigate(`/${profileUser.userID}`);
     } else {
-      navigate(`/photo`);
+      navigate(`/photo/${profileUser.userID}`);
     }
     window.scrollTo(0, 0);
   };

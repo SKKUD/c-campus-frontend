@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const MessageListHeader = styled.div`
-  width: 100vw;
+  width: 100%;
   min-width: 250px;
   max-width: 320px;
   display: flex;
@@ -10,8 +10,7 @@ export const MessageListHeader = styled.div`
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
 `;
 
 export const MessageListHeaderMessageCount = styled.div`
@@ -33,9 +32,16 @@ export const MessageListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px;
-  padding-left: 5px;
-  padding-right: 5px;
+
+  padding: 80px 10px 0px;
+`;
+
+export const MessageScrollContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
 `;
 
 export const MessageDataContainer = styled.div`
@@ -52,7 +58,7 @@ export const MessageDataContainer = styled.div`
 export const MessageListHoder = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   min-width: 250px;
   max-width: 320px;
   margin: 0 auto;
@@ -99,7 +105,11 @@ export const MessageBoxEmpty = styled.div`
   line-height: normal;
   letter-spacing: -0.28px;
 
-  margin-top: 80px;
+  margin-top: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
+
+  @media (min-width: 1024px) {
+    margin-top: 80px;
+  }
 `;

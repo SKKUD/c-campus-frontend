@@ -13,7 +13,7 @@ export const ButtonGroup = styled.div`
   @media (min-width: 1024px) {
     position: absolute;
     top: 620px;
-    left: calc(50% + 220px);
+    left: calc(50% + 240px);
     transform: translate(-50%, 0);
   }
 `;

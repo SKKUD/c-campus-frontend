@@ -13,6 +13,7 @@ export const PhotoModalContainer = styled(Box)`
 `;
 
 export const CloseModalBtn = styled.div`
+  cursor: pointer;
   align-self: flex-end;
 `;
 
@@ -22,13 +23,42 @@ export const PhotoModalIMG = styled.img`
   margin-bottom: 20px;
 `;
 
+export const PhotoModalButtonGroup = styled.div`
+  width: 236px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const PhotoDeleteBtn = styled.img`
+  cursor: pointer;
+  width: 54px;
+  height: 54px;
+  margin-left: -5px;
+  margin-top: 5px;
+`;
+
 export const PhotoShareBtn = styled(Button)`
-  width: 201px;
+  width: 180px;
   height: 48px;
-  color: #164300;
   background-color: #fff;
   border-radius: 10px;
   color: #164300;
+  font-family: Cafe24Ssurround;
+  font-size: 22px;
+  font-weight: 700;
+  :hover {
+    background-color: #fff;
+  }
+`;
+
+export const PhotoDeleteConfirmBtn = styled(Button)`
+  width: 180px;
+  height: 48px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #972424;
   font-family: Cafe24Ssurround;
   font-size: 22px;
   font-weight: 700;

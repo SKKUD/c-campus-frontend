@@ -5,7 +5,7 @@ export const handleShare = async () => {
     if (UA.indexOf("android") > -1) {
       try {
         const blob = await htmlToImage.toBlob(
-          document.querySelector(".fourcutImage") as HTMLElement
+          document.querySelector(".congcamMessage") as HTMLElement
         );
 
         if (blob) {

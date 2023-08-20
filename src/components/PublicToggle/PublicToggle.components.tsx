@@ -5,22 +5,26 @@ import {
   ToggleDescription,
 } from "./PublicToggle.styles";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // recoil
 import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
 
 // axios call
-import { PatchPublic } from "../../hooks/MessagePublic";
 import axios from "axios";
+
+// 
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 interface IPublicToggle {
   axiosisPublic?: boolean,
 }
 
+
 export const PublicToggle = ({axiosisPublic} : IPublicToggle) => {
   const [isOn, setisOn] = useState(!axiosisPublic); // true가 비공개 false가 공개
+  const [userAuth] = useAuthCheckApi();
 
   const extractMessageID = () => {
     // get current url
@@ -35,23 +39,34 @@ export const PublicToggle = ({axiosisPublic} : IPublicToggle) => {
     return returnID;
   };
 
-  const toggleHandler = () => {
+  const patchAxios = async (messageID: string) => {
+    await axios.patch(
+      process.env.REACT_APP_BACKEND_SERVER + `/users/${userAuth}/messages/${messageID}`,
+      {
+
+      },
+      {
+        withCredentials: true,
+      }
+    ).then((response) => {
+      console.log("response");
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log("error occur")
+      console.log(error);
+    })
+  };
+
+  const toggleHandler = async () => {
     // invert isOn
     setisOn(!isOn)
 
-    // extract messageID
+    // extract
     const messageID: string[] = extractMessageID();
 
-    // patch
-    const updated = { isPublic: isOn };
-    const res = axios.patch(`${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[0]}/messages/${messageID[1]}`, 
-                            { withCredentials: true })
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => {
-                console.log(error)
-              });
+    // patch it
+    patchAxios(messageID[0]);
   };
 
   return (

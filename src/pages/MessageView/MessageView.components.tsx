@@ -78,7 +78,7 @@ const MessageView = () => {
 
   // mui-modal variable
   const [open, setOpen] = useState<boolean>(false);
-  const [modalContent, SetModalContent] = useState<string>("d");
+  const [modalContent, SetModalContent] = useState<string>("");
 
   // ID state
   const [stateMessageID, SetMessageID] = useState<string>("");
@@ -117,9 +117,6 @@ const MessageView = () => {
     SetCurrentID(messageID[1]);
 
     // axios get
-    console.log(
-      `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`
-    );
     const response = axios
       .get(
         `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`,
@@ -127,8 +124,9 @@ const MessageView = () => {
       )
       .then((response) => {
         if (response.data.status === 200) {
-          console.log(response.data.data);
-          SetIsAnswer(response.data.data.quiz_is_solved || false);
+          console.log("get test")
+          console.log(response);
+          SetIsAnswer(response.data.data.quiz_is_solved);
           if (response.data.data.quiz_is_solved) {
             // if quiz is solved, change modal to fourcut
             SetModalContent("정답입니다");
@@ -141,8 +139,6 @@ const MessageView = () => {
           console.log(error);
         }
       });
-    console.log(axiosMessage);
-    console.log(currentID === userAuth);
   }, []);
 
   return (
@@ -153,9 +149,9 @@ const MessageView = () => {
         >
           {match1024 && ( // 웹 환경일 때
             <MessageViewWebFourcutContainer onClick={handleOpen}>
-              {axiosMessage?.image_url || false ? ( // 이미지가 있는지 없는지 확인
+              {axiosMessage?.image_url ? ( // 이미지가 있는지 없는지 확인
                 <>
-                  {axiosMessage?.is_quiz || false ? ( // 퀴즈가 있는지 없는지 확인
+                  {!(axiosMessage?.is_quiz) ? ( // 퀴즈가 있는지 없는지 확인
                     // 퀴즈가 없음 (그냥 사진 보여줌)
                     <MessageViewContentFrame src={lockedFourcut} />
                   ) : (
@@ -204,9 +200,9 @@ const MessageView = () => {
               <MessageViewContentMainContainer className="MessageViewCenter">
                 {!match1024 ? ( // 모바일일 때
                   <MessageViewFourcutFrameContainer onClick={handleOpen}>
-                    {axiosMessage?.image_url || true ? ( // 이미지가 있는지 없는지 확인
+                    {axiosMessage?.image_url ? ( // 이미지가 있는지 없는지 확인
                       <>
-                        {axiosMessage?.is_quiz || false ? ( // 퀴즈가 있는지 없는지 확인
+                        {!(axiosMessage?.is_quiz) ? ( // 퀴즈가 있는지 없는지 확인
                           // 퀴즈가 없음 (그냥 사진 보여줌)
                           <MessageViewContentFrame src={lockedFourcut} />
                         ) : (
@@ -253,11 +249,6 @@ const MessageView = () => {
                   )}
                 </ModalLayout>
 
-                {/* <Modal>
-                  <Box>
-      
-                  </Box>
-                </Modal> */}
                 <MessageViewContentMainText>
                   {axiosMessage?.content}
                 </MessageViewContentMainText>

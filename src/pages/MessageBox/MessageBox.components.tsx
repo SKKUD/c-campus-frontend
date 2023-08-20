@@ -103,6 +103,10 @@ const MessageList = () => {
     if (currentID !== "") {
       const fetchData = async () => {
         try {
+          const resGet = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/auth/authentication`)
+                        .then((response) => {
+                          console.log(response);
+                        })
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`,
             { withCredentials: true }

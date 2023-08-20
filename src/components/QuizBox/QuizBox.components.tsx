@@ -99,20 +99,17 @@ const QuizBox = ({ Quiz, Answer, handleClose, SetModalContent, userID, messageID
 
       // 정답
       const res = axios.post(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userID}/messages/${messageID}/quiz`,
-                              { 
-
-                              },
-                              {
-                                withCredentials: true,
-                              })  
-                              .then((response) => {
-                                console.log(response);
-                                // 정상적으로 처리되면 리다이렉트 시켜줌
-                                setTimeout(() => navigate(`/message/${messageID}/${userID}`), 2000);
-                              })
-                              .catch((error) => {
-
-                              });
+      { messageId: messageID, answer: Answer}, 
+        { withCredentials: true}
+                            )  
+                            .then((response) => {
+                              console.log(response);
+                              // 정상적으로 처리되면 리다이렉트 시켜줌
+                              setTimeout(() => navigate(`/message/${messageID}/${userID}`), 2000);
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
     }
 
     // 정답이 아닐 때,

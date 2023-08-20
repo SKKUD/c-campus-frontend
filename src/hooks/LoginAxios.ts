@@ -16,6 +16,7 @@ export const useAuthCheckApi = () => {
           withCredentials: true,
         }
       );
+      console.log(res);
       setAuth(res.data.userId);
     };
     fetchAuth();

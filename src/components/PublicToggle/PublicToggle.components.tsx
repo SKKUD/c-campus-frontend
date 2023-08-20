@@ -16,7 +16,6 @@ import axios from "axios";
 
 // 
 import { useAuthCheckApi } from "../../hooks/LoginAxios";
-import { PatchPublic } from "../../hooks/PatchPublic";
 
 interface IPublicToggle {
   axiosisPublic?: boolean,
@@ -40,6 +39,25 @@ export const PublicToggle = ({axiosisPublic} : IPublicToggle) => {
     return returnID;
   };
 
+  const patchAxios = async (messageID: string) => {
+    await axios.patch(
+      process.env.REACT_APP_BACKEND_SERVER + `/users/${userAuth}/messages/${messageID}`,
+      {
+
+      },
+      {
+        withCredentials: true,
+      }
+    ).then((response) => {
+      console.log("response");
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log("error occur")
+      console.log(error);
+    })
+  };
+
   const toggleHandler = async () => {
     // invert isOn
     setisOn(!isOn)
@@ -48,12 +66,7 @@ export const PublicToggle = ({axiosisPublic} : IPublicToggle) => {
     const messageID: string[] = extractMessageID();
 
     // patch it
-    try {
-      await axios.patch(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/${messageID[0]}`, 
-                        { withCredentials: true, });
-    } catch (error) {
-      console.log(error);
-    }
+    patchAxios(messageID[0]);
   };
 
   return (

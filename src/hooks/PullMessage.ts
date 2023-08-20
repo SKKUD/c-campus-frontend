@@ -19,10 +19,12 @@ export const CheckRemainCount = (userAuth: string) => {
           .then((response) => {
             if (response.status === 200) {
               SetMessageNumber(response.data.data);
+            } else if (response.status === 400) {
+              SetMessageNumber("ERROR");
             } else {
               // error occured
-              console.log("error");
-              SetMessageNumber("0");
+              console.log("else");
+              SetMessageNumber("ERROR");
             }
           })
           .catch((error) => {

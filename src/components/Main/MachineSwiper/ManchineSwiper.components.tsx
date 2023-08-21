@@ -30,10 +30,6 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
   const checkAuth = useAuthCheckApi();
   const messageNumber = CheckRemainCount(currentID);
 
-  useEffect(() => {
-    console.log(messageNumber);
-  }, []);
-  
   return (
     <SwiperContainer>
       {

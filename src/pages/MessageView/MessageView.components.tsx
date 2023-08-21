@@ -124,8 +124,6 @@ const MessageView = () => {
       )
       .then((response) => {
         if (response.data.status === 200) {
-          console.log("get test")
-          console.log(response);
           SetIsAnswer(response.data.data.quiz_is_solved);
           if (response.data.data.quiz_is_solved) {
             // if quiz is solved, change modal to fourcut

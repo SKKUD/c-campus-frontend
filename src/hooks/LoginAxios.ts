@@ -16,7 +16,6 @@ export const useAuthCheckApi = () => {
           withCredentials: true,
         }
       );
-      console.log(res);
       setAuth(res.data.userId);
     };
     fetchAuth();
@@ -43,7 +42,7 @@ export const useUserProfileGetApi = () => {
           );
           setProfile(res.data);
         } catch (error) {
-          console.log(error);
+          // error
         }
       }
     };
@@ -60,10 +59,10 @@ export const useUserLogoutApi = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response.status);
+
       })
       .catch((error) => {
-        console.log(error);
+
       });
   };
 

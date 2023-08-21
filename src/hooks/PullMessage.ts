@@ -22,13 +22,11 @@ export const CheckRemainCount = (userAuth: string) => {
             } else if (response.status === 400) {
               SetMessageNumber("ERROR");
             } else {
-              // error occured
-              console.log("else");
               SetMessageNumber("ERROR");
             }
           })
           .catch((error) => {
-            console.log(error);
+            // error occur
           });
       }
     };

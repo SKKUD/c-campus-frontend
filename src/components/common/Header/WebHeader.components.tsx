@@ -37,7 +37,7 @@ const WebHeader = () => {
   const handleMakeAccount = () => {
     window.location.href = kakaoURL;
   };
-
+  
   return (
     <HeaderContainer>
       <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
@@ -45,7 +45,11 @@ const WebHeader = () => {
         <SwipeButtonGroup>
           {
             // 로그인이 되어있어야 switch 가능 | 로그인한 auth와 현재 url ID 비교
-            checkAuth && userAuth === currentID ? <WebHeaderSwitch /> : <></>
+            checkAuth && String(checkAuth) === currentID ? (
+              <WebHeaderSwitch />
+            ) : (
+              <></>
+            )
           }
         </SwipeButtonGroup>
         {

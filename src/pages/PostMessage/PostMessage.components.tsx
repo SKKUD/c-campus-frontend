@@ -77,11 +77,27 @@ const PostMessage = () => {
   const [modalContent, setModalContent] = useState<string>("");
   const profiledata = useRecoilValue(UserState);
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
-  const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
+  const [currentSubject, SetCurrentSubject] = useState<string>("");
+
+  useEffect(() => {
+    const storedQuizContent = localStorage.getItem("quiz_content");
+    console.log(storedQuizContent)
+    //저장된 값이 있으면
+    if (storedQuizContent) {
+      console.log("set it")
+      SetCurrentSubject(storedQuizContent);
+    }
+    else {
+      console.log("default")
+      SetCurrentSubject(SubjectData[0]);
+    }
+    console.log(currentSubject);
+  }, [localStorage.getItem("quiz_content")]);
 
   // check localStorage
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
+    
     const storedName = localStorage.getItem("name");
     const storedContent = localStorage.getItem("content");
     const storedBackground = localStorage.getItem("background");
@@ -119,8 +135,12 @@ const PostMessage = () => {
         break;
       }
     }
+    // save it
     SetCurrentSubject(SubjectData[randomNumber]);
     SetCurrentSubjectNumber(randomNumber);
+    
+    // save local storage
+    localStorage.setItem("quiz_content", SubjectData[randomNumber]);
   };
 
   // content event handler
@@ -173,7 +193,8 @@ const PostMessage = () => {
   });
   const submitHandler = async () => {
     handleModalClose();
-    console.log(modalContent);
+    // console.log(modalContent);
+
     // submit
     if (nameText !== "" && contentText !== "") {
       setMessage({ name: nameText, content: contentText });
@@ -205,7 +226,6 @@ const PostMessage = () => {
 
   // useEffect for naming
   useEffect(() => {
-    console.log(profile);
     SetSubjectData(MakeQuestions(profile.nickname));
   }, [profile]);
 
@@ -298,7 +318,7 @@ const PostMessage = () => {
         <PostMessageRandomSubjectContainer>
           <PostMessageRandomSubject>랜덤 주제</PostMessageRandomSubject>
           <PostMessageRandomSubjectContent>
-            {currentSubject}
+            {localStorage.getItem("quiz_content")}
             <PostMessageUpdateButton
               src={recycleIcon}
               onClick={updateButtonHandler}

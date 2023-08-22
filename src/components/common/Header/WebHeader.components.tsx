@@ -10,8 +10,8 @@ import WebHeaderSwitch from "./WebHeaderSwitch/WebHeaderSwitch.components";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { UserAuth, UserState } from "../../../recoil/recoil";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { UserState } from "../../../recoil/recoil";
+import { useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
@@ -19,7 +19,6 @@ import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 const WebHeader = () => {
   const profileUser = useRecoilValue(UserState);
   const navigate = useNavigate();
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
   const [logout] = useUserLogoutApi();
@@ -37,7 +36,7 @@ const WebHeader = () => {
   const handleMakeAccount = () => {
     window.location.href = kakaoURL;
   };
-
+  
   return (
     <HeaderContainer>
       <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
@@ -45,7 +44,11 @@ const WebHeader = () => {
         <SwipeButtonGroup>
           {
             // 로그인이 되어있어야 switch 가능 | 로그인한 auth와 현재 url ID 비교
-            checkAuth && userAuth === currentID ? <WebHeaderSwitch /> : <></>
+            checkAuth && String(checkAuth) === currentID ? (
+              <WebHeaderSwitch />
+            ) : (
+              <></>
+            )
           }
         </SwipeButtonGroup>
         {

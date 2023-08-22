@@ -11,6 +11,8 @@ import MessageFeed from "../MessageFeed/MessageFeed.components";
 import infoDescImg from "../../assets/images/infoDescImg.png";
 import CongMachine from "../../components/Main/CongMachine/CongMachine.components";
 
+import { MainEmpty } from "../Main/Main.styles";
+
 // import for recoil
 import { UserAuth, UserState } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
@@ -38,22 +40,30 @@ const WebCongcamMachine = () => {
   }, [profile]);
 
   return (
-    <WebMainPageContainer>
-      <Ground />
-      <CongMachine />
-      <BoxAbove>
-        <InfoImgConatiner>
-          <InfoPaper src={infoDescImg} />
-        </InfoImgConatiner>
-        <ContentConatiner>
-          {checkAuth && userAuth === currentID ? (
-            <MessageList />
-          ) : (
-            <MessageFeed />
-          )}
-        </ContentConatiner>
-      </BoxAbove>
-    </WebMainPageContainer>
+    <>
+      {
+        profile.nickname && profile.nickname ? (
+          <WebMainPageContainer>
+            <Ground />
+            <CongMachine />
+            <BoxAbove>
+              <InfoImgConatiner>
+                <InfoPaper src={infoDescImg} />
+              </InfoImgConatiner>
+              <ContentConatiner>
+                {checkAuth && userAuth === currentID ? (
+                  <MessageList />
+                ) : (
+                  <MessageFeed />
+                )}
+              </ContentConatiner>
+            </BoxAbove>
+          </WebMainPageContainer>
+        ) : (
+          <MainEmpty>존재하지 않는 사용자입니다</MainEmpty>
+        )
+      }
+    </>
   );
 };
 

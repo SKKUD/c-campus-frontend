@@ -9,14 +9,10 @@ export const useMessageSubmitApi = (
   Message: { content: string; name: string }
 ) => {
   const currentID = useExtractID();
-  // const Message = useRecoilValue(MessageState);
+  
   const Photo = useRecoilValue(PhotoFile);
   const Quiz = useRecoilValue(QuizState);
-  console.log(messageCategory);
-  console.log(Message.content);
-  console.log(Message.name);
-  console.log(backgroundHex);
-  console.log(Quiz.QuizGiven);
+  
   const submitMessage = () => {
     const formData = new FormData();
     const jsonObject = Quiz.QuizGiven

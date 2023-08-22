@@ -3,6 +3,7 @@ import {
   MainContainer,
   MainBackground,
   BackgroundOfMainContainer,
+  MainEmpty,
 } from "./Main.styles";
 import ManchineSwiper from "../../components/Main/MachineSwiper/ManchineSwiper.components";
 import { useExtractID } from "../../hooks/useExtractID";
@@ -16,27 +17,24 @@ const Main: FC = () => {
   const [checkAuth] = useAuthCheckApi();
   const [profile] = useUserProfileGetApi();
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
-  const [userProfile, SetUserProfile] = useRecoilState(UserState);
 
   useEffect(() => {
     checkAuth && SetUserAuth(checkAuth.toString());
   }, [checkAuth]);
 
-  useEffect(() => {
-    SetUserProfile({
-      userID: currentID,
-      nickname: profile.nickname,
-      profileImageUrl: profile.profileImageUrl,
-    });
-  }, [profile]);
-
   return (
-    <BackgroundOfMainContainer>
-      <MainContainer>
-        <ManchineSwiper slide={slide} setSlide={setSlide} />
-        <MainBackground />
-      </MainContainer>
-    </BackgroundOfMainContainer>
+    <>
+      {profile.nickname && profile.userId ? (
+        <BackgroundOfMainContainer>
+          <MainContainer>
+            <ManchineSwiper slide={slide} setSlide={setSlide} />
+            <MainBackground />
+          </MainContainer>
+        </BackgroundOfMainContainer>
+      ) : (
+        <MainEmpty>존재하지 않는 사용자입니다</MainEmpty>
+      )}
+    </>
   );
 };
 

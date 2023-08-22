@@ -120,9 +120,12 @@ export const PostMessageRandomSubjectContent = styled.div`
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
+  word-break: keep-all;
 
   /* width: 90%; */
-  height: 56px;
+  /* height: 56px; */
+  margin-top: 5px;
+  padding: 10px;
   flex-shrink: 0;
   border-radius: 10px;
   border: 0.5px solid var(--main-2, #164300);
@@ -135,8 +138,6 @@ export const PostMessageRandomSubjectContent = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
-  padding-left: 10px;
 `;
 
 export const PostMessageUpdateButton = styled.img`

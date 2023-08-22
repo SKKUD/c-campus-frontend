@@ -9,10 +9,13 @@ import {
   PhotoModalIMG,
   PhotoShareBtn,
   PhotoDeleteConfirmBtn,
+  ChildModalContainer,
 } from "./PhotoModal.styles";
 import closeIcon from "../../../assets/images/close_icon.png";
 import deleteIcon from "../../../assets/images/delete_icon.png";
 import { usePhotoDeleteApi } from "../../../hooks/PhotoAxios";
+
+import axios from "axios";
 
 interface PhotoModalProps {
   open: boolean;
@@ -61,11 +64,32 @@ function ChildModal({ img }: ChildModalProps) {
     window.location.reload();
   };
 
+  const saveImageLocally = async () => {
+    await fetch(img)
+      .then(response => response.blob())
+      .then(blob => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "콩캠네컷";
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      })
+      .catch(error => {
+        console.error('Error saving image:', error);
+      });
+  }
+
+  React.useEffect(() => {
+    console.log(img);
+  })
+
   return (
     <>
       <PhotoModalButtonGroup>
         <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
-        <PhotoShareBtn variant="contained">저장하기</PhotoShareBtn>
+        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>저장하기</PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}

@@ -43,13 +43,20 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
   };
 
   const handleQuizSubmit = () => {
-    setQuiz({
-      QuizGiven: true,
-      QuizContent: quizContent,
-      QuizAnswer: quizAnswer,
-    });
-    handleModalClose();
-    navigate(`/message/post/${userid}`);
+    if (quizContent === "") {
+      alert("퀴즈를 입력해주세요.");
+    } else if (quizAnswer === "") {
+      alert("정답을 입력해주세요.");
+    } else {
+      setQuiz({
+        QuizGiven: true,
+        QuizContent: quizContent,
+        QuizAnswer: quizAnswer,
+      });
+      handleModalClose();
+      navigate(`/message/post/${userid}`);
+    }
+    
   };
   return (
     <>

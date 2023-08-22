@@ -21,3 +21,20 @@ export const MainBackground = styled.div`
   bottom: 0;
   left: 0;
 `;
+
+export const MainEmpty = styled.div`
+  width: 90%;
+  max-width: 375px;
+  margin: 100px auto;
+  padding: 30px 0;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: var(--font-black, #303030);
+  text-align: center;
+  font-family: GmarketSans;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: normal;
+  letter-spacing: -0.28px;
+`;

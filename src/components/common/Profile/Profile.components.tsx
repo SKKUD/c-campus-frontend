@@ -14,6 +14,7 @@ import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 import LightGreenBtn from "../Buttons/LightGreenBtn.components";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 import { useExtractID } from "../../../hooks/useExtractID";
+import { useEffect } from "react";
 
 interface IProfile {
   coin: number;

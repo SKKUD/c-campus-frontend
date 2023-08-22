@@ -10,9 +10,9 @@ export const handleShare = async () => {
 
         if (blob) {
           const data = {
-            title: "CongcamFourcut",
+            title: "congcamMessage",
             files: [
-              new File([blob], "CongcamFourcut.png", {
+              new File([blob], "congcamMessage.png", {
                 type: blob.type,
               }),
             ],

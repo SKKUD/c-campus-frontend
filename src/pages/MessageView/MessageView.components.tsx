@@ -40,6 +40,7 @@ import { useAuthCheckApi, useUserProfileGetApi } from "../../hooks/LoginAxios";
 // import modal
 import ShowImg from "../../components/MessageView/modal/ShowImg/ShowImg.components";
 import ModalLayout from "../../components/MessageView/ModalLayout/ModalLayout.components";
+import { handleShare } from "../../utils/handleShare";
 
 // interface
 interface IMessageData {
@@ -144,6 +145,7 @@ const MessageView = () => {
       {currentID === String(userAuth) && axiosMessage ? ( // check if currentID matched to current userAuth
         <MessageViewContainer
           backgroundColor={axiosMessage?.background_color_code || ""}
+          className="congcamMessage"
         >
           {match1024 && ( // 웹 환경일 때
             <MessageViewWebFourcutContainer onClick={handleOpen}>
@@ -263,7 +265,7 @@ const MessageView = () => {
 
             {/* Sharing Button */}
             <GreenBtnContainer className="MessageViewCenter">
-              <GreenBtn content="공유하기" />
+              <GreenBtn content="공유하기" onClick={handleShare} />
             </GreenBtnContainer>
           </MessageViewMobileContainer>
         </MessageViewContainer>

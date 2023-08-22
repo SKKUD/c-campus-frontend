@@ -65,7 +65,7 @@ const PostMessage = () => {
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
   const Quiz = useRecoilValue(QuizState);
-  const Photo = useRecoilValue(PhotoState);
+  const [Photo, setPhoto] = useRecoilState(PhotoState);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
   const [nameText, SetNameText] = useState<string>(Message.name);
   const [nameCount, SetNameCount] = useState<number>(0);
@@ -78,6 +78,35 @@ const PostMessage = () => {
   const profiledata = useRecoilValue(UserState);
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
   const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
+
+  // check localStorage
+  useEffect(() => {
+    const storedIsWriting = localStorage.getItem("IsWriting");
+    const storedName = localStorage.getItem("name");
+    const storedContent = localStorage.getItem("content");
+    const storedBackground = localStorage.getItem("background");
+    const storedPhoto = localStorage.getItem("photo");
+    if (storedIsWriting) {
+      setIsWriting(Boolean(storedIsWriting));
+    }
+    if (storedName) {
+      SetNameText(storedName);
+    }
+    if (storedContent) {
+      SetContentText(storedContent);
+    }
+    if (storedBackground) {
+      SetCurrentColorHex(storedBackground);
+    }
+    if (storedPhoto) {
+      setPhoto({
+        PhotoTaken: true,
+        PhotoURL: storedPhoto,
+      });
+    } else {
+      console.log("localStorage에 저장된 데이터 없음");
+    }
+  }, []);
 
   // subject update button
   const updateButtonHandler = () => {
@@ -119,6 +148,10 @@ const PostMessage = () => {
   const PostPhotoHandler = () => {
     setIsWriting(true);
     setMessage({ name: nameText, content: contentText });
+    localStorage.setItem("IsWriting", JSON.stringify(true));
+    localStorage.setItem("name", nameText);
+    localStorage.setItem("content", contentText);
+    localStorage.setItem("background", currentColorHex);
     navigate(`/photo/post/${userid}`);
   };
 
@@ -148,6 +181,7 @@ const PostMessage = () => {
       setDone(true);
       setModalContent("");
       handleModalOpen();
+      localStorage.clear();
     } else if (nameText === "") {
       alert("이름을 입력해주세요.");
     } else if (contentText === "") {
@@ -177,7 +211,7 @@ const PostMessage = () => {
 
   useEffect(() => {
     SetCurrentSubject(SubjectData[0]);
-  }, [SubjectData])
+  }, [SubjectData]);
 
   // return
   return (
@@ -274,7 +308,7 @@ const PostMessage = () => {
 
         <PostMessageContentTo>
           <p className="PostMessageTo">To. </p>
-          <p className="PostMessageReceiver">명륜 귀요미</p>
+          <p className="PostMessageReceiver">{profile && profile.nickname}</p>
         </PostMessageContentTo>
 
         {/* content */}

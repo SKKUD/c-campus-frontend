@@ -26,7 +26,7 @@ import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import { ExportElementAsPNG } from "../../utils/downloadPhoto";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   IsWritingMessage,
   PhotoFile,
@@ -42,7 +42,7 @@ import { toBlob } from "html-to-image";
 
 const PostPhoto = () => {
   const userid = useExtractID();
-  const IsWriting = useRecoilValue(IsWritingMessage);
+  const [IsWriting, setIsWriting] = useRecoilState(IsWritingMessage);
   const setPhotoTaken = useSetRecoilState(PhotoState);
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
@@ -56,6 +56,13 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
+
+  useEffect(() => {
+    const storedIsWriting = localStorage.getItem("IsWriting");
+    if (storedIsWriting) {
+      setIsWriting(Boolean(storedIsWriting));
+    }
+  }, []);
 
   const handleDelete = (num: number) => {
     if (window.confirm("선택한 사진을 지울까요?")) {

@@ -219,6 +219,7 @@ export const GreenBtnContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  padding-bottom: 30px;
   @media (min-width: 1024px) {
     max-width: 1024px;
     justify-content: right;

@@ -1,12 +1,15 @@
 import Router from "./Router";
 import { RecoilRoot } from "recoil";
+import { CookiesProvider } from "react-cookie";
 
 function App() {
   return (
     <div className="App" style={{ outline: 0 }}>
-      <RecoilRoot>
-        <Router />
-      </RecoilRoot>
+      <CookiesProvider>
+        <RecoilRoot>
+          <Router />
+        </RecoilRoot>
+      </CookiesProvider>
     </div>
   );
 }

@@ -51,27 +51,21 @@ import AskPhotopost from "../../components/PostMessage/modal/AskPhotopost/AskPho
 import { useMediaQuery } from "@mui/material";
 import { useMessageSubmitApi } from "../../hooks/MessageAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-
-// 질문 데이터
-const SubjectData = [
-  "우리가 먹었던 최고의 학식 메뉴",
-  "우리가 처음 만난 날",
-  "학교 다니면서 있었던 재밌었던 일",
-  "꼭 해주고 싶은 말",
-  "과거로 간다면 같이 하고 싶은 것",
-];
+import { MakeQuestions } from "../../data/QuestionSet";
+import { useUserProfileGetApi } from "../../hooks/LoginAxios";
 
 const backgroundColor = ["#D6EABA", "#D9E1CE", "#C1D3A7", "#DAEFAE", "#BFD8BA"];
 
 const PostMessage = () => {
+  const [profile] = useUserProfileGetApi();
   const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
+
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
   const Quiz = useRecoilValue(QuizState);
   const Photo = useRecoilValue(PhotoState);
-  const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
   const [nameText, SetNameText] = useState<string>(Message.name);
   const [nameCount, SetNameCount] = useState<number>(0);
@@ -81,6 +75,9 @@ const PostMessage = () => {
   const [currentColor, SetCurrentColor] = useState<number>(0);
   const [done, setDone] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
+  const profiledata = useRecoilValue(UserState);
+  const [SubjectData, SetSubjectData] = useState<string[]>([]);
+  const [currentSubject, SetCurrentSubject] = useState<string>(SubjectData[0]);
 
   // subject update button
   const updateButtonHandler = () => {
@@ -171,6 +168,16 @@ const PostMessage = () => {
   const handleModalClose = () => {
     setModalOpen(false);
   };
+
+  // useEffect for naming
+  useEffect(() => {
+    console.log(profile);
+    SetSubjectData(MakeQuestions(profile.nickname));
+  }, [profile]);
+
+  useEffect(() => {
+    SetCurrentSubject(SubjectData[0]);
+  }, [SubjectData])
 
   // return
   return (

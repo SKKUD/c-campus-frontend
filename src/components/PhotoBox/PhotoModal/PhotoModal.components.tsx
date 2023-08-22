@@ -65,11 +65,6 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    // const res = axios.get('https://example.com/image.jpg', { withCredentials: true }).then((response) => {
-    //   console.log(response);
-    // }).catch((error) => {
-
-    // })
     await fetch(img)
       .then(response => response.blob())
       .then(blob => {

@@ -10,8 +10,10 @@ import MessageList from "../MessageBox/MessageBox.components";
 import infoDescImg from "../../assets/images/infoDescImg.png";
 import MessageFeed from "../MessageFeed/MessageFeed.components";
 import CongMachine from "../../components/Main/CongMachine/CongMachine.components";
+import { useEffect } from "react";
 
 const WebCongcamFeed = () => {
+  
   return (
     <WebMainPageContainer>
       <Ground />

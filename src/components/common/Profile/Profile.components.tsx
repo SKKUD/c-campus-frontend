@@ -8,9 +8,12 @@ import {
 } from "./Profile.styles";
 import coinicon from "../../../assets/images/congCoin.png";
 import profileimage from "../../../assets/images/default_profile.jpeg";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { UserState } from "../../../recoil/recoil";
-import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import {
+  useAuthCheckApi,
+  useUserProfileGetApi,
+} from "../../../hooks/LoginAxios";
 import LightGreenBtn from "../Buttons/LightGreenBtn.components";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 import { useExtractID } from "../../../hooks/useExtractID";
@@ -23,7 +26,16 @@ const Profile = ({ coin }: IProfile) => {
   const profiledata = useRecoilValue(UserState);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
-  // const coin = 16;
+  const [profile] = useUserProfileGetApi();
+  const [userProfile, SetUserProfile] = useRecoilState(UserState);
+
+  useEffect(() => {
+    SetUserProfile({
+      userID: currentID,
+      nickname: profile.nickname,
+      profileImageUrl: profile.profileImageUrl,
+    });
+  }, [profile]);
 
   return (
     <ProfileContainer>

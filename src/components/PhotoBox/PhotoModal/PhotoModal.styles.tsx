@@ -5,11 +5,17 @@ export const PhotoModalContainer = styled(Box)`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 320px;
+  height: 100%;
+  /* overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  } */
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+
 `;
 
 export const CloseModalBtn = styled.div`
@@ -18,9 +24,10 @@ export const CloseModalBtn = styled.div`
 `;
 
 export const PhotoModalIMG = styled.img`
-  width: 236px;
-  height: 603px;
+  width: 70%;
+  height: auto;
   margin-bottom: 20px;
+  overflow: scroll;
 `;
 
 export const PhotoModalButtonGroup = styled.div`
@@ -65,4 +72,8 @@ export const PhotoDeleteConfirmBtn = styled(Button)`
   :hover {
     background-color: #fff;
   }
+`;
+
+export const ChildModalContainer = styled.div`
+  overflow: scroll;
 `;

@@ -40,6 +40,7 @@ export const useUserProfileGetApi = () => {
             process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}`,
             { withCredentials: true }
           );
+          
           setProfile(res.data);
         } catch (error) {
           // error

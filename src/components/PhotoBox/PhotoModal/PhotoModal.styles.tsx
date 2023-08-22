@@ -7,10 +7,10 @@ export const PhotoModalContainer = styled(Box)`
   left: 50%;
   width: 320px;
   height: 100%;
-  overflow: scroll;
+  /* overflow: scroll;
   ::-webkit-scrollbar {
     display: none;
-  }
+  } */
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -24,8 +24,8 @@ export const CloseModalBtn = styled.div`
 `;
 
 export const PhotoModalIMG = styled.img`
-  width: 236px;
-  height: 603px;
+  width: 70%;
+  height: auto;
   margin-bottom: 20px;
   overflow: scroll;
 `;

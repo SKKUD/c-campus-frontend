@@ -274,7 +274,7 @@ const PostMessage = () => {
 
         <PostMessageContentTo>
           <p className="PostMessageTo">To. </p>
-          <p className="PostMessageReceiver">명륜 귀요미</p>
+          <p className="PostMessageReceiver">{profile && profile.nickname}</p>
         </PostMessageContentTo>
 
         {/* content */}

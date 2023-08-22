@@ -36,7 +36,7 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
         // login and userID match | 현재 url에서의 id와 비교
         checkAuth && userAuth === currentID ? <PrevBtn /> : <></>
       }
-      <Profile coin={Number(messageNumber)}/>
+      <Profile coin={Number(messageNumber)} />
       {
         // 로그인이 되어있으면 message와 콩캠네컷 스와이프 가능 | 로그인 안되어있으면 CongMachine화면에서 쪽지쓰고 피드보는 것만 가능
         checkAuth && userAuth === currentID ? (
@@ -47,7 +47,6 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
               nextEl: ".next",
             }}
             pagination={{ clickable: true }}
-            // onSwiper={(swiper) => console.log(swiper.realIndex)}
             onSlideChange={(swiper) => setSlide(swiper.realIndex)}
           >
             <SwiperSlide>

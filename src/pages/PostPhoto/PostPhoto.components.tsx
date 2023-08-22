@@ -112,7 +112,6 @@ const PostPhoto = () => {
         ],
       };
       setPhotoFile(data.files[0]);
-      console.log(data.files[0]);
     }
   };
 

@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { ToggleContainer } from "./WebHeaderSwitch.styles";
-
-import { UserState } from "../../../../recoil/recoil";
-import { useRecoilValue } from "recoil";
+import { useAuthCheckApi } from "../../../../hooks/LoginAxios";
 
 const WebHeaderSwitch = () => {
-  const profileUser = useRecoilValue(UserState);
+  const [checkAuth] = useAuthCheckApi();
   const [isOn, setisOn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,10 +18,10 @@ const WebHeaderSwitch = () => {
   const toggleHandler = () => {
     setisOn(!isOn);
     if (isOn) {
-      // redirect to profileUser.userID
-      navigate(`/${profileUser.userID}`);
+      // redirect to userID
+      navigate(`/${checkAuth}`);
     } else {
-      navigate(`/photo/${profileUser.userID}`);
+      navigate(`/photo/${checkAuth}`);
     }
     window.scrollTo(0, 0);
   };

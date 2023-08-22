@@ -173,7 +173,8 @@ const PostMessage = () => {
   });
   const submitHandler = async () => {
     handleModalClose();
-    console.log(modalContent);
+    // console.log(modalContent);
+
     // submit
     if (nameText !== "" && contentText !== "") {
       setMessage({ name: nameText, content: contentText });
@@ -205,7 +206,6 @@ const PostMessage = () => {
 
   // useEffect for naming
   useEffect(() => {
-    console.log(profile);
     SetSubjectData(MakeQuestions(profile.nickname));
   }, [profile]);
 

@@ -14,6 +14,5 @@ export const setPhotoURL = async (setPhoto: (photo: PhotoData) => void) => {
       PhotoURL: dataUrl,
     });
     localStorage.setItem("photo", dataUrl);
-    console.log(dataUrl);
   });
 };

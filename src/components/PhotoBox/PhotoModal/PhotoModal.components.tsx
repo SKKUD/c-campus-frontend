@@ -68,7 +68,7 @@ function ChildModal({ img }: ChildModalProps) {
     // img에서 뒷부분 아이디 추출해야됨  https://블러블러/{여기}
     // extract ID
     console.log(img);
-    const IMG_ID: string = img.slice(56)
+    const IMG_ID: string = img.slice(55)
 
     console.log(IMG_ID);
     // 추출한 아이디 여기 넣어놓으면 됨

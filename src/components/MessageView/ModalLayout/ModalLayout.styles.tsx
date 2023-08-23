@@ -10,7 +10,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContainerInner = styled.div`
-  width: 400px;
+  width: 90%;
   height: calc(100vh + 60px);
   overflow: scroll;
   ::-webkit-scrollbar {

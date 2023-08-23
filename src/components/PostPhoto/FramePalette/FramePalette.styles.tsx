@@ -20,6 +20,7 @@ export const PaletteContainer = styled.div`
     }
   }
   @media (min-width: 1024px) {
+    padding-left: 0px;
     flex-direction: row;
     top: 50px;
     left: 50%;

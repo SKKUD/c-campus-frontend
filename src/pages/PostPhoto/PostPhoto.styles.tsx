@@ -20,12 +20,8 @@ export const FourcutNPaletteWrapper = styled.div`
 export const FourcutContainer = styled.div`
   width: 201px;
   height: 513px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
   box-sizing: border-box;
-  margin: 1px;
   @media (min-width: 1024px) {
     margin-top: 130px;
   }
@@ -41,7 +37,6 @@ export const FourcutFrame = styled.img`
 `;
 
 export const PhotoWrapper = styled.div`
-  margin: 0 auto;
   width: 201px;
   height: 452px;
   padding-top: 4.26px;

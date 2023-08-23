@@ -39,9 +39,6 @@ export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
       }}
     >
       <PhotoModalContainer>
-        <CloseModalBtn onClick={handleClose}>
-          <img src={closeIcon} alt="close" />
-        </CloseModalBtn>
         <PhotoModalIMG src={imgSrc} />
         <ChildModal img={imgSrc} />
       </PhotoModalContainer>

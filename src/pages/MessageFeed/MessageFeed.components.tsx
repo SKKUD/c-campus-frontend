@@ -85,7 +85,7 @@ const MessageFeed = () => {
 
   // navigate to message box
   const navigate = useNavigate();
-  const RedirectToFeedUrl = () => {
+  const RedirectToMessageBox = () => {
     navigate(`/message/${currentId}`);
   };
 
@@ -100,7 +100,7 @@ const MessageFeed = () => {
             {checkAuth && String(checkAuth) === currentId && (
               <LightGreenBtn
                 content="내 메세지 보기"
-                onClick={RedirectToFeedUrl}
+                onClick={RedirectToMessageBox}
               />
             )}
           </OpenMessageHeader>

@@ -4,6 +4,7 @@ import { useMediaQuery } from "@mui/material";
 import {
   PhotoBoothContainer,
   FourcutNPaletteWrapper,
+  FourcutContainerWrapper,
   FourcutContainer,
   FourcutFrame,
   PhotoWrapper,
@@ -125,86 +126,88 @@ const PostPhoto = () => {
   return (
     <PhotoBoothContainer>
       <FourcutNPaletteWrapper>
-        <FourcutContainer className="fourcutImage">
-          <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
-          <PhotoWrapper>
-            {current === 1 ? (
-              <TakePhoto
-                current={current}
-                setCurrent={setCurrent}
-                dispatchArr={dispatchArr}
-                onCapture={onCapture}
-                setOnCapture={setOnCapture}
-                done={done}
-              />
-            ) : (
-              <FourcutPhoto
-                alt="photo1"
-                src={photo1 || blank}
-                onClick={() => done === "done" && handleDelete(1)}
-              />
-            )}
-            {current === 2 ? (
-              <TakePhoto
-                current={current}
-                setCurrent={setCurrent}
-                dispatchArr={dispatchArr}
-                onCapture={onCapture}
-                setOnCapture={setOnCapture}
-                done={done}
-              />
-            ) : (
-              <FourcutPhoto
-                alt="photo2"
-                src={photo2 || blank}
-                onClick={() => done === "done" && handleDelete(2)}
-              />
-            )}
-            {current === 3 ? (
-              <TakePhoto
-                current={current}
-                setCurrent={setCurrent}
-                dispatchArr={dispatchArr}
-                onCapture={onCapture}
-                setOnCapture={setOnCapture}
-                done={done}
-              />
-            ) : (
-              <FourcutPhoto
-                alt="photo3"
-                src={photo3 || blank}
-                onClick={() => done === "done" && handleDelete(3)}
-              />
-            )}
-            {current === 4 ? (
-              <TakePhoto
-                current={current}
-                setCurrent={setCurrent}
-                dispatchArr={dispatchArr}
-                onCapture={onCapture}
-                setOnCapture={setOnCapture}
-                done={done}
-              />
-            ) : (
-              <FourcutPhoto
-                alt="photo4"
-                src={photo4 || blank}
-                onClick={() => done === "done" && handleDelete(4)}
-              />
-            )}
-          </PhotoWrapper>
-          <DateContainer
-            brightFrame={
-              frameNum === 2 || frameNum === 6
-                ? "bright"
-                : frameNum === 5
-                ? "medium"
-                : "dark"
-            }
-          >
-            {getDate()}
-          </DateContainer>
-        </FourcutContainer>
+        <FourcutContainerWrapper>
+          <FourcutContainer className="fourcutImage">
+            <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
+            <PhotoWrapper>
+              {current === 1 ? (
+                <TakePhoto
+                  current={current}
+                  setCurrent={setCurrent}
+                  dispatchArr={dispatchArr}
+                  onCapture={onCapture}
+                  setOnCapture={setOnCapture}
+                  done={done}
+                />
+              ) : (
+                <FourcutPhoto
+                  alt="photo1"
+                  src={photo1 || blank}
+                  onClick={() => done === "done" && handleDelete(1)}
+                />
+              )}
+              {current === 2 ? (
+                <TakePhoto
+                  current={current}
+                  setCurrent={setCurrent}
+                  dispatchArr={dispatchArr}
+                  onCapture={onCapture}
+                  setOnCapture={setOnCapture}
+                  done={done}
+                />
+              ) : (
+                <FourcutPhoto
+                  alt="photo2"
+                  src={photo2 || blank}
+                  onClick={() => done === "done" && handleDelete(2)}
+                />
+              )}
+              {current === 3 ? (
+                <TakePhoto
+                  current={current}
+                  setCurrent={setCurrent}
+                  dispatchArr={dispatchArr}
+                  onCapture={onCapture}
+                  setOnCapture={setOnCapture}
+                  done={done}
+                />
+              ) : (
+                <FourcutPhoto
+                  alt="photo3"
+                  src={photo3 || blank}
+                  onClick={() => done === "done" && handleDelete(3)}
+                />
+              )}
+              {current === 4 ? (
+                <TakePhoto
+                  current={current}
+                  setCurrent={setCurrent}
+                  dispatchArr={dispatchArr}
+                  onCapture={onCapture}
+                  setOnCapture={setOnCapture}
+                  done={done}
+                />
+              ) : (
+                <FourcutPhoto
+                  alt="photo4"
+                  src={photo4 || blank}
+                  onClick={() => done === "done" && handleDelete(4)}
+                />
+              )}
+            </PhotoWrapper>
+            <DateContainer
+              brightFrame={
+                frameNum === 2 || frameNum === 6
+                  ? "bright"
+                  : frameNum === 5
+                  ? "medium"
+                  : "dark"
+              }
+            >
+              {getDate()}
+            </DateContainer>
+          </FourcutContainer>
+        </FourcutContainerWrapper>
         <FramePalette setFrame={setFrame} />
       </FourcutNPaletteWrapper>
       {match1024 ? (

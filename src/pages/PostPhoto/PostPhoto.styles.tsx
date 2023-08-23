@@ -17,14 +17,17 @@ export const FourcutNPaletteWrapper = styled.div`
   justify-content: center;
 `;
 
+export const FourcutContainerWrapper = styled.div`
+  @media (min-width: 1024px) {
+    margin-top: 130px;
+  }
+`;
+
 export const FourcutContainer = styled.div`
   width: 201px;
   height: 513px;
   position: relative;
   box-sizing: border-box;
-  @media (min-width: 1024px) {
-    margin-top: 130px;
-  }
 `;
 
 export const FourcutFrame = styled.img`

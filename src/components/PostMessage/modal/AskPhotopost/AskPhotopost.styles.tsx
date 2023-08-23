@@ -42,4 +42,7 @@ export const AskPhotopostWhiteBtn = styled(Button)`
   font-family: Cafe24Ssurround;
   font-size: 22px;
   font-weight: 700;
+  @media (max-width: 350px) {
+    font-size: 18px;
+  }
 `;

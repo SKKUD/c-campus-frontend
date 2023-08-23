@@ -5,7 +5,7 @@ export const PhotoModalContainer = styled(Box)`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 320px;
+  width: 250px;
   height: auto;
   transform: translate(-50%, -50%);
   display: flex;
@@ -16,10 +16,16 @@ export const PhotoModalContainer = styled(Box)`
 export const CloseModalBtn = styled.div`
   cursor: pointer;
   align-self: flex-end;
+  margin-top: 30px;
+  margin-right: 10px;
+  > img {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const PhotoModalIMG = styled.img`
-  width: 70%;
+  width: 95%;
   height: auto;
   margin-bottom: 20px;
   overflow: scroll;
@@ -64,6 +70,7 @@ export const PhotoDeleteConfirmBtn = styled(Button)`
   font-family: Cafe24Ssurround;
   font-size: 22px;
   font-weight: 700;
+  pointer-events: revert;
   :hover {
     background-color: #fff;
   }

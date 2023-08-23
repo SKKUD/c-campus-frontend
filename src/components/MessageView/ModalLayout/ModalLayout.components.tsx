@@ -19,16 +19,10 @@ const ModalLayout: FC<ModalLayoutProps> = ({
   handleModalClose,
 }) => {
   return (
-    <Modal
-      open={modalOpen}
-      onClose={handleModalClose}
-      sx={{
-        overflowY: "scroll",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
-    >
-      <ModalContainerInner>{children}</ModalContainerInner>
+    <Modal open={modalOpen} onClose={handleModalClose}>
+      <ModalContainer>
+        <ModalContainerInner>{children}</ModalContainerInner>
+      </ModalContainer>
     </Modal>
   );
 };

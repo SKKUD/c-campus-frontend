@@ -15,8 +15,6 @@ import {
   OpenMesageEmpty,
 } from "./MessageFeed.styles";
 import { useExtractID } from "../../hooks/useExtractID";
-import LightGreenBtn from "../../components/common/Buttons/LightGreenBtn.components";
-import { useNavigate } from "react-router";
 
 // interface
 interface IAxiosMessageData {
@@ -81,12 +79,6 @@ const MessageFeed = () => {
     }
   }, [currentId]);
 
-  // navigate to message box
-  const navigate = useNavigate();
-  const RedirectToFeedUrl = () => {
-    navigate(`/message/${currentId}`);
-  };
-
   return (
     <>
       {messageNumber !== 0 ? (
@@ -95,10 +87,6 @@ const MessageFeed = () => {
             <OpenMessageHeaderContent>
               {messageNumber}개의 공개쪽지
             </OpenMessageHeaderContent>
-            <LightGreenBtn
-              content="내 메세지 보기"
-              onClick={RedirectToFeedUrl}
-            />
           </OpenMessageHeader>
 
           <OpenMessageContainer>

@@ -79,40 +79,19 @@ const PostMessage = () => {
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
   const [currentSubject, SetCurrentSubject] = useState<string>(""); 
 
-  
-  // initial
-  useEffect(() => {
-    const randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
-    
-    SetCurrentSubject(SubjectData[randomNumber]);
-    SetCurrentSubjectNumber(randomNumber);
-    localStorage.setItem("quiz_content", SubjectData[randomNumber]);
-  }, []);
-
-  // whenever quiz change
-  useEffect(() => {
-    const storedQuizContent = localStorage.getItem("quiz_content");
-    console.log(storedQuizContent)
-
-    //저장된 값이 있으면
-    if (storedQuizContent) {
-      SetCurrentSubject(storedQuizContent);
-    }
-    else {
-      SetCurrentSubject(SubjectData[0]);
-    }
-    console.log(currentSubject);
-  }, [localStorage.getItem("quiz_content")]);
-
   // check localStorage
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
+    const storedSubject = localStorage.getItem("quiz_content");
     const storedName = localStorage.getItem("name");
     const storedContent = localStorage.getItem("content");
     const storedBackground = localStorage.getItem("background");
     const storedPhoto = localStorage.getItem("photo");
     if (storedIsWriting) {
       setIsWriting(Boolean(storedIsWriting));
+    }
+    if (storedSubject) {
+      SetCurrentSubject(storedSubject);
     }
     if (storedName) {
       SetNameText(storedName);
@@ -144,6 +123,7 @@ const PostMessage = () => {
         break;
       }
     }
+
     // save it
     SetCurrentSubject(SubjectData[randomNumber]);
     SetCurrentSubjectNumber(randomNumber);
@@ -239,8 +219,21 @@ const PostMessage = () => {
   }, [profile]);
 
   useEffect(() => {
-    SetCurrentSubject(SubjectData[0]);
+    // when subjectdata set
+    const randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
+    SetCurrentSubject(SubjectData[randomNumber]);
+    SetCurrentSubjectNumber(randomNumber);
   }, [SubjectData]);
+
+  // whenever quiz change
+  useEffect(() => {
+    const storedQuizContent = localStorage.getItem("quiz_content");
+
+    //저장된 값이 있으면
+    if (storedQuizContent) {
+      SetCurrentSubject(storedQuizContent);
+    }
+  }, [localStorage.getItem("quiz_content")]);
 
   // return
   return (

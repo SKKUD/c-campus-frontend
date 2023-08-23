@@ -3,12 +3,15 @@ import styled from "@emotion/styled";
 export const PaletteContainer = styled.div`
   width: 48px;
   height: 336px;
-  margin-left: 5px;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  padding-left: 280px;
+
   @media (min-width: 768px) {
+    padding-left: 300px;
     width: 60px;
     height: 426px;
     > svg {
@@ -17,7 +20,7 @@ export const PaletteContainer = styled.div`
     }
   }
   @media (min-width: 1024px) {
-    position: absolute;
+    padding-left: 0px;
     flex-direction: row;
     top: 50px;
     left: 50%;

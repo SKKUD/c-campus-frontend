@@ -65,7 +65,14 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    await fetch(img)
+    // img에서 뒷부분 아이디 추출해야됨  https://블러블러/{여기}
+    // extract ID
+    console.log(img);
+    const IMG_ID: string = img.slice(56)
+
+    console.log(IMG_ID);
+    // 추출한 아이디 여기 넣어놓으면 됨
+    await fetch(IMG_ID)
       .then(response => response.blob())
       .then(blob => {
         const a = document.createElement('a');

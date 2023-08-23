@@ -2,6 +2,8 @@ import { useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import { useRef, useCallback } from "react";
 import Webcam from "react-webcam";
+import { FourcutPhoto } from "../../../pages/PostPhoto/PostPhoto.styles";
+import blank from "../../../assets/images/blank.png";
 
 const videoConstraints = {
   width: 190,
@@ -47,7 +49,7 @@ const TakePhoto = ({
 
   return (
     <>
-      {match1024 && (
+      {match1024 ? (
         <Webcam
           audio={false}
           width={190}
@@ -56,6 +58,8 @@ const TakePhoto = ({
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
         />
+      ) : (
+        <FourcutPhoto src={blank} />
       )}
     </>
   );

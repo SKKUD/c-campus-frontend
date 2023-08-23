@@ -7,9 +7,6 @@ export const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100%;
-  max-height: 800px;
-  overflow: scroll;
   width: 90%;
   max-width: 341px;
 `;

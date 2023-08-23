@@ -68,23 +68,26 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    // img에서 뒷부분 아이디 추출해야됨  https://블러블러/{여기}
     // extract ID
-    console.log(img);
     const IMG_ID: string = img.slice(55)
 
-    console.log(IMG_ID);
-    // 추출한 아이디 여기 넣어놓으면 됨
     await fetch(IMG_ID)
       .then(response => response.blob())
-      .then(blob => {
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = "콩캠네컷";
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+      .then(imageData => {
+        // Create a Blob from the image data
+        const blob = new Blob([imageData], { type: 'image/png' });
+
+        // Create a downloadable link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '콩캠네컷.png'; // Set the desired filename
+
+        // Trigger the download
+        link.click();
+        console.log("This is new method");
+        // Clean up
+        window.URL.revokeObjectURL(url);
       })
       .catch(error => {
         console.error('Error saving image:', error);

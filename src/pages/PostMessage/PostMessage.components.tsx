@@ -77,18 +77,28 @@ const PostMessage = () => {
   const [modalContent, setModalContent] = useState<string>("");
   const profiledata = useRecoilValue(UserState);
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
-  const [currentSubject, SetCurrentSubject] = useState<string>("");
+  const [currentSubject, SetCurrentSubject] = useState<string>(""); 
 
+  
+  // initial
+  useEffect(() => {
+    const randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
+    
+    SetCurrentSubject(SubjectData[randomNumber]);
+    SetCurrentSubjectNumber(randomNumber);
+    localStorage.setItem("quiz_content", SubjectData[randomNumber]);
+  }, []);
+
+  // whenever quiz change
   useEffect(() => {
     const storedQuizContent = localStorage.getItem("quiz_content");
     console.log(storedQuizContent)
+
     //저장된 값이 있으면
     if (storedQuizContent) {
-      console.log("set it")
       SetCurrentSubject(storedQuizContent);
     }
     else {
-      console.log("default")
       SetCurrentSubject(SubjectData[0]);
     }
     console.log(currentSubject);
@@ -97,7 +107,6 @@ const PostMessage = () => {
   // check localStorage
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
-    
     const storedName = localStorage.getItem("name");
     const storedContent = localStorage.getItem("content");
     const storedBackground = localStorage.getItem("background");
@@ -318,7 +327,7 @@ const PostMessage = () => {
         <PostMessageRandomSubjectContainer>
           <PostMessageRandomSubject>랜덤 주제</PostMessageRandomSubject>
           <PostMessageRandomSubjectContent>
-            {localStorage.getItem("quiz_content")}
+            {currentSubject}
             <PostMessageUpdateButton
               src={recycleIcon}
               onClick={updateButtonHandler}

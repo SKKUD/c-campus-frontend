@@ -6,16 +6,11 @@ export const PhotoModalContainer = styled(Box)`
   top: 50%;
   left: 50%;
   width: 320px;
-  height: 100%;
-  /* overflow: scroll;
-  ::-webkit-scrollbar {
-    display: none;
-  } */
+  height: auto;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-
 `;
 
 export const CloseModalBtn = styled.div`

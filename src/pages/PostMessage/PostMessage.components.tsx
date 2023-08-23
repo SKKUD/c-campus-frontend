@@ -79,40 +79,19 @@ const PostMessage = () => {
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
   const [currentSubject, SetCurrentSubject] = useState<string>(""); 
 
-  
-  // initial
-  useEffect(() => {
-    const randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
-    
-    SetCurrentSubject(SubjectData[randomNumber]);
-    SetCurrentSubjectNumber(randomNumber);
-    localStorage.setItem("quiz_content", SubjectData[randomNumber]);
-  }, []);
-
-  // whenever quiz change
-  useEffect(() => {
-    const storedQuizContent = localStorage.getItem("quiz_content");
-    console.log(storedQuizContent)
-
-    //저장된 값이 있으면
-    if (storedQuizContent) {
-      SetCurrentSubject(storedQuizContent);
-    }
-    else {
-      SetCurrentSubject(SubjectData[0]);
-    }
-    console.log(currentSubject);
-  }, [localStorage.getItem("quiz_content")]);
-
   // check localStorage
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
+    const storedSubject = localStorage.getItem("question");
     const storedName = localStorage.getItem("name");
     const storedContent = localStorage.getItem("content");
     const storedBackground = localStorage.getItem("background");
     const storedPhoto = localStorage.getItem("photo");
     if (storedIsWriting) {
       setIsWriting(Boolean(storedIsWriting));
+    }
+    if (storedSubject) {
+      SetCurrentSubject(storedSubject);
     }
     if (storedName) {
       SetNameText(storedName);
@@ -144,12 +123,13 @@ const PostMessage = () => {
         break;
       }
     }
+
     // save it
     SetCurrentSubject(SubjectData[randomNumber]);
     SetCurrentSubjectNumber(randomNumber);
     
     // save local storage
-    localStorage.setItem("quiz_content", SubjectData[randomNumber]);
+    localStorage.setItem("question", SubjectData[randomNumber]);
   };
 
   // content event handler
@@ -180,6 +160,7 @@ const PostMessage = () => {
     localStorage.setItem("IsWriting", JSON.stringify(true));
     localStorage.setItem("name", nameText);
     localStorage.setItem("content", contentText);
+    localStorage.setItem("question", currentSubject);
     localStorage.setItem("background", currentColorHex);
     navigate(`/photo/post/${userid}`);
   };
@@ -211,6 +192,8 @@ const PostMessage = () => {
       setDone(true);
       setModalContent("");
       handleModalOpen();
+      // clear localStorage
+      localStorage.removeItem('quiz_content');
       localStorage.clear();
     } else if (nameText === "") {
       alert("이름을 입력해주세요.");
@@ -237,10 +220,36 @@ const PostMessage = () => {
   useEffect(() => {
     SetSubjectData(MakeQuestions(profile.nickname));
   }, [profile]);
-
+  
   useEffect(() => {
-    SetCurrentSubject(SubjectData[0]);
+    if (profile.nickname !== "") {
+      const storedQuizContent = localStorage.getItem("question");
+
+      //저장된 값이 있으면
+      if (storedQuizContent === undefined || storedQuizContent === null || storedQuizContent === "undefined") {
+        // when subjectdata set
+        const randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
+        SetCurrentSubject(SubjectData[randomNumber]);
+        SetCurrentSubjectNumber(randomNumber);
+        localStorage.setItem("question", SubjectData[randomNumber]);
+      } else {
+        SetCurrentSubject(storedQuizContent || "(오른쪽 버튼을 한번 더 눌러주세요)");
+      }
+    }
   }, [SubjectData]);
+
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
+  // whenever quiz change
+  // useEffect(() => {
+  //   const storedQuizContent = localStorage.getItem("quiz_content");
+
+  //   //저장된 값이 있으면
+  //   if (storedQuizContent) {
+  //     SetCurrentSubject(storedQuizContent);
+  //   }
+  // }, [localStorage.getItem("quiz_content")]);
 
   // return
   return (

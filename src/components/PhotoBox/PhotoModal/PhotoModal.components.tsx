@@ -29,17 +29,23 @@ export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
   };
 
   return (
-    <div>
-      <Modal open={open} onClose={handleClose}>
-        <PhotoModalContainer>
-          <CloseModalBtn onClick={handleClose}>
-            <img src={closeIcon} alt="close" />
-          </CloseModalBtn>
-          <PhotoModalIMG src={imgSrc} />
-          <ChildModal img={imgSrc} />
-        </PhotoModalContainer>
-      </Modal>
-    </div>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      sx={{
+        overflowY: "scroll",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
+      <PhotoModalContainer>
+        <CloseModalBtn onClick={handleClose}>
+          <img src={closeIcon} alt="close" />
+        </CloseModalBtn>
+        <PhotoModalIMG src={imgSrc} />
+        <ChildModal img={imgSrc} />
+      </PhotoModalContainer>
+    </Modal>
   );
 }
 

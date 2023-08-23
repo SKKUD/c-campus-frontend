@@ -37,15 +37,11 @@ export const FourcutContainer = styled.div`
   position: relative;
   box-sizing: border-box;
   margin: 1px;
-
-  /* default */
-  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.1);
 `;
 
 export const FourcutFrame = styled.img`
   width: 201px;
   height: 513px;
-  flex-shrink: 0;
   position: absolute;
   top: 0;
   pointer-events: none;
@@ -65,7 +61,6 @@ export const PhotoWrapper = styled.div`
 export const FourcutPhoto = styled.img`
   width: 189px;
   height: 112px;
-  flex-shrink: 0;
   background-color: #000;
   cursor: pointer;
 `;

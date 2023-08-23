@@ -1,3 +1,4 @@
+import { useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import { useRef, useCallback } from "react";
 import Webcam from "react-webcam";
@@ -27,6 +28,7 @@ const TakePhoto = ({
 }: ITakePhoto) => {
   const webcamRef = useRef<Webcam>(null);
   const setUrl = dispatchArr[current - 1];
+  const match1024 = useMediaQuery("(min-width:1024px)");
 
   useEffect(() => {
     if (onCapture) {
@@ -44,14 +46,18 @@ const TakePhoto = ({
   }, [webcamRef]);
 
   return (
-    <Webcam
-      audio={false}
-      width={190}
-      height={112}
-      ref={webcamRef}
-      screenshotFormat="image/jpeg"
-      videoConstraints={videoConstraints}
-    />
+    <>
+      {match1024 && (
+        <Webcam
+          audio={false}
+          width={190}
+          height={112}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          videoConstraints={videoConstraints}
+        />
+      )}
+    </>
   );
 };
 

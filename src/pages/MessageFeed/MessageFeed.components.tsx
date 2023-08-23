@@ -15,6 +15,9 @@ import {
   OpenMesageEmpty,
 } from "./MessageFeed.styles";
 import { useExtractID } from "../../hooks/useExtractID";
+import LightGreenBtn from "../../components/common/Buttons/LightGreenBtn.components";
+import { useNavigate } from "react-router";
+import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // interface
 interface IAxiosMessageData {
@@ -44,6 +47,7 @@ interface IAxiosData {
 
 const MessageFeed = () => {
   const currentId = useExtractID();
+  const [checkAuth] = useAuthCheckApi();
   // State for public filter
   const [filteredData, SetFilteredData] = useState<IAxiosData[]>();
   const [messageNumber, SetMessageNumber] = useState<number>(0);
@@ -79,6 +83,12 @@ const MessageFeed = () => {
     }
   }, [currentId]);
 
+  // navigate to message box
+  const navigate = useNavigate();
+  const RedirectToFeedUrl = () => {
+    navigate(`/message/${currentId}`);
+  };
+
   return (
     <>
       {messageNumber !== 0 ? (
@@ -87,6 +97,12 @@ const MessageFeed = () => {
             <OpenMessageHeaderContent>
               {messageNumber}개의 공개쪽지
             </OpenMessageHeaderContent>
+            {checkAuth && String(checkAuth) === currentId && (
+              <LightGreenBtn
+                content="내 메세지 보기"
+                onClick={RedirectToFeedUrl}
+              />
+            )}
           </OpenMessageHeader>
 
           <OpenMessageContainer>

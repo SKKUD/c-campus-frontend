@@ -12,8 +12,10 @@ export const MessageFeedContainer = styled.div`
 export const OpenMessageHeader = styled.div`
   width: 90%;
   max-width: 380px;
-  height: 30px;
-  margin: auto;
+  height: 50px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
   background: var(--background, #f5f5f5);
 `;
 

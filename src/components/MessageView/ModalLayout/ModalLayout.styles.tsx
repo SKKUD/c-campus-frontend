@@ -10,6 +10,7 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalContainerInner = styled.div`
+  width: 400px;
   height: calc(100vh + 60px);
   overflow: scroll;
   ::-webkit-scrollbar {
@@ -22,16 +23,16 @@ export const ModalContainerInner = styled.div`
   padding: 30px 0;
 `;
 
-export const ModalContentContainer = styled.div`
-  width: 100%;
-  border-radius: 15px;
-  background: var(--background, #f5f5f5);
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+// export const ModalContentContainer = styled.div`
+//   width: 100%;
+//   border-radius: 15px;
+//   background: var(--background, #f5f5f5);
+//   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 export const CloseButtonContainer = styled.div`
   width: 90%;

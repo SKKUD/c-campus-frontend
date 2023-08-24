@@ -146,11 +146,12 @@ export const MessageViewContentMainContainer = styled.div`
 
 export const MessageViewFourcutFrameContainer = styled.div`
   @media (min-width: 1024px) {
+
   }
 `;
 
 export const MessageViewContentFrame = styled.img`
-  width: 100%;
+  width: 99px;
   height: 254px;
 
   @media (min-width: 1024px) {

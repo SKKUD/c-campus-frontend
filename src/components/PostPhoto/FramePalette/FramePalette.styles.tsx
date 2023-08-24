@@ -4,14 +4,14 @@ export const PaletteContainer = styled.div`
   width: 48px;
   height: 336px;
   position: absolute;
+  left: calc(50% + 110px);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-left: 280px;
 
   @media (min-width: 768px) {
-    padding-left: 300px;
+    left: calc(50% + 150px);
     width: 60px;
     height: 426px;
     > svg {
@@ -20,7 +20,7 @@ export const PaletteContainer = styled.div`
     }
   }
   @media (min-width: 1024px) {
-    padding-left: 0px;
+    left: 0px;
     flex-direction: row;
     top: 50px;
     left: 50%;

@@ -74,32 +74,33 @@ function ChildModal({ img }: ChildModalProps) {
     window.location.reload();
   };
 
-  // const saveImageLocally = async () => {
-  //   // extract ID
-  //   const IMG_ID: string = img.slice(55)
+  const saveImageLocally = async () => {
+    // extract ID
+    const IMG_ID: string = img.slice(55)
 
-  //   await fetch(IMG_ID)
-  //     .then(response => response.blob())
-  //     .then(imageData => {
-  //       // Create a Blob from the image data
-  //       const blob = new Blob([imageData], { type: 'image/png' });
+    await fetch(IMG_ID)
+      .then(response => response.blob())
+      .then(imageData => {
+        console.log(imageData);
+        // Create a Blob from the image data
+        const blob = new Blob([imageData], { type: 'image/png' });
+        console.log(blob);
+        // Create a downloadable link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = '콩캠네컷.png'; // Set the desired filename
 
-  //       // Create a downloadable link
-  //       const url = window.URL.createObjectURL(blob);
-  //       const link = document.createElement('a');
-  //       link.href = url;
-  //       link.download = '콩캠네컷.png'; // Set the desired filename
-
-  //       // Trigger the download
-  //       link.click();
-  //       console.log("This is new method");
-  //       // Clean up
-  //       window.URL.revokeObjectURL(url);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error saving image:', error);
-  //     });
-  // }
+        // Trigger the download
+        link.click();
+        console.log("download v3");
+        // Clean up
+        window.URL.revokeObjectURL(url);
+      })
+      .catch(error => {
+        console.error('Error saving image:', error);
+      });
+  }
 
   const downloadFile = () => {
     console.log("download file to v2 version");
@@ -121,7 +122,8 @@ function ChildModal({ img }: ChildModalProps) {
         .catch((err) => {
             console.error('err: ', err);
         });
-};
+  };
+
   React.useEffect(() => {
     console.log(img);
   })
@@ -130,7 +132,7 @@ function ChildModal({ img }: ChildModalProps) {
     <>
       <PhotoModalButtonGroup>
         <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
-        <PhotoShareBtn variant="contained" onClick={downloadFile}>저장하기</PhotoShareBtn>
+        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>저장하기</PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}

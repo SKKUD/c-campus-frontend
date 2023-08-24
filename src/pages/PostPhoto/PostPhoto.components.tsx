@@ -108,7 +108,7 @@ const PostPhoto = () => {
         title: "fourcut",
         files: [
           new File([blob], "CongcamFourcut.png", {
-            type: blob.type,
+            type: "image/png",
           }),
         ],
       };

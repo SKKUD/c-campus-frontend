@@ -132,7 +132,7 @@ function ChildModal({ img }: ChildModalProps) {
     <>
       <PhotoModalButtonGroup>
         <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
-        <PhotoShareBtn variant="contained" onClick={downloadFile}>저장하기</PhotoShareBtn>
+        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>저장하기</PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}

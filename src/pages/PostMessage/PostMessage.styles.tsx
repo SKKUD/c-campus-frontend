@@ -10,6 +10,7 @@ export const PostMessageContainer = styled.div<{ backgroundColor: string }>`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 80px;
   }
 `;
 export const PostMessageFieldContainer = styled.div`
@@ -288,7 +289,9 @@ export const PostMessageWriterContent = styled.input`
     outline: none;
   }
 `;
-export const PostMessageWebFourcutContaner = styled.div``;
+export const PostMessageWebFourcutContaner = styled.div`
+  padding-top: 30px;
+`;
 
 
 interface ButtonWrapperProps {

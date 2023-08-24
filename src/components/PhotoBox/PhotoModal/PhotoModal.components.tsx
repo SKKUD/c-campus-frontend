@@ -17,6 +17,12 @@ import { usePhotoDeleteApi } from "../../../hooks/PhotoAxios";
 
 import axios from "axios";
 
+import defaultFourcut from "../../../assets/images/default_fourcut.png";
+
+import html2canvas from 'html2canvas';
+import saveAs from "file-saver";
+import { useRef } from "react";
+
 interface PhotoModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,6 +30,7 @@ interface PhotoModalProps {
 }
 
 export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -40,7 +47,7 @@ export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
     >
       <PhotoModalContainer>
         <PhotoModalIMG src={imgSrc} />
-        <ChildModal img={imgSrc} />
+        <ChildModal img={imgSrc}/>
       </PhotoModalContainer>
     </Modal>
   );
@@ -67,33 +74,54 @@ function ChildModal({ img }: ChildModalProps) {
     window.location.reload();
   };
 
-  const saveImageLocally = async () => {
-    // extract ID
+  // const saveImageLocally = async () => {
+  //   // extract ID
+  //   const IMG_ID: string = img.slice(55)
+
+  //   await fetch(IMG_ID)
+  //     .then(response => response.blob())
+  //     .then(imageData => {
+  //       // Create a Blob from the image data
+  //       const blob = new Blob([imageData], { type: 'image/png' });
+
+  //       // Create a downloadable link
+  //       const url = window.URL.createObjectURL(blob);
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.download = '콩캠네컷.png'; // Set the desired filename
+
+  //       // Trigger the download
+  //       link.click();
+  //       console.log("This is new method");
+  //       // Clean up
+  //       window.URL.revokeObjectURL(url);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error saving image:', error);
+  //     });
+  // }
+
+  const downloadFile = () => {
+    console.log("download file to v2 version");
+
     const IMG_ID: string = img.slice(55)
 
-    await fetch(IMG_ID)
-      .then(response => response.blob())
-      .then(imageData => {
-        // Create a Blob from the image data
-        const blob = new Blob([imageData], { type: 'image/png' });
-
-        // Create a downloadable link
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = '콩캠네컷.png'; // Set the desired filename
-
-        // Trigger the download
-        link.click();
-        console.log("This is new method");
-        // Clean up
-        window.URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-        console.error('Error saving image:', error);
-      });
-  }
-
+    fetch(IMG_ID, { method: 'GET' })
+        .then((res) => {
+          return res.blob();
+        })
+        .then((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "콩캠네컷";
+            document.body.appendChild(a);
+            a.click();
+        })
+        .catch((err) => {
+            console.error('err: ', err);
+        });
+};
   React.useEffect(() => {
     console.log(img);
   })
@@ -102,7 +130,7 @@ function ChildModal({ img }: ChildModalProps) {
     <>
       <PhotoModalButtonGroup>
         <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
-        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>저장하기</PhotoShareBtn>
+        <PhotoShareBtn variant="contained" onClick={downloadFile}>저장하기</PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}

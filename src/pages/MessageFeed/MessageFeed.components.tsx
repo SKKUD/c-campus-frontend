@@ -18,6 +18,7 @@ import { useExtractID } from "../../hooks/useExtractID";
 import LightGreenBtn from "../../components/common/Buttons/LightGreenBtn.components";
 import { useNavigate } from "react-router";
 import { useAuthCheckApi } from "../../hooks/LoginAxios";
+import { useMediaQuery } from "@mui/material";
 
 // interface
 interface IAxiosMessageData {
@@ -46,6 +47,7 @@ interface IAxiosData {
 }
 
 const MessageFeed = () => {
+  const match1024 = useMediaQuery("(min-width:1024px)");
   const currentId = useExtractID();
   const [checkAuth] = useAuthCheckApi();
   // State for public filter
@@ -86,7 +88,7 @@ const MessageFeed = () => {
   // navigate to message box
   const navigate = useNavigate();
   const RedirectToMessageBox = () => {
-    navigate(`/message/${currentId}`);
+    match1024 ? navigate(`/${currentId}`) : navigate(`/message/${currentId}`);
   };
 
   return (

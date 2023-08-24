@@ -86,7 +86,7 @@ const PostMessage = () => {
     const storedName = localStorage.getItem("name");
     const storedContent = localStorage.getItem("content");
     const storedBackground = localStorage.getItem("background");
-    const storedPhoto = localStorage.getItem("photo");
+
     if (storedIsWriting) {
       setIsWriting(Boolean(storedIsWriting));
     }
@@ -101,12 +101,6 @@ const PostMessage = () => {
     }
     if (storedBackground) {
       SetCurrentColorHex(storedBackground);
-    }
-    if (storedPhoto) {
-      setPhoto({
-        PhotoTaken: true,
-        PhotoURL: storedPhoto,
-      });
     } else {
       console.log("localStorage에 저장된 데이터 없음");
     }

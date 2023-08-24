@@ -112,6 +112,17 @@ const PostMessage = () => {
     }
   }, []);
 
+  const deleteLocalStorage = (e: BeforeUnloadEvent) => {
+    localStorage.clear();
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener("beforeunload", deleteLocalStorage);
+    })();
+  }, []);
+
+
   // subject update button
   const updateButtonHandler = () => {
     // 처음 나왔던게 다시 안 나오게 하기

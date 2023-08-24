@@ -155,7 +155,7 @@ const MessageView = () => {
             <MessageViewWebFourcutContainer onClick={handleOpen}>
               {axiosMessage?.image_url ? ( // 이미지가 있는지 없는지 확인
                 <>
-                  {!(axiosMessage?.is_quiz) ? ( // 퀴즈가 있는지 없는지 확인
+                  {!axiosMessage?.is_quiz ? ( // 퀴즈가 있는지 없는지 확인
                     // 퀴즈가 없음 (그냥 사진 보여줌)
                     <MessageViewContentFrame src={axiosMessage?.image_url} />
                   ) : (
@@ -206,9 +206,11 @@ const MessageView = () => {
                   <MessageViewFourcutFrameContainer onClick={handleOpen}>
                     {axiosMessage?.image_url ? ( // 이미지가 있는지 없는지 확인
                       <>
-                        {!(axiosMessage?.is_quiz) ? ( // 퀴즈가 있는지 없는지 확인
+                        {!axiosMessage?.is_quiz ? ( // 퀴즈가 있는지 없는지 확인
                           // 퀴즈가 없음 (그냥 사진 보여줌)
-                          <MessageViewContentFrame src={lockedFourcut} />
+                          <MessageViewContentFrame
+                            src={axiosMessage?.image_url}
+                          />
                         ) : (
                           // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
                           <>

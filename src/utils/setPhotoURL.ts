@@ -1,4 +1,4 @@
-import { toPng } from "html-to-image";
+import { toSvg } from "html-to-image";
 
 interface PhotoData {
   PhotoTaken: boolean;
@@ -8,10 +8,18 @@ interface PhotoData {
 export const setPhotoURL = async (setPhoto: (photo: PhotoData) => void) => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-  await toPng(el, { style: { background: "white" } }).then((dataUrl) => {
-    setPhoto({
-      PhotoTaken: true,
-      PhotoURL: dataUrl,
+  await toSvg(el, {
+    style: { background: "gray" },
+    width: 201,
+    height: 513,
+  })
+    .then((dataUrl) => {
+      setPhoto({
+        PhotoTaken: true,
+        PhotoURL: dataUrl,
+      });
+    })
+    .catch((error) => {
+      console.error("Error converting HTML to image:", error);
     });
-  });
 };

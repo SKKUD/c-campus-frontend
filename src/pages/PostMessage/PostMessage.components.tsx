@@ -86,6 +86,7 @@ const PostMessage = () => {
     const storedName = localStorage.getItem("name");
     const storedContent = localStorage.getItem("content");
     const storedBackground = localStorage.getItem("background");
+    const storedCurrentColor = localStorage.getItem("CurrentColor");
 
     if (storedIsWriting) {
       setIsWriting(Boolean(storedIsWriting));
@@ -101,6 +102,8 @@ const PostMessage = () => {
     }
     if (storedBackground) {
       SetCurrentColorHex(storedBackground);
+    } if(storedCurrentColor) {
+      SetCurrentColor(Number(storedCurrentColor));
     } else {
       console.log("localStorage에 저장된 데이터 없음");
     }
@@ -155,6 +158,7 @@ const PostMessage = () => {
   const colorHandler = (num: number) => {
     SetCurrentColor(num - 1);
     SetCurrentColorHex(backgroundColor[num - 1]);
+    localStorage.setItem("CurrentColor", String(num-1));
   };
 
   // click photo handler

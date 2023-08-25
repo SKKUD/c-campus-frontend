@@ -79,7 +79,7 @@ function ChildModal({ img }: ChildModalProps) {
     const IMG_ID: string = img.slice(55)
 
     console.log(
-      "download v5"
+      "download v6"
     )
     const res = await axios.get(IMG_ID, {responseType: 'blob'})
                       .then((response) => {

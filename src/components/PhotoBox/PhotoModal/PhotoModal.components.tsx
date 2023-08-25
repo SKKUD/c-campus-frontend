@@ -78,28 +78,31 @@ function ChildModal({ img }: ChildModalProps) {
     // extract ID
     const IMG_ID: string = img.slice(55)
 
-    await fetch(IMG_ID)
-      .then(response => response.blob())
-      .then(imageData => {
-        console.log(imageData);
-        // Create a Blob from the image data
-        const blob = new Blob([imageData], { type: 'image/png' });
-        console.log(blob);
-        // Create a downloadable link
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = '콩캠네컷.png'; // Set the desired filename
-
-        // Trigger the download
-        link.click();
-        console.log("download v3");
-        // Clean up
-        window.URL.revokeObjectURL(url);
-      })
-      .catch(error => {
-        console.error('Error saving image:', error);
-      });
+    const res = await axios.get(img, {responseType: 'blob'})
+                      .then((response) => {
+                        console.log(response);
+                        return new Blob([response.data]);
+                      })
+                      .then(imageData => {
+                        console.log(imageData);
+                        // Create a Blob from the image data
+                        const blob = new Blob([imageData], { type: 'image/png' });
+                        console.log(blob);
+                        // Create a downloadable link
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = '콩캠네컷.png'; // Set the desired filename
+                
+                        // Trigger the download
+                        link.click();
+                        console.log("download v3");
+                        // Clean up
+                        window.URL.revokeObjectURL(url);
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                      }); 
   }
 
   const downloadFile = () => {

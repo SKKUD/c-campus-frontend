@@ -79,7 +79,7 @@ function ChildModal({ img }: ChildModalProps) {
     const IMG_ID: string = img.slice(55)
 
     console.log(
-      "download v4"
+      "download v5"
     )
     const res = await axios.get(IMG_ID, {responseType: 'blob'})
                       .then((response) => {
@@ -99,7 +99,6 @@ function ChildModal({ img }: ChildModalProps) {
                 
                         // Trigger the download
                         link.click();
-                        console.log("download v3");
                         // Clean up
                         window.URL.revokeObjectURL(url);
                       })

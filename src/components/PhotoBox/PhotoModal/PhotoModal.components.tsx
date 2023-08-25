@@ -81,7 +81,7 @@ function ChildModal({ img }: ChildModalProps) {
     console.log(
       "download v4"
     )
-    const res = await axios.get(img, {responseType: 'blob'})
+    const res = await axios.get(IMG_ID, {responseType: 'blob'})
                       .then((response) => {
                         console.log(response);
                         return new Blob([response.data]);

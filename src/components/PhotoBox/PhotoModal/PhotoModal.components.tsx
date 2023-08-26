@@ -107,6 +107,22 @@ function ChildModal({ img }: ChildModalProps) {
                       }); 
   }
 
+  const downloadFileSaver = () => {
+    console.log("download v7");
+    const IMG_ID: string = img.slice(55)
+
+    fetch(IMG_ID, {method: 'GET'})
+      .then(res => {
+        return res.blob();
+      })
+      .then(blob => {
+        saveAs(blob, '콩캠네컷.png');
+      })
+      .catch(err => {
+        console.error('err: ', err);
+      })
+  };
+
   const downloadFile = () => {
     console.log("download file to v2 version");
 
@@ -137,7 +153,7 @@ function ChildModal({ img }: ChildModalProps) {
     <>
       <PhotoModalButtonGroup>
         <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
-        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>저장하기</PhotoShareBtn>
+        <PhotoShareBtn variant="contained" onClick={downloadFileSaver}>저장하기</PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}

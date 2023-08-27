@@ -16,7 +16,7 @@ import deleteIcon from "../../../assets/images/delete_icon.png";
 import { usePhotoDeleteApi } from "../../../hooks/PhotoAxios";
 
 import axios from "axios";
-
+import AWS from 'aws-sdk';
 import defaultFourcut from "../../../assets/images/default_fourcut.png";
 
 import html2canvas from 'html2canvas';
@@ -77,11 +77,15 @@ function ChildModal({ img }: ChildModalProps) {
   const saveImageLocally = async () => {
     // extract ID
     const IMG_ID: string = img.slice(55)
+    console.log(img + " clicked ");
 
-    console.log(
-      "download v8"
-    )
-    const res = await axios.get(IMG_ID, {responseType: 'blob'})
+    const res = await axios.get(IMG_ID, {
+                        responseType: 'blob',
+                        headers: {
+                          "Content-Type": "image/png",
+                          "server": "AmazonS3",
+                        }
+                      })
                       .then((response) => {
                         console.log(response);
                         return new Blob([response.data]);
@@ -144,6 +148,31 @@ function ChildModal({ img }: ChildModalProps) {
             console.error('err: ', err);
         });
   };
+
+  // const downloadFileV9 = async () => {
+  //   const IMG_ID: string = img.slice(56)
+
+  //   const s3 = new AWS.S3();
+  //   const params = {
+  //     Bucket: 'https://c-campus-bucket.s3.ap-northeast-2.amazonaws.com',
+  //     Key: IMG_ID,
+  //   };
+
+  //   try {
+  //     const data = await s3.getObject(params).promise();
+  //     const blob = new Blob([data.Body as BlobPart], { type: 'image/png' });
+  //     const url = URL.createObjectURL(blob);
+
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.download = 'image.png';
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   } catch (error) {
+  //     console.error('Error downloading image:', error);
+  //   }
+  // };
 
   React.useEffect(() => {
     console.log(img);

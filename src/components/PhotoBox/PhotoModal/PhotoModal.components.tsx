@@ -75,6 +75,7 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
+    console.log("download v9");
     // extract ID
     const IMG_ID: string = img.slice(55)
     console.log(img + " clicked ");
@@ -82,7 +83,7 @@ function ChildModal({ img }: ChildModalProps) {
     const res = await axios.get(IMG_ID, {
                         responseType: 'blob',
                         headers: {
-                          "Content-Type": "image/png",
+                          "Content-Type": "multipart/form-data",
                           "server": "AmazonS3",
                         }
                       })

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useExtractID } from "./useExtractID";
 import { useSetRecoilState } from "recoil";
 import { UserAuth } from "../recoil/recoil";
+import { useCookies } from "react-cookie";
 
 export const useAuthCheckApi = () => {
   const [checkAuth, setAuth] = useState("");
@@ -40,7 +41,7 @@ export const useUserProfileGetApi = () => {
             process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}`,
             { withCredentials: true }
           );
-          
+
           setProfile(res.data);
         } catch (error) {
           // error
@@ -56,14 +57,15 @@ export const useUserProfileGetApi = () => {
 export const useUserLogoutApi = () => {
   const logout = () => {
     axios
-      .post(process.env.REACT_APP_BACKEND_SERVER + `/oauth2/kakao/logout`, {
+      .get(process.env.REACT_APP_BACKEND_SERVER + `/oauth2/kakao/logout`, {
         withCredentials: true,
       })
       .then((response) => {
-
+        console.log(response);
+        window.location.reload();
       })
       .catch((error) => {
-
+        console.log(error);
       });
   };
 

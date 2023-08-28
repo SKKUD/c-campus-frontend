@@ -75,7 +75,7 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    console.log("download v9");
+    console.log("download v10, specify content-type to image/png");
 
     // extract ID
     const IMG_ID: string = img.slice(55)

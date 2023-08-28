@@ -208,7 +208,7 @@ const PostPhoto = () => {
             </DateContainer>
           </FourcutContainer>
         </FourcutContainerWrapper>
-        <FramePalette setFrame={setFrame} />
+        <FramePalette frameNum={frameNum} setFrame={setFrame} />
       </FourcutNPaletteWrapper>
       {match1024 ? (
         <>

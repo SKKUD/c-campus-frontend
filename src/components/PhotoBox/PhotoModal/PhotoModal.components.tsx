@@ -75,7 +75,7 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    console.log("download v12, http-middle-ware");
+    console.log("download v15, origin *");
 
     // extract ID
     const IMG_ID: string = img.slice(55)
@@ -85,6 +85,7 @@ function ChildModal({ img }: ChildModalProps) {
                         responseType: 'blob',
                         headers: {
                           "Content-Type": "image/png",
+                          "Access-Control-Allow-Origin": "*",
                           "server": "AmazonS3",
                         }
                       })

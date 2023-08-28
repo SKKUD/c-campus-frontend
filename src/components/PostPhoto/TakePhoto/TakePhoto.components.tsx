@@ -55,6 +55,7 @@ const TakePhoto = ({
           width={190}
           height={112}
           ref={webcamRef}
+          mirrored={true}
           screenshotFormat="image/jpeg"
           videoConstraints={videoConstraints}
         />

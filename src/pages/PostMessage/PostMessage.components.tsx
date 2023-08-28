@@ -77,7 +77,7 @@ const PostMessage = () => {
   const [modalContent, setModalContent] = useState<string>("");
   const profiledata = useRecoilValue(UserState);
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
-  const [currentSubject, SetCurrentSubject] = useState<string>(""); 
+  const [currentSubject, SetCurrentSubject] = useState<string>("");
 
   // check localStorage
   useEffect(() => {
@@ -102,7 +102,8 @@ const PostMessage = () => {
     }
     if (storedBackground) {
       SetCurrentColorHex(storedBackground);
-    } if(storedCurrentColor) {
+    }
+    if (storedCurrentColor) {
       SetCurrentColor(Number(storedCurrentColor));
     } else {
       console.log("localStorage에 저장된 데이터 없음");
@@ -119,7 +120,6 @@ const PostMessage = () => {
     })();
   }, []);
 
-
   // subject update button
   const updateButtonHandler = () => {
     // 처음 나왔던게 다시 안 나오게 하기
@@ -135,7 +135,7 @@ const PostMessage = () => {
     // save it
     SetCurrentSubject(SubjectData[randomNumber]);
     SetCurrentSubjectNumber(randomNumber);
-    
+
     // save local storage
     localStorage.setItem("question", SubjectData[randomNumber]);
   };
@@ -158,7 +158,7 @@ const PostMessage = () => {
   const colorHandler = (num: number) => {
     SetCurrentColor(num - 1);
     SetCurrentColorHex(backgroundColor[num - 1]);
-    localStorage.setItem("CurrentColor", String(num-1));
+    localStorage.setItem("CurrentColor", String(num - 1));
   };
 
   // click photo handler
@@ -200,10 +200,16 @@ const PostMessage = () => {
       submitMessage();
       setDone(true);
       setModalContent("");
-      handleModalOpen();
       // clear localStorage
-      localStorage.removeItem('quiz_content');
+      localStorage.removeItem("quiz_content");
       localStorage.clear();
+      // clear recoil message value
+      setMessage({
+        name: "",
+        content: "",
+      });
+      // 완료 모달 open
+      handleModalOpen();
     } else if (nameText === "") {
       alert("이름을 입력해주세요.");
     } else if (contentText === "") {
@@ -229,20 +235,27 @@ const PostMessage = () => {
   useEffect(() => {
     SetSubjectData(MakeQuestions(profile.nickname));
   }, [profile]);
-  
+
   useEffect(() => {
     if (profile.nickname !== "") {
       const storedQuizContent = localStorage.getItem("question");
 
       //저장된 값이 있으면
-      if (storedQuizContent === undefined || storedQuizContent === null || storedQuizContent === "undefined") {
+      if (
+        storedQuizContent === undefined ||
+        storedQuizContent === null ||
+        storedQuizContent === "undefined"
+      ) {
         // when subjectdata set
-        const randomNumber = Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
+        const randomNumber =
+          Math.floor(Math.random() * (SubjectData.length - 0)) + 0;
         SetCurrentSubject(SubjectData[randomNumber]);
         SetCurrentSubjectNumber(randomNumber);
         localStorage.setItem("question", SubjectData[randomNumber]);
       } else {
-        SetCurrentSubject(storedQuizContent || "(오른쪽 버튼을 한번 더 눌러주세요)");
+        SetCurrentSubject(
+          storedQuizContent || "(오른쪽 버튼을 한번 더 눌러주세요)"
+        );
       }
     }
   }, [SubjectData]);
@@ -405,11 +418,7 @@ const PostMessage = () => {
           {done ? (
             <WhiteBtn
               content="쪽지함 가기"
-              onClick={() =>
-                match1024
-                  ? navigate(`/${userid}`)
-                  : navigate(`/message/${userid}`)
-              }
+              onClick={() => navigate(`/${userid}`)}
             />
           ) : (
             <GreenBtn
@@ -423,7 +432,12 @@ const PostMessage = () => {
       {/* modal */}
       <ModalLayout modalOpen={modalOpen} handleModalClose={handleModalClose}>
         {modalContent === "" && done ? (
-          <SendMessage handleModalClose={handleModalClose} />
+          <SendMessage
+            handleModalClose={() => {
+              handleModalClose();
+              navigate(`/${userid}`);
+            }}
+          />
         ) : modalContent === "PhotoNotTaken" ? (
           <AskPhotopost
             handleModalClose={handleModalClose}

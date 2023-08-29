@@ -13,7 +13,7 @@ import {
   WebGreenBtnWrap,
 } from "./PostPhoto.styles";
 import FramePalette from "../../components/PostPhoto/FramePalette/FramePalette.components";
-import frame1 from "../../assets/images/frame01.png";
+import frame1 from "../../assets/images/frame01.svg";
 import frame2 from "../../assets/images/frame02.png";
 import frame3 from "../../assets/images/frame03.png";
 import frame4 from "../../assets/images/frame04.png";

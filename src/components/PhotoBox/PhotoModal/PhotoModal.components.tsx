@@ -75,13 +75,13 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    console.log("download v15, origin *");
+    console.log("download v16, delete proxy");
 
     // extract ID
     const IMG_ID: string = img.slice(55)
     console.log(img + " clicked ");
 
-    const res = await axios.get(IMG_ID, {
+    const res = await axios.get(img, {
                         responseType: 'blob',
                         headers: {
                           "Content-Type": "image/png",

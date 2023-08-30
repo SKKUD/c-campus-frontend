@@ -9,6 +9,7 @@ import ShareShape from "../../assets/images/shareImg.svg";
 
 const ShareUrl = () => {
   const [currentUrl, SetCurrentUrl] = useState<string>(window.location.href);
+  const [currentColor, SetCurrentColor] = useState<string>("#E0ECD1");
 
   useEffect(() => {
     SetCurrentUrl(window.location.href);
@@ -16,7 +17,7 @@ const ShareUrl = () => {
   }, [window.location.href]);
 
   return (
-    <ShareUrlContent text={currentUrl} onCopy={() => console.log("copyed")}>
+    <ShareUrlContent color={currentColor} text={currentUrl} onCopy={() => SetCurrentColor("#B4BDA9")}>
       <ShareUrlSvgContainer>
         <ShareUrlImgContainer src={ShareShape} />
       </ShareUrlSvgContainer>

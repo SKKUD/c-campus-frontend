@@ -60,3 +60,9 @@ export const CoinCotainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const WebShareUrlContainer = styled.div`
+  position: absolute;
+  bottom: -50px;
+  right: 15px;
+`

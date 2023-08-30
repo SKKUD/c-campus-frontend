@@ -42,6 +42,9 @@ import { CheckRemainCount } from "../../../hooks/PullMessage";
 import axios from "axios";
 import PullMessageModal from "../../PullMessageModal/PullMessageModal.components";
 
+import { ShareUrlContainer } from "../../../pages/Main/Main.styles";
+import ShareUrl from "../../ShareUrl/ShareUrl.components";
+
 interface CongMachineProps {
   slide?: number;
 }

@@ -1,6 +1,7 @@
 import { 
   ShareUrlContent,
   ShareUrlImgContainer,
+  ShareUrlSvgContainer,
 } from "./ShareUrl.styles";
 
 import { useEffect, useState } from "react";
@@ -16,7 +17,9 @@ const ShareUrl = () => {
 
   return (
     <ShareUrlContent text={currentUrl} onCopy={() => console.log("copyed")}>
-      <ShareUrlImgContainer src={ShareShape}/>
+      <ShareUrlSvgContainer>
+        <ShareUrlImgContainer src={ShareShape} />
+      </ShareUrlSvgContainer>
     </ShareUrlContent>
   )
 }

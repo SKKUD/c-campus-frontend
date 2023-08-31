@@ -208,6 +208,10 @@ const PostMessage = () => {
         name: "",
         content: "",
       });
+      setPhoto({
+        PhotoTaken: false,
+        PhotoURL: "",
+      });
       // 완료 모달 open
       handleModalOpen();
     } else if (nameText === "") {

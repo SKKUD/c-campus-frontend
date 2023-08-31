@@ -6,6 +6,21 @@ export const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
+export const DisabledGreenButton = styled(Button)`
+  background: rgba(98, 125, 85, 0.5);
+  color: #ffffff;
+  backdrop-filter: blur(5px);
+  width: 201px;
+  height: 48px;
+  font-family: Cafe24Ssurround;
+  font-size: 22px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+`;
+
 export const GreenButton = styled(Button)`
   background-color: #164300;
   color: #ffffff;

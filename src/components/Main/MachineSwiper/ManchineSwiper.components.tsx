@@ -19,6 +19,9 @@ import { CheckRemainCount } from "../../../hooks/PullMessage";
 import { check } from "prettier";
 import Profile from "../../common/Profile/Profile.components";
 
+import { ShareUrlContainer } from "../../../pages/Main/Main.styles";
+import ShareUrl from "../../ShareUrl/ShareUrl.components";
+
 interface MachineSwiperProps {
   slide: number;
   setSlide: React.Dispatch<React.SetStateAction<number>>;
@@ -52,6 +55,9 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
             <SwiperSlide>
               <SwiperSlideCard>
                 <CongMachine slide={slide} />
+                <ShareUrlContainer>
+                  <ShareUrl />
+                </ShareUrlContainer>
               </SwiperSlideCard>
             </SwiperSlide>
             <SwiperSlide>

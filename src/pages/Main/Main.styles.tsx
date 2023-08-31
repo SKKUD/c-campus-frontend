@@ -38,3 +38,10 @@ export const MainEmpty = styled.div`
   line-height: normal;
   letter-spacing: -0.28px;
 `;
+
+export const ShareUrlContainer = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+`;

@@ -9,8 +9,8 @@ import ManchineSwiper from "../../components/Main/MachineSwiper/ManchineSwiper.c
 import { useExtractID } from "../../hooks/useExtractID";
 import { useAuthCheckApi, useUserProfileGetApi } from "../../hooks/LoginAxios";
 import { useRecoilState } from "recoil";
-import { UserAuth, UserState } from "../../recoil/recoil";
-import ShareUrl from "../../components/ShareUrl/ShareUrl.components";
+import { UserAuth } from "../../recoil/recoil";
+
 
 const Main: FC = () => {
   const [slide, setSlide] = useState<number>(0);

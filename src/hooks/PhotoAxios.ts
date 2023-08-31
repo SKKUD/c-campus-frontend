@@ -35,18 +35,23 @@ export const usePhotoPostApi = () => {
   const currentID = useExtractID();
   const postFourcutPhoto = async () => {
     try {
-      const blob = await htmlToImage.toBlob(
+      const svgString = await htmlToImage.toSvg(
         document.querySelector(".fourcutImage") as HTMLElement
       );
 
-      if (blob) {
+      if (svgString) {
+        // SVG 문자열을 Blob으로 변환
+        const blob = new Blob([svgString], { type: "image/svg+xml" });
+
+        // Blob을 File 객체로 변환하고 파일명 설정
+        const svgFile = new File([blob], "CongcamFourcut.svg", {
+          type: "image/svg+xml",
+        });
+
+        // 이제 svgFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
         const data = {
           title: "fourcut",
-          files: [
-            new File([blob], "CongcamFourcut.png", {
-              type: blob.type,
-            }),
-          ],
+          files: [svgFile],
         };
 
         const formData = new FormData();
@@ -64,7 +69,7 @@ export const usePhotoPostApi = () => {
           });
       }
     } catch (error) {
-      alert("저장에 실패했씁니다");
+      console.error("오류 발생:", error);
     }
   };
 

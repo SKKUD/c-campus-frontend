@@ -39,7 +39,7 @@ import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.co
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { toBlob } from "html-to-image";
+import { toSvg } from "html-to-image";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -100,18 +100,29 @@ const PostPhoto = () => {
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
   const setRecoilPhotoFile = async () => {
-    const blob = await toBlob(ref.current as HTMLElement);
+    try {
+      const svgString = await toSvg(
+        document.querySelector(".fourcutImage") as HTMLElement
+      );
 
-    if (blob) {
-      const data = {
-        title: "fourcut",
-        files: [
-          new File([blob], "CongcamFourcut.svg", {
-            type: "image/svg",
-          }),
-        ],
-      };
-      setPhotoFile(data.files[0]);
+      if (svgString) {
+        // SVG 문자열을 Blob으로 변환
+        const blob = new Blob([svgString], { type: "image/svg+xml" });
+
+        // Blob을 File 객체로 변환하고 파일명 설정
+        const svgFile = new File([blob], "CongcamFourcut.svg", {
+          type: "image/svg+xml",
+        });
+
+        const data = {
+          title: "fourcut",
+          files: [svgFile],
+        };
+
+        setPhotoFile(data.files[0]);
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
     }
   };
 

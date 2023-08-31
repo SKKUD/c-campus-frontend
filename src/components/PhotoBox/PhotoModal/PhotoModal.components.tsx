@@ -82,37 +82,38 @@ function ChildModal({ img }: ChildModalProps) {
     const IMG_ID: string = img.slice(55)
     console.log(img + " clicked ");
 
-    const res = await axios.get(img, {
-                        responseType: 'blob',
-                        headers: {
-                          "Content-Type": "image/png",
-                          "Access-Control-Allow-Origin": "*",
-                          "server": "AmazonS3",
-                        }
-                      })
-                      .then((response) => {
-                        console.log(response);
-                        return new Blob([response.data]);
-                      })
-                      .then(imageData => {
-                        console.log(imageData);
-                        // Create a Blob from the image data
-                        const blob = new Blob([imageData], { type: 'image/png' });
-                        console.log(blob);
-                        // Create a downloadable link
-                        const url = window.URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = '콩캠네컷.png'; // Set the desired filename
-                
-                        // Trigger the download
-                        link.click();
-                        // Clean up
-                        window.URL.revokeObjectURL(url);
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                      }); 
+    const res = await axios
+      .get(img, {
+        responseType: "blob",
+        headers: {
+          "Content-Type": "image/svg+xml",
+          "Access-Control-Allow-Origin": "*",
+          server: "AmazonS3",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        return new Blob([response.data]);
+      })
+      .then((imageData) => {
+        console.log(imageData);
+        // Create a Blob from the image data
+        const blob = new Blob([imageData], { type: "image/svg+xml" });
+        console.log(blob);
+        // Create a downloadable link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "콩캠네컷.svg"; // Set the desired filename
+
+        // Trigger the download
+        link.click();
+        // Clean up
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.log(error);
+      }); 
   }
 
   const downloadFileSaver = () => {

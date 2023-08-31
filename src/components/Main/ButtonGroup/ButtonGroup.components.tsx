@@ -20,7 +20,9 @@ import cong30_top_come_out_gif from "../../../assets/animations/cong30_top_af.gi
 import { PullMessage } from "../../../hooks/PullMessage";
 
 import axios from "axios";
+import DisabledGreenBtn from "../../common/Buttons/DisabledGreenBtn.components";
 import PullMessageModal from "../../PullMessageModal/PullMessageModal.components";
+import CantPullMessageModal from "../../CantPullMessageModal/CantPullMessageModal.components";
 
 interface ButtonGroupProps {
   slide?: number;
@@ -43,10 +45,12 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const checkAuth = useAuthCheckApi();
+  const [modalContent, SetModalContent] = useState<string>("");
 
   const pickNotes = () => {
     // pull
     if (messagenum >= 5) {
+      SetModalContent("opened");
       const res = axios
         .get(
           `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`,
@@ -108,6 +112,12 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     navigate(`/message/feed/${userid}`);
   };
 
+  const handleDisabledClick = () => {
+    console.log("clicked");
+    // 모달 보여주기
+    setOpen(true);
+  };
+
   useEffect(() => {
     if (messagenum >= 5) {
     }
@@ -118,18 +128,35 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
       {
         // 현재 url의 /message/${id} 뽑아와서 비교하는 코드로
         checkAuth && userAuth === currentID ? (
-          <>
-            {!slide ? (
-              <>
-                <GreenBtn
-                  onClick={() => pickNotes()}
-                  content={"쪽지 뽑기"}
-                  disabled={messagenum < 5 ? true : false}
-                />
-                <PullMessageModal
-                  modalOpen={open}
-                  handleModalClose={() => setOpen(false)}
-                />
+            <>
+              {!slide ? (
+                <>
+                {
+                  (messagenum < 5) ? (
+                    <DisabledGreenBtn
+                      content={"쪽지 뽑기"}
+                      onClick={handleDisabledClick}
+                    />
+                  ) : (
+                    <GreenBtn
+                      content={"쪽지 뽑기"}
+                      onClick={pickNotes}
+                    />
+                  )
+                }
+                {
+                  modalContent === "" ? (
+                    <CantPullMessageModal 
+                      modalOpen={open}
+                      handleModalClose={() => setOpen(false)}
+                    />
+                  ) : (
+                    <PullMessageModal
+                      modalOpen={open}
+                      handleModalClose={() => setOpen(false)}
+                    />
+                  )
+                }
               </>
             ) : (
               <GreenBtn

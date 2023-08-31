@@ -26,6 +26,8 @@ import {
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
+import DisabledGreenBtn from "../../common/Buttons/DisabledGreenBtn.components";
+
 import { Ground } from "../../WebMainPage/WebMainPage.styles";
 
 // import for recoil
@@ -41,9 +43,8 @@ import { CheckRemainCount } from "../../../hooks/PullMessage";
 // 
 import axios from "axios";
 import PullMessageModal from "../../PullMessageModal/PullMessageModal.components";
+import CantPullMessageModal from "../../CantPullMessageModal/CantPullMessageModal.components";
 
-import { ShareUrlContainer } from "../../../pages/Main/Main.styles";
-import ShareUrl from "../../ShareUrl/ShareUrl.components";
 
 interface CongMachineProps {
   slide?: number;
@@ -62,6 +63,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const messageNumber = CheckRemainCount(userid);
   const [isPulled, SetIsPulled] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [modalContent, SetModalContent] = useState<string>("");
 
   useEffect(() => {
     if (checkAuth && String(checkAuth) === userid) {
@@ -102,6 +104,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     // web에서 핸들링
     // pull
     if (messagenum >= 5) {
+      SetModalContent("opened");
       const res = axios
         .get(
           `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`,
@@ -143,6 +146,12 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     }, 2600);
   };
 
+  const handleDisabledClick = () => {
+    console.log("clicked");
+    // 모달 보여주기
+    setOpen(true);
+  };
+
   const handleWriteMessage = () => {
     // go to message write
     navigate(`/message/post/${userid}`);
@@ -159,15 +168,32 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
           <ButtonGroupContainer>
             {checkAuth && userAuth === currentID ? (
               <>
-                <GreenBtn
-                  content={"쪽지 뽑기"}
-                  disabled={messagenum < 5 ? true : false}
-                  onClick={handleMessage}
-                />
-                <PullMessageModal
-                  modalOpen={open}
-                  handleModalClose={() => setOpen(false)}
-                />
+                {
+                  (messagenum < 5) ? (
+                    <DisabledGreenBtn
+                      content={"쪽지 뽑기"}
+                      onClick={handleDisabledClick}
+                    />
+                  ) : (
+                    <GreenBtn
+                      content={"쪽지 뽑기"}
+                      onClick={handleMessage}
+                    />
+                  )
+                }
+                {
+                  modalContent === "" ? (
+                    <CantPullMessageModal 
+                      modalOpen={open}
+                      handleModalClose={() => setOpen(false)}
+                    />
+                  ) : (
+                    <PullMessageModal
+                      modalOpen={open}
+                      handleModalClose={() => setOpen(false)}
+                    />
+                  )
+                }
               </>
             ) : (
               <GreenBtn content={"쪽지 쓰기"} onClick={handleWriteMessage} />

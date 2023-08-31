@@ -1,10 +1,10 @@
-import { toPng } from "html-to-image";
+import { toSvg } from "html-to-image";
 
 export const ExportElementAsPNG = async () => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;
-  await toPng(el).then((dataUrl) => {
+  await toSvg(el).then((dataUrl) => {
     const link = document.createElement("a");
-    link.download = "fourcut.png";
+    link.download = "fourcut.svg";
     link.href = dataUrl;
 
     // Append to the html link element to the page

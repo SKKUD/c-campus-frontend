@@ -18,9 +18,9 @@ export const PaletteContainer = styled.div`
   @media (min-width: 1024px) {
     left: 0px;
     flex-direction: row;
-    top: 50px;
+    top: -100px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
     width: 456px;
     height: 64px;
   }

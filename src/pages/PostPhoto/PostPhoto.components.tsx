@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useMediaQuery } from "@mui/material";
 import {
@@ -13,7 +13,7 @@ import {
   WebGreenBtnWrap,
 } from "./PostPhoto.styles";
 import FramePalette from "../../components/PostPhoto/FramePalette/FramePalette.components";
-import frame1 from "../../assets/images/frame01.png";
+import frame1 from "../../assets/images/frame01.svg";
 import frame2 from "../../assets/images/frame02.png";
 import frame3 from "../../assets/images/frame03.png";
 import frame4 from "../../assets/images/frame04.png";
@@ -57,6 +57,7 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
@@ -99,16 +100,14 @@ const PostPhoto = () => {
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
   const setRecoilPhotoFile = async () => {
-    const blob = await toBlob(
-      document.querySelector(".fourcutImage") as HTMLElement
-    );
+    const blob = await toBlob(ref.current as HTMLElement);
 
     if (blob) {
       const data = {
         title: "fourcut",
         files: [
-          new File([blob], "CongcamFourcut.png", {
-            type: "image/png",
+          new File([blob], "CongcamFourcut.svg", {
+            type: "image/svg",
           }),
         ],
       };
@@ -116,19 +115,18 @@ const PostPhoto = () => {
     }
   };
 
-  const handleModalOpen = () => {
+  const handleModalOpen = async () => {
     setModalOpen(true);
-    setPhotoURL(setPhotoTaken);
-    setRecoilPhotoFile();
+    await setPhotoURL(setPhotoTaken, ref.current);
+    await setRecoilPhotoFile();
   };
   const handleModalClose = () => setModalOpen(false);
 
   return (
     <PhotoBoothContainer>
       <FourcutNPaletteWrapper>
-        <FourcutContainerWrapper>
-          <FourcutContainer className="fourcutImage">
-            <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
+        <FourcutContainerWrapper ref={ref} className="fourcutImage">
+          <FourcutContainer>
             <PhotoWrapper>
               {current === 1 ? (
                 <TakePhoto
@@ -195,18 +193,19 @@ const PostPhoto = () => {
                 />
               )}
             </PhotoWrapper>
-            <DateContainer
-              brightFrame={
-                frameNum === 2 || frameNum === 6
-                  ? "bright"
-                  : frameNum === 5
-                  ? "medium"
-                  : "dark"
-              }
-            >
-              {getDate()}
-            </DateContainer>
           </FourcutContainer>
+          <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
+          <DateContainer
+            brightFrame={
+              frameNum === 2 || frameNum === 6
+                ? "bright"
+                : frameNum === 5
+                ? "medium"
+                : "dark"
+            }
+          >
+            {getDate()}
+          </DateContainer>
         </FourcutContainerWrapper>
         <FramePalette frameNum={frameNum} setFrame={setFrame} />
       </FourcutNPaletteWrapper>

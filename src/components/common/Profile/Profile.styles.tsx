@@ -63,6 +63,6 @@ export const CoinCotainer = styled.div`
 
 export const WebShareUrlContainer = styled.div`
   position: absolute;
-  bottom: -50px;
+  bottom: -62px;
   right: 15px;
-`
+`;

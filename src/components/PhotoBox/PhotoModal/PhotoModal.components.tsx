@@ -86,7 +86,7 @@ function ChildModal({ img }: ChildModalProps) {
       .get(img, {
         responseType: "blob",
         headers: {
-          "Content-Type": "image/svg+xml",
+          "Content-Type": "image/png",
           "Access-Control-Allow-Origin": "*",
           server: "AmazonS3",
         },
@@ -98,13 +98,13 @@ function ChildModal({ img }: ChildModalProps) {
       .then((imageData) => {
         console.log(imageData);
         // Create a Blob from the image data
-        const blob = new Blob([imageData], { type: "image/svg+xml" });
+        const blob = new Blob([imageData], { type: "image/png" });
         console.log(blob);
         // Create a downloadable link
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "콩캠네컷.svg"; // Set the desired filename
+        link.download = "콩캠네컷.png"; // Set the desired filename
 
         // Trigger the download
         link.click();

@@ -1,4 +1,4 @@
-import { toPng, toSvg } from "html-to-image";
+import { toSvg } from "html-to-image";
 import { Ref } from "react";
 
 interface PhotoData {

@@ -106,8 +106,8 @@ const PostPhoto = () => {
       const data = {
         title: "fourcut",
         files: [
-          new File([blob], "CongcamFourcut.png", {
-            type: "image/png",
+          new File([blob], "CongcamFourcut.svg", {
+            type: "image/svg",
           }),
         ],
       };

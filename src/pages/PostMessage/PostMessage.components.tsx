@@ -40,6 +40,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   IsWritingMessage,
   MessageState,
+  PhotoFile,
   PhotoState,
   QuizState,
   UserState,
@@ -66,6 +67,7 @@ const PostMessage = () => {
   const setIsWriting = useSetRecoilState(IsWritingMessage);
   const Quiz = useRecoilValue(QuizState);
   const [Photo, setPhoto] = useRecoilState(PhotoState);
+  const setPhotofile = useSetRecoilState(PhotoFile);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
   const [nameText, SetNameText] = useState<string>(Message.name);
   const [nameCount, SetNameCount] = useState<number>(0);
@@ -212,7 +214,8 @@ const PostMessage = () => {
       setPhoto({
         PhotoTaken: false,
         PhotoURL: "",
-      })
+      });
+      setPhotofile(null);
       // 완료 모달 open
       handleModalOpen();
     } else if (nameText === "") {

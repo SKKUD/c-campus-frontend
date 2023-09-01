@@ -4,13 +4,13 @@ import * as htmlToImage from "html-to-image";
 export const handleShare = async () => {
   const UA = navigator.userAgent.toLowerCase();
 
-  const svgString = await htmlToImage.toSvg(
+  const pngString = await htmlToImage.toPng(
     document.querySelector(".congcamMessage") as HTMLElement
   );
-  if (svgString) {
+  if (pngString) {
     try {
       const img = new Image();
-      img.src = svgString;
+      img.src = pngString;
 
       img.onload = () => {
         const canvas = document.createElement("canvas");

@@ -81,7 +81,7 @@ function ChildModal({ img }: ChildModalProps) {
     const IMG_ID: string = img.slice(55)
     console.log(img + " clicked ");
 
-    const res = await axios.get(img, {
+    const res = await axios.get(IMG_ID, {
                         responseType: 'blob',
                         headers: {
                           "Content-Type": "image/png",

@@ -33,40 +33,59 @@ export const usePhotoGetApi = () => {
 
 export const usePhotoPostApi = () => {
   const currentID = useExtractID();
+
   const postFourcutPhoto = async () => {
     try {
-      const svgString = await htmlToImage.toSvg(
-        document.querySelector(".fourcutImage") as HTMLElement
-      );
+      const el = document.querySelector(".fourcutImage") as HTMLElement;
+
+      // SVG 문자열을 얻습니다.
+      const svgString = await htmlToImage.toSvg(el);
 
       if (svgString) {
-        // SVG 문자열을 Blob으로 변환
-        const blob = new Blob([svgString], { type: "image/svg+xml" });
+        // SVG 문자열을 이미지로 변환하여 Blob으로 얻습니다.
+        const img = new Image();
+        img.src = svgString;
 
-        // Blob을 File 객체로 변환하고 파일명 설정
-        const svgFile = new File([blob], "CongcamFourcut.svg", {
-          type: "image/svg+xml",
-        });
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d");
 
-        // 이제 svgFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
-        const data = {
-          title: "fourcut",
-          files: [svgFile],
+          if (ctx) {
+            ctx.drawImage(img, 0, 0);
+
+            canvas.toBlob((pngBlob) => {
+              if (pngBlob) {
+                // Blob을 File 객체로 변환하고 파일명 설정
+                const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+                  type: "image/png",
+                });
+
+                // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
+                const data = {
+                  title: "fourcut",
+                  files: [pngFile],
+                };
+
+                const formData = new FormData();
+                formData.append("file", data.files[0]);
+
+                axios
+                  .post(
+                    `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos`,
+                    formData
+                  )
+                  .then((response) => {
+                    console.log(response.status);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              }
+            }, "image/png");
+          }
         };
-
-        const formData = new FormData();
-        formData.append("file", data.files[0]);
-        axios
-          .post(
-            process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`,
-            formData
-          )
-          .then((response) => {
-            console.log(response.status);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
       }
     } catch (error) {
       console.error("오류 발생:", error);

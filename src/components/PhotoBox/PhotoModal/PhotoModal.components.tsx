@@ -43,11 +43,12 @@ export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
         overflowY: "scroll",
         scrollbarWidth: "none",
         msOverflowStyle: "none",
+        outline: "none",
       }}
     >
       <PhotoModalContainer>
         <PhotoModalIMG src={imgSrc} />
-        <ChildModal img={imgSrc}/>
+        <ChildModal img={imgSrc} />
       </PhotoModalContainer>
     </Modal>
   );

@@ -19,7 +19,7 @@ const ModalLayout: FC<ModalLayoutProps> = ({
   handleModalClose,
 }) => {
   return (
-    <Modal open={modalOpen} onClose={handleModalClose}>
+    <Modal open={modalOpen} onClose={handleModalClose} sx={{ outline: "none" }}>
       <ModalContainer>
         <ModalContentContainer>
           <CloseButtonContainer>

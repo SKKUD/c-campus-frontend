@@ -75,18 +75,19 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    console.log("download v16, delete proxy");
+    console.log("download v17, delete proxy and add cache-control");
 
     // extract ID
     const IMG_ID: string = img.slice(55)
     console.log(img + " clicked ");
 
-    const res = await axios.get(IMG_ID, {
+    const res = await axios.get(img, {
                         responseType: 'blob',
                         headers: {
                           "Content-Type": "image/png",
                           "Access-Control-Allow-Origin": "*",
                           "server": "AmazonS3",
+                          "Cache-Control": "no-cache",
                         }
                       })
                       .then((response) => {

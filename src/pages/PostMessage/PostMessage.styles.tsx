@@ -202,7 +202,7 @@ export const PostMessageContentFrameContainer = styled.div`
 `;
 
 export const PostMessageContentFrame = styled.img`
-  width: 100%;
+  width: 99.59px;
   height: 254px;
 
   @media (min-width: 1024px) {

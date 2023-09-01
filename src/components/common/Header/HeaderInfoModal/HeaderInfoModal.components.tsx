@@ -19,7 +19,7 @@ const HeaderInfoModal: FC<HeaderInfoModalProps> = ({
   handleModalClose,
 }) => {
   return (
-    <Modal open={modalOpen} onClose={handleModalClose}>
+    <Modal open={modalOpen} onClose={handleModalClose} sx={{ outline: "none" }}>
       <ModalContainer>
         <BtnWrapper>
           <CloseBtn onClick={handleModalClose}>

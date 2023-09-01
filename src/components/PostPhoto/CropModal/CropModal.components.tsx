@@ -49,7 +49,7 @@ const CropModal: React.FC<CaptureProps> = ({
     handleClose();
   };
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={handleClose} sx={{ outline: "none" }}>
       <CropModaContainer>
         <Cropper
           ref={cropperRef}

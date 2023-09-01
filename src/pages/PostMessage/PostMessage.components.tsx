@@ -208,10 +208,11 @@ const PostMessage = () => {
         name: "",
         content: "",
       });
+      // clear recoil photo valeu
       setPhoto({
         PhotoTaken: false,
         PhotoURL: "",
-      });
+      })
       // 완료 모달 open
       handleModalOpen();
     } else if (nameText === "") {

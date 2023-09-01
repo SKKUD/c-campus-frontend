@@ -99,32 +99,45 @@ const PostPhoto = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
+
   const setRecoilPhotoFile = async () => {
     try {
-      const svgString = await toSvg(
-        document.querySelector(".fourcutImage") as HTMLElement
-      );
+      const el = document.querySelector(".fourcutImage") as HTMLElement;
+
+      const svgString = await toSvg(el);
 
       if (svgString) {
-        // SVG 문자열을 Blob으로 변환
-        const blob = new Blob([svgString], { type: "image/svg+xml" });
+        const img = new Image();
+        img.src = svgString;
 
-        // Blob을 File 객체로 변환하고 파일명 설정
-        const svgFile = new File([blob], "CongcamFourcut.svg", {
-          type: "image/svg+xml",
-        });
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d");
 
-        const data = {
-          title: "fourcut",
-          files: [svgFile],
+          if (ctx) {
+            ctx.drawImage(img, 0, 0);
+
+            canvas.toBlob((pngBlob) => {
+              if (pngBlob) {
+                // Blob을 File 객체로 변환하고 파일명 설정
+                const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+                  type: "image/png",
+                });
+
+                setPhotoFile(pngFile);
+              }
+            }, "image/png");
+          }
         };
-
-        setPhotoFile(data.files[0]);
       }
     } catch (error) {
       console.error("오류 발생:", error);
     }
   };
+  
+ 
 
   const handleModalOpen = async () => {
     setModalOpen(true);

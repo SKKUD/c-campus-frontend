@@ -9,29 +9,42 @@ export const handleShare = async () => {
   );
   if (svgString) {
     try {
-      const blob = new Blob([svgString], { type: "image/svg+xml" });
+      const img = new Image();
+      img.src = svgString;
 
-      if (blob) {
-        // Blob을 파일로 변환합니다.
-        const file = new File([blob], "congcam_message.svg", {
-          type: "image/svg+xml",
-        });
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
 
-        // 공유할 데이터를 생성합니다.
-        const data = {
-          title: "Congcam message",
-          files: [file],
-        };
+        if (ctx) {
+          ctx.drawImage(img, 0, 0);
 
-        // 브라우저가 데이터를 공유할 수 있는지 확인합니다.
-        if (navigator.canShare && navigator.canShare(data)) {
-          navigator.share(data);
-        } else {
-          alert("이미지 공유를 지원하지 않는 브라우저입니다.");
+          canvas.toBlob((pngBlob) => {
+            if (pngBlob) {
+              // Blob을 File 객체로 변환하고 파일명 설정
+              const pngFile = new File([pngBlob], "CongcamMessage.png", {
+                type: "image/png",
+              });
+
+              // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
+              const data = {
+                title: "fourcut",
+                files: [pngFile],
+              };
+
+              if (navigator.canShare && navigator.canShare(data)) {
+                navigator.share(data);
+              } else {
+                alert("이미지 공유를 지원하지 않는 브라우저입니다.");
+              }
+            }
+          }, "image/png");
         }
-      } else {
-        alert("이미지를 공유할 수 없습니다.");
-      }
+      };
+
+     
     } catch {
       console.log("error");
     }

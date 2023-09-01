@@ -30,7 +30,6 @@ export const handleShare = async () => {
 
               // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
               const data = {
-                title: "fourcut",
                 files: [pngFile],
               };
 

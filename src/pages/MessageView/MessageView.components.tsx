@@ -148,6 +148,7 @@ const MessageView = () => {
       {currentID === String(userAuth) && axiosMessage ? ( // check if currentID matched to current userAuth
         <MessageViewContainer
           backgroundColor={axiosMessage?.background_color_code || ""}
+          className="congcamMessage"
         >
           {match1024 && ( // 웹 환경일 때
             <MessageViewWebFourcutContainer onClick={handleOpen}>
@@ -182,92 +183,90 @@ const MessageView = () => {
               <PublicToggle axiosisPublic={axiosMessage?.is_public} />
             </MessageViewPublicToggleContainer>
 
-            <div className="congcamMessage">
-              {/* Title */}
-              <MessageViewTitle className="MessageViewCenter">
-                {axiosMessage?.category}
-              </MessageViewTitle>
+            {/* Title */}
+            <MessageViewTitle className="MessageViewCenter">
+              {axiosMessage?.category}
+            </MessageViewTitle>
 
-              {/* Content */}
-              <MessageViewContent>
-                {/* Receiver */}
-                <MessageViewContentReceiver>
-                  <p className="MessageViewReceiverTo">To. </p>
-                  {/* author말고 로그인 정보에서 이름 가져오기 */}
-                  <p className="MessageViewReceiverMessageData">
-                    {nickname && nickname}
-                  </p>
-                </MessageViewContentReceiver>
+            {/* Content */}
+            <MessageViewContent>
+              {/* Receiver */}
+              <MessageViewContentReceiver>
+                <p className="MessageViewReceiverTo">To. </p>
+                {/* author말고 로그인 정보에서 이름 가져오기 */}
+                <p className="MessageViewReceiverMessageData">
+                  {nickname && nickname}
+                </p>
+              </MessageViewContentReceiver>
 
-                {/* Main Content */}
-                <MessageViewContentMainContainer className="MessageViewCenter">
-                  {!match1024 ? ( // 모바일일 때
-                    <MessageViewFourcutFrameContainer onClick={handleOpen}>
-                      {axiosMessage?.image_url ? ( // 이미지가 있는지 없는지 확인
-                        <>
-                          {!axiosMessage?.is_quiz ? ( // 퀴즈가 있는지 없는지 확인
-                            // 퀴즈가 없음 (그냥 사진 보여줌)
-                            <MessageViewContentFrame
-                              src={axiosMessage?.image_url}
-                            />
-                          ) : (
-                            // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
-                            <>
-                              {isAnswer ? (
-                                // 퀴즈가 풀림
-                                <MessageViewContentFrame
-                                  src={
-                                    axiosMessage?.image_url || defaultFrameIcon
-                                  }
-                                />
-                              ) : (
-                                // 퀴즈가 안 풀림
-                                <MessageViewContentFrame src={lockedFourcut} />
-                              )}
-                            </>
-                          )}
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </MessageViewFourcutFrameContainer>
-                  ) : (
-                    <></>
-                  )}
-                  <ModalLayout modalOpen={open} handleModalClose={handleClose}>
-                    {modalContent === "" ? (
-                      <QuizBox
-                        Quiz={
-                          axiosMessage.quiz_content || "우리가 처음 만난 곳은?"
-                        }
-                        Answer={axiosMessage.quiz_answer || "수선관"}
-                        handleClose={handleClose}
-                        SetModalContent={SetModalContent}
-                        userID={userAuth}
-                        messageID={String(axiosMessage.message_id)}
-                      />
+              {/* Main Content */}
+              <MessageViewContentMainContainer className="MessageViewCenter">
+                {!match1024 ? ( // 모바일일 때
+                  <MessageViewFourcutFrameContainer onClick={handleOpen}>
+                    {axiosMessage?.image_url ? ( // 이미지가 있는지 없는지 확인
+                      <>
+                        {!axiosMessage?.is_quiz ? ( // 퀴즈가 있는지 없는지 확인
+                          // 퀴즈가 없음 (그냥 사진 보여줌)
+                          <MessageViewContentFrame
+                            src={axiosMessage?.image_url}
+                          />
+                        ) : (
+                          // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
+                          <>
+                            {isAnswer ? (
+                              // 퀴즈가 풀림
+                              <MessageViewContentFrame
+                                src={
+                                  axiosMessage?.image_url || defaultFrameIcon
+                                }
+                              />
+                            ) : (
+                              // 퀴즈가 안 풀림
+                              <MessageViewContentFrame src={lockedFourcut} />
+                            )}
+                          </>
+                        )}
+                      </>
                     ) : (
-                      <ShowImg
-                        handleClose={handleClose}
-                        image_url={axiosMessage.image_url}
-                      />
+                      <></>
                     )}
-                  </ModalLayout>
+                  </MessageViewFourcutFrameContainer>
+                ) : (
+                  <></>
+                )}
+                <ModalLayout modalOpen={open} handleModalClose={handleClose}>
+                  {modalContent === "" ? (
+                    <QuizBox
+                      Quiz={
+                        axiosMessage.quiz_content || "우리가 처음 만난 곳은?"
+                      }
+                      Answer={axiosMessage.quiz_answer || "수선관"}
+                      handleClose={handleClose}
+                      SetModalContent={SetModalContent}
+                      userID={userAuth}
+                      messageID={String(axiosMessage.message_id)}
+                    />
+                  ) : (
+                    <ShowImg
+                      handleClose={handleClose}
+                      image_url={axiosMessage.image_url}
+                    />
+                  )}
+                </ModalLayout>
 
-                  <MessageViewContentMainText>
-                    {axiosMessage?.content}
-                  </MessageViewContentMainText>
-                </MessageViewContentMainContainer>
+                <MessageViewContentMainText>
+                  {axiosMessage?.content}
+                </MessageViewContentMainText>
+              </MessageViewContentMainContainer>
 
-                {/* Sender */}
-                <MessageViewContentSender>
-                  <p className="MessageViewSenderFrom">From. </p>
-                  <p className="MessageViewSenderMessageData">
-                    {axiosMessage?.author}
-                  </p>
-                </MessageViewContentSender>
-              </MessageViewContent>
-            </div>
+              {/* Sender */}
+              <MessageViewContentSender>
+                <p className="MessageViewSenderFrom">From. </p>
+                <p className="MessageViewSenderMessageData">
+                  {axiosMessage?.author}
+                </p>
+              </MessageViewContentSender>
+            </MessageViewContent>
 
             {/* Sharing Button */}
             <GreenBtnContainer className="MessageViewCenter">

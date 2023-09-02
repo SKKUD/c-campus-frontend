@@ -99,6 +99,7 @@ const PostPhoto = () => {
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
   const setRecoilPhotoFile = async () => {
+    console.log("png method")
     const blob = await toBlob(
       document.querySelector(".fourcutImage") as HTMLElement
     );

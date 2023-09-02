@@ -124,7 +124,8 @@ export const usePhotoPostApi = () => {
         axios
           .post(
             `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos`,
-            formData
+            formData,
+            { withCredentials: true }
           )
           .then((response) => {
             console.log(response.status);

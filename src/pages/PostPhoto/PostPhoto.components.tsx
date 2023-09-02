@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useMediaQuery } from "@mui/material";
 import {
@@ -13,13 +13,13 @@ import {
   WebGreenBtnWrap,
 } from "./PostPhoto.styles";
 import FramePalette from "../../components/PostPhoto/FramePalette/FramePalette.components";
-import frame1 from "../../assets/images/frame01.png";
-import frame2 from "../../assets/images/frame02.png";
-import frame3 from "../../assets/images/frame03.png";
-import frame4 from "../../assets/images/frame04.png";
-import frame5 from "../../assets/images/frame05.png";
-import frame6 from "../../assets/images/frame06.png";
-import frame7 from "../../assets/images/frame07.png";
+import frame1 from "../../assets/images/frame01.svg";
+import frame2 from "../../assets/images/frame02.svg";
+import frame3 from "../../assets/images/frame03.svg";
+import frame4 from "../../assets/images/frame04.svg";
+import frame5 from "../../assets/images/frame05.svg";
+import frame6 from "../../assets/images/frame06.svg";
+import frame7 from "../../assets/images/frame07.svg";
 import blank from "../../assets/images/blank.png";
 import { getDate } from "../../utils/getDate";
 import IconBtnGroup from "../../components/PostPhoto/IconBtnGroup/IconBtnGroup.components";
@@ -39,7 +39,7 @@ import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.co
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { toBlob } from "html-to-image";
+import { toSvg } from "html-to-image";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -57,6 +57,7 @@ const PostPhoto = () => {
   const [photo4, setPhoto4] = useState<string | null>(null);
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
@@ -98,38 +99,58 @@ const PostPhoto = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
-  const setRecoilPhotoFile = async () => {
-    console.log("png method")
-    const blob = await toBlob(
-      document.querySelector(".fourcutImage") as HTMLElement
-    );
 
-    if (blob) {
-      const data = {
-        title: "fourcut",
-        files: [
-          new File([blob], "CongcamFourcut.png", {
-            type: "image/png",
-          }),
-        ],
-      };
-      setPhotoFile(data.files[0]);
+  const setRecoilPhotoFile = async () => {
+    try {
+      const el = document.querySelector(".fourcutImage") as HTMLElement;
+
+      const svgString = await toSvg(el);
+
+      if (svgString) {
+        const img = new Image();
+        img.src = svgString;
+
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d");
+
+          if (ctx) {
+            ctx.drawImage(img, 0, 0);
+
+            canvas.toBlob((pngBlob) => {
+              if (pngBlob) {
+                // Blob을 File 객체로 변환하고 파일명 설정
+                const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+                  type: "image/png",
+                });
+
+                setPhotoFile(pngFile);
+              }
+            }, "image/png");
+          }
+        };
+      }
+    } catch (error) {
+      console.error("오류 발생:", error);
     }
   };
+  
+ 
 
-  const handleModalOpen = () => {
+  const handleModalOpen = async () => {
     setModalOpen(true);
-    setPhotoURL(setPhotoTaken);
-    setRecoilPhotoFile();
+    await setPhotoURL(setPhotoTaken, ref.current);
+    await setRecoilPhotoFile();
   };
   const handleModalClose = () => setModalOpen(false);
 
   return (
     <PhotoBoothContainer>
       <FourcutNPaletteWrapper>
-        <FourcutContainerWrapper>
-          <FourcutContainer className="fourcutImage">
-            <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
+        <FourcutContainerWrapper ref={ref} className="fourcutImage">
+          <FourcutContainer>
             <PhotoWrapper>
               {current === 1 ? (
                 <TakePhoto
@@ -196,20 +217,21 @@ const PostPhoto = () => {
                 />
               )}
             </PhotoWrapper>
-            <DateContainer
-              brightFrame={
-                frameNum === 2 || frameNum === 6
-                  ? "bright"
-                  : frameNum === 5
-                  ? "medium"
-                  : "dark"
-              }
-            >
-              {getDate()}
-            </DateContainer>
           </FourcutContainer>
+          <FourcutFrame src={frameImages[frameNum - 1]} alt="frame" />
+          <DateContainer
+            brightFrame={
+              frameNum === 2 || frameNum === 6
+                ? "bright"
+                : frameNum === 5
+                ? "medium"
+                : "dark"
+            }
+          >
+            {getDate()}
+          </DateContainer>
         </FourcutContainerWrapper>
-        <FramePalette setFrame={setFrame} />
+        <FramePalette frameNum={frameNum} setFrame={setFrame} />
       </FourcutNPaletteWrapper>
       {match1024 ? (
         <>

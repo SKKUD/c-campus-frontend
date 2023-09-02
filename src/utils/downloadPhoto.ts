@@ -1,5 +1,6 @@
 import { toSvg } from "html-to-image";
 
+// 찍고 나서 로컬에 저장
 export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;

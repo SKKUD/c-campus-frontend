@@ -39,7 +39,7 @@ import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.co
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { toSvg } from "html-to-image";
+import { toPng, toSvg } from "html-to-image";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -89,7 +89,7 @@ const PostPhoto = () => {
           : "사진을 공유하시겠습니까?"
       )
     ) {
-      // await ExportElementAsPNG();
+      await ExportElementAsPNG();
       await postFourcutPhoto();
 
       // navigate(`/photo/${userid}`);
@@ -104,40 +104,40 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgString = await toSvg(el);
+      const pngString = await toPng(el);
 
-      if (svgString) {
-        const img = new Image();
-        img.src = svgString;
+      if (pngString) {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = pngString;
 
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext("2d");
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
 
-          if (ctx) {
-            ctx.drawImage(img, 0, 0);
+            if (ctx) {
+              ctx.drawImage(img, 0, 0);
 
-            canvas.toBlob((pngBlob) => {
-              if (pngBlob) {
-                // Blob을 File 객체로 변환하고 파일명 설정
-                const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-                  type: "image/png",
-                });
+              canvas.toBlob((pngBlob) => {
+                if (pngBlob) {
+                  // Blob을 File 객체로 변환하고 파일명 설정
+                  const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+                    type: "image/png",
+                  });
 
-                setPhotoFile(pngFile);
-              }
-            }, "image/png");
-          }
-        };
+                  setPhotoFile(pngFile);
+                }
+              }, "image/png");
+            }
+          };
+        }, 10000);
       }
     } catch (error) {
       console.error("오류 발생:", error);
     }
   };
-  
- 
 
   const handleModalOpen = async () => {
     setModalOpen(true);

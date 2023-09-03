@@ -249,7 +249,7 @@ const MessageView = () => {
                   ) : (
                     <ShowImg
                       handleClose={handleClose}
-                      image_url={axiosMessage.image_url}
+                      image_url={axiosMessage.image_url!}
                     />
                   )}
                 </ModalLayout>

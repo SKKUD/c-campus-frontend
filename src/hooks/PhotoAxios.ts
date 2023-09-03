@@ -159,3 +159,8 @@ export const usePhotoDeleteApi = () => {
 
   return [deleteFourcutPhoto];
 };
+
+
+
+
+

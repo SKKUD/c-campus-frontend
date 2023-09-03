@@ -1,4 +1,4 @@
-import { toSvg } from "html-to-image";
+import { toPng, toSvg } from "html-to-image";
 import { Ref } from "react";
 
 interface PhotoData {
@@ -12,16 +12,18 @@ export const setPhotoURL = async (
 ) => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;
   if (el) {
-    await toSvg(el, {
+    await toPng(el, {
       style: { background: "black" },
       width: 201,
       height: 513,
     })
       .then((dataUrl) => {
-        setPhoto({
-          PhotoTaken: true,
-          PhotoURL: dataUrl,
-        });
+        setTimeout(() => {
+          setPhoto({
+            PhotoTaken: true,
+            PhotoURL: dataUrl,
+          });
+        }, 10000);
       })
       .catch((error) => {
         console.error("Error converting HTML to image:", error);

@@ -15,6 +15,10 @@ import { useExtractID } from "../../../hooks/useExtractID";
 import Profile from "../../common/Profile/Profile.components";
 import { CheckRemainCount } from "../../../hooks/PullMessage";
 
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
+import { useRecoilState } from "recoil";
+import { UserAuth } from "../../../recoil/recoil";
+
 interface CongPhotoMachineProps {
   slide?: number;
 }
@@ -23,7 +27,9 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
   const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
-
+  const [checkAuth] = useAuthCheckApi();
+  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const currentID = useExtractID();
   const messageNumber = CheckRemainCount(userid);
 
   return (
@@ -33,10 +39,16 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
         <MachinePhotoImage src={congcam_bf_gif} />
         {match1024 ? (
           <ButtonGroupContainer>
-            <GreenBtn
-              content="콩캠네컷 찍기"
-              onClick={() => navigate(`/photo/post/${userid}`)}
-            />
+            {
+              (checkAuth && userAuth === currentID) ? (
+                <GreenBtn
+                  content="콩캠네컷 찍기"
+                  onClick={() => navigate(`/photo/post/${userid}`)}
+                />
+              ) : (
+                <></>
+              )
+            }
           </ButtonGroupContainer>
         ) : (
           <ButtonGroup slide={slide} />

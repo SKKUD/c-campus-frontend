@@ -51,6 +51,7 @@ export const MessageViewPublicToggleContainer = styled.div`
     max-width: 450px;
     margin: 0;
     margin-right: 0px;
+    margin-top: 15px;
   }
 `;
 
@@ -164,7 +165,7 @@ export const MessageViewContentFrame = styled.img`
   @media (min-width: 1024px) {
     width: 205.814px;
     height: 525px;
-    margin-top: 77px;
+    margin-top: 60px;
     margin-right: 20px;
   }
 `;

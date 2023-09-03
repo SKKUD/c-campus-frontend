@@ -269,9 +269,16 @@ const MessageView = () => {
             </MessageViewContent>
 
             {/* Sharing Button */}
-            <GreenBtnContainer className="MessageViewCenter">
-              <GreenBtn content="공유하기" onClick={handleShare} />
-            </GreenBtnContainer>
+            {
+              match1024 ? (
+                <>
+                </>
+              ) : (
+                <GreenBtnContainer className="MessageViewCenter">
+                  <GreenBtn content="공유하기" onClick={handleShare} />
+                </GreenBtnContainer>
+              )
+            }
           </MessageViewMobileContainer>
         </MessageViewContainer>
       ) : (

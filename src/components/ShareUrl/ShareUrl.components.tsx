@@ -33,9 +33,6 @@ const ShareUrl = () => {
           <br />
           복사된 링크를 공유해보세요.
         </ShareText>
-        <GreenBtnContainer>
-          <GreenBtn onClick={() => setOpen(false)} content="닫기" />
-        </GreenBtnContainer>
       </ModalLayout>
     </>
   );

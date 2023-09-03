@@ -45,7 +45,6 @@ export const MessageViewPublicToggleContainer = styled.div`
   display: flex;
   justify-content: right;
   margin: 0 auto;
-  padding-right: 15px;
 
   @media (min-width: 1024px) {
     width: 100%;
@@ -58,7 +57,7 @@ export const MessageViewPublicToggleContainer = styled.div`
 export const MessageViewTitle = styled.div`
   width: 90vw;
   max-width: 343px;
-  height: 56px;
+  /* height: 56px; */
   margin: auto;
   /* flex-shrink: 0; */
   border-radius: 7px;
@@ -70,15 +69,20 @@ export const MessageViewTitle = styled.div`
   border: 0.5px 0.5px 0.5px 0.5px;
   color: var(--font-black, #303030);
   text-align: center;
+  font-family: YeongdeokSea;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.4px;
   word-break: keep-all;
+  padding: 10px;
 
   @media (min-width: 1024px) {
     max-width: 450px;
+  }
+  .categoryText {
+
   }
 `;
 
@@ -113,12 +117,13 @@ export const MessageViewContentReceiver = styled.div`
 
   > .MessageViewReceiverMessageData {
     color: var(--font-black, #303030);
-    /* font-family: Yeongdeok Sea; */
+    font-family: YeongdeokSea;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.48px;
+    padding-bottom: 5px;
   }
   @media (min-width: 1024px) {
     max-width: 450px;
@@ -132,7 +137,7 @@ export const MessageViewContentMainContainer = styled.div`
   margin-right: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
-  padding: 20px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   display: flex;
   margin: auto;
   flex-direction: row;
@@ -145,6 +150,8 @@ export const MessageViewContentMainContainer = styled.div`
 `;
 
 export const MessageViewFourcutFrameContainer = styled.div`
+  display: flex;
+  justify-content: center;
   @media (min-width: 1024px) {
 
   }
@@ -168,7 +175,7 @@ export const MessageViewContentMainText = styled.p`
   margin-left: 5px;
   min-height: 200px;
   color: var(--black, #252525);
-  /* font-family: Yeongdeok Sea; */
+  font-family: YeongdeokSea;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -200,16 +207,19 @@ export const MessageViewContentSender = styled.div`
     line-height: normal;
     letter-spacing: -0.32px;
     margin-right: 5px;
+    margin-top: 20px;
   }
 
   > .MessageViewSenderMessageData {
     color: var(--font-black, #303030);
-    /* font-family: Yeongdeok Sea; */
+    font-family: YeongdeokSea;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.48px;
+    margin-right: 4px;
+    padding-bottom: 5px;
   }
   @media (min-width: 1024px) {
     max-width: 450px;

@@ -78,7 +78,8 @@ export const OpenMessageContentTitle = styled.p`
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.4px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  margin-top: 12px;
 `;
 
 export const OpenMessageContentMainText = styled.p`
@@ -131,7 +132,7 @@ export const OpenMesageEmpty = styled.div`
   padding: 30px 0;
   background-color: #ffffff;
   border-radius: 10px;
-  color: var(--font-black, #303030);
+  color: var(--font-black, #808080);
   text-align: center;
   font-family: GmarketSans;
   font-size: 16px;

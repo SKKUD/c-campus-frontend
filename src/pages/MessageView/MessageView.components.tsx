@@ -185,7 +185,7 @@ const MessageView = () => {
 
             {/* Title */}
             <MessageViewTitle className="MessageViewCenter">
-              {axiosMessage?.category}
+              <div className="categoryText">{axiosMessage?.category}</div>
             </MessageViewTitle>
 
             {/* Content */}
@@ -249,7 +249,7 @@ const MessageView = () => {
                   ) : (
                     <ShowImg
                       handleClose={handleClose}
-                      image_url={axiosMessage.image_url}
+                      image_url={axiosMessage.image_url!}
                     />
                   )}
                 </ModalLayout>
@@ -269,9 +269,16 @@ const MessageView = () => {
             </MessageViewContent>
 
             {/* Sharing Button */}
-            <GreenBtnContainer className="MessageViewCenter">
-              <GreenBtn content="공유하기" onClick={handleShare} />
-            </GreenBtnContainer>
+            {
+              match1024 ? (
+                <>
+                </>
+              ) : (
+                <GreenBtnContainer className="MessageViewCenter">
+                  <GreenBtn content="공유하기" onClick={handleShare} />
+                </GreenBtnContainer>
+              )
+            }
           </MessageViewMobileContainer>
         </MessageViewContainer>
       ) : (

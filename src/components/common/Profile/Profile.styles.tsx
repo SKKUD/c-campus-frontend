@@ -8,10 +8,13 @@ export const ProfileContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  top: 100px;
+  top: 80px;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 800;
+  @media (min-width: 1024px) {
+    top: 95px;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
@@ -45,6 +48,7 @@ export const CoinCotainer = styled.div`
   width: 80px;
   height: 32px;
   padding: 4px 6px;
+  border-radius: 4px;
   background-color: rgba(141, 198, 63, 0.2);
   > img {
     width: 24px;
@@ -56,13 +60,18 @@ export const CoinCotainer = styled.div`
     font-size: 14px;
     font-weight: 500;
   }
+  .coinCount {
+    width: 21px;
+    display: flex;
+    justify-content: center;
+  }
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 export const WebShareUrlContainer = styled.div`
   position: absolute;
-  bottom: -62px;
-  right: 15px;
+  bottom: -52px;
+  right: 16px;
 `;

@@ -86,7 +86,7 @@ export const LightGreenButton = styled(Button)`
   height: 32px;
   flex-shrink: 0;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
+  border-radius: 4px;
   background: rgba(22, 67, 0, 0.7);
   display: flex;
   justify-content: center;

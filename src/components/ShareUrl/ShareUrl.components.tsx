@@ -3,6 +3,7 @@ import {
   ShareUrlContent,
   ShareUrlImgContainer,
   ShareUrlSvgContainer,
+  ShareGreenBtnContainer,
 } from "./ShareUrl.styles";
 
 import { useEffect, useState } from "react";
@@ -14,11 +15,21 @@ import { GreenBtnContainer } from "../../pages/MessageView/MessageView.styles";
 const ShareUrl = () => {
   const [currentUrl, SetCurrentUrl] = useState<string>(window.location.href);
   const [open, setOpen] = useState<boolean>(false);
+  const [isLoad, SetIsLoad] = useState<boolean>(false);
 
   useEffect(() => {
     SetCurrentUrl(window.location.href);
     console.log("changed");
   }, [window.location.href]);
+
+  useEffect(() => {
+    if (isLoad === false) {
+      setTimeout(() => {
+        setOpen(false);
+      }, 2500);
+      SetIsLoad(true);
+    }
+  }, [open])
 
   return (
     <>
@@ -33,9 +44,9 @@ const ShareUrl = () => {
           <br />
           복사된 링크를 공유해보세요.
         </ShareText>
-        <GreenBtnContainer>
+        <ShareGreenBtnContainer>
           <GreenBtn onClick={() => setOpen(false)} content="닫기" />
-        </GreenBtnContainer>
+        </ShareGreenBtnContainer>
       </ModalLayout>
     </>
   );

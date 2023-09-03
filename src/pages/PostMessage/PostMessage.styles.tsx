@@ -30,7 +30,7 @@ export const PostMessageFieldContainer = styled.div`
 
 export const PostMessageColors = styled.div`
   display: flex;
-  width: 90%;
+  width: 83%;
   flex-direction: row;
   justify-content: space-evenly;
   margin-top: 10px;
@@ -98,8 +98,8 @@ export const PostMessageColor5 = styled.div`
 `;
 
 export const PostMessageColorCheck = styled.img`
-  height: 12px;
-  width: 12px;
+  height: 16px;
+  width: 16px;
 `;
 
 export const PostMessageRandomSubjectContainer = styled.div`
@@ -112,6 +112,9 @@ export const PostMessageRandomSubjectContainer = styled.div`
 export const PostMessageRandomSubject = styled.div`
   display: flex;
   align-items: start;
+  font-family: GmarketSans;
+  color: #808080;
+  font-weight: 400;
 `;
 
 export const PostMessageRandomSubjectContent = styled.div`
@@ -125,7 +128,7 @@ export const PostMessageRandomSubjectContent = styled.div`
 
   /* width: 90%; */
   /* height: 56px; */
-  margin-top: 5px;
+  margin-top: 3px;
   padding: 10px;
   flex-shrink: 0;
   border-radius: 10px;
@@ -139,6 +142,9 @@ export const PostMessageRandomSubjectContent = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  .SubjectContent {
+    padding-left: 5px;
+  }
 `;
 
 export const PostMessageUpdateButton = styled.img`
@@ -157,7 +163,9 @@ export const PostMessageContentContainer = styled.div`
 
 export const PostMessageContentTo = styled.div`
   width: 90%;
-  height: 56px;
+  height: 36px;
+  margin-top: 8px;
+  margin-bottom: -3px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -251,6 +259,7 @@ export const PostMessageWriterContainer = styled.div`
   width: 90%;
   display: flex;
   flex-direction: column;
+
 `;
 
 export const PostMessageWriter = styled.div`
@@ -263,8 +272,8 @@ export const PostMessageWriter = styled.div`
   font-weight: 500;
   line-height: normal;
 
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 8px;
+  margin-bottom: 4px;
 `;
 
 export const PostMessageWriterContent = styled.input`
@@ -284,7 +293,7 @@ export const PostMessageWriterContent = styled.input`
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   :focus {
     outline: none;
   }
@@ -292,7 +301,6 @@ export const PostMessageWriterContent = styled.input`
 export const PostMessageWebFourcutContaner = styled.div`
   padding-top: 30px;
 `;
-
 
 interface ButtonWrapperProps {
   done: boolean;

@@ -4,14 +4,14 @@ export const MessageFrame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
 `
 
 export const MessageHolder = styled.div`
-  width: 15vw;
+  width: 17vw;
   max-width: 60px;
-  height: 15vw;
+  height: 17vw;
   max-height: 60px;
   border-radius: 10px;
   background: #fff;
@@ -40,7 +40,7 @@ export const MessageContent = styled.p`
   font-weight: 400;
   line-height: 130%;
   margin-top: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   padding-left: 6px;
   padding-right: 6px;
   overflow: hidden;

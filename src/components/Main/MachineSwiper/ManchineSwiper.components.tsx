@@ -55,9 +55,6 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
             <SwiperSlide>
               <SwiperSlideCard>
                 <CongMachine slide={slide} />
-                <ShareUrlContainer>
-                  <ShareUrl />
-                </ShareUrlContainer>
               </SwiperSlideCard>
             </SwiperSlide>
             <SwiperSlide>

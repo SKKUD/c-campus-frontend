@@ -43,7 +43,10 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
               (checkAuth && userAuth === currentID) ? (
                 <GreenBtn
                   content="콩캠네컷 찍기"
-                  onClick={() => navigate(`/photo/post/${userid}`)}
+                  onClick={() => {
+                            navigate(`/photo/post/${userid}`);
+                            window.location.reload();
+                          }}
                 />
               ) : (
                 <></>

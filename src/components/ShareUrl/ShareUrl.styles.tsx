@@ -38,10 +38,16 @@ export const ShareText = styled.div`
   padding: 30px 30px 0px;
   word-break: keep-all;
   margin-top: -20px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   @media (max-width: 485px) {
     font-size: 18px;
     line-height: 30px;
     padding: 30px 30px 0px;
   }
+`;
+
+export const ShareGreenBtnContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
 `;

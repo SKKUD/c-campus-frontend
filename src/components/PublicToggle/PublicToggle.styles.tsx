@@ -57,6 +57,7 @@ export const ToggleDescription = styled.div<{ color: string }>`
   text-align: center;
   margin: 20px;
   margin-right: 5px;
+  margin-bottom: 12px;
   width: 85px;
   display: flex;
   justify-content: right;

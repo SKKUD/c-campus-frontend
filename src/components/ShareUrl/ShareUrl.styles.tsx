@@ -37,6 +37,8 @@ export const ShareText = styled.div`
   line-height: 35px;
   padding: 30px 30px 0px;
   word-break: keep-all;
+  margin-top: -20px;
+  margin-bottom: 25px;
   @media (max-width: 485px) {
     font-size: 18px;
     line-height: 30px;

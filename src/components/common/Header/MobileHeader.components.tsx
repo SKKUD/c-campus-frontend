@@ -33,6 +33,8 @@ const MobileHeader: FC = () => {
     navigate(-1);
   };
   const handleLogoClick = () => {
+    console.log("click");
+    console.log(userid);
     navigate(`/${userid}`);
   };
   // 메뉴버튼 팝업 구현

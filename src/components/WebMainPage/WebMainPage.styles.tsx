@@ -32,6 +32,7 @@ export const BoxAbove = styled.div`
 
 export const InfoImgConatiner = styled.div`
   width: 400px;
+  height: 660px;
   border-radius: 15px;
   z-index: 10;
   @media (max-width: 1280px) {

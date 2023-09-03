@@ -62,6 +62,7 @@ export const MessageListHoder = styled.div`
   min-width: 250px;
   max-width: 320px;
   margin: 0 auto;
+  margin-bottom: 16px;
 `;
 
 export const MessageListDate = styled.div`

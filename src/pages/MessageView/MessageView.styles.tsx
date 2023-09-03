@@ -164,7 +164,7 @@ export const MessageViewContentFrame = styled.img`
   @media (min-width: 1024px) {
     width: 205.814px;
     height: 525px;
-    margin-top: 85px;
+    margin-top: 77px;
     margin-right: 20px;
   }
 `;
@@ -239,4 +239,5 @@ export const GreenBtnContainer = styled.div`
 `;
 
 // web
-export const MessageViewWebFourcutContainer = styled.div``;
+export const MessageViewWebFourcutContainer = styled.div`
+`;

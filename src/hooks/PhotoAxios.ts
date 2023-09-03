@@ -108,31 +108,34 @@ export const usePhotoPostApi = () => {
 
       if (pngBlob) {
         // Blob을 File 객체로 변환하고 파일명 설정
-        const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-          type: "image/png",
-        });
-
-        // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
-        const data = {
-          title: "fourcut",
-          files: [pngFile],
-        };
-
-        const formData = new FormData();
-        formData.append("file", data.files[0]);
-
-        axios
-          .post(
-            `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos`,
-            formData,
-            { withCredentials: true }
-          )
-          .then((response) => {
-            console.log(response.status);
-          })
-          .catch((error) => {
-            console.log(error);
+        setTimeout(() => {
+          const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+            type: "image/png",
           });
+
+          // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
+          const data = {
+            title: "fourcut",
+            files: [pngFile],
+          };
+
+          const formData = new FormData();
+          formData.append("file", data.files[0]);
+
+          axios
+            .post(
+              `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos`,
+              formData,
+              { withCredentials: true }
+            )
+            .then((response) => {
+              console.log(response.status);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }, 5000);
+        
       }
     } catch (error) {
       console.error("오류 발생:", error);

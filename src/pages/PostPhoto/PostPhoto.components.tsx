@@ -92,7 +92,7 @@ const PostPhoto = () => {
       // await ExportElementAsPNG();
       await postFourcutPhoto();
 
-      // navigate(`/photo/${userid}`);
+      navigate(`/photo/${userid}`);
     }
   };
 

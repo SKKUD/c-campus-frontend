@@ -76,17 +76,10 @@ const Profile = ({ coin }: IProfile) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <div>{coin ? coin : 0}</div>
-            {
-              match1024 ? (
-                <WebShareUrlContainer>
-                  <ShareUrl />
-                </WebShareUrlContainer>
-              ) : (
-                <>
-                </>
-              )
-            }
+            <div className="coinCount">{coin ? coin : 0}</div>
+            <WebShareUrlContainer>
+              <ShareUrl />
+            </WebShareUrlContainer>
           </CoinCotainer>
         ) : (
           <LightGreenBtn

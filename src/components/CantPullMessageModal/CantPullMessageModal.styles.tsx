@@ -27,4 +27,6 @@ export const CantPullMessageModalText = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 33px */
+  margin-top: -5px;
+  margin-bottom: 10px;
 `;

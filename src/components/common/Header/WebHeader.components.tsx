@@ -24,7 +24,12 @@ const WebHeader = () => {
   const [logout] = useUserLogoutApi();
 
   const handleLogoClick = () => {
-    navigate(`/${profileUser.userID}`);
+    console.log(checkAuth);
+    if (checkAuth) {
+      navigate(`/${checkAuth}`);
+    } else {
+      navigate(`/`);
+    }
     window.location.reload();
   };
 

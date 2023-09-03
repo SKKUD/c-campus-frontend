@@ -17,6 +17,7 @@ import HeaderInfoModal from "./HeaderInfoModal/HeaderInfoModal.components";
 import { useRecoilValue } from "recoil";
 import { UserState } from "../../../recoil/recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
+import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 const MobileHeader: FC = () => {
   const userid = useExtractID();
@@ -24,7 +25,7 @@ const MobileHeader: FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
-
+  const [checkAuth] = useAuthCheckApi();
   // 뒤로가기버튼 구현
   const location = useLocation();
   const pathname = location.pathname;
@@ -33,8 +34,14 @@ const MobileHeader: FC = () => {
     navigate(-1);
   };
   const handleLogoClick = () => {
-    navigate(`/${userid}`);
+    if (checkAuth) {
+      navigate(`/${checkAuth}`);
+    } else {
+      navigate(`/`);
+    }
+    window.location.reload();
   };
+  
   // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {

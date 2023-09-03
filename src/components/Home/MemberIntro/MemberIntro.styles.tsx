@@ -70,6 +70,7 @@ export const ProfileCotainer = styled.div`
   }
   @media (max-width: 370px) {
     gap: 10px;
+    margin-bottom: 50px;
   }
 `;
 
@@ -127,12 +128,12 @@ export const ProfileIcon = styled.div`
     }
   }
   @media (max-width: 370px) {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     top: 49px;
     > img {
-      width: 10px;
-      height: 10px;
+      width: 15px;
+      height: 15px;
     }
   }
 `;

@@ -97,7 +97,7 @@ const MessageFeed = () => {
         <MessageFeedContainer>
           <OpenMessageHeader>
             <OpenMessageHeaderContent>
-              {messageNumber}개의 공개쪽지
+              {messageNumber}개의 공개 쪽지
             </OpenMessageHeaderContent>
             {checkAuth && String(checkAuth) === currentId && (
               <LightGreenBtn

@@ -176,7 +176,7 @@ const MessageView = () => {
               )}
             </MessageViewWebFourcutContainer>
           )}
-          <MessageViewMobileContainer>
+          <MessageViewMobileContainer backgroundColor={axiosMessage?.background_color_code || ""}>
             {/* Public Toggle */}
             <MessageViewPublicToggleContainer>
               <PublicToggle axiosisPublic={axiosMessage?.is_public} />

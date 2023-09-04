@@ -5,8 +5,8 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { UserAuth, UserState } from "../../../recoil/recoil";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { IsWritingMessage, UserAuth, UserState } from "../../../recoil/recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
@@ -46,6 +46,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   const currentID = useExtractID();
   const checkAuth = useAuthCheckApi();
   const [modalContent, SetModalContent] = useState<string>("");
+  const setIsWriting = useSetRecoilState(IsWritingMessage);
 
   const pickNotes = () => {
     // pull
@@ -98,7 +99,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   };
   const takePhotos = () => {
     navigate(`/photo/post/${userid}`);
-    window.location.reload();
+    setIsWriting(false);
   };
   const movetoNoteBox = () => {
     navigate(`/message/${userid}`);

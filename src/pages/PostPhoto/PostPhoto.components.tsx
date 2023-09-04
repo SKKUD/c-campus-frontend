@@ -105,6 +105,12 @@ const PostPhoto = () => {
       const BlobString = await domToBlob(el, {
         quality: 0.9,
         scale: 4,
+        width: 201,
+        height: 512,
+        style: {
+          width: "100vw",
+          height: "100vh",
+        },
       });
 
       if (BlobString) {

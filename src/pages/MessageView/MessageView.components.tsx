@@ -114,7 +114,7 @@ const MessageView = () => {
   };
 
   useEffect(() => {
-    console.log("test v2 handleShare, img -> div")
+    
     // extract messageID
     const messageID: string[] = extractMessageID();
     SetMessageID(messageID[0]);

@@ -103,7 +103,7 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const pngBlob = await domToBlob(el, { quality: 0.9, scale: 10 });
+      const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
 
       if (pngBlob) {
         setTimeout(async () => {

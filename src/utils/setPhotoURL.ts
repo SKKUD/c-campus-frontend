@@ -1,5 +1,5 @@
 import { toPng, toSvg } from "html-to-image";
-import { domToPng, domToSvg } from "modern-screenshot";
+import { domToImage, domToPng, domToSvg } from "modern-screenshot";
 import { Ref } from "react";
 
 interface PhotoData {
@@ -13,7 +13,7 @@ export const setPhotoURL = async (
 ) => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;
   if (el) {
-    await domToPng(el, {
+    await domToSvg(el, {
       quality: 0.9,
       scale: 10,
     })

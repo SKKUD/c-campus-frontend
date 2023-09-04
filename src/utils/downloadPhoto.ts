@@ -1,14 +1,14 @@
-import { domToPng } from "modern-screenshot";
+import { domToPng, domToSvg } from "modern-screenshot";
 
 export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-    const pngURL = await domToPng(el, { quality: 0.9, scale: 10 });
+    const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
 
-    if (pngURL) {
+    if (svgURL) {
       setTimeout(async () => {
-        const pngBlob = await (await fetch(pngURL)).blob();
+        const pngBlob = await(await fetch(svgURL)).blob();
         // Blob을 File 객체로 변환하고 파일명 설정
         const pngFile = new File([pngBlob], "CongcamFourcut.png", {
           type: "image/png",

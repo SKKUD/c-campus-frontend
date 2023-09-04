@@ -89,7 +89,7 @@ export const usePhotoPostApi = () => {
       const svgURL = await domToSvg(el, { quality: 0.7, scale: 5 });
 
       if (svgURL) {
-        setTimeout(async () => {
+        setTimeout(() => {
           try {
             const img = new Image();
             img.src = svgURL;

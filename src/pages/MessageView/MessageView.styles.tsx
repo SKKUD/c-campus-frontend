@@ -5,7 +5,8 @@ import styled from "styled-components";
 export const MessageViewMobileContainer = styled.div<{ backgroundColor: string }>`
   .congcamMessage {
     background-color: ${(props) => props.backgroundColor};
-    
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   @media (min-width: 1024px) {
     max-width: 1024px;

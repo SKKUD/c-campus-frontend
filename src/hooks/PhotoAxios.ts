@@ -89,10 +89,6 @@ export const usePhotoPostApi = () => {
       const BlobString = await domToBlob(el, {
         quality: 0.9,
         scale: 4,
-        style: {
-          width: "1606px",
-          height: "4096px",
-        },
       });
 
       if (BlobString) {

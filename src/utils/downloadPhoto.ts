@@ -11,13 +11,13 @@ export const ExportElementAsPNG = async () => {
 
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = img.width * 5;
-          canvas.height = img.height * 5;
+          canvas.width = img.width * 2;
+          canvas.height = img.height * 2;
 
           const ctx = canvas.getContext("2d");
 
           if (ctx) {
-            ctx.scale(5, 5);
+            ctx.scale(2, 2);
             ctx.drawImage(img, 0, 0);
 
             canvas.toBlob((pngBlob) => {

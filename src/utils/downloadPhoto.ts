@@ -5,9 +5,7 @@ export const ExportElementAsPNG = async () => {
 
     const pngBlob = await domToBlob(el, {
       quality: 0.9,
-      scale: 2,
-      width: 201,
-      height: 513,
+      scale: 4,
     });
 
     if (pngBlob) {

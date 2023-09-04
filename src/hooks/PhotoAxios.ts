@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
-import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
+import { domToBlob, domToPng } from "modern-screenshot";
 
 export const usePhotoGetApi = () => {
   const currentID = useExtractID();
@@ -39,14 +39,11 @@ export const usePhotoPostApi = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
+      const pngBlob = await domToBlob(el, { quality: 0.9, scale: 10 });
 
-      if (svgURL) {
+      if (pngBlob) {
         // Blob을 File 객체로 변환하고 파일명 설정
-
         setTimeout(async () => {
-          const pngBlob = await(await fetch(svgURL)).blob();
-
           const pngFile = new File([pngBlob], "CongcamFourcut.png", {
             type: "image/png",
           });
@@ -81,6 +78,74 @@ export const usePhotoPostApi = () => {
 
   return [postFourcutPhoto];
 };
+
+// export const usePhotoPostApi = () => {
+//   const currentID = useExtractID();
+
+//   const postFourcutPhoto = async () => {
+//     try {
+//       const el = document.querySelector(".fourcutImage") as HTMLElement;
+
+//       const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
+
+//       if (svgURL) {
+//         setTimeout(async () => {
+//           try {
+//             const img = new Image();
+//             img.src = svgURL;
+
+//             img.onload = () => {
+//               const canvas = document.createElement("canvas");
+//               canvas.width = img.width;
+//               canvas.height = img.height;
+//               const ctx = canvas.getContext("2d");
+
+//               if (ctx) {
+//                 ctx.drawImage(img, 0, 0);
+
+//                 canvas.toBlob((pngBlob) => {
+//                   if (pngBlob) {
+//                     // Blob을 File 객체로 변환하고 파일명 설정
+//                     const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+//                       type: "image/png",
+//                     });
+
+//                     // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
+//                     const data = {
+//                       files: [pngFile],
+//                     };
+
+//                     const formData = new FormData();
+//                     formData.append("file", data.files[0]);
+
+//                     axios
+//                       .post(
+//                         `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/photos`,
+//                         formData,
+//                         { withCredentials: true }
+//                       )
+//                       .then((response) => {
+//                         console.log(response.status);
+//                       })
+//                       .catch((error) => {
+//                         console.log(error);
+//                       });
+//                   }
+//                 }, "image/png");
+//               }
+//             };
+//           } catch {
+//             console.log("error");
+//           }
+//         }, 1000);
+//       }
+//     } catch (error) {
+//       console.error("오류 발생:", error);
+//     }
+//   };
+
+//   return [postFourcutPhoto];
+// };
 
 export const usePhotoDeleteApi = () => {
   const currentID = useExtractID();

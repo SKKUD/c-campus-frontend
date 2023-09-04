@@ -75,7 +75,7 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
           match1024 ? (
             <WhiteBtn content="저장하기" onClick={saveImageLocally}/>
           ) : (
-            <WhiteBtn content="저장하기" onClick={saveImageLocally}/>
+            <WhiteBtn content="공유하기"/>
           )
         }    
       </ShowImgButtonContainer>

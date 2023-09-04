@@ -6,6 +6,9 @@ export const ExportElementAsPNG = async () => {
     const pngBlob = await domToBlob(el, {
       quality: 0.9,
       scale: 4,
+      features: {
+        fixSvgXmlDecode: false,
+      },
     });
 
     if (pngBlob) {

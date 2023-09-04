@@ -64,6 +64,7 @@ const PostPhoto = () => {
     if (storedIsWriting) {
       setIsWriting(Boolean(storedIsWriting));
     }
+    console.log("fix");
   }, []);
 
   const handleDelete = (num: number) => {

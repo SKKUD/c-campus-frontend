@@ -4,7 +4,7 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v10, toBlob and cacheBust: true await many times exclude quality scale");
+  console.log("v11, toBlob and cacheBust: true await many times exclude quality scale padding");
 
   const UA = navigator.userAgent.toLowerCase();
 

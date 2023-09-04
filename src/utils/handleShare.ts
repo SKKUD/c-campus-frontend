@@ -12,10 +12,9 @@ export const handleShare = async () => {
     document.querySelector(".congcamMessage") as HTMLElement, {
       cacheBust: true,
     }
+    
   );
-
   if (pngBlob) {
-    console.log(pngBlob);
     setTimeout(() => {
       try {
         // Blob을 File 객체로 변환하고 파일명 설정

@@ -155,7 +155,6 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     navigate(`/message/post/${userid}`);
   };
 
-  console.log("check");
 
   return (
     <CongMachineContainer>

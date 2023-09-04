@@ -366,7 +366,7 @@ const PostMessage = () => {
         <PostMessageRandomSubjectContainer>
           <PostMessageRandomSubject>랜덤 주제</PostMessageRandomSubject>
           <PostMessageRandomSubjectContent>
-            <div className="SubjectContent">{currentSubject}</div>
+            {currentSubject}
             <PostMessageUpdateButton
               src={recycleIcon}
               onClick={updateButtonHandler}

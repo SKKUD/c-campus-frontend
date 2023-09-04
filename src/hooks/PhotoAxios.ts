@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
-import { domToBlob, domToPng } from "modern-screenshot";
+import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
 
 export const usePhotoGetApi = () => {
   const currentID = useExtractID();
@@ -39,13 +39,13 @@ export const usePhotoPostApi = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const pngURL = await domToPng(el, { quality: 0.9, scale: 10 });
+      const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
 
-      if (pngURL) {
+      if (svgURL) {
         // Blob을 File 객체로 변환하고 파일명 설정
 
         setTimeout(async () => {
-          const pngBlob = await (await fetch(pngURL)).blob();
+          const pngBlob = await(await fetch(svgURL)).blob();
 
           const pngFile = new File([pngBlob], "CongcamFourcut.png", {
             type: "image/png",

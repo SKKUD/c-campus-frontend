@@ -1,21 +1,14 @@
 import { error } from "console";
 import * as htmlToImage from "html-to-image";
 import { domToBlob } from "modern-screenshot";
-import { toPng } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v4");
-
   const UA = navigator.userAgent.toLowerCase();
 
-  const pngBlob = await toPng(
-    document.querySelector(".congcamMessage") as HTMLElement, {
-      cacheBust: true,
-    }
+  const pngBlob = await domToBlob(
+    document.querySelector(".congcamMessage") as HTMLElement
   );
-
   if (pngBlob) {
-    console.log(pngBlob);
     setTimeout(() => {
       try {
         // Blob을 File 객체로 변환하고 파일명 설정

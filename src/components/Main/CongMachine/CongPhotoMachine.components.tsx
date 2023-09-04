@@ -16,8 +16,8 @@ import Profile from "../../common/Profile/Profile.components";
 import { CheckRemainCount } from "../../../hooks/PullMessage";
 
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
-import { useRecoilState } from "recoil";
-import { UserAuth } from "../../../recoil/recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { IsWritingMessage, UserAuth } from "../../../recoil/recoil";
 
 interface CongPhotoMachineProps {
   slide?: number;
@@ -31,6 +31,7 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
   const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const messageNumber = CheckRemainCount(userid);
+  const setIsWriting = useSetRecoilState(IsWritingMessage);
 
   return (
     <CongMachineContainer>
@@ -44,7 +45,7 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
                 content="콩캠네컷 찍기"
                 onClick={() => {
                   navigate(`/photo/post/${userid}`);
-                  window.location.reload();
+                  setIsWriting(false);
                 }}
               />
             ) : (

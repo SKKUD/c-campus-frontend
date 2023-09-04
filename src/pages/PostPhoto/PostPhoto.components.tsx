@@ -40,7 +40,7 @@ import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
 import { toPng, toSvg } from "html-to-image";
-import { domToBlob } from "modern-screenshot/index";
+import { domToBlob } from "modern-screenshot";
 
 const PostPhoto = () => {
   const userid = useExtractID();

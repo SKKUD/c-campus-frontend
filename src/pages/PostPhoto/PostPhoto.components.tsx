@@ -39,8 +39,7 @@ import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.co
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { toPng, toSvg } from "html-to-image";
-import { domToBlob } from "modern-screenshot";
+import { domToPng } from "modern-screenshot";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -100,56 +99,17 @@ const PostPhoto = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
-
-  // const setRecoilPhotoFile = async () => {
-  //   try {
-  //     const el = document.querySelector(".fourcutImage") as HTMLElement;
-
-  //     const svgString = await toSvg(el);
-
-  //     if (svgString) {
-  //       setTimeout(() => {
-  //         const img = new Image();
-  //         img.src = svgString;
-
-  //         img.onload = () => {
-  //           const canvas = document.createElement("canvas");
-  //           canvas.width = img.width;
-  //           canvas.height = img.height;
-  //           const ctx = canvas.getContext("2d");
-
-  //           if (ctx) {
-  //             ctx.drawImage(img, 0, 0);
-
-  //             canvas.toBlob((pngBlob) => {
-  //               if (pngBlob) {
-  //                 // Blob을 File 객체로 변환하고 파일명 설정
-  //                 const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-  //                   type: "image/png",
-  //                 });
-
-  //                 setPhotoFile(pngFile);
-  //               }
-  //             }, "image/png");
-  //           }
-  //         };
-  //       }, 250);
-  //     }
-  //   } catch (error) {
-  //     console.error("오류 발생:", error);
-  //   }
-  // };
-
   const setRecoilPhotoFile = async () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const BlobString = await domToBlob(el);
+      const pngURL = await domToPng(el, { quality: 0.9, scale: 10 });
 
-      if (BlobString) {
-        setTimeout(() => {
+      if (pngURL) {
+        setTimeout(async () => {
+          const pngBlob = await (await fetch(pngURL)).blob();
           // Blob을 File 객체로 변환하고 파일명 설정
-          const pngFile = new File([BlobString], "CongcamFourcut.png", {
+          const pngFile = new File([pngBlob], "CongcamFourcut.png", {
             type: "image/png",
           });
 

@@ -14,7 +14,8 @@ export const setPhotoURL = async (
   const el = document.querySelector(".fourcutImage") as HTMLElement;
   if (el) {
     await domToPng(el, {
-      style: { background: "black" },
+      quality: 0.9,
+      scale: 10,
     })
       .then((dataUrl) => {
         setTimeout(() => {

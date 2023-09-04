@@ -4,10 +4,30 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v6, toBlob and cacheBust: true");
+  console.log("v8, toBlob and cacheBust: true await many times edit className");
 
   const UA = navigator.userAgent.toLowerCase();
 
+  await toBlob(
+    document.querySelector(".congcamMessage") as HTMLElement, {
+      cacheBust: true,
+    }
+  );
+  await toBlob(
+    document.querySelector(".congcamMessage") as HTMLElement, {
+      cacheBust: true,
+    }
+  );
+  await toBlob(
+    document.querySelector(".congcamMessage") as HTMLElement, {
+      cacheBust: true,
+    }
+  );
+  await toBlob(
+    document.querySelector(".congcamMessage") as HTMLElement, {
+      cacheBust: true,
+    }
+  );
   const pngBlob = await toBlob(
     document.querySelector(".congcamMessage") as HTMLElement, {
       cacheBust: true,

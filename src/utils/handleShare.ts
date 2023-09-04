@@ -4,7 +4,7 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v11, toBlob and cacheBust: true await many times exclude quality scale padding");
+  console.log("v12, erase setTimeOut");
 
   const UA = navigator.userAgent.toLowerCase();
 
@@ -16,21 +16,20 @@ export const handleShare = async () => {
         bypassingCache: true,
       }
     }
-  );
-  
-  if (pngBlob) {
-    setTimeout(() => {
+  ).then((response) => {
+    console.log(response);
+    if (response) {
       try {
         // Blob을 File 객체로 변환하고 파일명 설정
-        const pngFile = new File([pngBlob], "CongcamMessage.png", {
+        const pngFile = new File([response], "CongcamMessage.png", {
           type: "image/png",
         });
-
+  
         // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
         const data = {
           files: [pngFile],
         };
-
+  
         if (navigator.canShare && navigator.canShare(data)) {
           navigator.share(data);
         } else {
@@ -39,6 +38,8 @@ export const handleShare = async () => {
       } catch {
         console.log("error");
       }
-    }, 1000);
-  }
+    }
+  }).catch((error) => {
+    console.log(error);
+  });
 };

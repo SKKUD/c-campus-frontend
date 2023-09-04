@@ -108,8 +108,8 @@ const PostPhoto = () => {
         width: 201,
         height: 512,
         style: {
-          width: "100vw",
-          height: "100vh",
+          width: "1606px",
+          height: "4096px",
         },
       });
 

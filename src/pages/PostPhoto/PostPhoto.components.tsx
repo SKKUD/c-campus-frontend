@@ -103,7 +103,7 @@ const PostPhoto = () => {
   const setRecoilPhotoFile = async () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
-
+      console.log("toPng severalTime");
       await toPng(el);
       await toPng(el);
       await toPng(el);

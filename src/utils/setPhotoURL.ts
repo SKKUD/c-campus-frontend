@@ -14,8 +14,8 @@ export const setPhotoURL = async (
   const el = document.querySelector(".fourcutImage") as HTMLElement;
   if (el) {
     await domToSvg(el, {
-      quality: 0.9,
-      scale: 10,
+      quality: 0.7,
+      scale: 5,
     })
       .then((dataUrl) => {
         setTimeout(() => {

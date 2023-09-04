@@ -12,8 +12,8 @@ export const handleShare = async () => {
     document.querySelector(".congcamMessage") as HTMLElement, {
       cacheBust: true,
     }
-    
   );
+  
   if (pngBlob) {
     setTimeout(() => {
       try {

@@ -86,7 +86,7 @@ export const usePhotoPostApi = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgURL = await domToSvg(el, { quality: 0.7, scale: 5 });
+      const svgURL = await domToSvg(el);
 
       if (svgURL) {
         setTimeout(() => {
@@ -96,12 +96,13 @@ export const usePhotoPostApi = () => {
 
             img.onload = () => {
               const canvas = document.createElement("canvas");
-              canvas.width = img.width;
-              canvas.height = img.height;
+              canvas.width = img.width * 2;
+              canvas.height = img.height * 2;
 
               const ctx = canvas.getContext("2d");
 
               if (ctx) {
+                ctx.scale(2, 2);
                 ctx.drawImage(img, 0, 0);
 
                 canvas.toBlob((pngBlob) => {

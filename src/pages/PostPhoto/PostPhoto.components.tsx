@@ -104,6 +104,12 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
+      await toPng(el);
+      await toPng(el);
+      await toPng(el);
+      await toPng(el);
+      await toPng(el);
+      await toPng(el);
       const pngString = await toPng(el);
 
       if (pngString) {

@@ -40,6 +40,7 @@ export const FourcutFrame = styled.img`
   pointer-events: none;
   filter: blur(0px);
   shape-rendering: crispEdges;
+  image-rendering: pixelated;
 `;
 
 export const PhotoWrapper = styled.div`

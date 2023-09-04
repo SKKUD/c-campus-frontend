@@ -4,7 +4,7 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v7, toBlob and cacheBust: true await many times");
+  console.log("v8, toBlob and cacheBust: true await many times edit className");
 
   const UA = navigator.userAgent.toLowerCase();
 

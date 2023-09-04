@@ -148,7 +148,6 @@ const MessageView = () => {
       {currentID === String(userAuth) && axiosMessage ? ( // check if currentID matched to current userAuth
         <MessageViewContainer
           backgroundColor={axiosMessage?.background_color_code || ""}
-          className="congcamMessage"
         >
           {match1024 && ( // 웹 환경일 때
             <MessageViewWebFourcutContainer onClick={handleOpen}>

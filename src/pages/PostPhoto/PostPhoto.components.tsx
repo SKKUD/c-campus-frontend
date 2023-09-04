@@ -108,7 +108,6 @@ const PostPhoto = () => {
         style: {
           width: "1606px",
           height: "4096px",
-          shapeRendering: "crispEdges",
         },
       });
 

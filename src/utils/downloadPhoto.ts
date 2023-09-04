@@ -9,7 +9,6 @@ export const ExportElementAsPNG = async () => {
       style: {
         width: "1606px",
         height: "4096px",
-        shapeRendering: "crispEdges",
       },
     });
 

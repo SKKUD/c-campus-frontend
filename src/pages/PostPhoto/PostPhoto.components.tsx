@@ -39,7 +39,7 @@ import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.co
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { domToPng, domToSvg } from "modern-screenshot";
+import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -103,11 +103,10 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
+      const pngBlob = await domToBlob(el, { quality: 0.9, scale: 10 });
 
-      if (svgURL) {
+      if (pngBlob) {
         setTimeout(async () => {
-          const pngBlob = await(await fetch(svgURL)).blob();
           // Blob을 File 객체로 변환하고 파일명 설정
           const pngFile = new File([pngBlob], "CongcamFourcut.png", {
             type: "image/png",

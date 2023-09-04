@@ -155,7 +155,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     navigate(`/message/post/${userid}`);
   };
 
-  console.log("배포됨");
+
 
   return (
     <CongMachineContainer>

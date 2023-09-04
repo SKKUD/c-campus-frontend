@@ -96,13 +96,12 @@ export const usePhotoPostApi = () => {
 
             img.onload = () => {
               const canvas = document.createElement("canvas");
-              canvas.width = img.width * 2;
-              canvas.height = img.height * 2;
+              canvas.width = img.width;
+              canvas.height = img.height;
 
               const ctx = canvas.getContext("2d");
 
               if (ctx) {
-                ctx.scale(2, 2);
                 ctx.drawImage(img, 0, 0);
 
                 canvas.toBlob((pngBlob) => {
@@ -139,7 +138,7 @@ export const usePhotoPostApi = () => {
           } catch {
             console.log("error");
           }
-        }, 1000);
+        }, 5000);
       }
     } catch (error) {
       console.error("오류 발생:", error);

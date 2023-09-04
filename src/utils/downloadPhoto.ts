@@ -2,7 +2,7 @@ import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
 export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;
-    const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
+    const svgURL = await domToSvg(el, { quality: 0.7, scale: 5 });
 
     if (svgURL) {
       setTimeout(() => {
@@ -11,13 +11,12 @@ export const ExportElementAsPNG = async () => {
 
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = img.width * 2;
-          canvas.height = img.height * 2;
+          canvas.width = img.width;
+          canvas.height = img.height;
 
           const ctx = canvas.getContext("2d");
 
           if (ctx) {
-            ctx.scale(2, 2);
             ctx.drawImage(img, 0, 0);
 
             canvas.toBlob((pngBlob) => {

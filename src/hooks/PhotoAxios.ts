@@ -86,7 +86,7 @@ export const usePhotoPostApi = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgURL = await domToSvg(el);
+      const svgURL = await domToSvg(el, { quality: 0.9 });
 
       if (svgURL) {
         setTimeout(() => {

@@ -104,35 +104,16 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgString = await domToSvg(el);
+      const BlobString = await domToBlob(el, { quality: 0.9 });
 
-      if (svgString) {
+      if (BlobString) {
         setTimeout(() => {
-          const img = new Image();
-          img.src = svgString;
+          // Blob을 File 객체로 변환하고 파일명 설정
+          const pngFile = new File([BlobString], "CongcamFourcut.png", {
+            type: "image/png",
+          });
 
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width * 2;
-            canvas.height = img.height * 2;
-            const ctx = canvas.getContext("2d");
-
-            if (ctx) {
-              ctx.scale(2, 2);
-              ctx.drawImage(img, 0, 0);
-
-              canvas.toBlob((pngBlob) => {
-                if (pngBlob) {
-                  // Blob을 File 객체로 변환하고 파일명 설정
-                  const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-                    type: "image/png",
-                  });
-
-                  setPhotoFile(pngFile);
-                }
-              }, "image/png");
-            }
-          };
+          setPhotoFile(pngFile);
         }, 5000);
       }
     } catch (error) {

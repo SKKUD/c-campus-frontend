@@ -38,7 +38,7 @@ export const ExportElementAsPNG = async () => {
             }, "image/png");
           }
         };
-      }, 1000);
+      }, 5000);
     }
   } catch (error) {
     console.error("Error exporting as PNG:", error);

@@ -1,40 +1,44 @@
 import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
-
 export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;
+    const svgURL = await domToSvg(el, { quality: 0.9, scale: 10 });
 
-    const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
+    if (svgURL) {
+      setTimeout(() => {
+        const img = new Image();
+        img.src = svgURL;
 
-    if (pngBlob) {
-      setTimeout(async () => {
-        const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-          type: "image/png",
-        });
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width * 5;
+          canvas.height = img.height * 5;
 
-        // pngFile을 사용하여 파일 업로드 또는 저장할 수 있습니다.
-        const data = {
-          title: "fourcut",
-          files: [pngFile],
+          const ctx = canvas.getContext("2d");
+
+          if (ctx) {
+            ctx.scale(5, 5);
+            ctx.drawImage(img, 0, 0);
+
+            canvas.toBlob((pngBlob) => {
+              if (pngBlob) {
+                // Blob을 File 객체로 변환하고 파일명 설정
+                const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+                  type: "image/png",
+                });
+
+                // 다운로드 링크 생성
+                const link = document.createElement("a");
+                link.download = "fourcut.png";
+                link.href = URL.createObjectURL(pngFile);
+
+                // 다운로드 시작
+                link.click();
+              }
+            }, "image/png");
+          }
         };
-
-        const blobUrl = URL.createObjectURL(data.files[0]);
-
-        const link = document.createElement("a");
-        link.download = "fourcut.png";
-        link.href = blobUrl;
-
-        // Append the html link element to the page
-        document.body.appendChild(link);
-
-        // Start the download
-        link.click();
-
-        // Clean up and remove the link after a delay (adjust the delay as needed)
-        setTimeout(() => {
-          document.body.removeChild(link);
-        }, 1000); // Remove the link after 1 second
-      }, 6000);
+      }, 1000);
     }
   } catch (error) {
     console.error("Error exporting as PNG:", error);

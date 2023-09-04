@@ -1,13 +1,18 @@
 import { error } from "console";
 import * as htmlToImage from "html-to-image";
 import { domToBlob } from "modern-screenshot";
+import { toPng } from "html-to-image";
 
 export const handleShare = async () => {
+  console.log("test v3 handleShare, toPng add cacheBust")
   const UA = navigator.userAgent.toLowerCase();
 
-  const pngBlob = await domToBlob(
-    document.querySelector(".congcamMessage") as HTMLElement
+  const pngBlob = await toPng(
+    document.querySelector(".congcamMessage") as HTMLElement, {
+      cacheBust: true,
+    }
   );
+
   if (pngBlob) {
     setTimeout(() => {
       try {

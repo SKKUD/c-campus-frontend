@@ -46,6 +46,7 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
                 onClick={() => {
                   navigate(`/photo/post/${userid}`);
                   setIsWriting(false);
+                  localStorage.clear();
                 }}
               />
             ) : (

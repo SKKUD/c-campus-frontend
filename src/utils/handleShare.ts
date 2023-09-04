@@ -1,14 +1,14 @@
 import { error } from "console";
 import * as htmlToImage from "html-to-image";
 import { domToBlob } from "modern-screenshot";
-import { toPng } from "html-to-image";
+import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v4");
+  console.log("v6, toBlob and cacheBust: true");
 
   const UA = navigator.userAgent.toLowerCase();
 
-  const pngBlob = await toPng(
+  const pngBlob = await toBlob(
     document.querySelector(".congcamMessage") as HTMLElement, {
       cacheBust: true,
     }

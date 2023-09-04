@@ -34,7 +34,7 @@ export const ExportElementAsPNG = async () => {
         setTimeout(() => {
           document.body.removeChild(link);
         }, 1000); // Remove the link after 1 second
-      }, 5000);
+      }, 6000);
     }
   } catch (error) {
     console.error("Error exporting as PNG:", error);

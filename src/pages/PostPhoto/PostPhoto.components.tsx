@@ -113,7 +113,7 @@ const PostPhoto = () => {
           });
 
           setPhotoFile(pngFile);
-        }, 1000);
+        }, 6000);
       }
     } catch (error) {
       console.error("오류 발생:", error);

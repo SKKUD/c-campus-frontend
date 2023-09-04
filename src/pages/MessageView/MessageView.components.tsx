@@ -14,9 +14,7 @@ import {
   MessageViewWebFourcutContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
-  GreenBtnContainer,
-  MessageViewContentFrameDiv,
-  MessageViewContentFrameDivContainer
+  GreenBtnContainer
 } from "./MessageView.styles";
 
 // import components
@@ -114,7 +112,6 @@ const MessageView = () => {
   };
 
   useEffect(() => {
-    console.log("test v2 handleShare, img -> div")
     // extract messageID
     const messageID: string[] = extractMessageID();
     SetMessageID(messageID[0]);
@@ -185,6 +182,7 @@ const MessageView = () => {
             <MessageViewPublicToggleContainer>
               <PublicToggle axiosisPublic={axiosMessage?.is_public} />
             </MessageViewPublicToggleContainer>
+
             {/* Title */}
             <MessageViewTitle className="MessageViewCenter">
               <div className="categoryText">{axiosMessage?.category}</div>
@@ -209,25 +207,19 @@ const MessageView = () => {
                       <>
                         {!axiosMessage?.is_quiz ? ( // 퀴즈가 있는지 없는지 확인
                           // 퀴즈가 없음 (그냥 사진 보여줌)
-                          <MessageViewContentFrameDivContainer>
-                            <MessageViewContentFrameDiv
-                              imageUrl={axiosMessage?.image_url}
-                            />
-                          </MessageViewContentFrameDivContainer>
-                          
+                          <MessageViewContentFrame
+                            src={axiosMessage?.image_url}
+                          />
                         ) : (
                           // 퀴즈가 있음 (퀴즈가 풀릴 때 보여줌)
                           <>
                             {isAnswer ? (
                               // 퀴즈가 풀림
-                              <MessageViewContentFrameDivContainer>
-                                <MessageViewContentFrameDiv
-                                  imageUrl={
-                                    axiosMessage?.image_url || defaultFrameIcon
-                                  }
-                                />
-                              </MessageViewContentFrameDivContainer>
-                              
+                              <MessageViewContentFrame
+                                src={
+                                  axiosMessage?.image_url || defaultFrameIcon
+                                }
+                              />
                             ) : (
                               // 퀴즈가 안 풀림
                               <MessageViewContentFrame src={lockedFourcut} />

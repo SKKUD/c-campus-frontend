@@ -23,7 +23,7 @@ export const setPhotoURL = async (
             PhotoTaken: true,
             PhotoURL: dataUrl,
           });
-        }, 250);
+        }, 500);
       })
       .catch((error) => {
         console.error("Error converting HTML to image:", error);

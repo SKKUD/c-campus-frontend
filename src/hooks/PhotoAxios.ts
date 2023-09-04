@@ -69,7 +69,7 @@ export const usePhotoPostApi = () => {
             .catch((error) => {
               console.log(error);
             });
-        }, 1000);
+        }, 6000);
       }
     } catch (error) {
       console.error("오류 발생:", error);

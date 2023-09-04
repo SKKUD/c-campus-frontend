@@ -158,6 +158,25 @@ export const MessageViewFourcutFrameContainer = styled.div`
   }
 `;
 
+export const MessageViewContentFrameDivContainer = styled.div`
+  width: 99px;
+  height: 254px;
+`;
+
+export const MessageViewContentFrameDiv = styled.div<{ imageUrl?: string }>`
+  height: 100%;
+  width: 100%;
+  background-image: url(${(props) => props.imageUrl});
+  background-repeat : no-repeat;
+  background-size : cover;
+  @media (min-width: 1024px) {
+    width: 205.814px;
+    height: 525px;
+    margin-top: 60px;
+    margin-right: 20px;
+  }
+`;
+
 export const MessageViewContentFrame = styled.img`
   width: 99px;
   height: 254px;

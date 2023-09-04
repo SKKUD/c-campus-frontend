@@ -99,26 +99,66 @@ const PostPhoto = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
+
   const setRecoilPhotoFile = async () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
+      const svgString = await domToSvg(el, { quality: 0.7, scale: 5 });
 
-      if (pngBlob) {
-        setTimeout(async () => {
-          // Blob을 File 객체로 변환하고 파일명 설정
-          const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-            type: "image/png",
-          });
+      if (svgString) {
+        setTimeout(() => {
+          const img = new Image();
+          img.src = svgString;
 
-          setPhotoFile(pngFile);
-        }, 6000);
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width * 5;
+            canvas.height = img.height * 5;
+            const ctx = canvas.getContext("2d");
+
+            if (ctx) {
+              ctx.scale(5, 5);
+              ctx.drawImage(img, 0, 0);
+
+              canvas.toBlob((pngBlob) => {
+                if (pngBlob) {
+                  // Blob을 File 객체로 변환하고 파일명 설정
+                  const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+                    type: "image/png",
+                  });
+
+                  setPhotoFile(pngFile);
+                }
+              }, "image/png");
+            }
+          };
+        }, 1000);
       }
     } catch (error) {
       console.error("오류 발생:", error);
     }
   };
+  // const setRecoilPhotoFile = async () => {
+  //   try {
+  //     const el = document.querySelector(".fourcutImage") as HTMLElement;
+
+  //     const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
+
+  //     if (pngBlob) {
+  //       setTimeout(async () => {
+  //         // Blob을 File 객체로 변환하고 파일명 설정
+  //         const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+  //           type: "image/png",
+  //         });
+
+  //         setPhotoFile(pngFile);
+  //       }, 6000);
+  //     }
+  //   } catch (error) {
+  //     console.error("오류 발생:", error);
+  //   }
+  // };
 
   const handleModalOpen = async () => {
     setModalOpen(true);

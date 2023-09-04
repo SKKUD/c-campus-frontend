@@ -98,7 +98,6 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
       setTopImg(topImg);
     }
   }, [checkAuth, messagenum, isPulled, messageNumber]);
-  
 
   const handleMessage = () => {
     // web에서 핸들링
@@ -147,7 +146,6 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   };
 
   const handleDisabledClick = () => {
-    console.log("clicked");
     // 모달 보여주기
     setOpen(true);
   };
@@ -157,7 +155,8 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     navigate(`/message/post/${userid}`);
   };
 
-  console.log(String(checkAuth) === currentID);
+  console.log("배포됨");
+
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>

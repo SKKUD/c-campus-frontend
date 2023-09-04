@@ -40,6 +40,7 @@ import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
 import { toPng, toSvg } from "html-to-image";
+import { domToBlob } from "modern-screenshot";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -100,39 +101,60 @@ const PostPhoto = () => {
   const setPhotoFile = useSetRecoilState(PhotoFile);
   // isWriting일때 사진 처리
 
+  // const setRecoilPhotoFile = async () => {
+  //   try {
+  //     const el = document.querySelector(".fourcutImage") as HTMLElement;
+
+  //     const svgString = await toSvg(el);
+
+  //     if (svgString) {
+  //       setTimeout(() => {
+  //         const img = new Image();
+  //         img.src = svgString;
+
+  //         img.onload = () => {
+  //           const canvas = document.createElement("canvas");
+  //           canvas.width = img.width;
+  //           canvas.height = img.height;
+  //           const ctx = canvas.getContext("2d");
+
+  //           if (ctx) {
+  //             ctx.drawImage(img, 0, 0);
+
+  //             canvas.toBlob((pngBlob) => {
+  //               if (pngBlob) {
+  //                 // Blob을 File 객체로 변환하고 파일명 설정
+  //                 const pngFile = new File([pngBlob], "CongcamFourcut.png", {
+  //                   type: "image/png",
+  //                 });
+
+  //                 setPhotoFile(pngFile);
+  //               }
+  //             }, "image/png");
+  //           }
+  //         };
+  //       }, 250);
+  //     }
+  //   } catch (error) {
+  //     console.error("오류 발생:", error);
+  //   }
+  // };
+
   const setRecoilPhotoFile = async () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const svgString = await toSvg(el);
+      const BlobString = await domToBlob(el);
 
-      if (svgString) {
+      if (BlobString) {
         setTimeout(() => {
-          const img = new Image();
-          img.src = svgString;
+          // Blob을 File 객체로 변환하고 파일명 설정
+          const pngFile = new File([BlobString], "CongcamFourcut.png", {
+            type: "image/png",
+          });
 
-          img.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-
-            if (ctx) {
-              ctx.drawImage(img, 0, 0);
-
-              canvas.toBlob((pngBlob) => {
-                if (pngBlob) {
-                  // Blob을 File 객체로 변환하고 파일명 설정
-                  const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-                    type: "image/png",
-                  });
-
-                  setPhotoFile(pngFile);
-                }
-              }, "image/png");
-            }
-          };
-        }, 250);
+          setPhotoFile(pngFile);
+        }, 1000);
       }
     } catch (error) {
       console.error("오류 발생:", error);

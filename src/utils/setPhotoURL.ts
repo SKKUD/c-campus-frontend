@@ -15,8 +15,6 @@ export const setPhotoURL = async (
   if (el) {
     await domToPng(el, {
       style: { background: "black" },
-      width: 201,
-      height: 513,
     })
       .then((dataUrl) => {
         setTimeout(() => {

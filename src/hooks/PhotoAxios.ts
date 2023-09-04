@@ -86,7 +86,12 @@ export const usePhotoPostApi = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const BlobString = await domToBlob(el, { quality: 0.9, scale: 5 });
+      const BlobString = await domToBlob(el, {
+        quality: 0.9,
+        scale: 2,
+        width: 402,
+        height: 1026,
+      });
 
       if (BlobString) {
         setTimeout(() => {

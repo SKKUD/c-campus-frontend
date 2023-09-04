@@ -92,7 +92,6 @@ export const usePhotoPostApi = () => {
         style: {
           width: "1606px",
           height: "4096px",
-          shapeRendering: "crispEdges",
         },
       });
 

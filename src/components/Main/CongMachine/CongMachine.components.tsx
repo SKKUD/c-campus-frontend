@@ -157,6 +157,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     navigate(`/message/post/${userid}`);
   };
 
+  console.log(String(checkAuth) === currentID);
   return (
     <CongMachineContainer>
       <CongMachineContentContainer>
@@ -166,34 +167,27 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
         {/* <CongMachineProfileContainer>Hello</CongMachineProfileContainer> */}
         {match1024 ? ( // 웹일 때
           <ButtonGroupContainer>
-            {checkAuth && userAuth === currentID ? (
+            {checkAuth && String(checkAuth) === currentID ? (
               <>
-                {
-                  (messagenum < 5) ? (
-                    <DisabledGreenBtn
-                      content={"쪽지 뽑기"}
-                      onClick={handleDisabledClick}
-                    />
-                  ) : (
-                    <GreenBtn
-                      content={"쪽지 뽑기"}
-                      onClick={handleMessage}
-                    />
-                  )
-                }
-                {
-                  modalContent === "" ? (
-                    <CantPullMessageModal 
-                      modalOpen={open}
-                      handleModalClose={() => setOpen(false)}
-                    />
-                  ) : (
-                    <PullMessageModal
-                      modalOpen={open}
-                      handleModalClose={() => setOpen(false)}
-                    />
-                  )
-                }
+                {messagenum < 5 ? (
+                  <DisabledGreenBtn
+                    content={"쪽지 뽑기"}
+                    onClick={handleDisabledClick}
+                  />
+                ) : (
+                  <GreenBtn content={"쪽지 뽑기"} onClick={handleMessage} />
+                )}
+                {modalContent === "" ? (
+                  <CantPullMessageModal
+                    modalOpen={open}
+                    handleModalClose={() => setOpen(false)}
+                  />
+                ) : (
+                  <PullMessageModal
+                    modalOpen={open}
+                    handleModalClose={() => setOpen(false)}
+                  />
+                )}
               </>
             ) : (
               <GreenBtn content={"쪽지 쓰기"} onClick={handleWriteMessage} />

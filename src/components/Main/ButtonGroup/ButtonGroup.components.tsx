@@ -98,6 +98,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   };
   const takePhotos = () => {
     navigate(`/photo/post/${userid}`);
+    window.location.reload();
   };
   const movetoNoteBox = () => {
     navigate(`/message/${userid}`);
@@ -127,36 +128,29 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     <ButtonGroupContainer>
       {
         // 현재 url의 /message/${id} 뽑아와서 비교하는 코드로
-        checkAuth && userAuth === currentID ? (
-            <>
-              {!slide ? (
-                <>
-                {
-                  (messagenum < 5) ? (
-                    <DisabledGreenBtn
-                      content={"쪽지 뽑기"}
-                      onClick={handleDisabledClick}
-                    />
-                  ) : (
-                    <GreenBtn
-                      content={"쪽지 뽑기"}
-                      onClick={pickNotes}
-                    />
-                  )
-                }
-                {
-                  modalContent === "" ? (
-                    <CantPullMessageModal 
-                      modalOpen={open}
-                      handleModalClose={() => setOpen(false)}
-                    />
-                  ) : (
-                    <PullMessageModal
-                      modalOpen={open}
-                      handleModalClose={() => setOpen(false)}
-                    />
-                  )
-                }
+        checkAuth && String(checkAuth) === currentID ? (
+          <>
+            {!slide ? (
+              <>
+                {messagenum < 5 ? (
+                  <DisabledGreenBtn
+                    content={"쪽지 뽑기"}
+                    onClick={handleDisabledClick}
+                  />
+                ) : (
+                  <GreenBtn content={"쪽지 뽑기"} onClick={pickNotes} />
+                )}
+                {modalContent === "" ? (
+                  <CantPullMessageModal
+                    modalOpen={open}
+                    handleModalClose={() => setOpen(false)}
+                  />
+                ) : (
+                  <PullMessageModal
+                    modalOpen={open}
+                    handleModalClose={() => setOpen(false)}
+                  />
+                )}
               </>
             ) : (
               <GreenBtn

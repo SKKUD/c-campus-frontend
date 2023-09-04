@@ -39,19 +39,17 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
         <MachinePhotoImage src={congcam_bf_gif} />
         {match1024 ? (
           <ButtonGroupContainer>
-            {
-              (checkAuth && userAuth === currentID) ? (
-                <GreenBtn
-                  content="콩캠네컷 찍기"
-                  onClick={() => {
-                            navigate(`/photo/post/${userid}`);
-                            window.location.reload();
-                          }}
-                />
-              ) : (
-                <></>
-              )
-            }
+            {checkAuth && String(checkAuth) === currentID ? (
+              <GreenBtn
+                content="콩캠네컷 찍기"
+                onClick={() => {
+                  navigate(`/photo/post/${userid}`);
+                  window.location.reload();
+                }}
+              />
+            ) : (
+              <></>
+            )}
           </ButtonGroupContainer>
         ) : (
           <ButtonGroup slide={slide} />

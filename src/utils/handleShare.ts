@@ -4,33 +4,15 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v8, toBlob and cacheBust: true await many times edit className");
+  console.log("v9, toBlob and cacheBust: true await many times exclude");
 
   const UA = navigator.userAgent.toLowerCase();
 
-  await toBlob(
+  const pngBlob = await domToBlob(
     document.querySelector(".congcamMessage") as HTMLElement, {
-      cacheBust: true,
-    }
-  );
-  await toBlob(
-    document.querySelector(".congcamMessage") as HTMLElement, {
-      cacheBust: true,
-    }
-  );
-  await toBlob(
-    document.querySelector(".congcamMessage") as HTMLElement, {
-      cacheBust: true,
-    }
-  );
-  await toBlob(
-    document.querySelector(".congcamMessage") as HTMLElement, {
-      cacheBust: true,
-    }
-  );
-  const pngBlob = await toBlob(
-    document.querySelector(".congcamMessage") as HTMLElement, {
-      cacheBust: true,
+      fetch: {
+        bypassingCache: true,
+      }
     }
   );
   
@@ -55,6 +37,6 @@ export const handleShare = async () => {
       } catch {
         console.log("error");
       }
-    }, 5000);
+    }, 1000);
   }
 };

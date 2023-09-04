@@ -104,12 +104,12 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const pngString = await toPng(el);
+      const svgString = await toSvg(el);
 
-      if (pngString) {
+      if (svgString) {
         setTimeout(() => {
           const img = new Image();
-          img.src = pngString;
+          img.src = svgString;
 
           img.onload = () => {
             const canvas = document.createElement("canvas");
@@ -132,7 +132,7 @@ const PostPhoto = () => {
               }, "image/png");
             }
           };
-        }, 10000);
+        }, 250);
       }
     } catch (error) {
       console.error("오류 발생:", error);

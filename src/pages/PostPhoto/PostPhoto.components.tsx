@@ -84,9 +84,7 @@ const PostPhoto = () => {
   const handleSubmit = async () => {
     if (
       window.confirm(
-        match1024
-          ? "사진을 저장하시겠습니까? 저장 후에 메인 페이지로 이동합니다."
-          : "사진을 공유하시겠습니까?"
+        "사진을 저장하시겠습니까? 저장 후에 보관함으로 이동합니다. 파일이 저장될 때까지 5초만 기다려주세요!"
       )
     ) {
       await ExportElementAsPNG();
@@ -104,7 +102,7 @@ const PostPhoto = () => {
     try {
       const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-      const BlobString = await domToBlob(el, { quality: 0.9 });
+      const BlobString = await domToBlob(el, { quality: 0.9, scale: 5 });
 
       if (BlobString) {
         setTimeout(() => {

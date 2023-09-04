@@ -3,7 +3,7 @@ export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-    const pngBlob = await domToBlob(el, { quality: 0.9 });
+    const pngBlob = await domToBlob(el, { quality: 0.9, scale: 5 });
 
     if (pngBlob) {
       setTimeout(() => {

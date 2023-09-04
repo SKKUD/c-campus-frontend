@@ -1,4 +1,5 @@
 import { toBlob, toSvg } from "html-to-image";
+import { domToBlob } from "modern-screenshot";
 
 // 찍고 나서 로컬에 저장
 // export const ExportElementAsPNG = async () => {
@@ -60,7 +61,7 @@ export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;
 
-    const pngBlob = await toBlob(el);
+    const pngBlob = await domToBlob(el);
 
     if (pngBlob) {
       setTimeout(() => {
@@ -92,7 +93,6 @@ export const ExportElementAsPNG = async () => {
           document.body.removeChild(link);
         }, 1000); // Remove the link after 1 second
       }, 5000);
-     
     }
   } catch (error) {
     console.error("Error exporting as PNG:", error);

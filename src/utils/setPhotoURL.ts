@@ -1,4 +1,5 @@
 import { toPng, toSvg } from "html-to-image";
+import { domToPng, domToSvg } from "modern-screenshot";
 import { Ref } from "react";
 
 interface PhotoData {
@@ -12,7 +13,7 @@ export const setPhotoURL = async (
 ) => {
   const el = document.querySelector(".fourcutImage") as HTMLElement;
   if (el) {
-    await toPng(el, {
+    await domToPng(el, {
       style: { background: "black" },
       width: 201,
       height: 513,
@@ -23,7 +24,7 @@ export const setPhotoURL = async (
             PhotoTaken: true,
             PhotoURL: dataUrl,
           });
-        }, 10000);
+        }, 250);
       })
       .catch((error) => {
         console.error("Error converting HTML to image:", error);

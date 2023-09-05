@@ -87,7 +87,9 @@ const PostPhoto = () => {
       await ExportElementAsPNG();
       await postFourcutPhoto();
 
-      navigate(`/photo/${userid}`);
+      setTimeout(() => {
+        navigate(`/photo/${userid}`);
+      }, 5000);
     }
   };
 

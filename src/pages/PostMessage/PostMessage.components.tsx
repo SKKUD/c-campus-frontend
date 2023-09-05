@@ -63,7 +63,7 @@ const PostMessage = () => {
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
-  const Quiz = useRecoilValue(QuizState);
+  const [Quiz, setQuiz] = useRecoilState(QuizState);
   const [Photo, setPhoto] = useRecoilState(PhotoState);
   const setPhotofile = useSetRecoilState(PhotoFile);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
@@ -210,6 +210,11 @@ const PostMessage = () => {
       setPhoto({
         PhotoTaken: false,
         PhotoURL: "",
+      });
+      setQuiz({
+        QuizGiven: false,
+        QuizContent: "",
+        QuizAnswer: "",
       });
       setPhotofile(null);
       // 완료 모달 open

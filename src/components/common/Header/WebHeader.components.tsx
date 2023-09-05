@@ -17,7 +17,9 @@ import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 const WebHeader = () => {
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android|CriOS).)*safari/i.test(
+    navigator.userAgent
+  );
 
   const navigate = useNavigate();
   const currentID = useExtractID();

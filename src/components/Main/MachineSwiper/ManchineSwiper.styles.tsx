@@ -15,7 +15,6 @@ export const SwiperContainer = styled.div`
 export const SwiperSlideCard = styled.div`
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;

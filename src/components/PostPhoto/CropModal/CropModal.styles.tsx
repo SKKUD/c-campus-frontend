@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 export const CropModaContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  padding: 60px 0 10vh;
+  padding: 60px 0 15vh;
   background-color: #000;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,7 @@ export const CropModaContainer = styled.div`
 
 export const ButtonWrap = styled.div`
   width: 100vw;
+  max-width: 600px;
   height: 72px;
   position: relative;
 `;

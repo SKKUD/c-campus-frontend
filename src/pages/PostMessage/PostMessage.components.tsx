@@ -34,7 +34,7 @@ import takepicIcon from "../../assets/images/takepic_mobile_icon.png";
 import MakeQuiz from "../../components/PostMessage/modal/MakeQuiz/MakeQuiz.components";
 import SendMessage from "../../components/PostMessage/modal/SendMessage/SendMessage.components";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   IsWritingMessage,
@@ -242,7 +242,9 @@ const PostMessage = () => {
 
   // useEffect for naming
   useEffect(() => {
-    SetSubjectData(MakeQuestions(profile.nickname));
+    if (userid === profile.userId) {
+      SetSubjectData(MakeQuestions(profile.nickname));
+    }
   }, [profile]);
 
   useEffect(() => {

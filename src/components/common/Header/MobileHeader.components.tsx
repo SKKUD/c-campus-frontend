@@ -20,7 +20,8 @@ import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 const MobileHeader: FC = () => {
-  const userid = useExtractID();
+  const UA = navigator.userAgent.toLowerCase();
+  const isChrome = UA.includes("chrome");
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
@@ -41,7 +42,7 @@ const MobileHeader: FC = () => {
     }
     window.location.reload();
   };
-  
+
   // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,33 +52,39 @@ const MobileHeader: FC = () => {
     setAnchorEl(null);
   };
   const PopoverOpen = Boolean(anchorEl);
+  console.log(isChrome);
 
   return (
     <HeaderContainer>
-      {pathname === "/main" ? (
-        <StyledIconButton onClick={handleModalOpen}>
-          <InfoIcon src={infoIcon} />
-        </StyledIconButton>
+      {!isChrome ? (
+        <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
       ) : (
-        <StyledIconButton onClick={handleGoBack}>
-          <BackIcon src={backIcon} />
-        </StyledIconButton>
+        <>
+          {pathname === "/main" ? (
+            <StyledIconButton onClick={handleModalOpen}>
+              <InfoIcon src={infoIcon} />
+            </StyledIconButton>
+          ) : (
+            <StyledIconButton onClick={handleGoBack}>
+              <BackIcon src={backIcon} />
+            </StyledIconButton>
+          )}
+
+          <HeaderInfoModal
+            modalOpen={modalOpen}
+            handleModalClose={handleModalClose}
+          />
+          <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
+          <StyledIconButton onClick={handleMenuClick}>
+            <MenuIcon src={menuIcon} />
+          </StyledIconButton>
+          <HeaderPopover
+            open={PopoverOpen}
+            anchorEl={anchorEl}
+            handleClose={handlePopoverClose}
+          />
+        </>
       )}
-      <HeaderInfoModal
-        modalOpen={modalOpen}
-        handleModalClose={handleModalClose}
-      />
-
-      <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
-
-      <StyledIconButton onClick={handleMenuClick}>
-        <MenuIcon src={menuIcon} />
-      </StyledIconButton>
-      <HeaderPopover
-        open={PopoverOpen}
-        anchorEl={anchorEl}
-        handleClose={handlePopoverClose}
-      />
     </HeaderContainer>
   );
 };

@@ -17,7 +17,9 @@ import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 const WebHeader = () => {
-  const profileUser = useRecoilValue(UserState);
+  const UA = navigator.userAgent.toLowerCase();
+  const isChrome = UA.includes("chrome");
+
   const navigate = useNavigate();
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
@@ -41,32 +43,40 @@ const WebHeader = () => {
   const handleMakeAccount = () => {
     window.location.href = kakaoURL;
   };
-  
+
   return (
     <HeaderContainer>
-      <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
-      <WebButtonWrap>
-        <SwipeButtonGroup>
-          {
-            // 로그인이 되어있어야 switch 가능 | 로그인한 auth와 현재 url ID 비교
-            checkAuth && String(checkAuth) === currentID ? (
-              <WebHeaderSwitch />
-            ) : (
-              <></>
-            )
-          }
-        </SwipeButtonGroup>
-        {
-          // 로그인만 되어있는지만 여부 체크
-          checkAuth ? (
-            <WebHeaderButton onClick={handleLogout}>로그아웃</WebHeaderButton>
-          ) : (
-            <WebHeaderButton onClick={handleMakeAccount}>
-              로그인
-            </WebHeaderButton>
-          )
-        }
-      </WebButtonWrap>
+      {!isChrome ? (
+        <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
+      ) : (
+        <>
+          <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
+          <WebButtonWrap>
+            <SwipeButtonGroup>
+              {
+                // 로그인이 되어있어야 switch 가능 | 로그인한 auth와 현재 url ID 비교
+                checkAuth && String(checkAuth) === currentID ? (
+                  <WebHeaderSwitch />
+                ) : (
+                  <></>
+                )
+              }
+            </SwipeButtonGroup>
+            {
+              // 로그인만 되어있는지만 여부 체크
+              checkAuth ? (
+                <WebHeaderButton onClick={handleLogout}>
+                  로그아웃
+                </WebHeaderButton>
+              ) : (
+                <WebHeaderButton onClick={handleMakeAccount}>
+                  로그인
+                </WebHeaderButton>
+              )
+            }
+          </WebButtonWrap>
+        </>
+      )}
     </HeaderContainer>
   );
 };

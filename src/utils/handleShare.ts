@@ -4,7 +4,7 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v12, erase setTimeOut");
+  console.log("v13, erase setTimeOut padding more");
 
   const UA = navigator.userAgent.toLowerCase();
 

@@ -14,7 +14,8 @@ import {
   MessageViewWebFourcutContainer,
   MessageViewContentMainText,
   MessageViewContentSender,
-  GreenBtnContainer
+  GreenBtnContainer,
+  MessageViewSpeechBubble
 } from "./MessageView.styles";
 
 // import components
@@ -87,6 +88,9 @@ const MessageView = () => {
 
   // state for answer
   const [isAnswer, SetIsAnswer] = useState<boolean>(false);
+  
+  // state for onClick
+  const [onClickShare, SetOnClickShare] = useState<boolean>(false);
 
   // mui-modal function
   const handleOpen = () => {
@@ -110,6 +114,13 @@ const MessageView = () => {
 
     return returnID;
   };
+
+  const handleOnClickShare = () => {
+    SetOnClickShare(true);
+    // window.location.reload();
+    handleShare();
+
+  }
 
   useEffect(() => {
     // extract messageID
@@ -275,9 +286,19 @@ const MessageView = () => {
                 <>
                 </>
               ) : (
-                <GreenBtnContainer className="MessageViewCenter">
-                  <GreenBtn content="공유하기" onClick={handleShare} />
-                </GreenBtnContainer>
+                <>
+                  {
+                    onClickShare ? (
+                      <GreenBtnContainer className="MessageViewCenter">
+                        <GreenBtn content="공유 진행 중.." disabled={true}/>
+                      </GreenBtnContainer>
+                    ) : (
+                      <GreenBtnContainer className="MessageViewCenter">
+                        <GreenBtn content="공유하기" onClick={handleOnClickShare} />
+                      </GreenBtnContainer>
+                    )
+                  }
+                </>
               )
             }
           </MessageViewMobileContainer>

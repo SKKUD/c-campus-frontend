@@ -1,4 +1,4 @@
-import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
+import { domToBlob } from "modern-screenshot";
 export const ExportElementAsPNG = async () => {
   try {
     const el = document.querySelector(".fourcutImage") as HTMLElement;

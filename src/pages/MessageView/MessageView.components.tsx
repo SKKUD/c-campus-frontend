@@ -25,16 +25,12 @@ import lockedFourcut from "../../assets/images/4cut_lock.png";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 
 // import mui for modal
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
 import { useMediaQuery } from "@mui/material";
 
 // 
 import axios from "axios";
 
 // auth
-import { UserAuth } from "../../recoil/recoil";
-import { useRecoilState } from "recoil";
 import { useAuthCheckApi, useUserProfileGetApi } from "../../hooks/LoginAxios";
 
 // import modal
@@ -42,12 +38,7 @@ import ShowImg from "../../components/MessageView/modal/ShowImg/ShowImg.componen
 import ModalLayout from "../../components/MessageView/ModalLayout/ModalLayout.components";
 import { handleShare } from "../../utils/handleShare";
 
-// interface
-interface IMessageData {
-  status: number;
-  message: string;
-  data: IData;
-}
+
 
 // interface
 interface IData {
@@ -82,7 +73,7 @@ const MessageView = () => {
   const [modalContent, SetModalContent] = useState<string>("");
 
   // ID state
-  const [stateMessageID, SetMessageID] = useState<string>("");
+  const [, SetMessageID] = useState<string>("");
   const [currentID, SetCurrentID] = useState<string>("");
 
   // state for answer
@@ -118,7 +109,7 @@ const MessageView = () => {
     SetCurrentID(messageID[1]);
 
     // axios get
-    const response = axios
+    axios
       .get(
         `${process.env.REACT_APP_BACKEND_SERVER}/users/${messageID[1]}/messages/${messageID[0]}`,
         { withCredentials: true }

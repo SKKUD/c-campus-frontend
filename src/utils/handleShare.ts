@@ -1,7 +1,4 @@
-import { error } from "console";
-import * as htmlToImage from "html-to-image";
 import { domToBlob } from "modern-screenshot";
-import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
   const pngBlob = await domToBlob(

@@ -21,18 +21,15 @@ import {
   CongMachineContainer,
   CongMachineContentContainer,
   MachineImage,
-  CongMachineProfileContainer,
 } from "./CongMachine.styles";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import DisabledGreenBtn from "../../common/Buttons/DisabledGreenBtn.components";
 
-import { Ground } from "../../WebMainPage/WebMainPage.styles";
-
 // import for recoil
-import { UserAuth, UserState } from "../../../recoil/recoil";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { UserAuth } from "../../../recoil/recoil";
+import { useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 import Profile from "../../common/Profile/Profile.components";
@@ -40,11 +37,10 @@ import Profile from "../../common/Profile/Profile.components";
 // import for messagenum
 import { CheckRemainCount } from "../../../hooks/PullMessage";
 
-// 
+//
 import axios from "axios";
 import PullMessageModal from "../../PullMessageModal/PullMessageModal.components";
 import CantPullMessageModal from "../../CantPullMessageModal/CantPullMessageModal.components";
-
 
 interface CongMachineProps {
   slide?: number;
@@ -57,7 +53,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const [topimgsrc, setTopImg] = useState(cong1_top_gif);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const [messagenum, SetMessageNum] = useState<number>(0);
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const userAuth = useRecoilValue(UserAuth);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
   const messageNumber = CheckRemainCount(userid);
@@ -97,14 +93,14 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
       setTopImg(topImg);
     }
-  }, [checkAuth, messagenum, isPulled, messageNumber]);
+  }, [userid, checkAuth, messagenum, isPulled, messageNumber]);
 
   const handleMessage = () => {
     // web에서 핸들링
     // pull
     if (messagenum >= 5) {
       SetModalContent("opened");
-      const res = axios
+      axios
         .get(
           `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`,
           { withCredentials: true }
@@ -154,7 +150,6 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
     // go to message write
     navigate(`/message/post/${userid}`);
   };
-
 
   return (
     <CongMachineContainer>

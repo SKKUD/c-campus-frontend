@@ -14,9 +14,9 @@ import CongMachine from "../../components/Main/CongMachine/CongMachine.component
 import { MainEmpty } from "../Main/Main.styles";
 
 // import for recoil
-import { UserAuth, UserState } from "../../recoil/recoil";
+import { UserAuth } from "../../recoil/recoil";
 import { useRecoilState } from "recoil";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthCheckApi, useUserProfileGetApi } from "../../hooks/LoginAxios";
 import { useExtractID } from "../../hooks/useExtractID";
 

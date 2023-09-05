@@ -2,26 +2,17 @@ import * as React from "react";
 import Modal from "@mui/material/Modal";
 import ModalLayout from "../../PostMessage/ModalLayout/ModalLayout.components";
 import {
-  CloseModalBtn,
   PhotoDeleteBtn,
   PhotoModalButtonGroup,
   PhotoModalContainer,
   PhotoModalIMG,
   PhotoShareBtn,
   PhotoDeleteConfirmBtn,
-  ChildModalContainer,
 } from "./PhotoModal.styles";
-import closeIcon from "../../../assets/images/close_icon.png";
 import deleteIcon from "../../../assets/images/delete_icon.png";
 import { usePhotoDeleteApi } from "../../../hooks/PhotoAxios";
 
 import axios from "axios";
-import AWS from 'aws-sdk';
-import defaultFourcut from "../../../assets/images/default_fourcut.png";
-
-import html2canvas from 'html2canvas';
-import saveAs from "file-saver";
-import { useRef } from "react";
 
 interface PhotoModalProps {
   open: boolean;
@@ -30,7 +21,6 @@ interface PhotoModalProps {
 }
 
 export default function PhotoModal({ open, setOpen, imgSrc }: PhotoModalProps) {
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -77,9 +67,7 @@ function ChildModal({ img }: ChildModalProps) {
 
   const saveImageLocally = async () => {
     // extract ID
-    const IMG_ID: string = img.slice(55);
-
-    const res = await axios
+    axios
       .get(img, {
         responseType: "blob",
         headers: {
@@ -111,12 +99,13 @@ function ChildModal({ img }: ChildModalProps) {
       });
   };
 
-
   return (
     <>
       <PhotoModalButtonGroup>
         <PhotoDeleteBtn src={deleteIcon} onClick={handleOpen} />
-        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>저장하기</PhotoShareBtn>
+        <PhotoShareBtn variant="contained" onClick={saveImageLocally}>
+          저장하기
+        </PhotoShareBtn>
       </PhotoModalButtonGroup>
       <Modal
         open={open}

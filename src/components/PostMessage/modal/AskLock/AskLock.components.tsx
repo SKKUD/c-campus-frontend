@@ -8,8 +8,6 @@ import {
 } from "./AskLock.styles";
 import MakeQuiz from "../MakeQuiz/MakeQuiz.components";
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../../../recoil/recoil";
 import { useExtractID } from "../../../../hooks/useExtractID";
 
 interface AskLockProps {

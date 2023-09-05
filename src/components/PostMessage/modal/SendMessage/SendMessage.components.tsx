@@ -1,8 +1,6 @@
 import {
   SendMessageContainer,
   SendMessageButtonContainer,
-  SendMessageQuitButtonContainer,
-  SendMessageQuitButton,
   SendMessageContent,
 } from "./SendMessage.styles";
 

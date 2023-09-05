@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { useNavigate } from "react-router";
 import {
   AskPhotopostButtonContainer,
   AskPhotopostContent,
@@ -8,9 +7,6 @@ import {
 } from "./AskPhotopost.styles";
 import MakeQuiz from "../MakeQuiz/MakeQuiz.components";
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../../../recoil/recoil";
-import { useExtractID } from "../../../../hooks/useExtractID";
 
 interface AskPhotopostProps {
   handleModalClose: () => void;
@@ -25,9 +21,7 @@ const AskPhotopost: FC<AskPhotopostProps> = ({
   setModalContent,
   submitHandler,
 }) => {
-  const userid = useExtractID();
-  const [IsMakingQuiz, setIsMakingQuiz] = useState(false);
-  const navigate = useNavigate();
+  const [IsMakingQuiz] = useState(false);
   const handleSubmit = () => {
     setModalContent("");
     // submit 함수

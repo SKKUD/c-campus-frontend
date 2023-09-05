@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 
-import CloseIcon from "@mui/icons-material/Close";
 import { Button } from "@mui/material";
 
 export const AskPhotopostContainer = styled.div`

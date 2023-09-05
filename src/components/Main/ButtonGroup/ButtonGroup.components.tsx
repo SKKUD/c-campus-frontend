@@ -1,12 +1,12 @@
 import { ButtonGroupContainer } from "./ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import WhiteBtn from "../../common/Buttons/WhiteBtn.components";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { IsWritingMessage, UserAuth, UserState } from "../../../recoil/recoil";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { IsWritingMessage, UserAuth } from "../../../recoil/recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
@@ -16,8 +16,6 @@ import cong5_top_come_out_gif from "../../../assets/animations/cong5_top_af.gif"
 import cong10_top_come_out_gif from "../../../assets/animations/cong10_top_af.gif";
 import cong15_top_come_out_gif from "../../../assets/animations/cong15_top_af.gif";
 import cong30_top_come_out_gif from "../../../assets/animations/cong30_top_af.gif";
-
-import { PullMessage } from "../../../hooks/PullMessage";
 
 import axios from "axios";
 import DisabledGreenBtn from "../../common/Buttons/DisabledGreenBtn.components";
@@ -42,7 +40,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   const [open, setOpen] = useState(false);
   const userid = useExtractID();
   const navigate = useNavigate();
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const userAuth = useRecoilValue(UserAuth);
   const currentID = useExtractID();
   const checkAuth = useAuthCheckApi();
   const [modalContent, SetModalContent] = useState<string>("");
@@ -52,7 +50,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     // pull
     if (messagenum >= 5) {
       SetModalContent("opened");
-      const res = axios
+      axios
         .get(
           `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`,
           { withCredentials: true }
@@ -119,11 +117,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     // 모달 보여주기
     setOpen(true);
   };
-
-  useEffect(() => {
-    if (messagenum >= 5) {
-    }
-  }, []);
 
   return (
     <ButtonGroupContainer>

@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import CloseIcon from "@mui/icons-material/Close";
-import { IconButton } from "@mui/material";
 
 export const ModalContainer = styled.div`
   position: absolute;

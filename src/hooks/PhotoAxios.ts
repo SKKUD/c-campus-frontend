@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
-import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
+import { domToBlob } from "modern-screenshot";
 
 export const usePhotoGetApi = () => {
   const currentID = useExtractID();
@@ -10,7 +10,7 @@ export const usePhotoGetApi = () => {
   useEffect(() => {
     if (currentID) {
       const fetchEvents = async () => {
-        const res = await axios
+        await axios
           .get(
             process.env.REACT_APP_BACKEND_SERVER + `/users/${currentID}/photos`,
             { withCredentials: true }

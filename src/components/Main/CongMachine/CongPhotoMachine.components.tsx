@@ -6,7 +6,6 @@ import {
   CongMachineContentContainer,
   MachinePhotoImage,
 } from "./CongMachine.styles";
-import congcam_af_gif from "../../../assets/animations/congcam_af.gif";
 import congcam_bf_gif from "../../../assets/animations/congcam_bf.gif";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
@@ -16,8 +15,8 @@ import Profile from "../../common/Profile/Profile.components";
 import { CheckRemainCount } from "../../../hooks/PullMessage";
 
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { IsWritingMessage, UserAuth } from "../../../recoil/recoil";
+import { useSetRecoilState } from "recoil";
+import { IsWritingMessage } from "../../../recoil/recoil";
 
 interface CongPhotoMachineProps {
   slide?: number;
@@ -28,7 +27,6 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
   const [checkAuth] = useAuthCheckApi();
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const messageNumber = CheckRemainCount(userid);
   const setIsWriting = useSetRecoilState(IsWritingMessage);

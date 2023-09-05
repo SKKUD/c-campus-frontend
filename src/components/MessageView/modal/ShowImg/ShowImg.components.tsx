@@ -8,21 +8,17 @@ import {
 } from "./ShowImg.styles";
 
 import WhiteBtn from "../../../common/Buttons/WhiteBtn.components";
-import defaultFrame from "../../../../assets/images/defaultFourcut.png"
-import { useMediaQuery } from "@mui/material";
-import { useEffect } from "react";
+import defaultFrame from "../../../../assets/images/defaultFourcut.png";
 import axios from "axios";
 
 interface IShowImg {
   handleClose: () => void;
-  image_url: string,
+  image_url: string;
 }
 
-const ShowImg = ({handleClose, image_url}: IShowImg) => {
-  const match1024 = useMediaQuery("(min-width:1024px)");
-  
+const ShowImg = ({ handleClose, image_url }: IShowImg) => {
   const saveImageLocally = async () => {
-    const res = await axios
+    await axios
       .get(image_url, {
         responseType: "blob",
         headers: {
@@ -54,7 +50,6 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
       });
   };
 
-
   return (
     <ShowImgContainer>
       <ShowImgQuitButtonContainer>
@@ -68,6 +63,6 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
       </ShowImgButtonContainer>
     </ShowImgContainer>
   );
-}
+};
 
 export default ShowImg;

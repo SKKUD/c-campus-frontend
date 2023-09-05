@@ -41,6 +41,7 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
 
   const handleGoMyaccount = () => {
     navigate(`/${checkAuth}`);
+    window.location.reload();
   };
 
   return (

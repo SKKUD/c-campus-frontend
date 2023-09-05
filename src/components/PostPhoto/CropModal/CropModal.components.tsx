@@ -57,7 +57,7 @@ const CropModal: React.FC<CaptureProps> = ({
           src={inputImage ? inputImage : ""}
           viewMode={1}
           width={800}
-          height={500}
+          height={480}
           background={false}
           responsive
           autoCropArea={1}

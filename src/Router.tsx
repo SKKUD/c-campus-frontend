@@ -23,7 +23,9 @@ declare global {
 }
 
 const Router = () => {
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android|CriOS).)*safari/i.test(
+    navigator.userAgent
+  );
 
   const match1024 = useMediaQuery("(min-width:1024px)");
   return (

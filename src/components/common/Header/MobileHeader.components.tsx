@@ -20,7 +20,9 @@ import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 const MobileHeader: FC = () => {
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android|CriOS).)*safari/i.test(
+    navigator.userAgent
+  );
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);

@@ -5,8 +5,8 @@ import styled from "styled-components";
 export const MessageViewMobileContainer = styled.div<{ backgroundColor: string }>`
   .congcamMessage {
     background-color: ${(props) => props.backgroundColor};
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
   @media (min-width: 1024px) {
     max-width: 1024px;
@@ -50,7 +50,7 @@ export const MessageViewPublicToggleContainer = styled.div`
   display: flex;
   justify-content: right;
   margin: 0 auto;
-  margin-bottom: -5px;
+  margin-bottom: -8px;
   @media (min-width: 1024px) {
     width: 100%;
     max-width: 450px;
@@ -246,4 +246,27 @@ export const GreenBtnContainer = styled.div`
 
 // web
 export const MessageViewWebFourcutContainer = styled.div`
+`;
+
+export const MessageViewSpeechBubble = styled.div`
+  position: relative;
+  width: 200px;
+  height: 40px;
+  padding: 0px;
+  background: #FFFFFF;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  ::after {
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #FFFFFF transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -15px;
+    left: 39px;
+  }
 `;

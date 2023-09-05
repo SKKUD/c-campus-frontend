@@ -6,8 +6,8 @@ import {
 } from "./Message.styles";
 
 // import assets
-import CloseIcon from "../../assets/images/congball.png";
-import OpenIcon from "../../assets/images/congball_open_color.png";
+import CloseIcon from "../../assets/images/congball.svg";
+import OpenIcon from "../../assets/images/congball_open_color.svg";
 
 import { useNavigate } from "react-router";
 import { useExtractID } from "../../hooks/useExtractID";

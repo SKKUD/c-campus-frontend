@@ -10,7 +10,7 @@ export const MemberIntroContainer = styled.div`
   padding: 85px;
   font-family: GmarketSans;
   text-align: center;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     padding: 50px 20px;
   }
 `;
@@ -19,7 +19,7 @@ export const MemberIntroHeader = styled.div`
   color: #000;
   font-size: 32px;
   font-weight: 400;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     font-size: 20px;
   }
   @media (max-width: 370px) {
@@ -38,7 +38,7 @@ export const TrackLabel = styled.div`
   font-weight: 500;
   margin-top: 60px;
   margin-bottom: 5px;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     font-size: 14px;
     margin-top: 32px;
   }
@@ -48,7 +48,7 @@ export const TrackIntro = styled.div`
   color: #000;
   font-size: 32px;
   font-weight: 300;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     font-size: 20px;
   }
   @media (max-width: 370px) {
@@ -63,7 +63,7 @@ export const ProfileCotainer = styled.div`
   width: auto;
   margin-top: 64px;
   margin-bottom: 100px;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     gap: 20px;
     margin-top: 32px;
     margin-bottom: 88px;
@@ -79,7 +79,7 @@ export const ProfileBox = styled(Link)`
   position: relative;
   text-decoration: none;
   color: inherit;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     width: 94px;
   }
   @media (max-width: 370px) {
@@ -93,7 +93,7 @@ export const ProfilePhoto = styled.img`
   border-radius: 100px;
   object-fit: cover;
 
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     width: 94px;
     height: 94px;
   }
@@ -118,7 +118,7 @@ export const ProfileIcon = styled.div`
     width: 31px;
     height: 31px;
   }
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     width: 30px;
     height: 30px;
     top: 64px;
@@ -140,7 +140,7 @@ export const ProfileIcon = styled.div`
 export const ProfileName = styled.div`
   font-size: 32px;
   font-weight: 300;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     font-size: 20px;
   }
   @media (max-width: 370px) {
@@ -152,7 +152,7 @@ export const ProfileDetail = styled.div`
   color: #808080;
   font-size: 16px;
   font-weight: 400;
-  @media (max-width: 425px) {
+  @media (max-width: 768px) {
     font-size: 12px;
   }
   @media (max-width: 370px) {

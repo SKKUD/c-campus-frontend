@@ -282,7 +282,10 @@ const PostPhoto = () => {
             </ModalLayout>
           </>
         ) : (
-          <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+          <WhiteBtn
+            content={loading ? `사진 저장 중...` : `완료`}
+            onClick={(e) => handleSubmit()}
+          />
         )
       ) : (
         <IconBtnGroup

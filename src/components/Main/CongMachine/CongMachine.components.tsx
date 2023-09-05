@@ -50,7 +50,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
-  const [topimgsrc, setTopImg] = useState(cong1_top_gif);
+  const [topimgsrc, setTopImg] = useState(cong5_top_gif);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const [messagenum, SetMessageNum] = useState<number>(0);
   const userAuth = useRecoilValue(UserAuth);

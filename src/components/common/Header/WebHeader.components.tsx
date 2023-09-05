@@ -10,8 +10,6 @@ import WebHeaderSwitch from "./WebHeaderSwitch/WebHeaderSwitch.components";
 import { useNavigate } from "react-router";
 
 // import for recoil
-import { UserState } from "../../../recoil/recoil";
-import { useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";

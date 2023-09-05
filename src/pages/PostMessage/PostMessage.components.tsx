@@ -31,7 +31,6 @@ import colorCheck from "../../assets/images/colorCheck.svg";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 import lockedFrameIcon from "../../assets/images/4cut_lock.png";
 import takepicIcon from "../../assets/images/takepic_mobile_icon.png";
-import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import MakeQuiz from "../../components/PostMessage/modal/MakeQuiz/MakeQuiz.components";
 import SendMessage from "../../components/PostMessage/modal/SendMessage/SendMessage.components";
 
@@ -43,7 +42,6 @@ import {
   PhotoFile,
   PhotoState,
   QuizState,
-  UserState,
 } from "../../recoil/recoil";
 import { useNavigate } from "react-router";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
@@ -70,14 +68,13 @@ const PostMessage = () => {
   const setPhotofile = useSetRecoilState(PhotoFile);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
   const [nameText, SetNameText] = useState<string>(Message.name);
-  const [nameCount, SetNameCount] = useState<number>(0);
+  const [, SetNameCount] = useState<number>(0);
   const [contentText, SetContentText] = useState<string>(Message.content);
-  const [contentCount, SetContentCount] = useState<number>(0);
+  const [, SetContentCount] = useState<number>(0);
   const [currentColorHex, SetCurrentColorHex] = useState<string>("#D6EABA");
   const [currentColor, SetCurrentColor] = useState<number>(0);
   const [done, setDone] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
-  const profiledata = useRecoilValue(UserState);
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
   const [currentSubject, SetCurrentSubject] = useState<string>("");
 
@@ -181,11 +178,11 @@ const PostMessage = () => {
     handleModalOpen();
   };
 
-  const ChangePhotoHandler = () => {
-    if (window.confirm("콩캠네컷을 다시 찍으시겠어요?")) {
-      PostPhotoHandler();
-    }
-  };
+  // const ChangePhotoHandler = () => {
+  //   if (window.confirm("콩캠네컷을 다시 찍으시겠어요?")) {
+  //     PostPhotoHandler();
+  //   }
+  // };
 
   // submit handler
   const [submitMessage] = useMessageSubmitApi(currentSubject, currentColorHex, {
@@ -194,7 +191,6 @@ const PostMessage = () => {
   });
   const submitHandler = async () => {
     handleModalClose();
-    // console.log(modalContent);
 
     // submit
     if (nameText !== "" && contentText !== "") {

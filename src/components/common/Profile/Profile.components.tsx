@@ -9,7 +9,7 @@ import {
 } from "./Profile.styles";
 import coinicon from "../../../assets/images/congCoin.png";
 import profileimage from "../../../assets/images/default_profile.jpeg";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { UserState } from "../../../recoil/recoil";
 import {
   useAuthCheckApi,
@@ -19,19 +19,17 @@ import LightGreenBtn from "../Buttons/LightGreenBtn.components";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useEffect } from "react";
-import { useMediaQuery } from "@mui/material";
 import ShareUrl from "../../ShareUrl/ShareUrl.components";
 
 interface IProfile {
   coin: number;
 }
 const Profile = ({ coin }: IProfile) => {
-  const match1024 = useMediaQuery("(min-width:1024px)");
   const profiledata = useRecoilValue(UserState);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
   const [profile] = useUserProfileGetApi();
-  const [userProfile, SetUserProfile] = useRecoilState(UserState);
+  const SetUserProfile = useSetRecoilState(UserState);
 
   useEffect(() => {
     SetUserProfile({

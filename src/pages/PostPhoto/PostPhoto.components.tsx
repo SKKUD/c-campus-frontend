@@ -27,19 +27,14 @@ import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import { ExportElementAsPNG } from "../../utils/downloadPhoto";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  IsWritingMessage,
-  PhotoFile,
-  PhotoState,
-  UserState,
-} from "../../recoil/recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { IsWritingMessage, PhotoFile, PhotoState } from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
+import { domToBlob } from "modern-screenshot";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -123,26 +118,6 @@ const PostPhoto = () => {
       console.error("오류 발생:", error);
     }
   };
-  // const setRecoilPhotoFile = async () => {
-  //   try {
-  //     const el = document.querySelector(".fourcutImage") as HTMLElement;
-
-  //     const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
-
-  //     if (pngBlob) {
-  //       setTimeout(async () => {
-  //         // Blob을 File 객체로 변환하고 파일명 설정
-  //         const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-  //           type: "image/png",
-  //         });
-
-  //         setPhotoFile(pngFile);
-  //       }, 6000);
-  //     }
-  //   } catch (error) {
-  //     console.error("오류 발생:", error);
-  //   }
-  // };
 
   const handleModalOpen = async () => {
     setLoading(true);

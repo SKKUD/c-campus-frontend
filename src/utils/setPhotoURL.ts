@@ -1,6 +1,4 @@
-import { toPng, toSvg } from "html-to-image";
-import { domToImage, domToPng, domToSvg } from "modern-screenshot";
-import { Ref } from "react";
+import { domToSvg } from "modern-screenshot";
 
 interface PhotoData {
   PhotoTaken: boolean;

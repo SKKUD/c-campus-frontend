@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 
 export const PhotoBoothContainer = styled.div`
   background-color: #f5f5f5;

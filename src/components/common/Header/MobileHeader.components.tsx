@@ -14,9 +14,6 @@ import infoIcon from "../../../assets/images/info_icon.svg";
 import menuIcon from "../../../assets/images/menu_icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import HeaderInfoModal from "./HeaderInfoModal/HeaderInfoModal.components";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../../recoil/recoil";
-import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 const MobileHeader: FC = () => {

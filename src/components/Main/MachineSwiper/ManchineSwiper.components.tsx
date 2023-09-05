@@ -6,21 +6,15 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PrevBtn, NextBtn } from "./SwiperNavigationBtn.components";
 import CongMachine from "../CongMachine/CongMachine.components";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import CongPhotoMachine from "../CongMachine/CongPhotoMachine.components";
 
 // import for recoil
-import { useRecoilState } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
-import { UserAuth } from "../../../recoil/recoil";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 import { CheckRemainCount } from "../../../hooks/PullMessage";
 
-import { check } from "prettier";
 import Profile from "../../common/Profile/Profile.components";
-
-import { ShareUrlContainer } from "../../../pages/Main/Main.styles";
-import ShareUrl from "../../ShareUrl/ShareUrl.components";
 
 interface MachineSwiperProps {
   slide: number;
@@ -28,7 +22,6 @@ interface MachineSwiperProps {
 }
 
 const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
   const currentID = useExtractID();
   const checkAuth = useAuthCheckApi();
   const messageNumber = CheckRemainCount(currentID);
@@ -37,12 +30,12 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
     <SwiperContainer>
       {
         // login and userID match | 현재 url에서의 id와 비교
-        checkAuth && userAuth === currentID ? <PrevBtn /> : <></>
+        checkAuth && String(checkAuth) === currentID ? <PrevBtn /> : <></>
       }
       <Profile coin={Number(messageNumber)} />
       {
         // 로그인이 되어있으면 message와 콩캠네컷 스와이프 가능 | 로그인 안되어있으면 CongMachine화면에서 쪽지쓰고 피드보는 것만 가능
-        checkAuth && userAuth === currentID ? (
+        checkAuth && String(checkAuth) === currentID ? (
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             navigation={{
@@ -67,7 +60,7 @@ const MachineSwiper: FC<MachineSwiperProps> = ({ slide, setSlide }) => {
           <CongMachine slide={slide} />
         )
       }
-      {checkAuth && userAuth === currentID ? <NextBtn /> : <></>}
+      {checkAuth && String(checkAuth) === currentID ? <NextBtn /> : <></>}
     </SwiperContainer>
   );
 };

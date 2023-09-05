@@ -16,7 +16,6 @@ export const MessageViewMobileContainer = styled.div<{ backgroundColor: string }
 export const MessageViewContainer = styled.div<{ backgroundColor: string }>`
   background-color: ${(props) => props.backgroundColor};
   width: 100vw;
-  height: 100vh;
   overflow: scroll;
   padding-top: 60px;
 
@@ -26,6 +25,7 @@ export const MessageViewContainer = styled.div<{ backgroundColor: string }>`
     justify-content: center;
 
     padding-top: 80px;
+    padding-bottom: 40px;
   }
 `;
 

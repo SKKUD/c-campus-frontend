@@ -145,9 +145,10 @@ const PostPhoto = () => {
   // };
 
   const handleModalOpen = async () => {
-    setModalOpen(true);
+    setLoading(true);
     await setPhotoURL(setPhotoTaken, ref.current);
     await setRecoilPhotoFile();
+    setModalOpen(true);
   };
   const handleModalClose = () => setModalOpen(false);
 
@@ -251,7 +252,10 @@ const PostPhoto = () => {
             {done === "done" ? (
               IsWriting ? (
                 <>
-                  <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+                  <WhiteBtn
+                    content={loading ? `사진 저장 중...` : `완료`}
+                    onClick={(e) => handleModalOpen()}
+                  />
                   <ModalLayout
                     modalOpen={modalOpen}
                     handleModalClose={handleModalClose}
@@ -273,7 +277,10 @@ const PostPhoto = () => {
       ) : done === "done" ? (
         IsWriting ? (
           <>
-            <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+            <WhiteBtn
+              content={loading ? `사진 저장 중...` : `완료`}
+              onClick={(e) => handleModalOpen()}
+            />
             <ModalLayout
               modalOpen={modalOpen}
               handleModalClose={handleModalClose}
@@ -282,7 +289,10 @@ const PostPhoto = () => {
             </ModalLayout>
           </>
         ) : (
-          <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+          <WhiteBtn
+            content={loading ? `사진 저장 중...` : `완료`}
+            onClick={(e) => handleSubmit()}
+          />
         )
       ) : (
         <IconBtnGroup

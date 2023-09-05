@@ -65,19 +65,13 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
   return (
     <ShowImgContainer>
       <ShowImgQuitButtonContainer>
-        <ShowImgQuitButton onClick={handleClose}/>
+        <ShowImgQuitButton onClick={handleClose} />
       </ShowImgQuitButtonContainer>
       <ShowImgImgContainer>
-        <ShowImgImgContent src={image_url || defaultFrame}/>
+        <ShowImgImgContent src={image_url || defaultFrame} />
       </ShowImgImgContainer>
       <ShowImgButtonContainer>
-        {
-          match1024 ? (
-            <WhiteBtn content="저장하기" onClick={saveImageLocally}/>
-          ) : (
-            <WhiteBtn content="공유하기"/>
-          )
-        }    
+        <WhiteBtn content="저장하기" onClick={saveImageLocally} />
       </ShowImgButtonContainer>
     </ShowImgContainer>
   );

@@ -7,6 +7,7 @@ export const PhotoBoothContainer = styled.div`
   padding-top: 100px;
   overflow: scroll;
   min-height: 100vh;
+  padding-bottom: 50px;
 `;
 
 export const FourcutNPaletteWrapper = styled.div`

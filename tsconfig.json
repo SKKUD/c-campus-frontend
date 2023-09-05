@@ -16,5 +16,13 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "plugins": [
+    {
+      "name": "ForkTsCheckerWebpackPlugin",
+      "options": {
+        "memoryLimit": 4096
+      }
+    }
+  ]
 }

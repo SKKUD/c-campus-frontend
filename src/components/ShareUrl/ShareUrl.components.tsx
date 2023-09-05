@@ -19,7 +19,6 @@ const ShareUrl = () => {
 
   useEffect(() => {
     SetCurrentUrl(window.location.href);
-    console.log("changed");
   }, [window.location.href]);
 
   useEffect(() => {

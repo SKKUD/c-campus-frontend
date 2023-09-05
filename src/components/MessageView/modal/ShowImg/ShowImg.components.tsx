@@ -22,45 +22,38 @@ const ShowImg = ({handleClose, image_url}: IShowImg) => {
   const match1024 = useMediaQuery("(min-width:1024px)");
   
   const saveImageLocally = async () => {
-    console.log("download v17, delete proxy and add cache-control");
+    const res = await axios
+      .get(image_url, {
+        responseType: "blob",
+        headers: {
+          "Content-Type": "image/png",
+          "Access-Control-Allow-Origin": "*",
+          server: "AmazonS3",
+          "Cache-Control": "no-cache",
+        },
+      })
+      .then((response) => {
+        return new Blob([response.data]);
+      })
+      .then((imageData) => {
+        // Create a Blob from the image data
+        const blob = new Blob([imageData], { type: "image/png" });
+        // Create a downloadable link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "콩캠네컷.png"; // Set the desired filename
 
-    const res = await axios.get(image_url, {
-                        responseType: 'blob',
-                        headers: {
-                          "Content-Type": "image/png",
-                          "Access-Control-Allow-Origin": "*",
-                          "server": "AmazonS3",
-                          "Cache-Control": "no-cache",
-                        }
-                      })
-                      .then((response) => {
-                        console.log(response);
-                        return new Blob([response.data]);
-                      })
-                      .then(imageData => {
-                        console.log(imageData);
-                        // Create a Blob from the image data
-                        const blob = new Blob([imageData], { type: 'image/png' });
-                        console.log(blob);
-                        // Create a downloadable link
-                        const url = window.URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = '콩캠네컷.png'; // Set the desired filename
-                
-                        // Trigger the download
-                        link.click();
-                        // Clean up
-                        window.URL.revokeObjectURL(url);
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                      }); 
-  }
+        // Trigger the download
+        link.click();
+        // Clean up
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  useEffect(() => {
-    console.log(match1024);
-  }, [])
 
   return (
     <ShowImgContainer>

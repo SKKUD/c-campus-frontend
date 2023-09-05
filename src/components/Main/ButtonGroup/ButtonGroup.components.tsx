@@ -116,7 +116,6 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
   };
 
   const handleDisabledClick = () => {
-    console.log("clicked");
     // 모달 보여주기
     setOpen(true);
   };

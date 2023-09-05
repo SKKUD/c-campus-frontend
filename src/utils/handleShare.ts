@@ -4,20 +4,17 @@ import { domToBlob } from "modern-screenshot";
 import { toBlob } from "html-to-image";
 
 export const handleShare = async () => {
-  console.log("v11, toBlob and cacheBust: true await many times exclude quality scale padding");
-
-  const UA = navigator.userAgent.toLowerCase();
-
   const pngBlob = await domToBlob(
-    document.querySelector(".congcamMessage") as HTMLElement, {
+    document.querySelector(".congcamMessage") as HTMLElement,
+    {
       quality: 0.9,
       scale: 4,
       fetch: {
         bypassingCache: true,
-      }
+      },
     }
   );
-  
+
   if (pngBlob) {
     setTimeout(() => {
       try {

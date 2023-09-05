@@ -7,7 +7,6 @@ export const CheckRemainCount = (userAuth: string) => {
   const [messageNumber, SetMessageNumber] = useState<string>("0");
 
   useEffect(() => {
-    // console.log("auth " + checkAuth);
     const fetchRemainCount = async () => {
       if (userAuth) {
         // check userAuth exist

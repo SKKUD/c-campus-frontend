@@ -123,26 +123,6 @@ const PostPhoto = () => {
       console.error("오류 발생:", error);
     }
   };
-  // const setRecoilPhotoFile = async () => {
-  //   try {
-  //     const el = document.querySelector(".fourcutImage") as HTMLElement;
-
-  //     const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
-
-  //     if (pngBlob) {
-  //       setTimeout(async () => {
-  //         // Blob을 File 객체로 변환하고 파일명 설정
-  //         const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-  //           type: "image/png",
-  //         });
-
-  //         setPhotoFile(pngFile);
-  //       }, 6000);
-  //     }
-  //   } catch (error) {
-  //     console.error("오류 발생:", error);
-  //   }
-  // };
 
   const handleModalOpen = async () => {
     setLoading(true);

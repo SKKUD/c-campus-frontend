@@ -66,11 +66,6 @@ const PhotoBox = () => {
   const [photoNumber, SetPhotoNumber] = useState<number>(0);
 
   useEffect(() => {
-    // console.log("userAuth " + userAuth);
-    // console.log("currentID " + currentID);
-    // console.log(typeof(userAuth));
-    // console.log(photo.length);
-    // console.log(photo);
     SetPhotoNumber(photo.length);
   }, [currentID, userAuth, photo]);
 

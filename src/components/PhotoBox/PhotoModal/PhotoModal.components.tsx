@@ -76,112 +76,41 @@ function ChildModal({ img }: ChildModalProps) {
   };
 
   const saveImageLocally = async () => {
-    console.log("download v17, delete proxy and add cache-control");
-
     // extract ID
-    const IMG_ID: string = img.slice(55)
-    console.log(img + " clicked ");
+    const IMG_ID: string = img.slice(55);
 
-    const res = await axios.get(img, {
-                        responseType: 'blob',
-                        headers: {
-                          "Content-Type": "image/png",
-                          "Access-Control-Allow-Origin": "*",
-                          "server": "AmazonS3",
-                          "Cache-Control": "no-cache",
-                        }
-                      })
-                      .then((response) => {
-                        console.log(response);
-                        return new Blob([response.data]);
-                      })
-                      .then(imageData => {
-                        console.log(imageData);
-                        // Create a Blob from the image data
-                        const blob = new Blob([imageData], { type: 'image/png' });
-                        console.log(blob);
-                        // Create a downloadable link
-                        const url = window.URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = '콩캠네컷.png'; // Set the desired filename
-                
-                        // Trigger the download
-                        link.click();
-                        // Clean up
-                        window.URL.revokeObjectURL(url);
-                      })
-                      .catch((error) => {
-                        console.log(error);
-                      }); 
-  }
+    const res = await axios
+      .get(img, {
+        responseType: "blob",
+        headers: {
+          "Content-Type": "image/png",
+          "Access-Control-Allow-Origin": "*",
+          server: "AmazonS3",
+          "Cache-Control": "no-cache",
+        },
+      })
+      .then((response) => {
+        return new Blob([response.data]);
+      })
+      .then((imageData) => {
+        // Create a Blob from the image data
+        const blob = new Blob([imageData], { type: "image/png" });
+        // Create a downloadable link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "콩캠네컷.png"; // Set the desired filename
 
-  const downloadFileSaver = () => {
-    console.log("download v7");
-    const IMG_ID: string = img.slice(55)
-
-    fetch(IMG_ID, {method: 'GET'})
-      .then(res => {
-        return res.blob();
+        // Trigger the download
+        link.click();
+        // Clean up
+        window.URL.revokeObjectURL(url);
       })
-      .then(blob => {
-        saveAs(blob, '콩캠네컷.png');
-      })
-      .catch(err => {
-        console.error('err: ', err);
-      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const downloadFile = () => {
-    console.log("download file to v2 version");
-
-    const IMG_ID: string = img.slice(55)
-
-    fetch(IMG_ID, { method: 'GET' })
-        .then((res) => {
-          return res.blob();
-        })
-        .then((blob) => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "콩캠네컷";
-            document.body.appendChild(a);
-            a.click();
-        })
-        .catch((err) => {
-            console.error('err: ', err);
-        });
-  };
-
-  // const downloadFileV9 = async () => {
-  //   const IMG_ID: string = img.slice(56)
-
-  //   const s3 = new AWS.S3();
-  //   const params = {
-  //     Bucket: 'https://c-campus-bucket.s3.ap-northeast-2.amazonaws.com',
-  //     Key: IMG_ID,
-  //   };
-
-  //   try {
-  //     const data = await s3.getObject(params).promise();
-  //     const blob = new Blob([data.Body as BlobPart], { type: 'image/png' });
-  //     const url = URL.createObjectURL(blob);
-
-  //     const link = document.createElement('a');
-  //     link.href = url;
-  //     link.download = 'image.png';
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   } catch (error) {
-  //     console.error('Error downloading image:', error);
-  //   }
-  // };
-
-  React.useEffect(() => {
-    console.log(img);
-  })
 
   return (
     <>

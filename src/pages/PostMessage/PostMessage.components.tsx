@@ -194,7 +194,6 @@ const PostMessage = () => {
   });
   const submitHandler = async () => {
     handleModalClose();
-    // console.log(modalContent);
 
     // submit
     if (nameText !== "" && contentText !== "") {

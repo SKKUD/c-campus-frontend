@@ -98,9 +98,9 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     }, 2600);
   };
   const takePhotos = () => {
-    navigate(`/photo/post/${userid}`);
     setIsWriting(false);
     localStorage.clear();
+    navigate(`/photo/post/${userid}`);
   };
   const movetoNoteBox = () => {
     navigate(`/message/${userid}`);

@@ -44,9 +44,9 @@ const CongPhotoMachine: FC<CongPhotoMachineProps> = ({ slide }) => {
               <GreenBtn
                 content="콩캠네컷 찍기"
                 onClick={() => {
-                  navigate(`/photo/post/${userid}`);
                   setIsWriting(false);
                   localStorage.clear();
+                  navigate(`/photo/post/${userid}`);
                 }}
               />
             ) : (

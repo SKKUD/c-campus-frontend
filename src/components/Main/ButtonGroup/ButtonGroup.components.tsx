@@ -107,6 +107,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
     navigate(`/photo/${userid}`);
   };
   const movetoMessagePost = () => {
+    localStorage.removeItem("question");
     navigate(`/message/post/${userid}`);
   };
   const movetoMessageFeed = () => {

@@ -148,6 +148,7 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
   const handleWriteMessage = () => {
     // go to message write
+    localStorage.removeItem("question");
     navigate(`/message/post/${userid}`);
   };
 

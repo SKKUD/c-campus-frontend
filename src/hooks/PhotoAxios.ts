@@ -89,9 +89,6 @@ export const usePhotoPostApi = () => {
       const BlobString = await domToBlob(el, {
         quality: 0.9,
         scale: 4,
-        features: {
-          fixSvgXmlDecode: false,
-        },
       });
 
       if (BlobString) {

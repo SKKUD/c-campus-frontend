@@ -58,6 +58,7 @@ const PostPhoto = () => {
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
   const ref = useRef<HTMLDivElement | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
@@ -87,6 +88,7 @@ const PostPhoto = () => {
         "사진을 저장하시겠습니까? 저장 후에 보관함으로 이동합니다. 파일이 저장될 때까지 5초만 기다려주세요!"
       )
     ) {
+      setLoading(true);
       await ExportElementAsPNG();
       await postFourcutPhoto();
 
@@ -258,7 +260,10 @@ const PostPhoto = () => {
                   </ModalLayout>
                 </>
               ) : (
-                <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+                <WhiteBtn
+                  content={loading ? `사진 저장 중...` : `완료`}
+                  onClick={(e) => handleSubmit()}
+                />
               )
             ) : (
               <GreenBtn content="완료" disabled={true} />

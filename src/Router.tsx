@@ -23,15 +23,14 @@ declare global {
 }
 
 const Router = () => {
-  const UA = navigator.userAgent.toLowerCase();
-  const isChrome = UA.includes("chrome");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
   const match1024 = useMediaQuery("(min-width:1024px)");
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {!isChrome ? (
+        {isSafari ? (
           <Route path="/*" element={<SafariAlert />} />
         ) : match1024 ? (
           <>

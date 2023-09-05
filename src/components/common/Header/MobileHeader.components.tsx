@@ -20,8 +20,7 @@ import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 const MobileHeader: FC = () => {
-  const UA = navigator.userAgent.toLowerCase();
-  const isChrome = UA.includes("chrome");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
@@ -52,11 +51,10 @@ const MobileHeader: FC = () => {
     setAnchorEl(null);
   };
   const PopoverOpen = Boolean(anchorEl);
-  console.log(isChrome);
 
   return (
     <HeaderContainer>
-      {!isChrome ? (
+      {isSafari ? (
         <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
       ) : (
         <>

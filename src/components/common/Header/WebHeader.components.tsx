@@ -17,8 +17,7 @@ import { useAuthCheckApi, useUserLogoutApi } from "../../../hooks/LoginAxios";
 import { kakaoURL } from "../../../utils/login/KakaoLogin/KaKaoLoginURL";
 
 const WebHeader = () => {
-  const UA = navigator.userAgent.toLowerCase();
-  const isChrome = UA.includes("chrome");
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
   const navigate = useNavigate();
   const currentID = useExtractID();
@@ -46,7 +45,7 @@ const WebHeader = () => {
 
   return (
     <HeaderContainer>
-      {!isChrome ? (
+      {isSafari ? (
         <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
       ) : (
         <>

@@ -6,7 +6,6 @@ import {
   CantPullMessageModalGreenText,
 } from "./CantPullMessageModal.styles";
 import GreenBtn from "../common/Buttons/GreenBtn.components";
-import { ShareUrlContent } from "../ShareUrl/ShareUrl.styles";
 import CopyToClipboard from "react-copy-to-clipboard";
 
 interface ModalProps {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useMediaQuery } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/common/Header/Header.components";
@@ -26,17 +26,13 @@ const Router = () => {
   const isSafari = /^((?!chrome|android|CriOS).)*safari/i.test(
     navigator.userAgent
   );
-  
-  const isKakao = /^((?!chrome|android|CriOS).)*KAKAOTALK/i.test(
-    navigator.userAgent
-  );
-  
+
   const match1024 = useMediaQuery("(min-width:1024px)");
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {isSafari || isKakao ? ( // Safari거나 Kakao면
+        {isSafari ? (
           <Route path="/*" element={<SafariAlert />} />
         ) : match1024 ? (
           <>

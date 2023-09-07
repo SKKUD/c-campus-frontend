@@ -187,7 +187,7 @@ const MessageView = () => {
             <div className="congcamMessage">
               {/* Title */}
               <MessageViewTitle className="MessageViewCenter">
-                <div className="categoryText">{axiosMessage?.category}</div>
+                {axiosMessage?.category}
               </MessageViewTitle>
 
               {/* Content */}

@@ -51,6 +51,8 @@ export const WebHeaderButton = styled(Button)`
   width: 140px;
   height: 40px;
   color: #fff;
+  display: flex;
+  justify-content: center;
   text-align: center;
   font-size: 20px;
   font-style: normal;

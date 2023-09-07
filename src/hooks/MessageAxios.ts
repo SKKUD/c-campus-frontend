@@ -50,10 +50,10 @@ export const useMessageSubmitApi = (
         }
       )
       .then((response) => {
-        console.log(response.status);
+        // console.log(response.status);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

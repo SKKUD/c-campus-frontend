@@ -43,7 +43,7 @@ const IconBtnGroup: React.FC<CaptureProps> = ({
     const files = event.target.files;
 
     if (!files || files.length === 0) {
-      console.log("return");
+      // console.log("return");
       return;
     }
 

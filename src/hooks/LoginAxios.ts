@@ -57,11 +57,11 @@ export const useUserLogoutApi = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

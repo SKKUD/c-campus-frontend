@@ -95,7 +95,7 @@ function ChildModal({ img }: ChildModalProps) {
         window.URL.revokeObjectURL(url);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

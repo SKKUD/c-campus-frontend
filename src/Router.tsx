@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/common/Header/Header.components";
@@ -27,10 +27,8 @@ const Router = () => {
     navigator.userAgent
   );
   
-  const isKakao = /^((?!chrome|android|CriOS).)*KAKAOTALK/i.test(
-    navigator.userAgent
-  );
-  
+  const [isKakao, SetIsKakao] = useState<boolean>((navigator.userAgent.indexOf("KAKAOTALK") > -1) ? true : false);
+
   const match1024 = useMediaQuery("(min-width:1024px)");
   return (
     <BrowserRouter>

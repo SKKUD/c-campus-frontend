@@ -98,12 +98,12 @@ const QuizBox = ({ Quiz, Answer, handleClose, SetModalContent, userID, messageID
           { withCredentials: true }
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           // 정상적으로 처리되면 리다이렉트 시켜줌
           setTimeout(() => navigate(`/message/${messageID}/${userID}`), 2000);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     }
 

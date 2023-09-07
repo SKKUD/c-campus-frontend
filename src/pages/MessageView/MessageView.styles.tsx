@@ -51,7 +51,7 @@ export const MessageViewPublicToggleContainer = styled.div`
   display: flex;
   justify-content: right;
   margin: 0 auto;
-  margin-bottom: -8px;
+  margin-bottom: -10px;
   @media (min-width: 1024px) {
     width: 100%;
     max-width: 450px;
@@ -84,13 +84,13 @@ export const MessageViewTitle = styled.div`
   letter-spacing: -0.4px;
   word-break: keep-all;
   padding: 10px;
-  padding-top: 5px;
+  /* padding-top: 5px; */
   @media (min-width: 1024px) {
     max-width: 450px;
   }
-  .categoryText {
+  /* .categoryText {
 
-  }
+  } */
 `;
 
 export const MessageViewContent = styled.div`

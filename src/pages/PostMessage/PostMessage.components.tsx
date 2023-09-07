@@ -105,7 +105,7 @@ const PostMessage = () => {
     if (storedCurrentColor) {
       SetCurrentColor(Number(storedCurrentColor));
     } else {
-      console.log("localStorage에 저장된 데이터 없음");
+      // console.log("localStorage에 저장된 데이터 없음");
     }
   }, []);
 

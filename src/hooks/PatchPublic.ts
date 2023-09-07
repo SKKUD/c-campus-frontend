@@ -9,7 +9,7 @@ export const PatchPublic =  async (userAuth: string, messageID: string) => {
                           { withCredentials: true, });
 
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
 

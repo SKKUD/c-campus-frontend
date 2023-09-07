@@ -46,7 +46,7 @@ const ShowImg = ({ handleClose, image_url }: IShowImg) => {
         window.URL.revokeObjectURL(url);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

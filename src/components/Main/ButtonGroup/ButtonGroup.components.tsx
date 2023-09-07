@@ -57,17 +57,17 @@ const ButtonGroup: FC<ButtonGroupProps> = ({
         )
         .then((response) => {
           if (response.status === 400) {
-            console.log("5개 미만임");
+            // console.log("5개 미만임");
           } else if (response.status === 200) {
-            console.log("성공적으로 뽑음");
+            // console.log("성공적으로 뽑음");
           } else {
-            console.log("이외의 오류");
+            // console.log("이외의 오류");
           }
 
-          console.log(response);
+          // console.log(response);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     }
     // 쪽지 뽑는 gif 재생 후

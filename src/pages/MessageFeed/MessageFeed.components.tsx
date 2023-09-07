@@ -79,7 +79,7 @@ const MessageFeed = () => {
         })
         .catch((error) => {
           if (axios.isAxiosError(error)) {
-            console.log(error);
+            // console.log(error);
           }
         });
     }

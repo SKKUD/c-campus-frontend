@@ -25,7 +25,7 @@ const WebHeader = () => {
   const [logout] = useUserLogoutApi();
 
   const handleLogoClick = () => {
-    console.log(checkAuth);
+    // console.log(checkAuth);
     if (checkAuth) {
       navigate(`/${checkAuth}`);
     } else {

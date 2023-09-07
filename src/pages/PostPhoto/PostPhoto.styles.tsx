@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 
 export const PhotoBoothContainer = styled.div`
   background-color: #f5f5f5;
@@ -7,6 +6,7 @@ export const PhotoBoothContainer = styled.div`
   padding-top: 100px;
   overflow: scroll;
   min-height: 100vh;
+  padding-bottom: 50px;
 `;
 
 export const FourcutNPaletteWrapper = styled.div`
@@ -38,6 +38,9 @@ export const FourcutFrame = styled.img`
   top: 0;
   left: 0;
   pointer-events: none;
+  /* filter: blur(0px); */
+  /* shape-rendering: crispEdges; */
+  /* image-rendering: pixelated; */
 `;
 
 export const PhotoWrapper = styled.div`

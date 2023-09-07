@@ -27,19 +27,14 @@ import TakePhoto from "../../components/PostPhoto/TakePhoto/TakePhoto.components
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
 import { ExportElementAsPNG } from "../../utils/downloadPhoto";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  IsWritingMessage,
-  PhotoFile,
-  PhotoState,
-  UserState,
-} from "../../recoil/recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { IsWritingMessage, PhotoFile, PhotoState } from "../../recoil/recoil";
 import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import ModalLayout from "../../components/PostMessage/ModalLayout/ModalLayout.components";
 import { setPhotoURL } from "../../utils/setPhotoURL";
 import { usePhotoPostApi } from "../../hooks/PhotoAxios";
 import { useExtractID } from "../../hooks/useExtractID";
-import { domToBlob, domToPng, domToSvg } from "modern-screenshot";
+import { domToBlob } from "modern-screenshot";
 
 const PostPhoto = () => {
   const userid = useExtractID();
@@ -58,6 +53,7 @@ const PostPhoto = () => {
   const [done, setDone] = useState("ongoing");
   const dispatchArr = [setPhoto1, setPhoto2, setPhoto3, setPhoto4];
   const ref = useRef<HTMLDivElement | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const storedIsWriting = localStorage.getItem("IsWriting");
@@ -87,10 +83,13 @@ const PostPhoto = () => {
         "사진을 저장하시겠습니까? 저장 후에 보관함으로 이동합니다. 파일이 저장될 때까지 5초만 기다려주세요!"
       )
     ) {
+      setLoading(true);
       await ExportElementAsPNG();
       await postFourcutPhoto();
 
-      navigate(`/photo/${userid}`);
+      setTimeout(() => {
+        navigate(`/photo/${userid}`);
+      }, 5000);
     }
   };
 
@@ -105,12 +104,6 @@ const PostPhoto = () => {
       const BlobString = await domToBlob(el, {
         quality: 0.9,
         scale: 4,
-        width: 201,
-        height: 512,
-        style: {
-          width: "100vw",
-          height: "100vh",
-        },
       });
 
       if (BlobString) {
@@ -127,31 +120,12 @@ const PostPhoto = () => {
       console.error("오류 발생:", error);
     }
   };
-  // const setRecoilPhotoFile = async () => {
-  //   try {
-  //     const el = document.querySelector(".fourcutImage") as HTMLElement;
-
-  //     const pngBlob = await domToBlob(el, { quality: 0.7, scale: 5 });
-
-  //     if (pngBlob) {
-  //       setTimeout(async () => {
-  //         // Blob을 File 객체로 변환하고 파일명 설정
-  //         const pngFile = new File([pngBlob], "CongcamFourcut.png", {
-  //           type: "image/png",
-  //         });
-
-  //         setPhotoFile(pngFile);
-  //       }, 6000);
-  //     }
-  //   } catch (error) {
-  //     console.error("오류 발생:", error);
-  //   }
-  // };
 
   const handleModalOpen = async () => {
-    setModalOpen(true);
+    setLoading(true);
     await setPhotoURL(setPhotoTaken, ref.current);
     await setRecoilPhotoFile();
+    setModalOpen(true);
   };
   const handleModalClose = () => setModalOpen(false);
 
@@ -255,7 +229,10 @@ const PostPhoto = () => {
             {done === "done" ? (
               IsWriting ? (
                 <>
-                  <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+                  <WhiteBtn
+                    content={loading ? `사진 저장 중...` : `완료`}
+                    onClick={(e) => handleModalOpen()}
+                  />
                   <ModalLayout
                     modalOpen={modalOpen}
                     handleModalClose={handleModalClose}
@@ -264,7 +241,10 @@ const PostPhoto = () => {
                   </ModalLayout>
                 </>
               ) : (
-                <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+                <WhiteBtn
+                  content={loading ? `사진 저장 중...` : `완료`}
+                  onClick={(e) => handleSubmit()}
+                />
               )
             ) : (
               <GreenBtn content="완료" disabled={true} />
@@ -274,7 +254,10 @@ const PostPhoto = () => {
       ) : done === "done" ? (
         IsWriting ? (
           <>
-            <WhiteBtn content="완료" onClick={(e) => handleModalOpen()} />
+            <WhiteBtn
+              content={loading ? `사진 저장 중...` : `완료`}
+              onClick={(e) => handleModalOpen()}
+            />
             <ModalLayout
               modalOpen={modalOpen}
               handleModalClose={handleModalClose}
@@ -283,7 +266,10 @@ const PostPhoto = () => {
             </ModalLayout>
           </>
         ) : (
-          <WhiteBtn content="완료" onClick={(e) => handleSubmit()} />
+          <WhiteBtn
+            content={loading ? `사진 저장 중...` : `완료`}
+            onClick={(e) => handleSubmit()}
+          />
         )
       ) : (
         <IconBtnGroup

@@ -9,8 +9,14 @@ export const useExtractID = () => {
     // extract id /
     const splitparams: string[] = currentUrl.split("/");
 
+    let id = splitparams[splitparams.length - 1];
+
+    if (id.includes("?")) {
+      id = id.substring(0, id.indexOf("?"));
+    }
+
     // set it to currentID
-    SetCurrentID(splitparams[splitparams.length - 1]);
+    SetCurrentID(id);
   });
 
   return currentID;

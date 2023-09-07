@@ -11,15 +11,8 @@ import {
   QuizBoxQuizContent,
   QuizBoxCheckButtonContainer,
 } from "./QuizBox.styles";
-
-// import components
-import CloseIcon from "@mui/icons-material/Close";
 import GreenBtn from "../common/Buttons/GreenBtn.components";
-
-// import axios
 import axios from "axios";
-
-// import
 import { useNavigate } from "react-router";
 
 // QuizBox interface
@@ -98,18 +91,20 @@ const QuizBox = ({ Quiz, Answer, handleClose, SetModalContent, userID, messageID
       SetModalContent("정답입니다");
 
       // 정답
-      const res = axios.post(`${process.env.REACT_APP_BACKEND_SERVER}/users/${userID}/messages/${messageID}/quiz`,
-      { messageId: messageID, answer: Answer}, 
-        { withCredentials: true}
-                            )  
-                            .then((response) => {
-                              console.log(response);
-                              // 정상적으로 처리되면 리다이렉트 시켜줌
-                              setTimeout(() => navigate(`/message/${messageID}/${userID}`), 2000);
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            });
+      axios
+        .post(
+          `${process.env.REACT_APP_BACKEND_SERVER}/users/${userID}/messages/${messageID}/quiz`,
+          { messageId: messageID, answer: Answer },
+          { withCredentials: true }
+        )
+        .then((response) => {
+          // console.log(response);
+          // 정상적으로 처리되면 리다이렉트 시켜줌
+          setTimeout(() => navigate(`/message/${messageID}/${userID}`), 2000);
+        })
+        .catch((error) => {
+          // console.log(error);
+        });
     }
 
     // 정답이 아닐 때,

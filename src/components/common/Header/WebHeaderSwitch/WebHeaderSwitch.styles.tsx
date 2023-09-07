@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 export const ToggleContainer = styled.div`
   position: relative;
   cursor: pointer;
-
   > .toggle-container {
     width: 220px;
     height: 40px;
@@ -19,6 +18,9 @@ export const ToggleContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    .toggle-text {
+      margin-top: 1.5px;
+    }
     > div {
       width: 110px;
     }
@@ -47,6 +49,9 @@ export const ToggleContainer = styled.div`
     font-size: 16px;
     font-weight: 600;
     box-shadow: 2px 0px 2px 0px rgba(0, 0, 0, 0.07);
+    .toggle-text {
+      margin-top: 3px;
+    }
   }
   //.photo 클래스가 활성화 되었을 경우의 CSS를 구현
   > .photo-circle {

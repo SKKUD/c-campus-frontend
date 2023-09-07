@@ -1,5 +1,4 @@
 import {
-  MakeQuizContainer,
   MakeQuizContentContainer,
   MakeQuizContentLabel,
   MakeQuizContent,
@@ -12,8 +11,8 @@ import {
 
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
 import { ChangeEvent, FC, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { QuizState, UserState } from "../../../../recoil/recoil";
+import { useRecoilState } from "recoil";
+import { QuizState } from "../../../../recoil/recoil";
 import { useNavigate } from "react-router";
 import { useExtractID } from "../../../../hooks/useExtractID";
 
@@ -56,7 +55,6 @@ const MakeQuiz: FC<MakeQuizProps> = ({ handleModalClose }) => {
       handleModalClose();
       navigate(`/message/post/${userid}`);
     }
-    
   };
   return (
     <>

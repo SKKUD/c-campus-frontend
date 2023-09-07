@@ -57,7 +57,7 @@ const MessageFeed = () => {
   useEffect(() => {
     // get axios
     if (currentId !== "") {
-      const res = axios
+      axios
         .get(
           `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentId}/messages/pulled`,
           { withCredentials: true }
@@ -79,7 +79,7 @@ const MessageFeed = () => {
         })
         .catch((error) => {
           if (axios.isAxiosError(error)) {
-            console.log(error);
+            // console.log(error);
           }
         });
     }

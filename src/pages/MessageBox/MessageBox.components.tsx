@@ -16,14 +16,9 @@ import {
   MessageBoxEmpty,
   MessageDataContainer,
 } from "./MessageBox.styles";
-import { count } from "console";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../recoil/recoil";
 import { useExtractID } from "../../hooks/useExtractID";
 
 // import for userAuth
-import { UserAuth } from "../../recoil/recoil";
-import { useRecoilState } from "recoil";
 import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 // Message type
@@ -71,7 +66,6 @@ const MessageList = () => {
   const currentID = useExtractID();
 
   // state for transformed to IMessage
-  const [axiosMessage, SetAxiosMessage] = useState<IAxiosMessageData>();
   const [filteredToIMessage, SetFilteredToIMessage] = useState<IMessages[]>([]);
   const [countMessage, SetCountMessage] = useState<number>(0);
 
@@ -101,10 +95,11 @@ const MessageList = () => {
     if (currentID !== "") {
       const fetchData = async () => {
         try {
-          const resGet = axios.get(`${process.env.REACT_APP_BACKEND_SERVER}/auth/authentication`)
-                        .then((response) => {
-                          // check response
-                        })
+          axios
+            .get(`${process.env.REACT_APP_BACKEND_SERVER}/auth/authentication`)
+            .then((response) => {
+              // check response
+            });
           const response = await axios.get(
             `${process.env.REACT_APP_BACKEND_SERVER}/users/${currentID}/messages/pulled`,
             { withCredentials: true }
@@ -154,7 +149,7 @@ const MessageList = () => {
           }
         } catch (error) {
           if (axios.isAxiosError(error)) {
-            console.log(error);
+            // console.log(error);
           }
         }
       };
@@ -170,8 +165,9 @@ const MessageList = () => {
 
   return (
     <>
-      { // check if it is current userID
-        (String(userAuth) === currentID) ? (
+      {
+        // check if it is current userID
+        String(userAuth) === currentID ? (
           <>
             {countMessage !== 0 ? (
               <MessageListContainer>
@@ -179,7 +175,10 @@ const MessageList = () => {
                   <MessageListHeaderMessageCount>
                     {countMessage}개의 추억
                   </MessageListHeaderMessageCount>
-                  <LightGreenBtn content="내 피드 가기" onClick={RedirectToFeedUrl} />
+                  <LightGreenBtn
+                    content="내 피드 가기"
+                    onClick={RedirectToFeedUrl}
+                  />
                 </MessageListHeader>
                 <MessageDataContainer>
                   <MessageScrollContainer>
@@ -187,7 +186,9 @@ const MessageList = () => {
                       filteredToIMessage.map((messageData: IMessages) => {
                         return (
                           <MessageListHoder key={messageData.date}>
-                            <MessageListDate>{messageData.date}</MessageListDate>
+                            <MessageListDate>
+                              {messageData.date}
+                            </MessageListDate>
                             <MessageListContent>
                               {messageData.beans &&
                                 messageData.beans.map((bean: IBean) => {
@@ -214,9 +215,7 @@ const MessageList = () => {
             )}
           </>
         ) : (
-          <MessageBoxEmpty>
-            다른 사람의 쪽지입니다
-          </MessageBoxEmpty>
+          <MessageBoxEmpty>다른 사람의 쪽지입니다</MessageBoxEmpty>
         )
       }
     </>

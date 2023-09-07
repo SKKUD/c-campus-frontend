@@ -1,10 +1,6 @@
-import * as htmlToImage from "html-to-image";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
-import { useSetRecoilState } from "recoil";
-import { UserAuth } from "../recoil/recoil";
-import { useCookies } from "react-cookie";
 
 export const useAuthCheckApi = () => {
   const [checkAuth, setAuth] = useState("");
@@ -61,11 +57,11 @@ export const useUserLogoutApi = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         window.location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

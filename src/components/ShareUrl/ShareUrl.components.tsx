@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import ShareShape from "../../assets/images/shareImg.svg";
 import ModalLayout from "../PostMessage/ModalLayout/ModalLayout.components";
 import GreenBtn from "../common/Buttons/GreenBtn.components";
-import { GreenBtnContainer } from "../../pages/MessageView/MessageView.styles";
 
 const ShareUrl = () => {
   const [currentUrl, SetCurrentUrl] = useState<string>(window.location.href);
@@ -19,7 +18,6 @@ const ShareUrl = () => {
 
   useEffect(() => {
     SetCurrentUrl(window.location.href);
-    console.log("changed");
   }, [window.location.href]);
 
   useEffect(() => {

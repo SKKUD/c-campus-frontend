@@ -4,17 +4,8 @@ import {
   ToggleDescriptionContainer,
   ToggleDescription,
 } from "./PublicToggle.styles";
-
-import { useEffect, useState } from "react";
-
-// recoil
-import { UserAuth } from "../../recoil/recoil";
-import { useRecoilState } from "recoil";
-
-// axios call
+import { useState } from "react";
 import axios from "axios";
-
-// 
 import { useAuthCheckApi } from "../../hooks/LoginAxios";
 
 interface IPublicToggle {
@@ -49,12 +40,12 @@ export const PublicToggle = ({axiosisPublic} : IPublicToggle) => {
         withCredentials: true,
       }
     ).then((response) => {
-      console.log("response");
-      console.log(response);
+      // console.log("response");
+      // console.log(response);
     })
     .catch((error) => {
-      console.log("error occur")
-      console.log(error);
+      // console.log("error occur")
+      // console.log(error);
     })
   };
 

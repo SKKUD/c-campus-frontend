@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/common/Header/Header.components";
@@ -14,14 +14,29 @@ import NotFound from "./pages/NotFound/NotFound.components";
 import WebCongcamMachine from "./pages/WebCongcamMachine/WebCongcamMachine.components";
 import WebCongcamFourcut from "./pages/WebCongcamFourcut/WebCongcamFourcut.components";
 import WebCongcamFeed from "./pages/WebCongcamFeed/WebCongcamFeed.components";
+import SafariAlert from "./pages/SafariAlert/SafariAlert.components";
+
+declare global {
+  interface Window {
+    chrome: any;
+  }
+}
 
 const Router = () => {
+  const isSafari = /^((?!chrome|android|CriOS).)*safari/i.test(
+    navigator.userAgent
+  );
+  
+  const [isKakao, SetIsKakao] = useState<boolean>((navigator.userAgent.indexOf("KAKAOTALK") > -1) ? true : false);
+
   const match1024 = useMediaQuery("(min-width:1024px)");
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {match1024 ? (
+        {isSafari || isKakao ? ( // Safari거나 Kakao면
+          <Route path="/*" element={<SafariAlert />} />
+        ) : match1024 ? (
           <>
             <Route path="/" element={<Home />} /> {/*서비스 소개*/}
             <Route path="/:id" element={<WebCongcamMachine />} />{" "}

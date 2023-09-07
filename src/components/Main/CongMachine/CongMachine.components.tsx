@@ -21,18 +21,15 @@ import {
   CongMachineContainer,
   CongMachineContentContainer,
   MachineImage,
-  CongMachineProfileContainer,
 } from "./CongMachine.styles";
 import ButtonGroup from "../ButtonGroup/ButtonGroup.components";
 import { ButtonGroupContainer } from "../ButtonGroup/ButtonGroup.styles";
 import GreenBtn from "../../common/Buttons/GreenBtn.components";
 import DisabledGreenBtn from "../../common/Buttons/DisabledGreenBtn.components";
 
-import { Ground } from "../../WebMainPage/WebMainPage.styles";
-
 // import for recoil
-import { UserAuth, UserState } from "../../../recoil/recoil";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { UserAuth } from "../../../recoil/recoil";
+import { useRecoilValue } from "recoil";
 import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 import Profile from "../../common/Profile/Profile.components";
@@ -40,11 +37,10 @@ import Profile from "../../common/Profile/Profile.components";
 // import for messagenum
 import { CheckRemainCount } from "../../../hooks/PullMessage";
 
-// 
+//
 import axios from "axios";
 import PullMessageModal from "../../PullMessageModal/PullMessageModal.components";
 import CantPullMessageModal from "../../CantPullMessageModal/CantPullMessageModal.components";
-
 
 interface CongMachineProps {
   slide?: number;
@@ -54,10 +50,10 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
   const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
   const navigate = useNavigate();
-  const [topimgsrc, setTopImg] = useState(cong1_top_gif);
+  const [topimgsrc, setTopImg] = useState(cong5_top_gif);
   const [bottomimgsrc, setBottomImg] = useState(cong_bot_empty_gif);
   const [messagenum, SetMessageNum] = useState<number>(0);
-  const [userAuth, SetUserAuth] = useRecoilState(UserAuth);
+  const userAuth = useRecoilValue(UserAuth);
   const currentID = useExtractID();
   const [checkAuth] = useAuthCheckApi();
   const messageNumber = CheckRemainCount(userid);
@@ -97,29 +93,29 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
       setTopImg(topImg);
     }
-  }, [checkAuth, messagenum, isPulled, messageNumber]);
+  }, [userid, checkAuth, messagenum, isPulled, messageNumber]);
 
   const handleMessage = () => {
     // web에서 핸들링
     // pull
     if (messagenum >= 5) {
       SetModalContent("opened");
-      const res = axios
+      axios
         .get(
           `${process.env.REACT_APP_BACKEND_SERVER}/users/${userAuth}/messages/unpulled`,
           { withCredentials: true }
         )
         .then((response) => {
           if (response.status === 400) {
-            console.log("5개 미만임");
+            // console.log("5개 미만임");
           } else if (response.status === 200) {
-            console.log("성공적으로 뽑음");
+            // console.log("성공적으로 뽑음");
           } else {
-            console.log("이외의 오류");
+            // console.log("이외의 오류");
           }
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     }
     // 쪽지 뽑는 gif 재생 후
@@ -152,9 +148,9 @@ const CongMachine: FC<CongMachineProps> = ({ slide }) => {
 
   const handleWriteMessage = () => {
     // go to message write
+    localStorage.removeItem("question");
     navigate(`/message/post/${userid}`);
   };
-
 
   return (
     <CongMachineContainer>

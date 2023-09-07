@@ -6,12 +6,10 @@ import {
 } from "./Message.styles";
 
 // import assets
-import CloseIcon from "../../assets/images/congball.svg";
-import OpenIcon from "../../assets/images/congball_open_color.svg";
+import CloseIcon from "../../assets/images/congball.png";
+import OpenIcon from "../../assets/images/congball_open_color.png";
 
 import { useNavigate } from "react-router";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../recoil/recoil";
 import { useExtractID } from "../../hooks/useExtractID";
 
 interface IMessage {

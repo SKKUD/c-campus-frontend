@@ -1,10 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Popover } from "@mui/material";
 import { PopoverContainer, PopoverInner } from "./HeaderPopover.styles";
-
-// import for recoil
-import { UserAuth } from "../../../../recoil/recoil";
-import { useRecoilState } from "recoil";
 
 // import for redirect
 import { useNavigate } from "react-router";
@@ -45,6 +41,7 @@ const HeaderPopover: FC<HeaderPopoverProps> = ({
 
   const handleGoMyaccount = () => {
     navigate(`/${checkAuth}`);
+    window.location.reload();
   };
 
   return (

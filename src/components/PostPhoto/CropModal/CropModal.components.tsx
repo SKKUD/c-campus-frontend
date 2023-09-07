@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Cropper, ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { Modal } from "@mui/material";
@@ -57,7 +57,7 @@ const CropModal: React.FC<CaptureProps> = ({
           src={inputImage ? inputImage : ""}
           viewMode={1}
           width={800}
-          height={500}
+          height={480}
           background={false}
           responsive
           autoCropArea={1}

@@ -14,13 +14,12 @@ import infoIcon from "../../../assets/images/info_icon.svg";
 import menuIcon from "../../../assets/images/menu_icon.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import HeaderInfoModal from "./HeaderInfoModal/HeaderInfoModal.components";
-import { useRecoilValue } from "recoil";
-import { UserState } from "../../../recoil/recoil";
-import { useExtractID } from "../../../hooks/useExtractID";
 import { useAuthCheckApi } from "../../../hooks/LoginAxios";
 
 const MobileHeader: FC = () => {
-  const userid = useExtractID();
+  const isSafari = /^((?!chrome|android|CriOS).)*safari/i.test(
+    navigator.userAgent
+  );
   // 인포모달 구현
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
@@ -41,7 +40,7 @@ const MobileHeader: FC = () => {
     }
     window.location.reload();
   };
-  
+
   // 메뉴버튼 팝업 구현
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -54,30 +53,35 @@ const MobileHeader: FC = () => {
 
   return (
     <HeaderContainer>
-      {pathname === "/main" ? (
-        <StyledIconButton onClick={handleModalOpen}>
-          <InfoIcon src={infoIcon} />
-        </StyledIconButton>
+      {isSafari ? (
+        <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
       ) : (
-        <StyledIconButton onClick={handleGoBack}>
-          <BackIcon src={backIcon} />
-        </StyledIconButton>
+        <>
+          {pathname === "/main" ? (
+            <StyledIconButton onClick={handleModalOpen}>
+              <InfoIcon src={infoIcon} />
+            </StyledIconButton>
+          ) : (
+            <StyledIconButton onClick={handleGoBack}>
+              <BackIcon src={backIcon} />
+            </StyledIconButton>
+          )}
+
+          <HeaderInfoModal
+            modalOpen={modalOpen}
+            handleModalClose={handleModalClose}
+          />
+          <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
+          <StyledIconButton onClick={handleMenuClick}>
+            <MenuIcon src={menuIcon} />
+          </StyledIconButton>
+          <HeaderPopover
+            open={PopoverOpen}
+            anchorEl={anchorEl}
+            handleClose={handlePopoverClose}
+          />
+        </>
       )}
-      <HeaderInfoModal
-        modalOpen={modalOpen}
-        handleModalClose={handleModalClose}
-      />
-
-      <HeaderIMG src={HeaderImg} alt="header" onClick={handleLogoClick} />
-
-      <StyledIconButton onClick={handleMenuClick}>
-        <MenuIcon src={menuIcon} />
-      </StyledIconButton>
-      <HeaderPopover
-        open={PopoverOpen}
-        anchorEl={anchorEl}
-        handleClose={handlePopoverClose}
-      />
     </HeaderContainer>
   );
 };

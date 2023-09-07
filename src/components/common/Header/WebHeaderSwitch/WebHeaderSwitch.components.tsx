@@ -30,10 +30,10 @@ const WebHeaderSwitch = () => {
     <>
       <ToggleContainer onClick={toggleHandler}>
         <div className={`toggle-container ${isOn && "photo"}`}>
-          <div>콩캠머신</div> <div>콩캠네컷</div>
+          <div className="toggle-text">콩캠머신</div> <div className="toggle-text">콩캠네컷</div>
         </div>
         <div className={`toggle-circle ${isOn && "photo-circle"}`}>
-          {isOn ? "콩캠네컷" : "콩캠머신"}
+          <div className="toggle-text">{isOn ? "콩캠네컷" : "콩캠머신"}</div>
         </div>
       </ToggleContainer>
     </>

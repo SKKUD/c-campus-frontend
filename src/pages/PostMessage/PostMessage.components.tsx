@@ -31,11 +31,10 @@ import colorCheck from "../../assets/images/colorCheck.svg";
 import defaultFrameIcon from "../../assets/images/defaultFourcut.png";
 import lockedFrameIcon from "../../assets/images/4cut_lock.png";
 import takepicIcon from "../../assets/images/takepic_mobile_icon.png";
-import AskLock from "../../components/PostMessage/modal/AskLock/AskLock.components";
 import MakeQuiz from "../../components/PostMessage/modal/MakeQuiz/MakeQuiz.components";
 import SendMessage from "../../components/PostMessage/modal/SendMessage/SendMessage.components";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   IsWritingMessage,
@@ -43,7 +42,6 @@ import {
   PhotoFile,
   PhotoState,
   QuizState,
-  UserState,
 } from "../../recoil/recoil";
 import { useNavigate } from "react-router";
 import WhiteBtn from "../../components/common/Buttons/WhiteBtn.components";
@@ -65,19 +63,18 @@ const PostMessage = () => {
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
-  const Quiz = useRecoilValue(QuizState);
+  const [Quiz, setQuiz] = useRecoilState(QuizState);
   const [Photo, setPhoto] = useRecoilState(PhotoState);
   const setPhotofile = useSetRecoilState(PhotoFile);
   const [currentSubjectNumber, SetCurrentSubjectNumber] = useState<number>(0);
   const [nameText, SetNameText] = useState<string>(Message.name);
-  const [nameCount, SetNameCount] = useState<number>(0);
+  const [, SetNameCount] = useState<number>(0);
   const [contentText, SetContentText] = useState<string>(Message.content);
-  const [contentCount, SetContentCount] = useState<number>(0);
+  const [, SetContentCount] = useState<number>(0);
   const [currentColorHex, SetCurrentColorHex] = useState<string>("#D6EABA");
   const [currentColor, SetCurrentColor] = useState<number>(0);
   const [done, setDone] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<string>("");
-  const profiledata = useRecoilValue(UserState);
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
   const [currentSubject, SetCurrentSubject] = useState<string>("");
 
@@ -108,7 +105,7 @@ const PostMessage = () => {
     if (storedCurrentColor) {
       SetCurrentColor(Number(storedCurrentColor));
     } else {
-      console.log("localStorage에 저장된 데이터 없음");
+      // console.log("localStorage에 저장된 데이터 없음");
     }
   }, []);
 
@@ -181,11 +178,11 @@ const PostMessage = () => {
     handleModalOpen();
   };
 
-  const ChangePhotoHandler = () => {
-    if (window.confirm("콩캠네컷을 다시 찍으시겠어요?")) {
-      PostPhotoHandler();
-    }
-  };
+  // const ChangePhotoHandler = () => {
+  //   if (window.confirm("콩캠네컷을 다시 찍으시겠어요?")) {
+  //     PostPhotoHandler();
+  //   }
+  // };
 
   // submit handler
   const [submitMessage] = useMessageSubmitApi(currentSubject, currentColorHex, {
@@ -194,7 +191,6 @@ const PostMessage = () => {
   });
   const submitHandler = async () => {
     handleModalClose();
-    // console.log(modalContent);
 
     // submit
     if (nameText !== "" && contentText !== "") {
@@ -214,6 +210,11 @@ const PostMessage = () => {
       setPhoto({
         PhotoTaken: false,
         PhotoURL: "",
+      });
+      setQuiz({
+        QuizGiven: false,
+        QuizContent: "",
+        QuizAnswer: "",
       });
       setPhotofile(null);
       // 완료 모달 open
@@ -241,7 +242,9 @@ const PostMessage = () => {
 
   // useEffect for naming
   useEffect(() => {
-    SetSubjectData(MakeQuestions(profile.nickname));
+    if (userid === profile.userId) {
+      SetSubjectData(MakeQuestions(profile.nickname));
+    }
   }, [profile]);
 
   useEffect(() => {

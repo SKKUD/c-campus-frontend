@@ -1,23 +1,21 @@
-import { error } from "console";
-import * as htmlToImage from "html-to-image";
 import { domToBlob } from "modern-screenshot";
-import { toBlob } from "html-to-image";
-
+      
 export const handleShare = async () => {
-  console.log("v14, test reload");
+  // console.log("v14, test reload");
 
   const UA = navigator.userAgent.toLowerCase();
 
   const pngBlob = await domToBlob(
-    document.querySelector(".congcamMessage") as HTMLElement, {
+    document.querySelector(".congcamMessage") as HTMLElement,
+    {
       quality: 0.9,
       scale: 4,
       fetch: {
         bypassingCache: true,
-      }
+      },
     }
   ).then((response) => {
-    console.log(response);
+    // console.log(response);
     if (response) {
       try {
         // Blob을 File 객체로 변환하고 파일명 설정
@@ -40,7 +38,7 @@ export const handleShare = async () => {
       }
     }
   }).catch((error) => {
-    console.log(error);
+    // console.log(error);
   });
   setTimeout(() => {
     window.location.reload();

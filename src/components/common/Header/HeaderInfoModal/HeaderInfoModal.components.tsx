@@ -23,7 +23,7 @@ const HeaderInfoModal: FC<HeaderInfoModalProps> = ({
       <ModalContainer>
         <BtnWrapper>
           <CloseBtn onClick={handleModalClose}>
-            <img src={closeIcon} />
+            <img src={closeIcon} alt="close icon" />
           </CloseBtn>
         </BtnWrapper>
         <InfoPaper src={infoDescImg} />

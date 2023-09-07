@@ -1,4 +1,4 @@
-import { MessageState, QuizState, PhotoFile } from "./../recoil/recoil";
+import { QuizState, PhotoFile } from "./../recoil/recoil";
 import axios from "axios";
 import { useExtractID } from "./useExtractID";
 import { useRecoilValue } from "recoil";
@@ -9,10 +9,10 @@ export const useMessageSubmitApi = (
   Message: { content: string; name: string }
 ) => {
   const currentID = useExtractID();
-  
+
   const Photo = useRecoilValue(PhotoFile);
   const Quiz = useRecoilValue(QuizState);
-  
+
   const submitMessage = () => {
     const formData = new FormData();
     const jsonObject = Quiz.QuizGiven
@@ -50,10 +50,10 @@ export const useMessageSubmitApi = (
         }
       )
       .then((response) => {
-        console.log(response.status);
+        // console.log(response.status);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

@@ -63,7 +63,8 @@ const PostMessage = () => {
 
   // state browser
   const [isKakao, SetIsKakao] = useState<boolean>((navigator.userAgent.indexOf("KAKAOTALK") > -1) ? true : false);
-  
+  // const [isKakao, SetIsKakao] = useState<boolean>(true);
+
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
@@ -485,7 +486,7 @@ const PostMessage = () => {
               navigate(`/${userid}`);
             }}
           />
-        ) : modalContent === "PhotoNotTaken" ? (
+        ) : (modalContent === "PhotoNotTaken") ? (
           <AskPhotopost
             handleModalClose={handleModalClose}
             PostPhotoHandler={PostPhotoHandler}

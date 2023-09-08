@@ -4,6 +4,7 @@ import {
   AskPhotopostContent,
   AskPhotopostContainer,
   AskPhotopostWhiteBtn,
+  AskPhotoKakaoButtonContainer,
 } from "./AskPhotopost.styles";
 import MakeQuiz from "../MakeQuiz/MakeQuiz.components";
 import GreenBtn from "../../../common/Buttons/GreenBtn.components";
@@ -22,6 +23,8 @@ const AskPhotopost: FC<AskPhotopostProps> = ({
   submitHandler,
 }) => {
   const [IsMakingQuiz] = useState(false);
+  const [isKakao, SetIsKakao] = useState<boolean>((navigator.userAgent.indexOf("KAKAOTALK") > -1) ? true : false);
+
   const handleSubmit = () => {
     setModalContent("");
     // submit 함수
@@ -32,18 +35,33 @@ const AskPhotopost: FC<AskPhotopostProps> = ({
     <AskPhotopostContainer>
       {!IsMakingQuiz ? (
         <>
-          <AskPhotopostContent>
-            콩캠네컷을 <br /> 찍으러 갈까요?
-          </AskPhotopostContent>
-          <AskPhotopostButtonContainer>
-            <AskPhotopostWhiteBtn onClick={handleSubmit}>
-              아니요
-            </AskPhotopostWhiteBtn>
-            <GreenBtn
-              content="콩캠네컷 찍기"
-              onClick={() => PostPhotoHandler()}
-            />
-          </AskPhotopostButtonContainer>
+          {
+            isKakao ? ( 
+              <>
+                <AskPhotopostContent>
+                  쪽지를 전달할게요
+                </AskPhotopostContent>
+                <AskPhotoKakaoButtonContainer>
+                  <GreenBtn onClick={handleSubmit} content="쪽지 보내기" />
+                </AskPhotoKakaoButtonContainer>
+              </>
+            ) : (
+              <>
+                <AskPhotopostContent>
+                  콩캠네컷을 <br /> 찍으러 갈까요?
+                </AskPhotopostContent>
+                <AskPhotopostButtonContainer>
+                  <AskPhotopostWhiteBtn onClick={handleSubmit}>
+                    아니요
+                  </AskPhotopostWhiteBtn>
+                  <GreenBtn
+                    content="콩캠네컷 찍기"
+                    onClick={() => PostPhotoHandler()}
+                  />
+                </AskPhotopostButtonContainer>
+              </>
+            )
+          }
         </>
       ) : (
         <MakeQuiz handleModalClose={handleModalClose} />

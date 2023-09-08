@@ -27,14 +27,13 @@ const Router = () => {
     navigator.userAgent
   );
   
-  const [isKakao, SetIsKakao] = useState<boolean>((navigator.userAgent.indexOf("KAKAOTALK") > -1) ? true : false);
-
   const match1024 = useMediaQuery("(min-width:1024px)");
+  
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {isSafari || isKakao ? ( // Safari거나 Kakao면
+        {isSafari ? ( // Safari이면
           <Route path="/*" element={<SafariAlert />} />
         ) : match1024 ? (
           <>

@@ -117,6 +117,27 @@ export const PostMessageRandomSubject = styled.div`
   font-weight: 400;
 `;
 
+export const PostMessageNoticeKakaoBrowser = styled.div`
+  margin-top: 10px;
+  width: 90%;
+  height: 60px;
+  padding: 10px;
+  word-break: keep-all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  border: 0.5px solid var(--main-2, #164300);
+  border-radius: 10px;
+  color: #303030;
+  text-align: center;
+  font-family: GmarketSans;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+`;
+
 export const PostMessageRandomSubjectContent = styled.div`
   display: flex;
   flex-direction: row;

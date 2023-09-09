@@ -18,7 +18,7 @@ export const AskPhotopostContent = styled.div`
   color: var(--font-black, #303030);
   text-align: center;
   font-family: GmarketSans;
-  font-size: 22px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 33px */
@@ -26,6 +26,13 @@ export const AskPhotopostContent = styled.div`
   padding-bottom: 30px;
 `;
 
+export const AskPhotoKakaoButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+`
 export const AskPhotopostButtonContainer = styled.div`
   width: 90%;
   display: flex;

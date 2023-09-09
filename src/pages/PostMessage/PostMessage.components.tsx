@@ -23,6 +23,7 @@ import {
   ButtonWrapper,
   PostMessageContentFrameContainer,
   TakePicIcon,
+  PostMessageNoticeKakaoBrowser,
 } from "./PostMessage.styles";
 
 import GreenBtn from "../../components/common/Buttons/GreenBtn.components";
@@ -60,6 +61,10 @@ const PostMessage = () => {
   const userid = useExtractID();
   const match1024 = useMediaQuery("(min-width:1024px)");
 
+  // state browser
+  const [isKakao, SetIsKakao] = useState<boolean>((navigator.userAgent.indexOf("KAKAOTALK") > -1) ? true : false);
+  // const [isKakao, SetIsKakao] = useState<boolean>(true);
+
   // state
   const [Message, setMessage] = useRecoilState(MessageState);
   const setIsWriting = useSetRecoilState(IsWritingMessage);
@@ -77,6 +82,7 @@ const PostMessage = () => {
   const [modalContent, setModalContent] = useState<string>("");
   const [SubjectData, SetSubjectData] = useState<string[]>([]);
   const [currentSubject, SetCurrentSubject] = useState<string>("");
+  const [showInfo, SetShowInfo] = useState<boolean>(false);
 
   // check localStorage
   useEffect(() => {
@@ -240,6 +246,13 @@ const PostMessage = () => {
     setModalOpen(false);
   };
 
+  const handleClickDefault = () => {
+    SetShowInfo(true);
+    setTimeout(() => {
+      SetShowInfo(false);
+    }, 2500);
+  };
+
   // useEffect for naming
   useEffect(() => {
     if (userid === profile.userId) {
@@ -385,25 +398,40 @@ const PostMessage = () => {
         {/* content */}
         <PostMessageContentContainer>
           {!match1024 && (
-            <PostMessageContentFrameContainer>
-              <PostMessageContentFrame
-                src={
-                  Quiz.QuizGiven
-                    ? lockedFrameIcon
-                    : Photo.PhotoTaken && Photo.PhotoURL !== ""
-                    ? Photo.PhotoURL
-                    : defaultFrameIcon
-                }
-                onClick={
-                  Quiz.QuizGiven
-                    ? ChangeQuizHandler
-                    : Photo.PhotoTaken && Photo.PhotoURL !== ""
-                    ? ChangeQuizHandler
-                    : PostPhotoHandler
-                }
-              />
-              {!Photo.PhotoTaken && <TakePicIcon src={takepicIcon} />}
-            </PostMessageContentFrameContainer>
+            <>
+              {
+                isKakao ? (
+                  <>
+                    <PostMessageContentFrameContainer>
+                      <PostMessageContentFrame
+                        src={defaultFrameIcon}
+                        onClick={handleClickDefault}
+                      />
+                    </PostMessageContentFrameContainer>
+                  </>
+                ) : (
+                  <PostMessageContentFrameContainer>
+                    <PostMessageContentFrame
+                      src={
+                        Quiz.QuizGiven
+                          ? lockedFrameIcon
+                          : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                          ? Photo.PhotoURL
+                          : defaultFrameIcon
+                      }
+                      onClick={
+                        Quiz.QuizGiven
+                          ? ChangeQuizHandler
+                          : Photo.PhotoTaken && Photo.PhotoURL !== ""
+                          ? ChangeQuizHandler
+                          : PostPhotoHandler
+                      }
+                    />
+                    {!Photo.PhotoTaken && <TakePicIcon src={takepicIcon} />}
+                  </PostMessageContentFrameContainer>
+                )
+              }
+            </>
           )}
           <PostMessageContentText
             value={contentText}
@@ -412,7 +440,16 @@ const PostMessage = () => {
             placeholder="ㅇㅇ님에게 하고 싶은 말을 작성해주세요!"
           />
         </PostMessageContentContainer>
-
+        
+        {
+          showInfo ? (
+            <PostMessageNoticeKakaoBrowser>
+              카카오톡 브라우저에서는 <br/> 콩캠네컷을 사용할 수 없어요
+            </PostMessageNoticeKakaoBrowser>
+          ) : (
+            <></>
+          )
+        }
         {/* writer */}
         <PostMessageWriterContainer>
           <PostMessageWriter>From. </PostMessageWriter>
@@ -449,7 +486,7 @@ const PostMessage = () => {
               navigate(`/${userid}`);
             }}
           />
-        ) : modalContent === "PhotoNotTaken" ? (
+        ) : (modalContent === "PhotoNotTaken") ? (
           <AskPhotopost
             handleModalClose={handleModalClose}
             PostPhotoHandler={PostPhotoHandler}

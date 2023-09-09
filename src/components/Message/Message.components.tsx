@@ -3,6 +3,7 @@ import {
   MessageHolder, 
   MessageImage,
   MessageContent,
+  MessageHolderPublic,
 } from "./Message.styles";
 
 // import assets
@@ -15,10 +16,11 @@ import { useExtractID } from "../../hooks/useExtractID";
 interface IMessage {
   id: number;
   isOpen: boolean;
+  isPublic: boolean;
   nickName: string;
 }
 
-const Message = ({ id, isOpen, nickName }: IMessage) => {
+const Message = ({ id, isOpen, isPublic, nickName }: IMessage) => {
   const userid = useExtractID();
   const navigate = useNavigate();
 
@@ -28,14 +30,25 @@ const Message = ({ id, isOpen, nickName }: IMessage) => {
 
   return (
     <MessageFrame>
-      <MessageHolder onClick={RedirectToID}>
-        {isOpen ? (
-          <MessageImage src={OpenIcon}></MessageImage>
+      {
+        isPublic ? (
+          <MessageHolderPublic onClick={RedirectToID}>
+            {isOpen ? (
+              <MessageImage src={OpenIcon}></MessageImage>
+            ) : (
+              <MessageImage src={CloseIcon}></MessageImage>
+            )}
+          </MessageHolderPublic>
         ) : (
-          <MessageImage src={CloseIcon}></MessageImage>
-        )}
-      </MessageHolder>
-
+          <MessageHolder onClick={RedirectToID}>
+            {isOpen ? (
+              <MessageImage src={OpenIcon}></MessageImage>
+            ) : (
+              <MessageImage src={CloseIcon}></MessageImage>
+            )}
+          </MessageHolder>
+        )
+      }
       <MessageContent>{nickName}</MessageContent>
     </MessageFrame>
   );

@@ -32,6 +32,7 @@ interface IBean {
   messageId: number;
   author: string;
   isOpened: boolean;
+  isPublic: boolean;
 }
 
 // interface
@@ -132,6 +133,7 @@ const MessageList = () => {
                 messageId: message.message_id,
                 author: message.author,
                 isOpened: message.is_opened,
+                isPublic: message.is_public,
               };
               beans.push(beanObject);
             }
@@ -197,6 +199,7 @@ const MessageList = () => {
                                       key={bean.messageId}
                                       id={bean.messageId}
                                       isOpen={bean.isOpened}
+                                      isPublic={bean.isPublic}
                                       nickName={bean.author}
                                     />
                                   );

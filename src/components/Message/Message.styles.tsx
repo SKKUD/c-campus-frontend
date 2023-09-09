@@ -7,6 +7,21 @@ export const MessageFrame = styled.div`
   padding-left: 2px;
   padding-right: 2px;
 `
+export const MessageHolderPublic = styled.div`
+  width: 17vw;
+  max-width: 60px;
+  height: 17vw;
+  max-height: 60px;
+  border-radius: 10px;
+  border: 1px solid #8DC63F;
+  background: #fff;
+
+  /* default */
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const MessageHolder = styled.div`
   width: 17vw;

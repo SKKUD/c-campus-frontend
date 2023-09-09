@@ -13,7 +13,7 @@ export const MessageHolderPublic = styled.div`
   height: 17vw;
   max-height: 60px;
   border-radius: 10px;
-  border: 1px solid #8DC63F;
+  border: 1.5px solid #8DC63F;
   background: #fff;
 
   /* default */
